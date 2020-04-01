@@ -15,17 +15,16 @@ public class changeCooldownTimeTest {
     private GuestService guestService;
 
     @DataProvider
-    public Object[][] user() {
+    public Object[][] defaultCoolTime() {
         return new Object[][]{
-                {UserRepository.getAdmin(), LifetimeRepository.getDefaultCooldownTime()}
+                {LifetimeRepository.getDefaultCooldownTime()}
         };
     }
 
-    @Test(dataProvider = "user")
-    public void checkCooldownTime(User admin, Lifetime defaultTime) {
+    @Test(dataProvider = "defaultCoolTime")
+    public void checkCooldownTime(Lifetime defaultTime) {
         guestService = new GuestService();
         Assert.assertEquals(guestService
-                .successfulUserLogin(admin)
                 .getCooldownTime()
                 .getTimeAsText(), defaultTime.getTimeAsText());
     }
