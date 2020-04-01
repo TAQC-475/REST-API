@@ -66,4 +66,15 @@ public final class RestUrlRepository {
 				.addPatchUrl("");
 	}
 
+//	TODO
+	public static RestUrl getRemoved() {
+		return new RestUrl()
+				.addBaseUrl(server)
+				.addGetUrl("")
+				.addPostUrl("")
+				.addPutUrl("")
+				.addDeleteUrl("")
+				.addPatchUrl("");
+	}
+
 }
