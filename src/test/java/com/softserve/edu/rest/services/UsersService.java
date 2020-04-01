@@ -5,6 +5,7 @@ import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.*;
+import com.softserve.edu.rest.tools.EntityUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,29 +13,20 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UsersService {
-    private LockedUsersResource lockedUsersResource;
     private UsersResource usersResource;
     protected LoginedUser loginedUser;
 
     public UsersService(LoginedUser loginedUser) {
-        this.lockedUsersResource = new LockedUsersResource();
         this.usersResource = new UsersResource();
         this.loginedUser = loginedUser;
     }
 
-    protected void checkUsersFound(SimpleEntity usersResult){
-        if (usersResult.getContent() == ""
-                || usersResult.getContent() == "false"
-                || usersResult.getContent() == "null"){
-            throw new RuntimeException("Users not found or Token time out");
-        }
-    }
 
     public List<User> getAllUsers(){
         RestParameters urlParameters = new RestParameters()
             .addParameter("token",loginedUser.getToken());
         SimpleEntity usersResult = usersResource.httpGetAsEntity(null, urlParameters);
-        checkUsersFound(usersResult);
+        EntityUtils.get().checkEntity(usersResult);
         return parseUsers(usersResult.getContent());
     }
 

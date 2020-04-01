@@ -10,24 +10,24 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginAdministrationTest {
+    @DataProvider
+    public Object[][] userExist() {
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser()}};
+    }
 
-  @DataProvider
-  public Object[][] userExist(){
-    return new Object[][]{{UserRepository.getAdmin(),UserRepository.getValidUser()}};
-  }
-
-  @Test(dataProvider = "userExist")
-  public void checkExistUser(User adminUser, User validUser){
+    @Test(dataProvider = "userExist")
+    public void checkExistUser(User adminUser, User validUser) {
 //    Assert.assertTrue(new LoginService()
 //        .successfulAdmin(adminUser)
 //        .gotoUsersService()
 //        .isUserPresent(validUser));
-    UsersService usersService = new LoginService()
-        .successfulAdmin(adminUser)
-        .gotoUsersService();
+        UsersService usersService = new LoginService()
+                .successfulAdmin(adminUser)
+                .gotoUsersService();
 
-    Assert.assertTrue(usersService.isUserPresent(validUser));
+        Assert.assertTrue(usersService.isUserPresent(validUser));
+        usersService.gotoAdministrationService();
+    }
 
-    usersService.gotoAdministrationService();
-  }
+    public void checkExistUsersLoggined(User adminUser){}
 }

@@ -16,7 +16,7 @@ public final class RestUrlRepository {
 //		// .addDeleteUrl("/logout");
 //	}
 
-    public static RestUrl getLoggedUsers() {
+    public static RestUrl getLogginedUsers() {
         return new RestUrl()
                 .addBaseUrl(server)
                 .addGetUrl("/login/users")
@@ -26,7 +26,7 @@ public final class RestUrlRepository {
                 .addPatchUrl("");
     }
 
-    public static RestUrl getLoggedAdmins() {
+    public static RestUrl getLogginedAdmins() {
         return new RestUrl()
                 .addBaseUrl(server)
                 .addGetUrl("/login/admins")
