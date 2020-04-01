@@ -102,8 +102,8 @@ public class LoginLogoutTest extends RestTestRunner {
         //
         // Step
         AdminService adminService = guestService
-        		.successfulAdminLogin(admin)
-        		.changeCurrentLifetime(lifetime);
+        		.successfulAdminLogin(admin);
+//        		.changeCurrentLifetime(lifetime);
         //
         // Check
         Assert.assertTrue(adminService.getCurrentLifetime()

@@ -2,6 +2,7 @@ package com.softserve.edu.rest.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class User {
 
@@ -13,6 +14,13 @@ public class User {
 	private boolean isAdmin;
 	private List<String> items;
 
+	public User(String name) {
+		this.name = name;
+		this.password = "";
+		this.isAdmin = false;
+		this.items = new ArrayList<>();
+	}
+
 	// TODO Develop Builder
 	public User(String name, String password, boolean isAdmin) {
 		this.name = name;
@@ -20,6 +28,7 @@ public class User {
 		this.isAdmin = isAdmin;
 		items = new ArrayList<>();
 	}
+
 
 	// setters
 	
@@ -42,7 +51,38 @@ public class User {
 		items.add(item);
 		return this;
 	}
-	
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		User user = (User) o;
+		return isAdmin == user.isAdmin &&
+				Objects.equals(name, user.name) &&
+				Objects.equals(password, user.password) &&
+				Objects.equals(items, user.items);
+	}
+
+	public boolean equalName(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		User user = (User) o;
+		return name.equalsIgnoreCase(user.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, password, isAdmin, items);
+	}
+
 	// getters
 	
 	public String getName() {

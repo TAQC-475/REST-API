@@ -66,11 +66,10 @@ public final class RestUrlRepository {
 				.addPatchUrl("");
 	}
 
-//	TODO
-	public static RestUrl getRemoved() {
+	public static RestUrl getUsers() {
 		return new RestUrl()
 				.addBaseUrl(server)
-				.addGetUrl("")
+				.addGetUrl("/users")
 				.addPostUrl("")
 				.addPutUrl("")
 				.addDeleteUrl("")
