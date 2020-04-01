@@ -1,5 +1,6 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.resources.CooldownTimeResource;
 import com.softserve.edu.rest.resources.LoginResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,13 +20,13 @@ public class GuestService {
 
 	protected LoginResource loginResource;
 	protected TokenlifetimeResource tokenlifetimeResource;
-//	protected CooldownResource cooldownResource;
+	protected CooldownTimeResource cooldownResource;
 	private ApplicationResource applicationResource;
 
 	public GuestService() {
 		loginResource = new LoginResource();
 		tokenlifetimeResource = new TokenlifetimeResource();
-//		cooldownResource = new CooldownResource();
+		cooldownResource = new CooldownTimeResource();
 		applicationResource = new ApplicationResource();
 	}
 
@@ -125,5 +126,12 @@ public class GuestService {
 //		adminUser.setToken(simpleEntity.getContent());
 //		return new AdminService(adminUser);
 //	}
+
+	public Lifetime getCooldownTime() {
+		SimpleEntity simpleEntity = cooldownResource
+				.httpGetAsEntity(null, null);
+		checkEntity(simpleEntity, "false","Something gets wrong");
+		return new Lifetime(simpleEntity.getContent());
+	}
 
 }

@@ -1,12 +1,9 @@
 package com.softserve.edu.rest.services;
 
-import com.softserve.edu.rest.data.Lifetime;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.tools.RegexUtils;
-
-import io.qameta.allure.Step;
 
 public class AdminService extends UserService {
 	private UsersService usersService;
@@ -14,10 +11,10 @@ public class AdminService extends UserService {
 
 	public AdminService(LoginedUser loginedUser) {
 		super(loginedUser);
-		//check();
+		checkLoginedAdmins();
 	}
-	/*
-	private void check() {
+//	/*
+	private void checkLoginedAdmins() {
 		RestParameters urlParameters = new RestParameters()
 				.addParameter("token", loginedUser.getToken());
 		SimpleEntity loginedAdmins = loginResource.httpGetLoginedAdmins(null, urlParameters);
@@ -27,7 +24,7 @@ public class AdminService extends UserService {
             throw new RuntimeException("Error Admin Login. Response: " + loginedAdmins.getContent());
 		}
 	}
-	
+	/*
 	@Step("Change_Current_Lifetime")
 	public AdminService changeCurrentLifetime(Lifetime lifetime) {
 		RestParameters bodyParameters = new RestParameters()
