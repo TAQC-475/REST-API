@@ -14,7 +14,7 @@
 <!-- 			<class name="com.softserve.edu.AppTestReport" /> -->
 <!-- 			<class name="com.softserve.edu.rest.test.LoginLogoutTest" /> -->
 			<!-- <class name="com.softserve.testng.FirstNg" /> -->
-			<class name="com.softserve.edu.opencart.tests.LoginTest" />
+<!--			<class name="com.softserve.edu.opencart.tests.LoginTest" />-->
 			<!-- <class name="com.softserve.edu.opencart.tests.LoginTest"> -->
 			<!-- <methods> -->
 			<!-- <include name="checkSuccessful" /> -->
