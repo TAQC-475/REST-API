@@ -9,12 +9,14 @@ import com.softserve.edu.rest.tools.RegexUtils;
 import io.qameta.allure.Step;
 
 public class AdminService extends UserService {
+	private UsersService usersService;
+	private TokensService tokensService;
 
 	public AdminService(LoginedUser loginedUser) {
 		super(loginedUser);
-		check();
+		//check();
 	}
-	
+	/*
 	private void check() {
 		RestParameters urlParameters = new RestParameters()
 				.addParameter("token", loginedUser.getToken());
@@ -34,6 +36,6 @@ public class AdminService extends UserService {
 		SimpleEntity simpleEntity = tokenlifetimeResource.httpPutAsEntity(null, null, bodyParameters);
 		checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
 		return this;
-	}
+	}*/
 	
 }
