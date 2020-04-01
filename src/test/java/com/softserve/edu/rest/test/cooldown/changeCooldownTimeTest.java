@@ -17,7 +17,7 @@ public class changeCooldownTimeTest {
     @DataProvider
     public Object[][] user() {
         return new Object[][]{
-                {UserRepository.getAdmin(), LifetimeRepository.getTypical()}
+                {UserRepository.getAdmin(), LifetimeRepository.getDefaultCooldownTime()}
         };
     }
 

@@ -17,4 +17,6 @@ public final class LifetimeRepository {
 		return new Lifetime("900000");
 	}
 
+	public static Lifetime getDefaultCooldownTime() { return new Lifetime("180000"); }
+
 }
