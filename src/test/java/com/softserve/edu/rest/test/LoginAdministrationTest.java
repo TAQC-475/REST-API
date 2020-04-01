@@ -3,7 +3,6 @@ package com.softserve.edu.rest.test;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.LoginService;
-import com.softserve.edu.rest.services.UserService;
 import com.softserve.edu.rest.services.UsersService;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -22,7 +21,7 @@ public class LoginAdministrationTest {
 //        .gotoUsersService()
 //        .isUserPresent(validUser));
         UsersService usersService = new LoginService()
-                .successfulAdmin(adminUser)
+                .successfulAdminLogin(adminUser)
                 .gotoUsersService();
 
         Assert.assertTrue(usersService.isUserPresent(validUser));

@@ -15,12 +15,13 @@ public class EntityUtils {
         return instance;
     }
 
-    public void checkEntity(SimpleEntity result){
+    public SimpleEntity checkEntity(SimpleEntity result){
         if (result.getContent() == ""
                 || result.getContent() == "false"
                 || result.getContent() == "null"){
             throw new RuntimeException("Content is not found or Token time out");
         }
+        return result;
     }
 
 }
