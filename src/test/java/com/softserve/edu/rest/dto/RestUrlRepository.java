@@ -66,6 +66,15 @@ public final class RestUrlRepository {
 				.addPatchUrl("");
 	}
 
+	public static RestUrl getItems() {
+		return new RestUrl().addBaseUrl(server)
+				.addGetUrl("/items")
+				.addPostUrl("")
+				.addPutUrl("")
+				.addDeleteUrl("")
+				.addPatchUrl("");
+	}
+
 	public static RestUrl getUsers() {
 		return new RestUrl()
 				.addBaseUrl(server)
@@ -85,5 +94,4 @@ public final class RestUrlRepository {
 				.addDeleteUrl("")
 				.addPatchUrl("");
 	}
-
 }
