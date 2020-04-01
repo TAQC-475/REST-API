@@ -6,108 +6,106 @@ import java.util.Objects;
 
 public class User {
 
-	// private final String ERROR_USER_LOCKED = "ERROR, user locked";
-	// private final String ERROR_USER_NOT_FOUND = "ERROR, user not found";
-	//
-	private String name;
-	private String password;
-	private boolean isAdmin;
-	private List<String> items;
+    // private final String ERROR_USER_LOCKED = "ERROR, user locked";
+    // private final String ERROR_USER_NOT_FOUND = "ERROR, user not found";
+    //
+    private String name;
+    private String password;
+    private boolean isAdmin;
+    private List<String> items;
 
-	public User(String name) {
-		this.name = name;
-		this.password = "";
-		this.isAdmin = false;
-		this.items = new ArrayList<>();
-	}
+    public User(String name) {
+        this.name = name;
+        this.password = "";
+        this.isAdmin = false;
+        this.items = new ArrayList<>();
+    }
 
-	// TODO Develop Builder
-	public User(String name, String password, boolean isAdmin) {
-		this.name = name;
-		this.password = password;
-		this.isAdmin = isAdmin;
-		items = new ArrayList<>();
-	}
+    // TODO Develop Builder
+    public User(String name, String password, boolean isAdmin) {
+        this.name = name;
+        this.password = password;
+        this.isAdmin = isAdmin;
+        items = new ArrayList<>();
+    }
 
 
-	// setters
-	
-	public User setName(String name) {
-		this.name = name;
-		return this;
-	}
+    // setters
 
-	public User setPassword(String password) {
-		this.password = password;
-		return this;
-	}
+    public User setName(String name) {
+        this.name = name;
+        return this;
+    }
 
-	public User setAdmin(boolean isAdmin) {
-		this.isAdmin = isAdmin;
-		return this;
-	}
+    public User setPassword(String password) {
+        this.password = password;
+        return this;
+    }
 
-	public User addItem(String item) {
-		items.add(item);
-		return this;
-	}
+    public User setAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
+        return this;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		User user = (User) o;
-		return isAdmin == user.isAdmin &&
-				Objects.equals(name, user.name) &&
-				Objects.equals(password, user.password) &&
-				Objects.equals(items, user.items);
-	}
+    public User addItem(String item) {
+        items.add(item);
+        return this;
+    }
 
-	public boolean equalName(Object o) {
-		if (this == o) {
-			return true;
-		}
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		User user = (User) o;
-		return name.equalsIgnoreCase(user.name);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return isAdmin == user.isAdmin &&
+                Objects.equals(name, user.name) &&
+                Objects.equals(password, user.password) &&
+                Objects.equals(items, user.items);
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(name, password, isAdmin, items);
-	}
+    public boolean equalName(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        User user = (User) o;
+        return name.equalsIgnoreCase(user.name);
+    }
 
-	// getters
-	
-	public String getName() {
-		return name;
-	}
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, password, isAdmin, items);
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    // getters
 
-	public boolean isAdmin() {
-		return isAdmin;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public List<String> getItems() {
-		return items;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	@Override
-	public String toString() {
-		return "User [name=" + name
-				//+ ", password=" + password
-				+ ", isAdmin=" + isAdmin
-				+ ", items=" + items + "]";
-	}
+    public boolean isAdmin() {
+        return isAdmin;
+    }
 
-	
+    public List<String> getItems() {
+        return items;
+    }
+
+    @Override
+    public String toString() {
+        return "User [name=" + name
+                //+ ", password=" + password
+                + ", isAdmin=" + isAdmin
+                + ", items=" + items + "]";
+    }
 }

@@ -20,12 +20,12 @@ public class LoginAdministrationTest {
 //        .successfulAdmin(adminUser)
 //        .gotoUsersService()
 //        .isUserPresent(validUser));
-        UsersService usersService = new LoginService()
-                .successfulAdminLogin(adminUser)
-                .gotoUsersService();
+//        UsersService usersService = new LoginService()
+//                .successfulAdminLogin(adminUser)
+//                .gotoUsersService();
 
-        Assert.assertTrue(usersService.isUserPresent(validUser));
-        usersService.gotoAdministrationService();
+//        Assert.assertTrue(usersService.isUserPresent(validUser));
+//        usersService.gotoAdministrationService();
     }
 
     public void checkExistUsersLoggined(User adminUser){}

@@ -1,8 +1,8 @@
-package com.softserve.edu.rest.data;
+package com.softserve.edu.rest.dto;
 
 public enum EParameters {
 
-    USER("user"),
+    NAME("name"),
     PASSWORD("password"),
     TOKEN("token"),
     ITEM("item"),
@@ -17,14 +17,8 @@ public enum EParameters {
         this.parameter = parameter;
     }
 
-    public String getParameter() {
-        return parameter;
-    }
-
     @Override
     public String toString() {
-        return "EParameters{" +
-                "parameter='" + parameter + '\'' +
-                "} " + super.toString();
+        return String.valueOf(parameter);
     }
 }
