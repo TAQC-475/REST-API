@@ -4,23 +4,19 @@ import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.resources.AliveTokensResource;
-import com.softserve.edu.rest.resources.LockedUsersResource;
-import com.softserve.edu.rest.resources.LoggedUsersResource;
-import com.softserve.edu.rest.resources.UsersResource;
+import com.softserve.edu.rest.resources.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class UsersService {
-    private LoggedUsersResource logginedUsersResource;
     private LockedUsersResource lockedUsersResource;
     private UsersResource usersResource;
     private LoginedUser loginedUser;
 
     public UsersService(LoginedUser loginedUser) {
-        this.logginedUsersResource = new LoggedUsersResource();
         this.lockedUsersResource = new LockedUsersResource();
         this.usersResource = new UsersResource();
         this.loginedUser = loginedUser;
