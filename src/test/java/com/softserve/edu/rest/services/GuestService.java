@@ -1,5 +1,6 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.resources.LoginResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -9,7 +10,6 @@ import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.ApplicationResource;
-import com.softserve.edu.rest.resources.LoginResource;
 import com.softserve.edu.rest.resources.TokenlifetimeResource;
 
 import io.qameta.allure.Step;
