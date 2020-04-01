@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 public class UsersService {
     private LockedUsersResource lockedUsersResource;
     private UsersResource usersResource;
-    private LoginedUser loginedUser;
+    protected LoginedUser loginedUser;
 
     public UsersService(LoginedUser loginedUser) {
         this.lockedUsersResource = new LockedUsersResource();
@@ -22,19 +22,23 @@ public class UsersService {
         this.loginedUser = loginedUser;
     }
 
+    protected void checkUsersFound(SimpleEntity usersResult){
+        if (usersResult.getContent() == ""
+                || usersResult.getContent() == "false"
+                || usersResult.getContent() == "null"){
+            throw new RuntimeException("Users not found or Token time out");
+        }
+    }
+
     public List<User> getAllUsers(){
         RestParameters urlParameters = new RestParameters()
             .addParameter("token",loginedUser.getToken());
         SimpleEntity usersResult = usersResource.httpGetAsEntity(null, urlParameters);
-        if (usersResult.getContent() == ""
-                || usersResult.getContent() == "false"
-                || usersResult.getContent() == "null"){
-           throw new RuntimeException("Users not found or Token time out");
-        }
+        checkUsersFound(usersResult);
         return parseUsers(usersResult.getContent());
     }
 
-    private List<User> parseUsers(String users){
+    protected List<User> parseUsers(String users){
         List<User> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("\t\\w+\n");
         Matcher matcher = pattern.matcher(users);
