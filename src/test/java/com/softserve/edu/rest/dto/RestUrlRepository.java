@@ -16,21 +16,62 @@ public final class RestUrlRepository {
 //		// .addDeleteUrl("/logout");
 //	}
 
-    public static RestUrl getUserAuthorized() {
+    public static RestUrl getLoggedUsers() {
         return new RestUrl()
                 .addBaseUrl(server)
-                .addGetUrl("/login/users").addGetUrl("/login/admins") // getLoginedUsers, getLoginedAdmins
-                .addPostUrl("/login").addPostUrl("/logout") // login, logout
-                .addPutUrl("") // TODO Change Password
-                .addDeleteUrl("") // run POST
-                .addPatchUrl(""); // TODO Change Password
-        // .addDeleteUrl("/logout");
+                .addGetUrl("/login/users")
+                .addPostUrl("")
+                .addPutUrl("")
+                .addDeleteUrl("")
+                .addPatchUrl("");
     }
+
+    public static RestUrl getLoggedAdmins() {
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("/login/admins")
+                .addPostUrl("")
+                .addPutUrl("")
+                .addDeleteUrl("")
+                .addPatchUrl("");
+    }
+
+    public static RestUrl getAuthentication() {
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("")
+                .addPostUrl("/login")
+                .addPutUrl("")
+                .addDeleteUrl("/logout")
+                .addPatchUrl("");
+    }
+
+    public static RestUrl getUser(){
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("/user")
+                .addPostUrl("/user")
+                .addPutUrl("/user")
+                .addDeleteUrl("/user")
+                .addPatchUrl("");
+    }
+
+
 
     public static RestUrl getApplication() {
         return new RestUrl()
                 .addBaseUrl(server)
                 .addGetUrl("/reset")
+                .addPostUrl("")
+                .addPutUrl("")
+                .addDeleteUrl("")
+                .addPatchUrl("");
+    }
+
+    public static RestUrl getAliveTokens(){
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("/login/tockens") //Jesus doesn't want me for a sunbeam
                 .addPostUrl("")
                 .addPutUrl("")
                 .addDeleteUrl("")
