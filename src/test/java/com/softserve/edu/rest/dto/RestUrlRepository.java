@@ -76,4 +76,14 @@ public final class RestUrlRepository {
 				.addPatchUrl("");
 	}
 
+	public static RestUrl getCoolDownTime() {
+		return new RestUrl()
+				.addBaseUrl(server)
+				.addGetUrl("/cooldowntime")
+				.addPostUrl("")
+				.addPutUrl("/cooldowntime")
+				.addDeleteUrl("")
+				.addPatchUrl("");
+	}
+
 }
