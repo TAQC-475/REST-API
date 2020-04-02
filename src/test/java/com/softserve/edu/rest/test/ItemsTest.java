@@ -5,20 +5,24 @@ import com.softserve.edu.rest.data.ItemRepository;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.LoginService;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ItemsTest {
     @DataProvider
     public Object[][] dataForItemTest() {
-        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
+        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}};
     }
 
     @Test(dataProvider = "dataForItemTest")
-    public void verifyUserCanGetAllItems(User user, Item insertItem, Item checkItem) {
-        System.out.println(new LoginService()
+    public void verifyUserCanGetAllItems(User user, Item firstItemToAdd, Item secondItemToAdd) {
+        Assert.assertTrue(!new LoginService()
                 .successfulUserLogin(user)
+                .goToItemService()
+                .createItem(firstItemToAdd, true)
+                .createItem(secondItemToAdd, true)
                 .goToItemsService()
-                .getAllItems());
+                .getAllItems().isEmpty());
     }
 }

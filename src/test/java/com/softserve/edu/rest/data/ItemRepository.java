@@ -12,11 +12,11 @@ public class ItemRepository {
     }
 
     public static Item getCoreI7(){
-        return new Item("1", "Intel Core i7");
+        return new Item("2", "Intel Core i7");
     }
 
     public static Item getCoreI9(){
-        return new Item("1", "Intel Core i9");
+        return new Item("3", "Intel Core i9");
     }
 
 }
