@@ -1,5 +1,7 @@
 package com.softserve.edu.rest.test;
 
+import com.softserve.edu.rest.services.AdminServiceDoNotUse;
+import com.softserve.edu.rest.services.GuestServiceDoNotUse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -10,9 +12,7 @@ import com.softserve.edu.rest.data.Lifetime;
 import com.softserve.edu.rest.data.LifetimeRepository;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
-import com.softserve.edu.rest.services.AdminService;
-import com.softserve.edu.rest.services.GuestService;
-import com.softserve.edu.rest.services.UserService;
+import com.softserve.edu.rest.services.UserServiceDoNotUse;
 import com.softserve.edu.rest.tools.AllureUtils;
 
 import io.qameta.allure.Description;
@@ -53,17 +53,17 @@ public class LoginLogoutTest extends RestTestRunner {
         //log.debug("loginPositiveTest started!");
 		//
         //Steps
-        UserService userService = new GuestService()
+        UserServiceDoNotUse userService = new GuestServiceDoNotUse()
         		.successfulUserLogin(user);
         //
         //Check
         //Assert.assertTrue(userService.isUserLogged(user));
         //
         //Step
-        GuestService guestService = userService.logout();
+        GuestServiceDoNotUse guestService = userService.logout();
         //Assert.assertFalse(guestService.isUserLogged(user));
         //
-        AdminService adminService = guestService
+        AdminServiceDoNotUse adminService = guestService
         		.successfulAdminLogin(user);
         //
         guestService = adminService.logout();
@@ -93,7 +93,7 @@ public class LoginLogoutTest extends RestTestRunner {
         //log.debug("loginPositiveTest started!");
 		//
         // Steps
-		GuestService guestService = loadApplication()
+		GuestServiceDoNotUse guestService = loadApplication()
 				.resetServiceToInitialState();
         //
         // Check
@@ -101,7 +101,7 @@ public class LoginLogoutTest extends RestTestRunner {
         		.equals(LifetimeRepository.getDefault()));
         //
         // Step
-        AdminService adminService = guestService
+        AdminServiceDoNotUse adminService = guestService
         		.successfulAdminLogin(admin);
 //        		.changeCurrentLifetime(lifetime);
         //
@@ -123,7 +123,7 @@ public class LoginLogoutTest extends RestTestRunner {
 		// log.debug("loginPositiveTest started!");
 		//
 		// Steps
-		GuestService guestService = loadApplication()
+		GuestServiceDoNotUse guestService = loadApplication()
 				.resetServiceToInitialState();
 		//
 		// Check

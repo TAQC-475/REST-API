@@ -15,22 +15,22 @@ import com.softserve.edu.rest.resources.TokenlifetimeResource;
 
 import io.qameta.allure.Step;
 
-public class GuestService {
-	public static final Logger logger = LoggerFactory.getLogger(GuestService.class); // org.slf4j.LoggerFactory
+public class GuestServiceDoNotUse {
+	public static final Logger logger = LoggerFactory.getLogger(GuestServiceDoNotUse.class); // org.slf4j.LoggerFactory
 
 	protected LoginResource loginResource;
 	protected TokenlifetimeResource tokenlifetimeResource;
 	protected CooldownTimeResource cooldownResource;
 	private ApplicationResource applicationResource;
 
-	public GuestService() {
+	public GuestServiceDoNotUse() {
 		loginResource = new LoginResource();
 		tokenlifetimeResource = new TokenlifetimeResource();
 		cooldownResource = new CooldownTimeResource();
 		applicationResource = new ApplicationResource();
 	}
 
-//	public GuestService(LoginResource loginResource, TokenlifetimeResource tokenlifetimeResource) {
+//	public GuestServiceDoNotUse(LoginResource loginResource, TokenlifetimeResource tokenlifetimeResource) {
 //		this.loginResource = loginResource;
 //		this.tokenlifetimeResource = tokenlifetimeResource;
 //	}
@@ -48,7 +48,7 @@ public class GuestService {
 	}
 
 	@Step("Reset_Service_To_Initial_State")
-	public GuestService resetServiceToInitialState() {
+	public GuestServiceDoNotUse resetServiceToInitialState() {
 		SimpleEntity simpleEntity = applicationResource.httpPutAsEntity(null, null, null);
 		checkEntity(simpleEntity, "false", "Error Reset Server");
 		return this;
@@ -73,7 +73,7 @@ public class GuestService {
 	}
 	
 	// Check Error
-	public GuestService updateCurrentLifetime() {
+	public GuestServiceDoNotUse updateCurrentLifetime() {
 		logger.debug("updateCurrentLifetime START");
 		RestParameters bodyParameters = new RestParameters()
 				.addParameter("token", "111111111111111")
@@ -95,7 +95,7 @@ public class GuestService {
 //    }
 //
 
-	public UserService successfulUserLogin(User user) {
+	public UserServiceDoNotUse successfulUserLogin(User user) {
 		//logger.debug("successfulUserLogin START, user = " + user);
 		RestParameters bodyParameters = new RestParameters()
 				.addParameter("name", user.getName())
@@ -104,27 +104,27 @@ public class GuestService {
 		//logger.trace("successfulUserLogin TRACE, simpleEntity = " + simpleEntity);
 		checkEntity(simpleEntity, "ERROR, user not found", "Error Login");
 		//logger.debug("successfulUserLogin DONE, user = " + user);
-		return new UserService(new LoginedUser(user, simpleEntity.getContent()));
+		return new UserServiceDoNotUse(new LoginedUser(user, simpleEntity.getContent()));
 	}
 
 	@Step("Successful_Admin_Login")
-	public AdminService successfulAdminLogin(User adminUser) {
+	public AdminServiceDoNotUse successfulAdminLogin(User adminUser) {
 		RestParameters bodyParameters = new RestParameters()
 				.addParameter("name", adminUser.getName())
 				.addParameter("password", adminUser.getPassword());
 		SimpleEntity adminContent = loginResource.httpPostAsEntity(null, null, bodyParameters);
 		checkEntity(adminContent, "ERROR, user not found", "Error Login");
-		return new AdminService(new LoginedUser(adminUser, adminContent.getContent()));
+		return new AdminServiceDoNotUse(new LoginedUser(adminUser, adminContent.getContent()));
 	}
 
-//	public AdminService ChangeCurrentPassword(User adminUser) {
+//	public AdminServiceDoNotUse ChangeCurrentPassword(User adminUser) {
 //		String pass = "1111";
 //		RestParameters bodyParameters = new RestParameters().addParameter("token", adminUser.getToken())
 //				.addParameter("oldpassword", adminUser.getPassword()).addParameter("newpassword", pass);
 //		SimpleEntity simpleEntity = loginResource.httpPostAsEntity(null, null, bodyParameters);
 //		checkEntity(simpleEntity, "Error Login");
 //		adminUser.setToken(simpleEntity.getContent());
-//		return new AdminService(adminUser);
+//		return new AdminServiceDoNotUse(adminUser);
 //	}
 
 	public Lifetime getCooldownTime() {

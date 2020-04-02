@@ -5,11 +5,11 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.tools.RegexUtils;
 
-public class AdminService extends UserService {
+public class AdminServiceDoNotUse extends UserServiceDoNotUse {
 	private UsersService usersService;
 	private TokensService tokensService;
 
-	public AdminService(LoginedUser loginedUser) {
+	public AdminServiceDoNotUse(LoginedUser loginedUser) {
 		super(loginedUser);
 		checkLoginedAdmins();
 	}
@@ -26,7 +26,7 @@ public class AdminService extends UserService {
 	}
 	/*
 	@Step("Change_Current_Lifetime")
-	public AdminService changeCurrentLifetime(Lifetime lifetime) {
+	public AdminServiceDoNotUse changeCurrentLifetime(Lifetime lifetime) {
 		RestParameters bodyParameters = new RestParameters()
 				.addParameter("token", loginedUser.getToken())
 				.addParameter("time", lifetime.getTimeAsText());

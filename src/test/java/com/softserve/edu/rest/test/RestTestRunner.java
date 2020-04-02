@@ -9,7 +9,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 
-import com.softserve.edu.rest.services.GuestService;
+import com.softserve.edu.rest.services.GuestServiceDoNotUse;
 
 import io.qameta.allure.Step;
 
@@ -43,9 +43,9 @@ public abstract class RestTestRunner {
 	}
 
 	@Step("Load_Application")
-	public GuestService loadApplication() {
+	public GuestServiceDoNotUse loadApplication() {
 		// TODO Check Server Availability
-		return new GuestService();
+		return new GuestServiceDoNotUse();
 	}
 
 	public void presentationSleep() {

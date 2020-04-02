@@ -6,7 +6,7 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.CooldownTimeResource;
 
-public class CooldownService extends AdminService {
+public class CooldownService extends AdminServiceDoNotUse {
 
     protected CooldownTimeResource cooldownResource;
 
@@ -15,7 +15,7 @@ public class CooldownService extends AdminService {
         cooldownResource = new CooldownTimeResource();
     }
 
-    public AdminService changeCooldown(Lifetime lifetime) {
+    public AdminServiceDoNotUse changeCooldown(Lifetime lifetime) {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter("token", loginedUser.getToken())
                 .addParameter("time", lifetime.getTimeAsText());

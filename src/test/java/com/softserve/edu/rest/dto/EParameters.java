@@ -6,6 +6,7 @@ public enum EParameters {
     PASSWORD("password"),
     TOKEN("token"),
     ITEM("item"),
+    INDEX("index"),
     RIGHTS("rights"),
     TIME("time"),
     OLD_PASSWORD("oldpassword"),

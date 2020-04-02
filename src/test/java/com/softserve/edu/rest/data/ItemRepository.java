@@ -4,7 +4,7 @@ public class ItemRepository {
 
     //TODO add this repo to USER
     public static Item getDefaultItem() {
-        return new Item("1", "Default Item With Index 1");
+        return new Item("4", "Default Item With Index 1");
     }
 
 }

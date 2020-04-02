@@ -2,17 +2,14 @@ package com.softserve.edu.rest.test.cooldown;
 
 import com.softserve.edu.rest.data.Lifetime;
 import com.softserve.edu.rest.data.LifetimeRepository;
-import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
-import com.softserve.edu.rest.services.CooldownService;
-import com.softserve.edu.rest.services.GuestService;
+import com.softserve.edu.rest.services.GuestServiceDoNotUse;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class changeCooldownTimeTest {
 
-    private GuestService guestService;
+    private GuestServiceDoNotUse guestService;
 
     @DataProvider
     public Object[][] defaultCoolTime() {
@@ -23,7 +20,7 @@ public class changeCooldownTimeTest {
 
     @Test(dataProvider = "defaultCoolTime")
     public void checkCooldownTime(Lifetime defaultTime) {
-        guestService = new GuestService();
+        guestService = new GuestServiceDoNotUse();
         Assert.assertEquals(guestService
                 .getCooldownTime()
                 .getTimeAsText(), defaultTime.getTimeAsText());

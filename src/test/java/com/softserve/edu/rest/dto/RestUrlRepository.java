@@ -144,4 +144,14 @@ public final class RestUrlRepository {
                 .addDeleteUrl("")
                 .addPatchUrl("");
     }
+
+    public static RestUrl getItemsIndexes() {
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("/itemindexes")
+                .addPostUrl("")
+                .addPutUrl("")
+                .addDeleteUrl("")
+                .addPatchUrl("");
+    }
 }
