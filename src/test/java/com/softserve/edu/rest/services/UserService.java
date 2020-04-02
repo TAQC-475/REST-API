@@ -5,6 +5,7 @@ import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
+import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
 
 public class UserService {
@@ -29,5 +30,7 @@ public class UserService {
 //                .addParameter(EParameters.TOKEN, loginedUser.getToken())
 //                .addParameter(EParameters.OLD_PASSWORD, oldPassword.getPassword())
 //                .addParameter(EParameters.NEW_PASSWORD, newPassword.getPassword());
+//        SimpleEntity isChanged = userResource.httpPutAsEntity(null, null, bodyParameters);
+//        return isChanged;
 //    }
 }
