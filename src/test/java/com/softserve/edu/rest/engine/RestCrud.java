@@ -3,6 +3,7 @@ package com.softserve.edu.rest.engine;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.dto.RestUrl;
 import com.softserve.edu.rest.dto.RestUrlKeys;
@@ -61,7 +62,7 @@ public abstract class RestCrud {
         if (urlParameters != null)
         {
             boolean isFirstParameter = true;
-            for (String currentKey : urlParameters.getAllParameters().keySet()) {
+            for (EParameters currentKey : urlParameters.getAllParameters().keySet()) {
                 if (isFirstParameter)
                 {
                     urlTemplate = urlTemplate + URL_PARAMETERS_SEPARATOR;
@@ -81,7 +82,7 @@ public abstract class RestCrud {
     	String url = urlTemplate;
         if (pathVariables != null) {
         	String searchVariable;
-            for (String currentKey : pathVariables.getAllParameters().keySet()) {
+            for (EParameters currentKey : pathVariables.getAllParameters().keySet()) {
             	// TODO Create Const
                 searchVariable = "{" + currentKey + "}";
                 if (url.contains(searchVariable)) {
@@ -96,8 +97,8 @@ public abstract class RestCrud {
 	private RequestBody prepareRequestBody(RestParameters bodyParameters) {
 		FormBody.Builder formBodyBuilder = new FormBody.Builder();
 		if (bodyParameters != null) {
-			for (String currentKey : bodyParameters.getAllParameters().keySet()) {
-				formBodyBuilder.add(currentKey, bodyParameters.getParameter(currentKey));
+			for (EParameters currentKey : bodyParameters.getAllParameters().keySet()) {
+				formBodyBuilder.add(String.valueOf(currentKey), bodyParameters.getParameter(currentKey));
 			}
 		}
 		return formBodyBuilder.build();
