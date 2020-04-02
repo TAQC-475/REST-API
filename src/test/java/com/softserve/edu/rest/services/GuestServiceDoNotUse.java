@@ -20,13 +20,13 @@ public class GuestServiceDoNotUse {
 
 	protected LoginResource loginResource;
 	protected TokenlifetimeResource tokenlifetimeResource;
-	protected CooldownTimeResource cooldownResource;
+//	protected CooldownTimeResource cooldownResource;
 	private ApplicationResource applicationResource;
 
 	public GuestServiceDoNotUse() {
 		loginResource = new LoginResource();
 		tokenlifetimeResource = new TokenlifetimeResource();
-		cooldownResource = new CooldownTimeResource();
+//		cooldownResource = new CooldownTimeResource();
 		applicationResource = new ApplicationResource();
 	}
 
@@ -37,7 +37,6 @@ public class GuestServiceDoNotUse {
 
 	protected void checkEntity(SimpleEntity simpleEntity,
 			String wrongMessage, String errorMessage) {
-		// if (!simpleEntity.getContent().toLowerCase().equals("true"))
 		if ((simpleEntity.getContent() == null)
 				|| (simpleEntity.getContent().isEmpty())
 				|| (simpleEntity.getContent().toLowerCase()
@@ -127,11 +126,11 @@ public class GuestServiceDoNotUse {
 //		return new AdminServiceDoNotUse(adminUser);
 //	}
 
-	public Lifetime getCooldownTime() {
-		SimpleEntity simpleEntity = cooldownResource
-				.httpGetAsEntity(null, null);
-		checkEntity(simpleEntity, "false","Something gets wrong");
-		return new Lifetime(simpleEntity.getContent());
-	}
+//	public Lifetime getCooldownTime() {
+//		SimpleEntity simpleEntity = cooldownResource
+//				.httpGetAsEntity(null, null);
+//		checkEntity(simpleEntity, "false","Something gets wrong");
+//		return new Lifetime(simpleEntity.getContent());
+//	}
 
 }
