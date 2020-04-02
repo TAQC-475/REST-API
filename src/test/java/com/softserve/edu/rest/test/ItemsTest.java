@@ -11,11 +11,16 @@ import org.testng.annotations.Test;
 
 public class ItemsTest {
     @DataProvider
-    public Object[][] dataForItemTest() {
+    public Object[][] dataForGettingAllItemsTest() {
         return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}};
     }
 
-    @Test(dataProvider = "dataForItemTest")
+    @DataProvider
+    public Object[][] dataForAdminGettingUserItemsTest() {
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser()}};
+    }
+
+    @Test(dataProvider = "dataForGettingAllItemsTest")
     public void verifyUserCanGetAllItems(User user, Item firstItemToAdd, Item secondItemToAdd) {
         Assert.assertTrue(!new LoginService()
                 .successfulUserLogin(user)
@@ -24,5 +29,20 @@ public class ItemsTest {
                 .createItem(secondItemToAdd, true)
                 .goToItemsService()
                 .getAllItems().isEmpty());
+    }
+
+    @Test(dataProvider = "dataForAdminGettingUserItemsTest")
+    public void verifyAdminCanGetAllUserItems(User adminUser, User userToCheck){
+        String checkedUserItems = new LoginService()
+                .successfulUserLogin(userToCheck)
+                .goToItemsService()
+                .getAllItems();
+
+        String itemsGotByAdmin = new LoginService()
+                .successfulAdminLogin(adminUser)
+                .goToItemsService()
+                .getAllUserItemsAsAdmin(userToCheck);
+
+        Assert.assertEquals(checkedUserItems, itemsGotByAdmin);
     }
 }
