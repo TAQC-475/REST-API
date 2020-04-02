@@ -1,5 +1,6 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
@@ -18,8 +19,8 @@ public class UserServiceDoNotUse extends GuestServiceDoNotUse {
 	@Step("Logout")
 	public GuestServiceDoNotUse logout() {
 		RestParameters bodyParameters = new RestParameters()
-				.addParameter("name", loginedUser.getUser().getName())
-				.addParameter("token", loginedUser.getToken());
+				.addParameter(EParameters.NAME, loginedUser.getUser().getName())
+				.addParameter(EParameters.TOKEN, loginedUser.getToken());
 		SimpleEntity simpleEntity = loginResource
 				.httpDeleteAsEntity(null, null, bodyParameters);
 		checkEntity(simpleEntity, "false", "Error Logout");

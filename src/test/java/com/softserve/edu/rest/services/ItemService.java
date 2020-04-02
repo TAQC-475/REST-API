@@ -38,7 +38,7 @@ public class ItemService {
 
     private boolean isIndexFree(int index){
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN.toString(), loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
         SimpleEntity itemsIndexes = itemsIndexesResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(itemsIndexes);
         boolean isFree = true;
@@ -60,10 +60,10 @@ public class ItemService {
             throw new RuntimeException("Item with such index already exists");
         }
         RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN.toString(), loginedUser.getToken())
-                .addParameter(EParameters.ITEM.toString(), item.getItemText());
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.ITEM, item.getItemText());
         RestParameters pathParameters = new RestParameters()
-                .addParameter(EParameters.INDEX.toString(), item.getItemIndex());
+                .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity status = itemResource.httpPostAsEntity(pathParameters, null, bodyParameters);
         EntityUtils.get().checkEntity(status);
         return this;
@@ -71,9 +71,9 @@ public class ItemService {
 
     public Item getItem(Item item){
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN.toString(), loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
-                .addParameter(EParameters.INDEX.toString(), item.getItemIndex());
+                .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity result = itemResource.httpGetAsEntity(pathParameters, urlParameters);
         EntityUtils.get().checkEntity(result);
         return new Item(item.getItemIndex(), result.getContent());

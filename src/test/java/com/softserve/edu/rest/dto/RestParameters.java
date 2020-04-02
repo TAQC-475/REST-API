@@ -4,22 +4,22 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RestParameters {
-	private Map<String, String> parameters;
+	private Map<EParameters, String> parameters;
 
     public RestParameters() {
         parameters = new HashMap<>();
     }
 
-    public RestParameters addParameter(String key, String value) {
+    public RestParameters addParameter(EParameters key, String value) {
         parameters.put(key, value);
         return this;
     }
 
-    public String getParameter(String key) {
+    public String getParameter(EParameters key) {
         return parameters.get(key);
     }
 
-    public Map<String, String> getAllParameters() {
+    public Map<EParameters, String> getAllParameters() {
         return parameters;
     }
 }

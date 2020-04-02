@@ -1,5 +1,6 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
@@ -16,7 +17,7 @@ public class AdminServiceDoNotUse extends UserServiceDoNotUse {
 //	/*
 	private void checkLoginedAdmins() {
 		RestParameters urlParameters = new RestParameters()
-				.addParameter("token", loginedUser.getToken());
+				.addParameter(EParameters.TOKEN, loginedUser.getToken());
 		SimpleEntity loginedAdmins = loginResource.httpGetLoginedAdmins(null, urlParameters);
 		System.out.println("loginedAdmins: " + loginedAdmins);
 		if (!RegexUtils.isTextContains("admin", loginedAdmins.getContent())) {

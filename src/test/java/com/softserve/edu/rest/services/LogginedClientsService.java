@@ -1,6 +1,7 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.User;
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
@@ -24,7 +25,7 @@ public class LogginedClientsService extends UsersService{ //TODO Rename it (mayb
 
     public List<User> getLoggedUsers(){
         RestParameters urlParameters = new RestParameters()
-                .addParameter("token",loginedUser.getToken());
+                .addParameter(EParameters.TOKEN,loginedUser.getToken());
         SimpleEntity loggedUsersResult = logginedUsersResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(loggedUsersResult);
         return parseUsers(loggedUsersResult.getContent());
@@ -32,7 +33,7 @@ public class LogginedClientsService extends UsersService{ //TODO Rename it (mayb
 
     public List<User> getLoggedAdmins(){
         RestParameters urlParameters = new RestParameters()
-                .addParameter("token",loginedUser.getToken());
+                .addParameter(EParameters.TOKEN,loginedUser.getToken());
         SimpleEntity loggedAdminsResult = logginedAdminsResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(loggedAdminsResult);
         return parseUsers(loggedAdminsResult.getContent());

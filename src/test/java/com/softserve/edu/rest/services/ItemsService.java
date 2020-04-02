@@ -23,7 +23,7 @@ public class ItemsService {
 
     public String getAllItems(){
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN.toString(), loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
         SimpleEntity result = itemsResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(result);
         return result.getContent();
@@ -31,9 +31,9 @@ public class ItemsService {
 
     public String getAllUserItemsAsAdmin(User user){
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN.toString(), loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
-                .addParameter(EParameters.NAME.toString(), user.getName());
+                .addParameter(EParameters.NAME, user.getName());
         SimpleEntity result = userItemsResource.httpGetAsEntity(pathParameters, urlParameters);
         EntityUtils.get().checkEntity(result);
         return result.getContent();

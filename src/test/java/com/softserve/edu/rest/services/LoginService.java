@@ -1,6 +1,7 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.User;
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
@@ -21,8 +22,8 @@ public class LoginService {
 
     private SimpleEntity login(User user) {
         RestParameters bodyParameters = new RestParameters()
-                .addParameter("name", user.getName())
-                .addParameter("password", user.getPassword());
+                .addParameter(EParameters.NAME, user.getName())
+                .addParameter(EParameters.PASSWORD, user.getPassword());
         SimpleEntity tokenContent = loginResource.httpPostAsEntity(null, null, bodyParameters);
         EntityUtils.get().checkEntity(tokenContent);
         return tokenContent;

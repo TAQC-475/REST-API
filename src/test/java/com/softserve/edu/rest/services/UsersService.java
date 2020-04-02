@@ -1,6 +1,7 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.User;
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
@@ -24,7 +25,7 @@ public class UsersService {
 
     public List<User> getAllUsers(){
         RestParameters urlParameters = new RestParameters()
-            .addParameter("token",loginedUser.getToken());
+            .addParameter(EParameters.TOKEN, loginedUser.getToken());
         SimpleEntity usersResult = usersResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(usersResult);
         return parseUsers(usersResult.getContent());

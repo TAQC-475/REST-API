@@ -1,5 +1,6 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.resources.CooldownTimeResource;
 import com.softserve.edu.rest.resources.LoginResource;
 import org.slf4j.Logger;
@@ -75,8 +76,8 @@ public class GuestServiceDoNotUse {
 	public GuestServiceDoNotUse updateCurrentLifetime() {
 		logger.debug("updateCurrentLifetime START");
 		RestParameters bodyParameters = new RestParameters()
-				.addParameter("token", "111111111111111")
-				.addParameter("time", new Lifetime("111111").getTimeAsText());
+				.addParameter(EParameters.TOKEN, "111111111111111")
+				.addParameter(EParameters.TIME, new Lifetime("111111").getTimeAsText());
 		SimpleEntity simpleEntity = tokenlifetimeResource.httpPutAsEntity(null, null, bodyParameters);
 		checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
 		logger.debug("updateCurrentLifetime DONE");
@@ -97,8 +98,8 @@ public class GuestServiceDoNotUse {
 	public UserServiceDoNotUse successfulUserLogin(User user) {
 		//logger.debug("successfulUserLogin START, user = " + user);
 		RestParameters bodyParameters = new RestParameters()
-				.addParameter("name", user.getName())
-				.addParameter("password", user.getPassword());
+				.addParameter(EParameters.NAME, user.getName())
+				.addParameter(EParameters.PASSWORD, user.getPassword());
 		SimpleEntity simpleEntity = loginResource.httpPostAsEntity(null, null, bodyParameters);
 		//logger.trace("successfulUserLogin TRACE, simpleEntity = " + simpleEntity);
 		checkEntity(simpleEntity, "ERROR, user not found", "Error Login");
@@ -109,8 +110,8 @@ public class GuestServiceDoNotUse {
 	@Step("Successful_Admin_Login")
 	public AdminServiceDoNotUse successfulAdminLogin(User adminUser) {
 		RestParameters bodyParameters = new RestParameters()
-				.addParameter("name", adminUser.getName())
-				.addParameter("password", adminUser.getPassword());
+				.addParameter(EParameters.NAME, adminUser.getName())
+				.addParameter(EParameters.PASSWORD, adminUser.getPassword());
 		SimpleEntity adminContent = loginResource.httpPostAsEntity(null, null, bodyParameters);
 		checkEntity(adminContent, "ERROR, user not found", "Error Login");
 		return new AdminServiceDoNotUse(new LoginedUser(adminUser, adminContent.getContent()));
