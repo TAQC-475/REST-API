@@ -1,5 +1,8 @@
 package com.softserve.edu.rest.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public final class UserRepository {
 
     private UserRepository() {
@@ -16,6 +19,10 @@ public final class UserRepository {
     public static User getValidUser() {
         return new User("otlumtc", "qwerty", false);
     }
+
+//    public static List<User> getValidUsers(){
+//
+//    }
 
     public static User notExistingUser() {
         return new User("Anna", "ksjddlfkjddqwerty", false).addItem("My data");

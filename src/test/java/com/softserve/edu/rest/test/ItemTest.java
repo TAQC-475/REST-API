@@ -20,7 +20,7 @@ public class ItemTest {
     @Test(dataProvider = "dataForItemTest")
     public void verifyUserCanCreateItem(User user, Item insertItem, Item checkItem){
         ItemService itemService = new LoginService()
-                .successfulUser(user)
+                .successfulUserLogin(user)
                 .goToItemService()
                 .createItem(insertItem, false);
         Assert.assertTrue(itemService.getItem(checkItem).equals(insertItem));
