@@ -32,7 +32,7 @@ public class ItemsTest {
     }
 
     @Test(dataProvider = "dataForAdminGettingUserItemsTest")
-    public void verifyAdminCanGetAllUserItems(User adminUser, User userToCheck){
+    public void verifyAdminCanGetUserItems(User adminUser, User userToCheck){
         String checkedUserItems = new LoginService()
                 .successfulUserLogin(userToCheck)
                 .goToItemsService()
