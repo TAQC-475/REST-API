@@ -1,6 +1,11 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.data.User;
+import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.RestParameters;
+import com.softserve.edu.rest.entity.SimpleEntity;
+import com.softserve.edu.rest.tools.EntityUtils;
 
 public class AdministrationService extends UserService{
     private LoginedUser loginedUser;
@@ -28,4 +33,5 @@ public class AdministrationService extends UserService{
     public LoginedUser getLoginedUser() {
         return loginedUser;
     }
+
 }

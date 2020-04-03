@@ -12,10 +12,10 @@ public class AdminServiceDoNotUse extends UserServiceDoNotUse {
 
 	public AdminServiceDoNotUse(LoginedUser loginedUser) {
 		super(loginedUser);
-		checkLoginedAdmins();
+		//checkLoginedAdmins();
 	}
 //	/*
-	private void checkLoginedAdmins() {
+	/*private void checkLoginedAdmins() {
 		RestParameters urlParameters = new RestParameters()
 				.addParameter(EParameters.TOKEN, loginedUser.getToken());
 		SimpleEntity loginedAdmins = loginResource.httpGetLoginedAdmins(null, urlParameters);
@@ -24,7 +24,7 @@ public class AdminServiceDoNotUse extends UserServiceDoNotUse {
 			// TODO Develop Custom Exception
             throw new RuntimeException("Error Admin Login. Response: " + loginedAdmins.getContent());
 		}
-	}
+	}*/
 	/*
 	@Step("Change_Current_Lifetime")
 	public AdminServiceDoNotUse changeCurrentLifetime(Lifetime lifetime) {

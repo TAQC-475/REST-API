@@ -51,23 +51,5 @@ public class UserService {
 //        EntityUtils.get().checkEntity(simpleEntity);
 //    }
 
-    public AdministrationService createUser(User user){
-        createUserExample(user);
-        return new AdministrationService(loginedUser);
-    }
 
-    public AdministrationService createAdmin(User user){
-        createUserExample(user);
-        return new AdministrationService(loginedUser);
-    }
-
-    private void createUserExample(User user){
-        RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedUser.getToken())
-                .addParameter(EParameters.NAME, user.getName())
-                .addParameter(EParameters.PASSWORD, user.getPassword())
-                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
-        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
-        EntityUtils.get().checkEntity(simpleEntity);
-    }
 }
