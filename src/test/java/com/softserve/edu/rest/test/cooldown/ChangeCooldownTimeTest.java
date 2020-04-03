@@ -12,7 +12,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class changeCooldownTimeTest {
+public class ChangeCooldownTimeTest {
 
     private CooldownService cooldownService;
     private AdministrationService adminService;
