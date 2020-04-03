@@ -1,5 +1,6 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.data.LogginedUsers;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
@@ -8,16 +9,13 @@ import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.LoginResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 
-import java.util.LinkedList;
 import java.util.List;
 
 public class LoginService {
     private LoginResource loginResource;
-    private LinkedList<LoginedUser> logginedClients;
 
     public LoginService() {
         this.loginResource = new LoginResource();
-        this.logginedClients = new LinkedList<>();
     }
 
     private SimpleEntity login(User user) {
@@ -30,29 +28,29 @@ public class LoginService {
     }
 
     public AdministrationService successfulAdminLogin(User adminUser){
-        logginedClients.add(new LoginedUser(adminUser, login(adminUser).getContent()));
-        return new AdministrationService(logginedClients.getLast());
+        LogginedUsers.get().addUser((new LoginedUser(adminUser, login(adminUser).getContent())));
+        return new AdministrationService(LogginedUsers.get().getLastLoggined());
     }
 
     public UserService successfulUserLogin(User basicUser){
-        logginedClients.add(new LoginedUser(basicUser, login(basicUser).getContent()));
-        return new UserService(logginedClients.getLast());
+        LogginedUsers.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
+        return new UserService(LogginedUsers.get().getLastLoggined());
     }
 
 
 
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
         for (User adminUser : adminUsers) {
-            logginedClients.add(new LoginedUser(adminUser, login(adminUser).getContent()));
+            LogginedUsers.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
-        return new AdministrationService((logginedClients.getLast()));
+        return new AdministrationService((LogginedUsers.get().getLastLoggined()));
     }
 
     public UserService successfulUsersLogin(List<User> adminUsers){
         for (User adminUser : adminUsers){
-            logginedClients.add(new LoginedUser(adminUser, login(adminUser).getContent()));
+            LogginedUsers.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
-        return new UserService(logginedClients.getLast());
+        return new UserService(LogginedUsers.get().getLastLoggined());
     }
 
 }
