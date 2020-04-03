@@ -1,4 +1,4 @@
-package com.softserve.edu.rest.test.login;
+package com.softserve.edu.rest.test;
 
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
