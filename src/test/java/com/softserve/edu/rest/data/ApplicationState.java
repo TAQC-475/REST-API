@@ -4,17 +4,17 @@ import com.softserve.edu.rest.dto.LoginedUser;
 
 import java.util.LinkedList;
 
-public class LogginedUsers {
+public class ApplicationState {
     private static LinkedList<LoginedUser> logginedClients;
-    private static LogginedUsers instance;
+    private static ApplicationState instance;
 
-    private LogginedUsers(){
+    private ApplicationState(){
         logginedClients = new LinkedList<>();
     }
 
-    public static LogginedUsers get(){
+    public static ApplicationState get(){
         if(instance == null){
-            instance = new LogginedUsers();
+            instance = new ApplicationState();
         }
         return instance;
     }
@@ -41,5 +41,13 @@ public class LogginedUsers {
 
     public LinkedList<LoginedUser> getLogginedUsers() {
         return logginedClients;
+    }
+
+    public void removeLoggined(LoginedUser loginedUser){
+        logginedClients.remove(loginedUser);
+    }
+
+    public boolean isLoggined(LoginedUser loginedUser){
+        return logginedClients.contains(loginedUser);
     }
 }

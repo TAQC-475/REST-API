@@ -1,6 +1,6 @@
 package com.softserve.edu.rest.services;
 
-import com.softserve.edu.rest.data.LogginedUsers;
+import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
@@ -28,29 +28,43 @@ public class LoginService {
     }
 
     public AdministrationService successfulAdminLogin(User adminUser){
-        LogginedUsers.get().addUser((new LoginedUser(adminUser, login(adminUser).getContent())));
-        return new AdministrationService(LogginedUsers.get().getLastLoggined());
+        ApplicationState.get().addUser((new LoginedUser(adminUser, login(adminUser).getContent())));
+        return new AdministrationService(ApplicationState.get().getLastLoggined());
     }
 
     public UserService successfulUserLogin(User basicUser){
-        LogginedUsers.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
-        return new UserService(LogginedUsers.get().getLastLoggined());
+        ApplicationState.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
+        return new UserService(ApplicationState.get().getLastLoggined());
     }
 
 
 
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
         for (User adminUser : adminUsers) {
-            LogginedUsers.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
+            ApplicationState.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
-        return new AdministrationService((LogginedUsers.get().getLastLoggined()));
+        return new AdministrationService((ApplicationState.get().getLastLoggined()));
     }
 
     public UserService successfulUsersLogin(List<User> adminUsers){
         for (User adminUser : adminUsers){
-            LogginedUsers.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
+            ApplicationState.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
-        return new UserService(LogginedUsers.get().getLastLoggined());
+        return new UserService(ApplicationState.get().getLastLoggined());
+    }
+
+    private SimpleEntity logout(LoginedUser loginedUser){
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.NAME, loginedUser.getUser().getName())
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+        SimpleEntity result = loginResource.httpDeleteAsEntity(null, null, bodyParameters);
+        EntityUtils.get().checkEntity(result);
+        return result;
+    }
+
+    public SimpleEntity successfulLogout(LoginedUser loginedUser){
+        ApplicationState.get().removeLoggined(loginedUser);
+        return logout(loginedUser);
     }
 
 }

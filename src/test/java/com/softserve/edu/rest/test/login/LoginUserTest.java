@@ -1,8 +1,10 @@
 package com.softserve.edu.rest.test.login;
 
-import com.softserve.edu.rest.data.LogginedUsers;
+import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
+import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.AdministrationService;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.services.UserService;
@@ -26,18 +28,31 @@ public class LoginUserTest extends RestTestRunner {
         return admin;
     }
 
+
+
     @Test(dataProvider = "existingUserDataProvider")
     public void loginExistingUserTest(User user){
         UserService userService = new LoginService()
                 .successfulUserLogin(user);
-        Assert.assertEquals(tokenLength, LogginedUsers.get().getLastLoggined().getToken().length());
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
     }
 
     @Test(dataProvider = "existingAdminDataProvider")
     public void loginExistingAdminTest(User admin){
-        UserService userService = new LoginService()
-                .successfulUserLogin(admin);
-        Assert.assertEquals(tokenLength, LogginedUsers.get().getLastLoggined().getToken().length());
+        AdministrationService adminService = new LoginService()
+                .successfulAdminLogin(admin);
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
+    }
+
+    @Test(dataProvider = "existingUserDataProvider")
+    public void logoutExistingUserTest(User existingUser){
+        SimpleEntity result = new LoginService()
+                .successfulUserLogin(existingUser)
+                .goToLoginService()
+                .successfulLogout(ApplicationState.get().getLastLoggined());
+
+        Assert.assertEquals("true", result.getContent());
+
     }
 
 }
