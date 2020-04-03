@@ -8,6 +8,7 @@ import com.softserve.edu.rest.services.AdministrationService;
 import com.softserve.edu.rest.services.CooldownService;
 import com.softserve.edu.rest.services.LoginService;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -24,14 +25,13 @@ public class changeCooldownTimeTest {
     }
 
     @DataProvider
-    public Object[][] correctUser() {
+    public Object[][] changeCooldownTimePositive() {
         return new Object[][]{
-                {UserRepository.getAdmin(), LifetimeRepository.getDefaultCooldownTime(),
-                        LifetimeRepository.getNewCooldownTime()},
+                {UserRepository.getAdmin(), LifetimeRepository.getNewCooldownTime()},
         };
     }
 
-    @Test(dataProvider = "defaultCoolTime")
+    @Test(dataProvider = "defaultCoolTime", priority = 1)
     public void checkCooldownTime(Lifetime defaultTime) {
         cooldownService = new CooldownService();
         Assert.assertEquals(cooldownService
@@ -39,25 +39,23 @@ public class changeCooldownTimeTest {
                 .getTimeAsText(), defaultTime.getTimeAsText());
     }
 
-    @Test(dataProvider = "correctUser")
-    public void coolDownTimeChangeTest(User admin, Lifetime defaultTime, Lifetime lifetime) {
+    @Test(dataProvider = "changeCooldownTimePositive", priority = 2)
+    public void cooldownTimeChangeTest(User admin, Lifetime newLifeTime) {
         Lifetime checkNewCooldownTime = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoCooldownService()
-                .changeCooldown(lifetime);
+                .changeCooldown(newLifeTime);
 
         Assert.assertEquals(checkNewCooldownTime.getTimeAsText(),
-                lifetime.getTimeAsText());
+                newLifeTime.getTimeAsText());
+    }
+
+    @AfterClass
+    public void setCooldownTimeForDefault() {
+         new LoginService()
+                .successfulAdminLogin(UserRepository.getAdmin())
+                .gotoCooldownService()
+                .changeCooldown(LifetimeRepository.getDefaultCooldownTime());
     }
 
 }
-
-//    @Test(dataProvider = "correctUser")
-//    public void coolDownTimeChangeTest(User admin, Lifetime defaultTime, Lifetime lifetime) {
-//        Lifetime checkNewCooldownTime = new LoginService()
-//                .successfulAdminLogin(admin)
-//                .gotoCooldownService()
-//                .changeCooldown(lifetime);
-// returns boolean if time was changed
-//        Assert.assertEquals(cooldownService.toString(), "750000");//defaultTime.getTime());
-//    }
