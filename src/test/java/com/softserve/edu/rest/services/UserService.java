@@ -35,13 +35,14 @@ public class UserService {
 //        return isChanged;
 //    }
 
-//    public boolean createUser(User user){
-//        RestParameters bodyParameters = new RestParameters()
-//                .addParameter(EParameters.TOKEN, loginedUser.getToken())
-//                .addParameter(EParameters.NAME, user.getName())
-//                .addParameter(EParameters.PASSWORD, user.getPassword())
-//                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
-//        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
-//        EntityUtils.get().checkEntity(simpleEntity);
-//    }
+    public UserService createUser(User user){
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.NAME, user.getName())
+                .addParameter(EParameters.PASSWORD, user.getPassword())
+                .addBooleanParameter(EParameters.RIGHTS, user.isAdmin());
+        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
+        EntityUtils.get().checkEntity(simpleEntity);
+        return this;
+    }
 }
