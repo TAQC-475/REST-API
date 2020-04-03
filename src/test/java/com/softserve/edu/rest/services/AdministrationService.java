@@ -15,6 +15,7 @@ public class AdministrationService extends UserService{
   public UsersService gotoUsersService(){
     return new UsersService(loginedUser);
   }
+  public ItemService goToItemService(){return  new ItemService(loginedUser);}
 
   public ItemsService goToItemsService() {return  new ItemsService(loginedUser); }
 
