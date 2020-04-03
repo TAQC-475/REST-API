@@ -11,11 +11,12 @@ import com.softserve.edu.rest.tools.EntityUtils;
 
 import java.util.List;
 
-public class LogginedClientsService extends UsersService { //TODO Rename it (maybe)
+
+public class LogginedUsersService extends UsersService{ //TODO Rename it (maybe)
     private LogginedUsersResource logginedUsersResource;
     private LogginedAdminsResource logginedAdminsResource;
 
-    public LogginedClientsService(LoginedUser loginedUser) {
+    public LogginedUsersService(LoginedUser loginedUser){
         super(loginedUser);
         this.logginedUsersResource = new LogginedUsersResource();
         this.logginedAdminsResource = new LogginedAdminsResource();

@@ -26,6 +26,10 @@ public class UserService {
         return new ItemsService(loginedUser);
     }
 
+    public LoginService goToLoginService(){
+        return new LoginService();
+    }
+
 //    public boolean changePassword(User oldPassword, User newPassword){
 //        RestParameters bodyParameters = new RestParameters()
 //                .addParameter(EParameters.TOKEN, loginedUser.getToken())
