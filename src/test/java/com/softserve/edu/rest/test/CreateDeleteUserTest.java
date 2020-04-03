@@ -3,7 +3,7 @@ package com.softserve.edu.rest.test;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.LoginService;
-import com.softserve.edu.rest.services.UserService;
+import com.softserve.edu.rest.services.UsersService;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -13,20 +13,22 @@ public class CreateDeleteUserTest {
     SoftAssert softAssert = new SoftAssert();
 
     @DataProvider
-    public Object[][] ucreateUserserData(){
+    public Object[][] createUserData() {
         return new Object[][]{{UserRepository.getAdmin(),
                 UserRepository.getValidUser(),
                 UserRepository.getValidUser()}};
     }
 
-    @Test(dataProvider = "userExist", dataProviderClass = LoginAdministrationTest.class,
+    @Test(dataProvider = "createUserData",
             description = "Check if admin could create user with all valid fields")
-    public void createUser(User adminUser, User validUser){
-        UserService actualUser = new LoginService()
+    public void createUser(User adminUser, User validUser, User expectedUser) {
+        UsersService actualUser = new LoginService()
                 .successfulAdminLogin(adminUser)
                 .gotoManageUserService()
                 .createUser(validUser)
-                ;
+                .gotoUsersService();
+
+        Assert.assertTrue(actualUser.isUserPresent(expectedUser));
     }
 
 //    @DataProvider
