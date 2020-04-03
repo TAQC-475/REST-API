@@ -2,16 +2,15 @@ package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.dto.LoginedUser;
 
-public class AdministrationService {
-  private LoginedUser loginedUser;
+public class AdministrationService extends UserService{
+    private LoginedUser loginedUser;
 //  private UsersService usersService;
 
 
-  public AdministrationService(LoginedUser loginedUser) {
-    this.loginedUser = loginedUser;
-//    this.usersService = new UsersService(loginedUser);
-
-  }
+    public AdministrationService(LoginedUser loginedUser) {
+        super(loginedUser);
+        this.loginedUser = loginedUser;
+    }
 
   public UsersService gotoUsersService(){
     return new UsersService(loginedUser);
@@ -21,4 +20,11 @@ public class AdministrationService {
 
   public CooldownService gotoCooldownService() {return new CooldownService(loginedUser); }
 
+    public LogginedUsersService gotoLogginedUsersService(){
+        return new LogginedUsersService(loginedUser);
+    }
+
+    public LoginedUser getLoginedUser() {
+        return loginedUser;
+    }
 }
