@@ -11,29 +11,28 @@ import com.softserve.edu.rest.tools.EntityUtils;
 
 import java.util.List;
 
-public class LogginedClientsService extends UsersService{ //TODO Rename it (maybe)
+public class LogginedClientsService extends UsersService { //TODO Rename it (maybe)
     private LogginedUsersResource logginedUsersResource;
     private LogginedAdminsResource logginedAdminsResource;
 
-    public LogginedClientsService(LoginedUser loginedUser){
+    public LogginedClientsService(LoginedUser loginedUser) {
         super(loginedUser);
         this.logginedUsersResource = new LogginedUsersResource();
         this.logginedAdminsResource = new LogginedAdminsResource();
     }
 
 
-
-    public List<User> getLoggedUsers(){
+    public List<User> getLoggedUsers() {
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN,loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
         SimpleEntity loggedUsersResult = logginedUsersResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(loggedUsersResult);
         return parseUsers(loggedUsersResult.getContent());
     }
 
-    public List<User> getLoggedAdmins(){
+    public List<User> getLoggedAdmins() {
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN,loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
         SimpleEntity loggedAdminsResult = logginedAdminsResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(loggedAdminsResult);
         return parseUsers(loggedAdminsResult.getContent());

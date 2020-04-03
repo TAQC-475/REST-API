@@ -9,11 +9,13 @@ import org.testng.annotations.Test;
 
 public class CreateDeleteUserTest {
 
-//    @Test(dataProvider = "userExist", dataProviderClass = LoginAdministrationTest.class,
-//            description = "Check if admin could create user with all valid fields")
-//    public void createUser(User adminUser, User validUser){
-//        Assert.assertTrue(new LoginService()
-//        .successfulAdmin(adminUser).gotoUsersService().);
+    @Test(dataProvider = "userExist", dataProviderClass = LoginAdministrationTest.class,
+            description = "Check if admin could create user with all valid fields")
+    public void createUser(User adminUser, User validUser){
+        Assert.assertTrue(new LoginService()
+                .successfulAdminLogin(adminUser)
+                .goToUserService()
+                .createUser(validUser));
 //    }
 //    @DataProvider
 //    public Object[][] userData(){
@@ -25,4 +27,5 @@ public class CreateDeleteUserTest {
 //        LoginService login = new
 //
 //    }
+}
 }

@@ -29,7 +29,6 @@ public class User {
         items = new ArrayList<>();
     }
 
-
     // setters
 
     public User setName(String name) {
