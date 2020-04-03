@@ -26,6 +26,11 @@ public final class UserRepository {
 
     public static List<User> getExistingUsers(){
         List<User> users = new ArrayList<>();
+        users.add(new User("kilinatc", "qwerty", false));
+        users.add(new User("akimatc", "qwerty", false));
+        users.add(new User("OKonokhtc", "qwerty", false));
+        users.add(new User("slototc", "qwerty", false));
+        users.add(new User("khalaktc", "qwerty", false));
         return users;
     }
 }
