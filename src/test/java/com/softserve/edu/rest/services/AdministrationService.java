@@ -19,4 +19,6 @@ public class AdministrationService {
 
   public ItemsService goToItemsService() {return  new ItemsService(loginedUser); }
 
+  public CooldownService gotoCooldownService() {return new CooldownService(loginedUser); }
+
 }
