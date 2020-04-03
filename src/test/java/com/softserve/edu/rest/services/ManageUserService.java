@@ -32,7 +32,7 @@ public class ManageUserService {
             .addParameter(EParameters.TOKEN, loginedUser.getToken())
             .addParameter(EParameters.NAME, user.getName())
             .addParameter(EParameters.PASSWORD, user.getPassword())
-            .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
+            .addBooleanParameter(EParameters.RIGHTS, user.isAdmin());
         SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
         EntityUtils.get().checkEntity(simpleEntity);
     }
