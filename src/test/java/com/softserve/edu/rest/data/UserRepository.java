@@ -15,6 +15,9 @@ public final class UserRepository {
     public static User getAdmin() {
         return new User("admin", "qwerty", true).addItem("My data");
     }
+    public static User getNotExistedAdmin() {
+        return new User("Puhlyash", "qwerty", true).addItem("My data");
+    }
 
     public static User getValidUser() {
         return new User("otlumtc", "qwerty", false);
