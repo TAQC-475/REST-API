@@ -33,6 +33,9 @@ public class AdministrationService extends UserService{
     public LoginedUser getLoginedUser() {
         return loginedUser;
     }
+    public ManageUserService gotoManageUserService(){
+        return new ManageUserService(loginedUser);
+    }
 
 //    public AdministrationService createUser(){
 //
