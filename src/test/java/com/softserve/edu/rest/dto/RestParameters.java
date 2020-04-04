@@ -21,8 +21,6 @@ public class RestParameters {
         return this;
     }
 
-    //TODO boolean
-
     public String getParameter(EParameters key) {
         return parameters.get(key);
     }

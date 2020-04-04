@@ -2,14 +2,12 @@ package com.softserve.edu.rest.services;
 
 
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
-import javax.jws.soap.SOAPBinding.Use;
 
 public class UserService {
     private UserResource userResource;
@@ -41,6 +39,7 @@ public class UserService {
 //        return isChanged;
 //    }
 
+
 //    public boolean createUser(User user){
 //        RestParameters bodyParameters = new RestParameters()
 //                .addParameter(EParameters.TOKEN, loginedUser.getToken())
@@ -57,3 +56,6 @@ public class UserService {
 
 
 }
+
+
+

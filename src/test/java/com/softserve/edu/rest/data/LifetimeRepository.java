@@ -21,4 +21,6 @@ public final class LifetimeRepository {
 
 	public static Lifetime getNewCooldownTime() { return new Lifetime("360000"); }
 
+	public static Lifetime getNegativeLifeTime() { return new Lifetime("-100000"); }
+
 }

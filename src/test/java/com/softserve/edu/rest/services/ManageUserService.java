@@ -17,7 +17,7 @@ public class ManageUserService {
         userResource = new UserResource();
     }
 
-    public AdministrationService createUser(User user){
+    public AdministrationService createUser(User user) {
         createUserExample(user);
         return new AdministrationService(loginedUser);
     }
@@ -25,16 +25,17 @@ public class ManageUserService {
 
 
     private void createUserExample(User user){
+
         RestParameters bodyParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, loginedUser.getToken())
-            .addParameter(EParameters.NAME, user.getName())
-            .addParameter(EParameters.PASSWORD, user.getPassword())
-            .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.NAME, user.getName())
+                .addParameter(EParameters.PASSWORD, user.getPassword())
+                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
         SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
         EntityUtils.get().checkEntity(simpleEntity);
     }
 
-    public AdministrationService gotoAdminService(){
+    public AdministrationService gotoAdminService() {
         return new AdministrationService(loginedUser);
     }
 }
