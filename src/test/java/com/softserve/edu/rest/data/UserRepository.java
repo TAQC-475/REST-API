@@ -23,6 +23,14 @@ public final class UserRepository {
         return new User("otlumtc", "qwerty", false);
     }
 
+    public static User getFedorUser(){
+        return new User("Fedor", "qwerty", false);
+    }
+
+    public static User getFedorWithNewPassword(){
+        return new User("Fedor", "123456", false);
+    }
+
     public static User notExistingUser() {
         return new User("Anna", "ksjddlfkjddqwerty", false).addItem("My data");
     }

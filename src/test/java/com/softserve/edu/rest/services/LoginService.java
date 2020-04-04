@@ -27,16 +27,15 @@ public class LoginService {
         return tokenContent;
     }
 
-    public AdministrationService successfulAdminLogin(User adminUser){
+    public AdministrationService successfulAdminLogin(User adminUser) {
         ApplicationState.get().addUser((new LoginedUser(adminUser, login(adminUser).getContent())));
         return new AdministrationService(ApplicationState.get().getLastLoggined());
     }
 
-    public UserService successfulUserLogin(User basicUser){
+    public UserService successfulUserLogin(User basicUser) {
         ApplicationState.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
         return new UserService(ApplicationState.get().getLastLoggined());
     }
-
 
 
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
@@ -46,14 +45,14 @@ public class LoginService {
         return new AdministrationService((ApplicationState.get().getLastLoggined()));
     }
 
-    public UserService successfulUsersLogin(List<User> adminUsers){
-        for (User adminUser : adminUsers){
+    public UserService successfulUsersLogin(List<User> adminUsers) {
+        for (User adminUser : adminUsers) {
             ApplicationState.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
         return new UserService(ApplicationState.get().getLastLoggined());
     }
 
-    private SimpleEntity logout(LoginedUser loginedUser){
+    private SimpleEntity logout(LoginedUser loginedUser) {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.NAME, loginedUser.getUser().getName())
                 .addParameter(EParameters.TOKEN, loginedUser.getToken());
@@ -62,9 +61,8 @@ public class LoginService {
         return result;
     }
 
-    public SimpleEntity successfulLogout(LoginedUser loginedUser){
+    public SimpleEntity successfulLogout(LoginedUser loginedUser) {
         ApplicationState.get().removeLoggined(loginedUser);
         return logout(loginedUser);
     }
-
 }
