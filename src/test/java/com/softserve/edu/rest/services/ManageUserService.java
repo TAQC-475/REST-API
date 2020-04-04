@@ -22,10 +22,7 @@ public class ManageUserService {
         return new AdministrationService(loginedUser);
     }
 
-    public AdministrationService createAdmin(User user){
-        createUserExample(user);
-        return new AdministrationService(loginedUser);
-    }
+
 
     private void createUserExample(User user){
         RestParameters bodyParameters = new RestParameters()
