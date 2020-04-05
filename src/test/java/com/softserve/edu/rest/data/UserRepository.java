@@ -36,4 +36,12 @@ public final class UserRepository {
         users.add(new User("khalaktc", "qwerty", false));
         return users;
     }
+
+    public static User getNonExistingUser(){
+        return new User("nonexistinguser", "qwerty", false);
+    }
+
+    public static User getNonExistingAdmin(){
+        return new User("nonexistingadmin", "qwerty", true);
+    }
 }
