@@ -7,6 +7,7 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
+import java.util.List;
 
 public class ManageUserService {
     private LoginedUser loginedUser;
@@ -21,6 +22,14 @@ public class ManageUserService {
         createUserExample(user);
         return new AdministrationService(loginedUser);
     }
+
+    public AdministrationService createUsers(List<User> users){
+        for (User current: users){
+            createUser(current);
+        }
+        return new AdministrationService(loginedUser);
+    }
+
 
 
 
