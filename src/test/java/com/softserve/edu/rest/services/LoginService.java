@@ -50,7 +50,7 @@ public class LoginService {
         for (User adminUser : adminUsers){
             ApplicationState.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
-        return new UserService(ApplicationState.get().getLastLoggined());
+        return new UserService((ApplicationState.get().getLastLoggined()));
     }
 
     private SimpleEntity logout(LoginedUser loginedUser){

@@ -44,4 +44,14 @@ public final class UserRepository {
     public static User getNonExistingAdmin(){
         return new User("nonexistingadmin", "qwerty", true);
     }
+
+    public static List<User> getNonExistingUsers(){
+        List<User> users = new ArrayList<>();
+        users.add(new User("kaban", "qwerty", false));
+        users.add(new User("puhlyash", "qwerty", false));
+        users.add(new User("sraka", "qwerty", false));
+        users.add(new User("malyshka", "qwerty", false));
+        users.add(new User("katakombic", "qwerty", false));
+        return users;
+    }
 }

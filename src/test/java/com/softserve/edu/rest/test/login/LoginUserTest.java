@@ -41,6 +41,8 @@ public class LoginUserTest extends RestTestRunner {
     }
 
 
+
+
     @Test(dataProvider = "existingUserDataProvider")
     public void loginExistingUserTest(User user){
         UserService userService = new LoginService()
@@ -68,13 +70,25 @@ public class LoginUserTest extends RestTestRunner {
     }
 
     @Test(dataProvider = "nonExistingUserDataProvider")
-    public void createAndLoginUser(User admin, User newUser){
+    public void createAndLoginUserTest(User admin, User newUser){
         UserService userService = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
                 .createUser(newUser)
                 .goToLoginService()
                 .successfulUserLogin(newUser);
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
+    }
+
+    @Test(dataProvider = "nonExistingAdminDataProvider")
+    public void createAndLoginAdminTest(User admin, User newAdmin){
+        AdministrationService adminService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoManageUserService()
+                .removeUser(UserRepository.getValidUser());
+                /*.createUser(newAdmin)
+                .goToLoginService()
+                .successfulAdminLogin(newAdmin);*/
         Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
     }
 

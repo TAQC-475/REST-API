@@ -1,12 +1,14 @@
 package com.softserve.edu.rest.services;
 
 
+import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
+import com.softserve.edu.rest.tools.CustomException;
 import com.softserve.edu.rest.tools.EntityUtils;
 
 public class UserService {
@@ -28,6 +30,16 @@ public class UserService {
 
     public LoginService goToLoginService(){
         return new LoginService();
+    }
+
+    public AdministrationService gotoAdministrationService(){
+        AdministrationService administrationService = null;
+        try {
+             administrationService = new AdministrationService(ApplicationState.get().getAdmin());
+        }catch (CustomException exception){
+            exception.printStackTrace();
+        }
+        return administrationService;
     }
 
 //    public boolean changePassword(User oldPassword, User newPassword){
