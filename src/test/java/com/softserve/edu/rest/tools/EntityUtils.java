@@ -24,4 +24,12 @@ public class EntityUtils {
         }
         return result;
     }
+
+    //Check if lock request is success
+    public void checkLockEntity(SimpleEntity simpleEntity, String message) {
+        if ((simpleEntity.getContent() == null) || (simpleEntity.getContent().isEmpty())
+                || (simpleEntity.getContent().toLowerCase().equals("false"))) {
+            throw new RuntimeException(message);
+        }
+    }
 }
