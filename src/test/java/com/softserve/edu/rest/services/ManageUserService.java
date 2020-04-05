@@ -7,6 +7,8 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
+import java.util.List;
+import javax.jws.soap.SOAPBinding.Use;
 
 public class ManageUserService {
     private LoginedUser loginedUser;
@@ -22,6 +24,32 @@ public class ManageUserService {
         return new AdministrationService(loginedUser);
     }
 
+    public AdministrationService removeUser(User user){
+        removeUserExample(user);
+        return new AdministrationService(loginedUser);
+    }
+
+    public AdministrationService removeUsers(List<User> users){
+        for (User current: users){
+            removeUser(current);
+        }
+        return new AdministrationService(loginedUser);
+    }
+
+    public AdministrationService createUsers(List<User> users){
+        for (User current: users){
+            createUser(current);
+        }
+        return new AdministrationService(loginedUser);
+    }
+
+    private void removeUserExample(User user){
+        RestParameters bodyParameters = new RestParameters()
+            .addParameter(EParameters.TOKEN,loginedUser.getToken())
+            .addParameter(EParameters.NAME,user.getName());
+        SimpleEntity simpleEntity = userResource.httpDeleteAsEntity(null,null,bodyParameters);
+        EntityUtils.get().checkEntity(simpleEntity);
+    }
 
 
     private void createUserExample(User user){
