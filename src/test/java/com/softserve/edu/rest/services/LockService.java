@@ -35,9 +35,21 @@ public class LockService {
         SimpleEntity simpleEntity = lockUserResource
                 .httpGetAsEntity(null, bodyParameters);
 
-        System.out.println("locked users - "+simpleEntity.getContent());
+        System.out.println("locked users - \n"+simpleEntity.getContent());
         return simpleEntity.getContent();
     }
+
+    public LockService unlockUser(User user) {
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.NAME, user.getName());
+        SimpleEntity simpleEntity = lockUserResource
+                .httpPutAsEntity(pathParameters, null, bodyParameters);
+        EntityUtils.get().checkLockEntity(simpleEntity, "User was not unlocked");
+        return this;
+    }
+
 
     public boolean isUserLocked(User userToLock) {
 
