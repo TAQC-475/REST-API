@@ -11,20 +11,27 @@ import org.testng.annotations.Test;
 public class LockTest {
 
     @DataProvider
-    public Object[][] lockUser() {
+    public Object[][] lockDana() {
         return new Object[][]{
-                { UserRepository.getAdmin(), UserRepository.getUserDana() }
+                {UserRepository.getAdmin(), UserRepository.getUserDana()}
         };
     }
 
     @DataProvider
     public Object[][] lockAdmin() {
         return new Object[][]{
-                { UserRepository.getAdmin(), UserRepository.getAdminVasya() }
+                {UserRepository.getAdmin(), UserRepository.getAdminVasya()}
         };
     }
 
-    @Test(dataProvider = "lockUser", priority = 1)
+    @DataProvider
+    public Object[][] lockUser() {
+        return new Object[][]{
+                {UserRepository.getAdmin(), UserRepository.getUserWithWrongPassword()}
+        };
+    }
+
+    @Test(dataProvider = "lockDana", priority = 1)
     public void lockUserFromAdmin(User admin, User simpleUser) {
         LockService adminService = new LoginService()
                 .successfulAdminLogin(admin)
@@ -34,7 +41,20 @@ public class LockTest {
         Assert.assertTrue(adminService.isUserLocked(simpleUser));
     }
 
-    @Test(dataProvider = "lockAdmin", priority = 2)
+    @Test(dataProvider = "lockUser", priority = 2)
+    public void lockUserByUnsuccessfulLogin(User admin, User UserWithWrongPassword) {
+        LockService adminService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoLockService();
+        LoginService loginService = new LoginService()
+                .unsuccessfulUserLogin(UserWithWrongPassword)
+                .unsuccessfulUserLogin(UserWithWrongPassword)
+                .unsuccessfulUserLogin(UserWithWrongPassword);
+
+        Assert.assertTrue(adminService.isUserLocked(UserWithWrongPassword));
+    }
+
+    @Test(dataProvider = "lockAdmin", priority = 3)
     public void lockAdminFromAdmin(User admin, User someAdmin) {
         LockService adminService = new LoginService()
                 .successfulAdminLogin(admin)
@@ -44,7 +64,7 @@ public class LockTest {
         Assert.assertTrue(adminService.isUserLocked(someAdmin));
     }
 
-    @Test(dataProvider = "lockUser", priority = 2)
+    @Test(dataProvider = "lockDana", priority = 4)
     public void unlockUserFromAdmin(User admin, User someUser) {
         LockService adminService = new LoginService()
                 .successfulAdminLogin(admin)
@@ -53,7 +73,6 @@ public class LockTest {
 
         Assert.assertFalse(adminService.isUserLocked(someUser));
     }
-
 
 
 }

@@ -19,6 +19,10 @@ public final class UserRepository {
         return new User("Vasya", "qwerty", true);
     }
 
+    public static User getUserVasya() {
+        return new User("Vasya", "qwerty", false);
+    }
+
     public static User getUserDana() {
         return new User("Dana", "qwerty", true);
     }
@@ -30,6 +34,8 @@ public final class UserRepository {
     public static User getValidUser() {
         return new User("otlumtc", "qwerty", false);
     }
+
+    public static User getUserWithWrongPassword() { return new User("otlumtc", "wrong", false); }
 
     public static User notExistingUser() {
         return new User("Anna", "ksjddlfkjddqwerty", false).addItem("My data");
