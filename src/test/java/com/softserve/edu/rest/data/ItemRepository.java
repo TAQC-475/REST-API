@@ -28,4 +28,11 @@ public class ItemRepository {
         items.add(getCoreI7());
         return items;
     }
+
+    public static List<String> getTestItemsIndexes(){
+        List<String> itemsIndexes = new ArrayList<>();
+        itemsIndexes.add(getCoreI5().getItemIndex());
+        itemsIndexes.add(getCoreI7().getItemIndex());
+        return itemsIndexes;
+    }
 }

@@ -86,4 +86,6 @@ public class ItemService {
     public ItemsService goToItemsService(){
         return new ItemsService(loginedUser);
     }
+
+    public ItemsIndexesService goToItemsIndexesService(){ return new ItemsIndexesService(loginedUser);}
 }

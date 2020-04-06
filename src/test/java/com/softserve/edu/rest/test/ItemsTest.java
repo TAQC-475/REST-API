@@ -28,6 +28,11 @@ public class ItemsTest {
         return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI7()}};
     }
 
+    @DataProvider
+    public Object[][] dataForVerifyingUserCanGetAllItemsIndexes() {
+        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getTestItemsIndexes()}};
+    }
+
     @Test(dataProvider = "dataForGettingAllItemsTest")
     public void verifyUserCanGetAllItems(User user, Item firstItem, Item secondItem, List<Item> testItemsList) {
         ItemsService itemsService = new LoginService()
@@ -70,5 +75,18 @@ public class ItemsTest {
                 .getAllUserItemsAsAdmin(userToCheck);
 
         Assert.assertTrue(adminItems.contains(firstItem.getItemText()) && contentUserGetsTryingToGetAdminItems.equals(""));
+    }
+
+    @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes")
+    public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes){
+        List<String> itemsIndexes = new LoginService()
+                .successfulUserLogin(user)
+                .goToItemService()
+                .createItem(firstItem, true)
+                .createItem(secondItem, true)
+                .goToItemsIndexesService()
+                .getAllItemsIndexes();
+
+        Assert.assertEquals(itemsIndexes, testItemsIndexes);
     }
 }
