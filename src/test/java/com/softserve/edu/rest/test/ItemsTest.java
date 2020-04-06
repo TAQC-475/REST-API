@@ -4,16 +4,18 @@ import com.softserve.edu.rest.data.Item;
 import com.softserve.edu.rest.data.ItemRepository;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
-import com.softserve.edu.rest.services.ItemService;
+import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class ItemsTest {
     @DataProvider
     public Object[][] dataForGettingAllItemsTest() {
-        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI9()}};
+        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getTestItemsList()}};
     }
 
     @DataProvider
@@ -23,30 +25,19 @@ public class ItemsTest {
 
     @DataProvider
     public Object[][] dataForVerifyingUserCantGetAdminItems() {
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI7(), ItemRepository.getCoreI9()}};
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI7()}};
     }
 
     @Test(dataProvider = "dataForGettingAllItemsTest")
-    public void verifyUserCanGetAllItems(User user, Item firstItem, Item secondItem, Item thirdItem) {
-        ItemService itemService = new LoginService()
+    public void verifyUserCanGetAllItems(User user, Item firstItem, Item secondItem, List<Item> testItemsList) {
+        ItemsService itemsService = new LoginService()
                 .successfulUserLogin(user)
-                .goToItemService();
-
-        int initialNumberOfItems;
-        if(!itemService.goToItemsService().getAllItems().equals("")){
-            String[] initialItems = itemService.goToItemsService().getAllItems().split("\n");
-            initialNumberOfItems = initialItems.length;
-        }
-        else initialNumberOfItems = 0;
-
-        String[] itemsAfterAddingTwoItems = itemService
+                .goToItemService()
+                .createItem(firstItem, true)
                 .createItem(secondItem, true)
-                .createItem(thirdItem, true)
-                .goToItemsService()
-                .getAllItems().split("\n");
-        int numberOfItemsAfterAddingTwoItems = itemsAfterAddingTwoItems.length;
+                .goToItemsService();
 
-        Assert.assertEquals(numberOfItemsAfterAddingTwoItems - initialNumberOfItems, 2);
+        Assert.assertEquals(itemsService.getAllItemsList(), testItemsList);
     }
 
     @Test(dataProvider = "dataForAdminGettingUserItemsTest")
@@ -65,7 +56,7 @@ public class ItemsTest {
     }
 
     @Test(dataProvider = "dataForVerifyingUserCantGetAdminItems")
-    public void verifyUserCantGetAdminItems(User adminUser, User userToCheck, Item firstItem, Item secondItem){
+    public void verifyUserCantGetAdminItems(User adminUser, User userToCheck, Item firstItem) {
         String adminItems = new LoginService()
                 .successfulAdminLogin(adminUser)
                 .goToItemService()
