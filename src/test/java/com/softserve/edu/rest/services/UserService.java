@@ -10,7 +10,6 @@ import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 
 public class UserService {
-
     private UserResource userResource;
     private LoginedUser loginedUser;
 

@@ -30,11 +30,14 @@ public class ItemsTest {
     public void verifyUserCanGetAllItems(User user, Item firstItem, Item secondItem, Item thirdItem) {
         ItemService itemService = new LoginService()
                 .successfulUserLogin(user)
-                .goToItemService()
-                .createItem(firstItem, true);
+                .goToItemService();
 
-        String[] initialItems = itemService.goToItemsService().getAllItems().split("\n");
-        int initialNumberOfItems = initialItems.length;
+        int initialNumberOfItems;
+        if(!itemService.goToItemsService().getAllItems().equals("")){
+            String[] initialItems = itemService.goToItemsService().getAllItems().split("\n");
+            initialNumberOfItems = initialItems.length;
+        }
+        else initialNumberOfItems = 0;
 
         String[] itemsAfterAddingTwoItems = itemService
                 .createItem(secondItem, true)
@@ -43,7 +46,7 @@ public class ItemsTest {
                 .getAllItems().split("\n");
         int numberOfItemsAfterAddingTwoItems = itemsAfterAddingTwoItems.length;
 
-        Assert.assertTrue(numberOfItemsAfterAddingTwoItems - initialNumberOfItems == 2);
+        Assert.assertEquals(numberOfItemsAfterAddingTwoItems - initialNumberOfItems, 2);
     }
 
     @Test(dataProvider = "dataForAdminGettingUserItemsTest")

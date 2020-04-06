@@ -11,7 +11,7 @@ import com.softserve.edu.rest.tools.EntityUtils;
 public class CooldownService{
 
     protected CooldownTimeResource cooldownResource;
-    private LoginedUser loginedUser;  //  ?
+    private LoginedUser loginedUser;
 
     public CooldownService() {
         cooldownResource = new CooldownTimeResource();

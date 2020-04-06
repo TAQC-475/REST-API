@@ -15,6 +15,14 @@ public final class UserRepository {
     public static User getAdmin() {
         return new User("admin", "qwerty", true).addItem("My data");
     }
+    public static User getAdminVasya() {
+        return new User("Vasya", "qwerty", true);
+    }
+
+    public static User getUserDana() {
+        return new User("Dana", "qwerty", true);
+    }
+
     public static User getNotExistedAdmin() {
         return new User("Puhlyash", "qwerty", true).addItem("My data");
     }
@@ -43,5 +51,13 @@ public final class UserRepository {
         users.add(new User("slototc", "qwerty", false));
         users.add(new User("khalaktc", "qwerty", false));
         return users;
+    }
+
+    public static User getNonExistingUser(){
+        return new User("nonexistinguser", "qwerty", false);
+    }
+
+    public static User getNonExistingAdmin(){
+        return new User("nonexistingadmin", "qwerty", true);
     }
 }

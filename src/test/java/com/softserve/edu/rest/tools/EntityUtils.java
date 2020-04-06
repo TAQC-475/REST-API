@@ -39,4 +39,12 @@ public class EntityUtils {
     public static String randomAlphaNumeric(int count) {
         return RandomStringUtils.randomAlphanumeric(count);
     }
+
+    //Check if lock request is success
+    public void checkLockEntity(SimpleEntity simpleEntity, String message) {
+        if ((simpleEntity.getContent() == null) || (simpleEntity.getContent().isEmpty())
+                || (simpleEntity.getContent().toLowerCase().equals("false"))) {
+            throw new RuntimeException(message);
+        }
+    }
 }
