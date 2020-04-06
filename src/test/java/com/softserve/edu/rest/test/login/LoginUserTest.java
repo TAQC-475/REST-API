@@ -13,44 +13,19 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class LoginUserTest extends RestTestRunner {
     private static final short tokenLength = 32;
 
-    @DataProvider(name = "existingUserDataProvider")
-    public Object[] getExistingUser(){
-        Object[] user = {UserRepository.getValidUser()};
-        return user;
-    }
-
-    @DataProvider(name = "existingAdminDataProvider")
-    public Object[] getExistingAdmin(){
-        Object[] admin = {UserRepository.getAdmin()};
-        return admin;
-    }
-
-    @DataProvider(name = "nonExistingUserDataProvider")
-    public Object[][] getNonExistingUser(){
-        Object[][] user = {{UserRepository.getAdmin(), UserRepository.getNonExistingUser()}};
-        return user;
-    }
-
-    @DataProvider(name = "nonExistingAdminDataProvider")
-    public Object[][] getNonExistingAdmin(){
-        Object[][] admin = {{UserRepository.getAdmin(), UserRepository.getNonExistingAdmin()}};
-        return admin;
-    }
-
-
-
-
-    @Test(dataProvider = "existingUserDataProvider")
+    @Test(dataProvider = "existingUserDataProvider", dataProviderClass = UsersTestData.class)
     public void loginExistingUserTest(User user){
         UserService userService = new LoginService()
                 .successfulUserLogin(user);
         Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
     }
 
-    @Test(dataProvider = "existingAdminDataProvider")
+    @Test(dataProvider = "existingAdminDataProvider", dataProviderClass = UsersTestData.class)
     public void loginExistingAdminTest(User admin){
         AdministrationService adminService = new LoginService()
                 .successfulAdminLogin(admin);
@@ -59,28 +34,32 @@ public class LoginUserTest extends RestTestRunner {
 
 
 
-    @Test(dataProvider = "existingUserDataProvider")
-    public void logoutExistingUserTest(User existingUser){
-        SimpleEntity result = new LoginService()
+    @Test(dataProvider = "existingUserDataProvider", dataProviderClass = UsersTestData.class)
+    public void logoutExistingUserTest(User admin, User existingUser){
+        List<User> users = new LoginService()
                 .successfulUserLogin(existingUser)
-                .goToLoginService()
-                .successfulLogout(ApplicationState.get().getLastLoggined());
+                .gotoLoginService()
+                .successfulLogout(ApplicationState.get().getLastLoggined())
+                .gotoLoginService()
+                .successfulAdminLogin(admin)
+                .gotoLogginedUsersService()
+                .getLoggedUsers();
 
-        Assert.assertTrue(Boolean.valueOf(result.getContent()));
+        Assert.assertFalse(users.contains(existingUser));
     }
 
-    @Test(dataProvider = "nonExistingUserDataProvider")
+    @Test(dataProvider = "nonExistingUserDataProvider", dataProviderClass = UsersTestData.class)
     public void createAndLoginUserTest(User admin, User newUser){
         UserService userService = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
                 .createUser(newUser)
-                .goToLoginService()
+                .gotoLoginService()
                 .successfulUserLogin(newUser);
         Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
     }
 
-    @Test(dataProvider = "nonExistingAdminDataProvider")
+    @Test(dataProvider = "nonExistingAdminDataProvider", dataProviderClass = UsersTestData.class)
     public void createAndLoginAdminTest(User admin, User newAdmin){
         AdministrationService adminService = new LoginService()
                 .successfulAdminLogin(admin)

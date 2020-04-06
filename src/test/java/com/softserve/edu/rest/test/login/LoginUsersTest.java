@@ -11,56 +11,40 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 public class LoginUsersTest extends RestTestRunner {
-    @DataProvider(name = "existingUsersDataProvider")
-    public Object[][] getExistingUsers(){
-        Object[][] objects = {{UserRepository.getAdmin(), UserRepository.getExistingUsers()}};
-        return objects;
-    }
-
-    @DataProvider(name = "nonExistingUsersDataProvider")
-    public Object[][] getNonExistingUsers(){
-        Object[][] objects = {{UserRepository.getAdmin(), UserRepository.getNonExistingUsers()}};
-        return objects;
-    }
-
-    @DataProvider(name = "nonExistingAdminsDataProvider")
-    public Object[][] getNonExistingAdmins(){
-        Object[][] objects = {{UserRepository.getAdmin(), UserRepository.getNonExistingAdmins()}};
-        return objects;
-    }
 
 
-    @Test(dataProvider = "existingUsersDataProvider")
+
+    @Test(dataProvider = "existingUsersDataProvider", dataProviderClass = UsersTestData.class)
     public void loginExistingUsersTest(User admin, List<User> existingUsers){
         LogginedUsersService logginedUsersService = new LoginService()
                 .successfulUsersLogin(existingUsers)
-                .goToLoginService()
+                .gotoLoginService()
                 .successfulAdminLogin(admin)
                 .gotoLogginedUsersService();
 
         Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(existingUsers));
     }
 
-    @Test(dataProvider = "nonExistingUsersDataProvider")
+    @Test(dataProvider = "nonExistingUsersDataProvider", dataProviderClass = UsersTestData.class)
     public void createAndLoginUsersTest(User admin, List<User> nonExistingUsers){
         LogginedUsersService logginedUsersService = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
                 .createUsers(nonExistingUsers)
-                .goToLoginService()
+                .gotoLoginService()
                 .successfulUsersLogin(nonExistingUsers)
                 .gotoAdministrationService()
                 .gotoLogginedUsersService();
         Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(nonExistingUsers));
     }
 
-    @Test(dataProvider = "nonExistingAdminsDataProvider")
+    @Test(dataProvider = "nonExistingAdminsDataProvider", dataProviderClass = UsersTestData.class)
     public void createAndLoginAdminsTest(User admin, List<User> nonExistingAdmins){
         LogginedUsersService logginedUsersService = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
                 .createUsers(nonExistingAdmins)
-                .goToLoginService()
+                .gotoLoginService()
                 .successfulAdminsLogin(nonExistingAdmins)
                 .gotoLogginedUsersService();
         Assert.assertTrue(logginedUsersService.getLoggedAdmins().containsAll(nonExistingAdmins));
