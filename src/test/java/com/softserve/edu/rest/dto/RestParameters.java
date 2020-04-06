@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RestParameters {
-    private Map<EParameters, Boolean> booleanParameters;
-	private Map<EParameters, String> parameters;
+    private Map<EParameters, String> parameters;
 
     public RestParameters() {
         parameters = new HashMap<>();
@@ -13,11 +12,6 @@ public class RestParameters {
 
     public RestParameters addParameter(EParameters key, String value) {
         parameters.put(key, value);
-        return this;
-    }
-
-    public RestParameters addBooleanParameter(EParameters key, boolean value){
-        booleanParameters.put(key, value);
         return this;
     }
 
