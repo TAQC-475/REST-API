@@ -19,6 +19,10 @@ public final class UserRepository {
         return new User("Vasya", "qwerty", true);
     }
 
+    public static User getUserVasya() {
+        return new User("Vasya", "qwerty", false);
+    }
+
     public static User getUserDana() {
         return new User("Dana", "qwerty", true);
     }

@@ -9,10 +9,12 @@ import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.LoginResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public class LoginService {
     private LoginResource loginResource;
+    public static final String INVALID_USER = "ERROR, user not found";
 
     public LoginService() {
         this.loginResource = new LoginResource();
@@ -66,9 +68,15 @@ public class LoginService {
         return result;
     }
 
+    public GuestService successfulLogout(LoginedUser loginedUser){
     public SimpleEntity successfulLogout(LoginedUser loginedUser) {
         ApplicationState.get().removeLoggined(loginedUser);
-        return logout(loginedUser);
+        logout(loginedUser);
+        return new GuestService();
+    }
+
+    public SimpleEntity unsuccessfulUserLogin(User user){
+        return login(user);
     }
 
 }

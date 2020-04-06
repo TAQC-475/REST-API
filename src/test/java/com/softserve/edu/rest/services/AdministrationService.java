@@ -29,6 +29,10 @@ public class AdministrationService extends UserService{
         return new ItemsService(loginedUser);
     }
 
+    public LoginService goToLoginService() {
+        return new LoginService();
+    }
+
     public CooldownService gotoCooldownService() { return new CooldownService(loginedUser); }
     public LockService gotoLockService(){ return new LockService(loginedUser);}
 

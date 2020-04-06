@@ -52,11 +52,19 @@ public class ApplicationState {
         return logginedClients.contains(loginedUser);
     }
 
-    public LoginedUser getAdmin() throws CustomException{
+    public LoginedUser getLogginedAdmin() throws CustomException{
         for(LoginedUser loginedUser: logginedClients){
             if(loginedUser.getUser().isAdmin())
                 return loginedUser;
         }
-        throw new CustomException("Could not go to the AdministrationService because no administrators are logined");
+        throw new CustomException("Cannot go to the AdministrationService because no administrators are loggined");
+    }
+
+    public LoginedUser getLogginedUser() throws CustomException{
+        for(LoginedUser loginedUser : logginedClients){
+            if(!loginedUser.getUser().isAdmin())
+                return loginedUser;
+        }
+        throw new CustomException("Cannot go to the UserService because no users are loggined");
     }
 }

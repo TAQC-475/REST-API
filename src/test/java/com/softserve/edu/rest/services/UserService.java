@@ -11,7 +11,7 @@ import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.CustomException;
 import com.softserve.edu.rest.tools.EntityUtils;
 
-public class UserService {
+public class UserService extends GuestService{
     private UserResource userResource;
     private LoginedUser loginedUser;
 
@@ -42,6 +42,7 @@ public class UserService {
         }
         return administrationService;
     }
+
 
 //    public boolean changePassword(User oldPassword, User newPassword){
 //        RestParameters bodyParameters = new RestParameters()
@@ -78,3 +79,6 @@ public class UserService {
         return this;
     }
 }
+
+
+
