@@ -22,6 +22,20 @@ public class ItemRepository {
         return new Item("3", "Intel Core i9");
     }
 
+    public static Item getItemWithMinIndex(){ return new Item("0", "ItemWithMinValue");}
+
+    public static Item getItemWithMaxIndex(){ return new Item(String.valueOf(Integer.MAX_VALUE), "ItemWithMinValue");}
+
+    public static Item getItemWithIndexBetweenMinAndMax(){ return new Item("432564", "ItemWithValueBetweenMinAndMax");}
+
+    public static Item getItemWithLetterIndex(){ return new Item("a", "ItemWithLetterIndex");}
+
+    public static Item getItemWithSpecialCharacterIndex(){ return new Item("*", "ItemWithSpecialCharacterIndex");}
+
+    public static Item getItemWithNegativeIndex(){ return new Item(String.valueOf(Integer.MIN_VALUE), "ItemWithNegativeIndex");}
+
+    public static Item getItemWithIndexHigherThanMax(){ return new Item(String.valueOf(Long.MAX_VALUE), "ItemWithIndexHigherThanMax");}
+
     public static List<Item> getTestItemsList() {
         List<Item> items = new ArrayList<>();
         items.add(getCoreI5());

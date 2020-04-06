@@ -35,15 +35,30 @@ public class ItemsService {
         return result.getContent();
     }
 
+    public String getAllItemsStatusCode() {
+        RestParameters urlParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+        SimpleEntity statusCode = itemsResource.httpGetAsEntity(null, urlParameters);
+        return statusCode.getCode();
+    }
+
     public String getAllUserItemsAsAdmin(User user) {
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.NAME, user.getName());
         SimpleEntity result = userItemsResource.httpGetAsEntity(pathParameters, urlParameters);
-        System.out.println(result);
         EntityUtils.get().checkEntity(result);
         return result.getContent();
+    }
+
+    public String getAllUserItemsAsAdminStatusCode(User user) {
+        RestParameters urlParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.NAME, user.getName());
+        SimpleEntity statusCode = userItemsResource.httpGetAsEntity(pathParameters, urlParameters);
+        return statusCode.getCode();
     }
 
     public List<Item> getItemsList(String items) {

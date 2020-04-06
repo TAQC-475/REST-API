@@ -1,4 +1,4 @@
-package com.softserve.edu.rest.test;
+package com.softserve.edu.rest.test.items;
 
 import com.softserve.edu.rest.data.Item;
 import com.softserve.edu.rest.data.ItemRepository;
