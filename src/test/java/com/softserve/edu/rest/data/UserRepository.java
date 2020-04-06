@@ -37,9 +37,11 @@ public final class UserRepository {
 
     public static User getUserWithWrongPassword() { return new User("otlumtc", "wrong", false); }
 
-    public static User getFedorUser(){
+    public static User getFedorUser() {
         return new User("Fedor", "qwerty", false);
-    public static User getFedorUser(String password){
+    }
+
+        public static User getFedorUser(String password){
         return new User("Fedor", password, false);
     }
 

@@ -32,11 +32,10 @@ public class UserService extends GuestService{
         return new LoginService();
     }
 
-    public UserService changePassword(String oldPassword, String newPassword) {
     public AdministrationService gotoAdministrationService(){
         AdministrationService administrationService = null;
         try {
-             administrationService = new AdministrationService(ApplicationState.get().getAdmin());
+             administrationService = new AdministrationService(ApplicationState.get().getLogginedAdmin());
         }catch (CustomException exception){
             exception.printStackTrace();
         }
@@ -54,22 +53,18 @@ public class UserService extends GuestService{
 //    }
 
 
-//    public boolean createUser(User user){
-//        RestParameters bodyParameters = new RestParameters()
-//                .addParameter(EParameters.TOKEN, loginedUser.getToken())
-//                .addParameter(EParameters.NAME, user.getName())
-//                .addParameter(EParameters.PASSWORD, user.getPassword())
-//                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
-//        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
-//        EntityUtils.get().checkEntity(simpleEntity);
-//    }
+    public UserService createUser(User user){
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.NAME, user.getName())
+                .addParameter(EParameters.PASSWORD, user.getPassword())
+                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
+        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
+        EntityUtils.get().checkEntity(simpleEntity);
+        return this;
+    }
 
-
-
-
-
-
-    public UserService changePassword(User oldPassword, String newPassword){
+    public UserService changePassword(String oldPassword, String newPassword){
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken())
                 .addParameter(EParameters.OLD_PASSWORD, oldPassword)

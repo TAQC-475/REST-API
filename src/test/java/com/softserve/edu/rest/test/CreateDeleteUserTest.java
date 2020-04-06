@@ -43,20 +43,22 @@ public class CreateDeleteUserTest {
                 UserRepository.getFedorWithNewPassword()}};
     }
 
-    @Test(dataProvider = "updateUserPasswordData", description = "Check if user can change his password")
-    public void updateUserPassword(User user, User oldPassword, String newPassword, User sameUser) {
+
+    @Test(dataProvider = "updateUserPasswordData",
+            description = "Check if user can change his password")
+    public void updateUserPassword(User user, String oldPassword, String newPassword, User sameUser) {
         SimpleEntity logout = new LoginService()
                 .successfulUserLogin(user)
                 .changePassword(oldPassword, newPassword)
                 .goToLoginService()
-                .successfulLogout(ApplicationState.get().getLastLoggined());
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
 
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
 
         SimpleEntity login = new LoginService()
                 .successfulUserLogin(sameUser)
                 .goToLoginService()
-                .successfulLogout(ApplicationState.get().getLastLoggined());
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
 
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
@@ -68,7 +70,7 @@ public class CreateDeleteUserTest {
         String oldPassword = "qwerty";
         String newPassword = EntityUtils.randomAlphaNumeric(0);
         return new Object[][]{{
-                UserRepository.getFedorUser("qwerty"),
+                UserRepository.getFedorUser(oldPassword),
                 UserRepository.getFedorUser(newPassword),
                 newPassword,
                 UserRepository.getFedorUser(newPassword)}};
@@ -80,14 +82,14 @@ public class CreateDeleteUserTest {
                 .successfulUserLogin(user)
                 .changePassword(oldPassword, newPassword)
                 .goToLoginService()
-                .successfulLogout(ApplicationState.get().getLastLoggined());
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
 
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
 
         SimpleEntity login = new LoginService()
                 .successfulUserLogin(sameUser)
                 .goToLoginService()
-                .successfulLogout(ApplicationState.get().getLastLoggined());
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
 
         softAssert.assertTrue(EntityUtils.isUserActionUnSuccessful(login));
 
@@ -96,7 +98,7 @@ public class CreateDeleteUserTest {
 
 
 //    @Test
-//    public void updateUserPasswordToLoverValidCase(User user, String oldPassword, String newPassword, User sameUser) {
+//    public void updateUserPasswordToEmptyField(User user, String oldPassword, String newPassword, User sameUser) {
 //        SimpleEntity logout = new LoginService()
 //                .successfulUserLogin(user)
 //                .changePassword(oldPassword, newPassword)

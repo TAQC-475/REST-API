@@ -9,7 +9,6 @@ import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.LoginResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public class LoginService {
@@ -40,7 +39,7 @@ public class LoginService {
         return new UserService(ApplicationState.get().getLastLoggined());
     }
 
-    public LoginService unsuccessfulUserLogin(User basicUser){
+    public LoginService unsuccessfulUserLogin(User basicUser) {
         login(basicUser);
         return this;
     }
@@ -69,13 +68,17 @@ public class LoginService {
         return result;
     }
 
-    public GuestService successfulLogout(LoginedUser loginedUser){
-    public SimpleEntity successfulLogout(LoginedUser loginedUser) {
+    public GuestService successfulLogout(LoginedUser loginedUser) {
         ApplicationState.get().removeLoggined(loginedUser);
         logout(loginedUser);
         return new GuestService();
     }
 
+    public SimpleEntity successfulLogoutAsEntity(LoginedUser loginedUser) {
+        ApplicationState.get().removeLoggined(loginedUser);
+        return logout(loginedUser);
+
+    }
 
 //    public SimpleEntity unsuccessfulUserLogin(User user){
 //        return login(user);

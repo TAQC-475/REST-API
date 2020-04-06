@@ -1,11 +1,12 @@
 package com.softserve.edu.rest.tools;
 
 import com.softserve.edu.rest.entity.SimpleEntity;
+import com.softserve.edu.rest.services.GuestService;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class EntityUtils {
     public static final String SUCCESS_MARKER = "true";
-    public static final String UNSUCCESS_MARKER = "false";
+    public static final String UNSUCCESSFUL_MARKER = "false";
     private static EntityUtils instance;
 
     private EntityUtils() {
@@ -33,7 +34,7 @@ public class EntityUtils {
     }
 
     public static boolean isUserActionUnSuccessful(SimpleEntity logoutEntity) {
-        return logoutEntity.getContent().equalsIgnoreCase(SUCCESS_MARKER);
+        return logoutEntity.getContent().equalsIgnoreCase(UNSUCCESSFUL_MARKER);
     }
 
     public static String randomAlphaNumeric(int count) {
