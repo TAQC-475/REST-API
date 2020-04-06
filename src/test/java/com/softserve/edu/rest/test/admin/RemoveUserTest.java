@@ -1,4 +1,4 @@
-package com.softserve.edu.rest.test;
+package com.softserve.edu.rest.test.admin;
 
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.LoginService;

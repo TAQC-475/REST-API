@@ -9,13 +9,11 @@ import com.softserve.edu.rest.resources.LockedUsersResource;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 import java.util.List;
-import javax.jws.soap.SOAPBinding.Use;
 
 public class ManageUserService {
 
     private LoginedUser loginedUser;
     private UserResource userResource;
-    private LockedUsersResource lockedUsersResource;
 
     public ManageUserService(LoginedUser loginedUser) {
         this.loginedUser = loginedUser;
@@ -31,6 +29,10 @@ public class ManageUserService {
         removeUserExample(user);
         return new AdministrationService(loginedUser);
     }
+    public boolean removeUserAndCheckIt(User user){
+        removeUserExample(user);
+        return true;
+    }
 
     public AdministrationService removeUsers(List<User> users) {
         for (User current : users) {
@@ -45,8 +47,6 @@ public class ManageUserService {
         }
         return new AdministrationService(loginedUser);
     }
-
-
 
     private void removeUserExample(User user) {
         RestParameters bodyParameters = new RestParameters()
