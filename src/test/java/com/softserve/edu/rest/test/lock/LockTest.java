@@ -13,7 +13,14 @@ public class LockTest {
     @DataProvider
     public Object[][] lockUser() {
         return new Object[][]{
-                { UserRepository.getAdmin(), UserRepository.getValidUser() }
+                { UserRepository.getAdmin(), UserRepository.getUserDana() }
+        };
+    }
+
+    @DataProvider
+    public Object[][] lockAdmin() {
+        return new Object[][]{
+                { UserRepository.getAdmin(), UserRepository.getAdminVasya() }
         };
     }
 
@@ -25,6 +32,26 @@ public class LockTest {
                 .lockUser(simpleUser);
 
         Assert.assertTrue(adminService.isUserLocked(simpleUser));
+    }
+
+    @Test(dataProvider = "lockAdmin", priority = 2)
+    public void lockAdminFromAdmin(User admin, User someAdmin) {
+        LockService adminService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoLockService()
+                .lockUser(someAdmin);
+
+        Assert.assertTrue(adminService.isUserLocked(someAdmin));
+    }
+
+    @Test(dataProvider = "lockUser", priority = 2)
+    public void unlockUserFromAdmin(User admin, User someUser) {
+        LockService adminService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoLockService()
+                .unlockUser(someUser);
+
+        Assert.assertFalse(adminService.isUserLocked(someUser));
     }
 
 
