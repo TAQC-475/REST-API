@@ -23,4 +23,7 @@ public final class LifetimeRepository {
 
 	public static Lifetime getNegativeLifeTime() { return new Lifetime("-100000"); }
 
+	public static Lifetime getShort() {		return new Lifetime("5000"); }
+
+	public static Lifetime getZeroLifetime() {		return new Lifetime("0"); }
 }
