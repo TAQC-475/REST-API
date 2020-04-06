@@ -50,10 +50,31 @@ public class LockService {
         return this;
     }
 
+    public LockService unlockAllUsers() {
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+        SimpleEntity simpleEntity = lockUserResource
+                .httpPutAsEntity(null, null, bodyParameters);
+        return this;
+    }
+
+    public String getAllLockedAdmins() {
+        RestParameters urlParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+        SimpleEntity simpleEntity = lockUserResource.httpGetAsEntity(null, urlParameters);
+        return simpleEntity.getContent();
+    }
 
     public boolean isUserLocked(User userToLock) {
-
         if (getAllLockedUsers().contains(userToLock.getName())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean isAdminLocked(User user) {
+        if (getAllLockedAdmins().contains(user.getName())) {
             return true;
         } else {
             return false;

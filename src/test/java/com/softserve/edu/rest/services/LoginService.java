@@ -37,7 +37,10 @@ public class LoginService {
         return new UserService(ApplicationState.get().getLastLoggined());
     }
 
-
+    public LoginService unsuccessfulUserLogin(User basicUser){
+        ApplicationState.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
+        return this;
+    }
 
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
         for (User adminUser : adminUsers) {

@@ -31,6 +31,8 @@ public final class UserRepository {
         return new User("otlumtc", "qwerty", false);
     }
 
+    public static User getUserWithWrongPassword() { return new User("otlumtc", "wrong", false); }
+
     public static User notExistingUser() {
         return new User("Anna", "ksjddlfkjddqwerty", false).addItem("My data");
     }
