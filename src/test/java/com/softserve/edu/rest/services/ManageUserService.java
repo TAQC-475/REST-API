@@ -46,40 +46,6 @@ public class ManageUserService {
         return new AdministrationService(loginedUser);
     }
 
-    public AdministrationService lockUser(User user){
-        lockUserExample(user);
-        return new AdministrationService(loginedUser);
-    }
-
-    public AdministrationService unlockUser(User user){
-        unlockUserExample(user);
-        return new AdministrationService(loginedUser);
-    }
-
-    public AdministrationService unlockAllUsers() {
-        RestParameters bodyParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, loginedUser.getToken());
-        SimpleEntity simpleEntity = lockedUsersResource.httpPutAsEntity(null, null, bodyParameters);
-        EntityUtils.get().checkEntity(simpleEntity);
-        return new AdministrationService(loginedUser);
-    }
-
-    private void lockUserExample(User user) {
-        RestParameters bodyParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, loginedUser.getToken())
-            .addParameter(EParameters.NAME, user.getName());
-        SimpleEntity simpleEntity = lockedUsersResource
-            .httpPostAsEntity(null, null, bodyParameters);
-        EntityUtils.get().checkEntity(simpleEntity);
-    }
-
-    private void unlockUserExample(User user) {
-        RestParameters bodyParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, loginedUser.getToken())
-            .addParameter(EParameters.NAME, user.getName());
-        SimpleEntity simpleEntity = lockedUsersResource.httpPutAsEntity(null, null, bodyParameters);
-        EntityUtils.get().checkEntity(simpleEntity);
-    }
 
 
     private void removeUserExample(User user) {
