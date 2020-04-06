@@ -75,8 +75,4 @@ public class LoginService {
         return new GuestService();
     }
 
-    public SimpleEntity unsuccessfulUserLogin(User user){
-        return login(user);
-    }
-
 }
