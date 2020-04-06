@@ -20,18 +20,19 @@ public class UserService {
         this.loginedUser = loginedUser;
     }
 
-    public ItemService goToItemService(){
+    public ItemService goToItemService() {
         return new ItemService(loginedUser);
     }
 
-    public ItemsService goToItemsService(){
+    public ItemsService goToItemsService() {
         return new ItemsService(loginedUser);
     }
 
-    public LoginService goToLoginService(){
+    public LoginService goToLoginService() {
         return new LoginService();
     }
 
+    public UserService changePassword(String oldPassword, String newPassword) {
     public AdministrationService gotoAdministrationService(){
         AdministrationService administrationService = null;
         try {
@@ -70,13 +71,10 @@ public class UserService {
     public UserService changePassword(User oldPassword, String newPassword){
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken())
-                .addParameter(EParameters.OLD_PASSWORD, oldPassword.getPassword())
+                .addParameter(EParameters.OLD_PASSWORD, oldPassword)
                 .addParameter(EParameters.NEW_PASSWORD, newPassword);
         SimpleEntity result = userResource.httpPutAsEntity(null, urlParameters, null);
         EntityUtils.get().checkEntity(result);
         return this;
     }
 }
-
-
-

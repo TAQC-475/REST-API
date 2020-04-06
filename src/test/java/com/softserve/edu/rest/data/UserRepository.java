@@ -35,6 +35,8 @@ public final class UserRepository {
 
     public static User getFedorUser(){
         return new User("Fedor", "qwerty", false);
+    public static User getFedorUser(String password){
+        return new User("Fedor", password, false);
     }
 
     public static User getFedorWithNewPassword(){
