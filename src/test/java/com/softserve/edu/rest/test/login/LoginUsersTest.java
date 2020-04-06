@@ -23,6 +23,12 @@ public class LoginUsersTest extends RestTestRunner {
         return objects;
     }
 
+    @DataProvider(name = "nonExistingAdminsDataProvider")
+    public Object[][] getNonExistingAdmins(){
+        Object[][] objects = {{UserRepository.getAdmin(), UserRepository.getNonExistingAdmins()}};
+        return objects;
+    }
+
 
     @Test(dataProvider = "existingUsersDataProvider")
     public void loginExistingUsersTest(User admin, List<User> existingUsers){
@@ -45,8 +51,19 @@ public class LoginUsersTest extends RestTestRunner {
                 .successfulUsersLogin(nonExistingUsers)
                 .gotoAdministrationService()
                 .gotoLogginedUsersService();
-        List<User> users = logginedUsersService.getLoggedUsers();
         Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(nonExistingUsers));
+    }
+
+    @Test(dataProvider = "nonExistingAdminsDataProvider")
+    public void createAndLoginAdminsTest(User admin, List<User> nonExistingAdmins){
+        LogginedUsersService logginedUsersService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoManageUserService()
+                .createUsers(nonExistingAdmins)
+                .goToLoginService()
+                .successfulAdminsLogin(nonExistingAdmins)
+                .gotoLogginedUsersService();
+        Assert.assertTrue(logginedUsersService.getLoggedAdmins().containsAll(nonExistingAdmins));
     }
 
 }

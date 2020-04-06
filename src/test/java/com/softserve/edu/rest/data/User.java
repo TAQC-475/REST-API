@@ -60,7 +60,7 @@ public class User {
             return false;
         }
         User user = (User) o;
-        return isAdmin == user.isAdmin &&
+        return //isAdmin == user.isAdmin &&
                 Objects.equals(name, user.name) &&
                 //Objects.equals(password, user.password) &&
                 Objects.equals(items, user.items);
