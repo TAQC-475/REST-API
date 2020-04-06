@@ -28,6 +28,17 @@ public class LoginUserTest extends RestTestRunner {
         return admin;
     }
 
+    @DataProvider(name = "nonExistingUserDataProvider")
+    public Object[][] getNonExistingUser(){
+        Object[][] user = {{UserRepository.getAdmin(), UserRepository.getNonExistingUser()}};
+        return user;
+    }
+
+    @DataProvider(name = "nonExistingAdminDataProvider")
+    public Object[][] getNonExistingAdmin(){
+        Object[][] admin = {{UserRepository.getAdmin(), UserRepository.getNonExistingAdmin()}};
+        return admin;
+    }
 
 
     @Test(dataProvider = "existingUserDataProvider")
@@ -44,6 +55,8 @@ public class LoginUserTest extends RestTestRunner {
         Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
     }
 
+
+
     @Test(dataProvider = "existingUserDataProvider")
     public void logoutExistingUserTest(User existingUser){
         SimpleEntity result = new LoginService()
@@ -51,8 +64,18 @@ public class LoginUserTest extends RestTestRunner {
                 .goToLoginService()
                 .successfulLogout(ApplicationState.get().getLastLoggined());
 
-        Assert.assertEquals("true", result.getContent());
+        Assert.assertTrue(Boolean.valueOf(result.getContent()));
+    }
 
+    @Test(dataProvider = "nonExistingUserDataProvider")
+    public void createAndLoginUser(User admin, User newUser){
+        UserService userService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoManageUserService()
+                .createUser(newUser)
+                .goToLoginService()
+                .successfulUserLogin(newUser);
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
     }
 
 }
