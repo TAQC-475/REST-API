@@ -20,15 +20,27 @@ public class UserService extends GuestService{
         this.loginedUser = loginedUser;
     }
 
-    public ItemService goToItemService(){
+    public ItemService goToItemService() {
         return new ItemService(loginedUser);
     }
 
-    public ItemsService goToItemsService(){
+    public ItemsService goToItemsService() {
         return new ItemsService(loginedUser);
     }
 
+    public LoginService goToLoginService() {
+        return new LoginService();
+    }
 
+    public AdministrationService gotoAdministrationService(){
+        AdministrationService administrationService = null;
+        try {
+             administrationService = new AdministrationService(ApplicationState.get().getLogginedAdmin());
+        }catch (CustomException exception){
+            exception.printStackTrace();
+        }
+        return administrationService;
+    }
 
 
 //    public boolean changePassword(User oldPassword, User newPassword){
@@ -41,21 +53,26 @@ public class UserService extends GuestService{
 //    }
 
 
-//    public boolean createUser(User user){
-//        RestParameters bodyParameters = new RestParameters()
-//                .addParameter(EParameters.TOKEN, loginedUser.getToken())
-//                .addParameter(EParameters.NAME, user.getName())
-//                .addParameter(EParameters.PASSWORD, user.getPassword())
-//                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
-//        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
-//        EntityUtils.get().checkEntity(simpleEntity);
-//    }
+    public UserService createUser(User user){
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.NAME, user.getName())
+                .addParameter(EParameters.PASSWORD, user.getPassword())
+                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
+        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
+        EntityUtils.get().checkEntity(simpleEntity);
+        return this;
+    }
 
-
-
-
-
-
+    public UserService changePassword(String oldPassword, String newPassword){
+        RestParameters urlParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.OLD_PASSWORD, oldPassword)
+                .addParameter(EParameters.NEW_PASSWORD, newPassword);
+        SimpleEntity result = userResource.httpPutAsEntity(null, urlParameters, null);
+        EntityUtils.get().checkEntity(result);
+        return this;
+    }
 }
 
 

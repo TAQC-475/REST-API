@@ -9,7 +9,6 @@ import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.LoginResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 public class LoginService {
@@ -30,20 +29,21 @@ public class LoginService {
         return tokenContent;
     }
 
-    public AdministrationService successfulAdminLogin(User adminUser){
+    public AdministrationService successfulAdminLogin(User adminUser) {
         ApplicationState.get().addUser((new LoginedUser(adminUser, login(adminUser).getContent())));
         return new AdministrationService(ApplicationState.get().getLastLoggined());
     }
 
-    public UserService successfulUserLogin(User basicUser){
+    public UserService successfulUserLogin(User basicUser) {
         ApplicationState.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
         return new UserService(ApplicationState.get().getLastLoggined());
     }
 
-    public LoginService unsuccessfulUserLogin(User basicUser){
+    public LoginService unsuccessfulUserLogin(User basicUser) {
         login(basicUser);
         return this;
     }
+
 
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
         for (User adminUser : adminUsers) {
@@ -52,14 +52,14 @@ public class LoginService {
         return new AdministrationService((ApplicationState.get().getLastLoggined()));
     }
 
-    public UserService successfulUsersLogin(List<User> adminUsers){
-        for (User adminUser : adminUsers){
+    public UserService successfulUsersLogin(List<User> adminUsers) {
+        for (User adminUser : adminUsers) {
             ApplicationState.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
         return new UserService((ApplicationState.get().getLastLoggined()));
     }
 
-    private SimpleEntity logout(LoginedUser loginedUser){
+    private SimpleEntity logout(LoginedUser loginedUser) {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.NAME, loginedUser.getUser().getName())
                 .addParameter(EParameters.TOKEN, loginedUser.getToken());
@@ -68,12 +68,17 @@ public class LoginService {
         return result;
     }
 
-    public GuestService successfulLogout(LoginedUser loginedUser){
+    public GuestService successfulLogout(LoginedUser loginedUser) {
         ApplicationState.get().removeLoggined(loginedUser);
         logout(loginedUser);
         return new GuestService();
     }
 
+    public SimpleEntity successfulLogoutAsEntity(LoginedUser loginedUser) {
+        ApplicationState.get().removeLoggined(loginedUser);
+        return logout(loginedUser);
+
+    }
 
 //    public SimpleEntity unsuccessfulUserLogin(User user){
 //        return login(user);
