@@ -16,6 +16,7 @@ public class LoginService {
     private LoginResource loginResource;
     public static final String INVALID_USER = "ERROR, user not found";
 
+
     public LoginService() {
         this.loginResource = new LoginResource();
     }
@@ -73,8 +74,8 @@ public class LoginService {
         return new GuestService();
     }
 
-    public SimpleEntity unsuccessfulUserLogin(User user){
-        return login(user);
-    }
+//    public SimpleEntity unsuccessfulUserLogin(User user){
+//        return login(user);
+//    }
 
 }
