@@ -41,6 +41,7 @@ public class ItemsService {
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.NAME, user.getName());
         SimpleEntity result = userItemsResource.httpGetAsEntity(pathParameters, urlParameters);
+        System.out.println(result);
         EntityUtils.get().checkEntity(result);
         return result.getContent();
     }

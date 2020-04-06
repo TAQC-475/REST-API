@@ -8,11 +8,7 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.dto.RestUrl;
 import com.softserve.edu.rest.dto.RestUrlKeys;
 
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
+import okhttp3.*;
 
 public abstract class RestCrud {
 	private final String NOT_SUPPORT_MESSAGE = "Method %s not Support for %s Resource";
@@ -135,6 +131,7 @@ public abstract class RestCrud {
         String responseText = null;
         try {
             responseText = response.body().string();
+            responseText = "{" + "\"code\":\"" + response.code() + "\"," + responseText.substring(1);
         } catch (IOException e) {
             // TODO Develop Custom Exception + Log
             // e.printStackTrace();
@@ -162,6 +159,10 @@ public abstract class RestCrud {
 
     protected String httpGetAsText(RestParameters pathVariables, RestParameters urlParameters) {
     	return responseBodyAsText(httpGetAsResponse(pathVariables, urlParameters));
+    }
+
+    public int httpGetAsStatusCode(RestParameters pathVariables, RestParameters urlParameters, RestUrl restUrl){
+        return httpGetAsResponse(pathVariables, urlParameters, restUrl).code();
     }
 
     // Http Post - - - - - - - - - - - - - - - - - - - -
