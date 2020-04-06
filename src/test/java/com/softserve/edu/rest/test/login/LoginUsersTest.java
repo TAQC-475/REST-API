@@ -17,6 +17,19 @@ public class LoginUsersTest extends RestTestRunner {
         return objects;
     }
 
+    @DataProvider(name = "nonExistingUsersDataProvider")
+    public Object[][] getNonExistingUsers(){
+        Object[][] objects = {{UserRepository.getAdmin(), UserRepository.getNonExistingUsers()}};
+        return objects;
+    }
+
+    @DataProvider(name = "nonExistingAdminsDataProvider")
+    public Object[][] getNonExistingAdmins(){
+        Object[][] objects = {{UserRepository.getAdmin(), UserRepository.getNonExistingAdmins()}};
+        return objects;
+    }
+
+
     @Test(dataProvider = "existingUsersDataProvider")
     public void loginExistingUsersTest(User admin, List<User> existingUsers){
         LogginedUsersService logginedUsersService = new LoginService()
@@ -26,6 +39,31 @@ public class LoginUsersTest extends RestTestRunner {
                 .gotoLogginedUsersService();
 
         Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(existingUsers));
+    }
+
+    @Test(dataProvider = "nonExistingUsersDataProvider")
+    public void createAndLoginUsersTest(User admin, List<User> nonExistingUsers){
+        LogginedUsersService logginedUsersService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoManageUserService()
+                .createUsers(nonExistingUsers)
+                .goToLoginService()
+                .successfulUsersLogin(nonExistingUsers)
+                .gotoAdministrationService()
+                .gotoLogginedUsersService();
+        Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(nonExistingUsers));
+    }
+
+    @Test(dataProvider = "nonExistingAdminsDataProvider")
+    public void createAndLoginAdminsTest(User admin, List<User> nonExistingAdmins){
+        LogginedUsersService logginedUsersService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoManageUserService()
+                .createUsers(nonExistingAdmins)
+                .goToLoginService()
+                .successfulAdminsLogin(nonExistingAdmins)
+                .gotoLogginedUsersService();
+        Assert.assertTrue(logginedUsersService.getLoggedAdmins().containsAll(nonExistingAdmins));
     }
 
 }

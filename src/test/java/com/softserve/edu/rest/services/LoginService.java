@@ -37,6 +37,11 @@ public class LoginService {
         return new UserService(ApplicationState.get().getLastLoggined());
     }
 
+    public LoginService unsuccessfulUserLogin(User basicUser){
+        ApplicationState.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
+        return this;
+    }
+
 
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
         for (User adminUser : adminUsers) {
@@ -49,7 +54,7 @@ public class LoginService {
         for (User adminUser : adminUsers) {
             ApplicationState.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }
-        return new UserService(ApplicationState.get().getLastLoggined());
+        return new UserService((ApplicationState.get().getLastLoggined()));
     }
 
     private SimpleEntity logout(LoginedUser loginedUser) {
@@ -65,4 +70,5 @@ public class LoginService {
         ApplicationState.get().removeLoggined(loginedUser);
         return logout(loginedUser);
     }
+
 }

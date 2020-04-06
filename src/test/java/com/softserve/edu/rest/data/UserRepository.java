@@ -31,6 +31,8 @@ public final class UserRepository {
         return new User("otlumtc", "qwerty", false);
     }
 
+    public static User getUserWithWrongPassword() { return new User("otlumtc", "wrong", false); }
+
     public static User getFedorUser(){
         return new User("Fedor", "qwerty", false);
     }
@@ -59,5 +61,25 @@ public final class UserRepository {
 
     public static User getNonExistingAdmin(){
         return new User("nonexistingadmin", "qwerty", true);
+    }
+
+    public static List<User> getNonExistingUsers(){
+        List<User> users = new ArrayList<>();
+        users.add(new User("kaban", "qwerty", false));
+        users.add(new User("puhlyash", "qwerty", false));
+        users.add(new User("sraka", "qwerty", false));
+        users.add(new User("malyshka", "qwerty", false));
+        users.add(new User("katakombic", "qwerty", false));
+        return users;
+    }
+
+    public static List<User> getNonExistingAdmins(){
+        List<User> admins = new ArrayList<>();
+        admins.add(new User("kabanAdmin", "qwerty", true));
+        admins.add(new User("puhlyashAdmin", "qwerty", true));
+        admins.add(new User("srakaAdmin", "qwerty", true));
+        admins.add(new User("malyshkaAdmin", "qwerty", true));
+        admins.add(new User("katakombicAdmin", "qwerty", true));
+        return admins;
     }
 }
