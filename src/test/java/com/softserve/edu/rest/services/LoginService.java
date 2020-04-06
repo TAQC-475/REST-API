@@ -41,7 +41,7 @@ public class LoginService {
     }
 
     public LoginService unsuccessfulUserLogin(User basicUser){
-        ApplicationState.get().addUser(new LoginedUser(basicUser, login(basicUser).getContent()));
+        login(basicUser);
         return this;
     }
 
