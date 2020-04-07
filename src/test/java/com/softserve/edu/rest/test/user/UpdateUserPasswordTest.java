@@ -4,21 +4,14 @@ import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.data.dataproviders.UserPasswordData;
 import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.services.GuestService;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.tools.EntityUtils;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class UpdateUserPasswordTest {
-    GuestService guestService;
+public class UpdateUserPasswordTest extends UserTestRunner {
     SoftAssert softAssert = new SoftAssert();
-
-//    @AfterMethod
-//    public void afterMethod() {
-//        guestService.resetServiceToInitialState();
-//    }
 
     @Test(dataProvider = "updateUserPasswordToEmptyData", dataProviderClass = UserPasswordData.class,
             description = "Check if User can change his password to an empty")
