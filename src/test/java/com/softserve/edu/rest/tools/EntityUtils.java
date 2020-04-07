@@ -37,6 +37,10 @@ public class EntityUtils {
         return logoutEntity.getContent().equalsIgnoreCase(UNSUCCESSFUL_MARKER);
     }
 
+    /**
+     * @param count
+     * @return random letters and digits
+     */
     public static String randomAlphaNumeric(int count) {
         return RandomStringUtils.randomAlphanumeric(count);
     }

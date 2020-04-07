@@ -42,17 +42,6 @@ public class UserService extends GuestService{
         return administrationService;
     }
 
-
-//    public boolean changePassword(User oldPassword, User newPassword){
-//        RestParameters bodyParameters = new RestParameters()
-//                .addParameter(EParameters.TOKEN, loginedUser.getToken())
-//                .addParameter(EParameters.OLD_PASSWORD, oldPassword.getPassword())
-//                .addParameter(EParameters.NEW_PASSWORD, newPassword.getPassword());
-//        SimpleEntity isChanged = userResource.httpPutAsEntity(null, null, bodyParameters);
-//        return isChanged;
-//    }
-
-
     public UserService createUser(User user){
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken())
@@ -64,15 +53,17 @@ public class UserService extends GuestService{
         return this;
     }
 
-    public UserService changePassword(String oldPassword, String newPassword){
+    protected UserService changePassword(User oldPassword, String newPassword){
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken())
-                .addParameter(EParameters.OLD_PASSWORD, oldPassword)
+                .addParameter(EParameters.OLD_PASSWORD, oldPassword.getPassword())
                 .addParameter(EParameters.NEW_PASSWORD, newPassword);
         SimpleEntity result = userResource.httpPutAsEntity(null, urlParameters, null);
         EntityUtils.get().checkEntity(result);
         return this;
     }
+
+
 }
 
 

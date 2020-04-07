@@ -5,7 +5,6 @@ import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.resources.LockedUsersResource;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 import java.util.List;
@@ -59,7 +58,6 @@ public class ManageUserService {
 
 
     private void createUserExample(User user) {
-
         RestParameters bodyParameters = new RestParameters()
             .addParameter(EParameters.TOKEN, loginedUser.getToken())
             .addParameter(EParameters.NAME, user.getName())

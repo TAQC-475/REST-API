@@ -5,16 +5,16 @@ import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.resources.LockedUsersResource;
+import com.softserve.edu.rest.resources.LockUserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 
 public class LockService {
 
-    protected LockedUsersResource lockUserResource;
+    protected LockUserResource lockUserResource;
     protected LoginedUser loginedUser;
 
     public LockService(LoginedUser loginedUser) {
-        lockUserResource = new LockedUsersResource();
+        lockUserResource = new LockUserResource();
         this.loginedUser = loginedUser;
     }
 
@@ -35,7 +35,7 @@ public class LockService {
         SimpleEntity simpleEntity = lockUserResource
                 .httpGetAsEntity(null, bodyParameters);
 
-        System.out.println("locked users - \n"+simpleEntity.getContent());
+        System.out.println("locked users - \n"+simpleEntity.getContent());  //  !!!
         return simpleEntity.getContent();
     }
 
@@ -79,6 +79,11 @@ public class LockService {
         } else {
             return false;
         }
+    }
+
+    public LoginService loadApplication() {
+        // TODO Check Server Availability
+        return new LoginService();
     }
 
 }

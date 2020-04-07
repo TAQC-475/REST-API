@@ -15,6 +15,7 @@ public final class UserRepository {
     public static User getAdmin() {
         return new User("admin", "qwerty", true).addItem("My data");
     }
+
     public static User getAdminVasya() {
         return new User("Vasya", "qwerty", true);
     }
@@ -35,25 +36,23 @@ public final class UserRepository {
         return new User("otlumtc", "qwerty", false);
     }
 
-    public static User getUserWithWrongPassword() { return new User("otlumtc", "wrong", false); }
+    public static User getUserWithWrongPassword() {
+        return new User("otlumtc", "wrong", false);
+    }
+
+    public static User getUserWithNewPassword(String password) {
+        return new User("otlumtc", password, false);
+    }
 
     public static User getFedorUser() {
         return new User("Fedor", "qwerty", false);
-    }
-
-        public static User getFedorUser(String password){
-        return new User("Fedor", password, false);
-    }
-
-    public static User getFedorWithNewPassword(){
-        return new User("Fedor", "123456", false);
     }
 
     public static User notExistingUser() {
         return new User("Anna", "ksjddlfkjddqwerty", false).addItem("My data");
     }
 
-    public static List<User> getExistingUsers(){
+    public static List<User> getExistingUsers() {
         List<User> users = new ArrayList<>();
         users.add(new User("kilinatc", "qwerty", false));
         users.add(new User("akimatc", "qwerty", false));
@@ -63,15 +62,15 @@ public final class UserRepository {
         return users;
     }
 
-    public static User getNonExistingUser(){
+    public static User getNonExistingUser() {
         return new User("nonexistinguser", "qwerty", false);
     }
 
-    public static User getNonExistingAdmin(){
+    public static User getNonExistingAdmin() {
         return new User("nonexistingadmin", "qwerty", true);
     }
 
-    public static List<User> getNonExistingUsers(){
+    public static List<User> getNonExistingUsers() {
         List<User> users = new ArrayList<>();
         users.add(new User("kaban", "qwerty", false));
         users.add(new User("puhlyash", "qwerty", false));
@@ -81,7 +80,7 @@ public final class UserRepository {
         return users;
     }
 
-    public static List<User> getNonExistingAdmins(){
+    public static List<User> getNonExistingAdmins() {
         List<User> admins = new ArrayList<>();
         admins.add(new User("kabanAdmin", "qwerty", true));
         admins.add(new User("puhlyashAdmin", "qwerty", true));
