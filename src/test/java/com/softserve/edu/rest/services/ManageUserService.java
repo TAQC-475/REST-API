@@ -1,5 +1,6 @@
 package com.softserve.edu.rest.services;
 
+import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
@@ -59,7 +60,6 @@ public class ManageUserService {
 
 
     private void createUserExample(User user) {
-
         RestParameters bodyParameters = new RestParameters()
             .addParameter(EParameters.TOKEN, loginedUser.getToken())
             .addParameter(EParameters.NAME, user.getName())

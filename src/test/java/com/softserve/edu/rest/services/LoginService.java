@@ -77,7 +77,20 @@ public class LoginService {
     public SimpleEntity successfulLogoutAsEntity(LoginedUser loginedUser) {
         ApplicationState.get().removeLoggined(loginedUser);
         return logout(loginedUser);
+    }
 
+    public SimpleEntity changePasswordAndLogOut(User user, User oldPassword, String newPassword){
+        return new LoginService()
+                .successfulUserLogin(user)
+                .changePassword(oldPassword, newPassword)
+                .goToLoginService()
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
+    }
+
+    public SimpleEntity successfulLoginAndLogout(User baseUser){
+        return new LoginService().successfulUserLogin(baseUser)
+                .goToLoginService()
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
     }
 
 //    public SimpleEntity unsuccessfulUserLogin(User user){
