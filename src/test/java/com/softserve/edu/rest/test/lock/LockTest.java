@@ -2,36 +2,58 @@ package com.softserve.edu.rest.test.lock;
 
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
+import com.softserve.edu.rest.services.AdministrationService;
+import com.softserve.edu.rest.services.GuestService;
 import com.softserve.edu.rest.services.LockService;
 import com.softserve.edu.rest.services.LoginService;
 import org.testng.Assert;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LockTest {
 
+    @BeforeSuite
+    public void createExtraUsers() {
+        new GuestService().resetServiceToInitialState();
+        new LoginService()
+                .successfulAdminLogin(UserRepository.getAdmin())
+                .gotoManageUserService()
+                .createUser(UserRepository.getUserDana())
+                .gotoManageUserService()
+                .createUser(UserRepository.getAdminVasya());
+        System.out.println("before suite");
+    }
+
     @DataProvider
-    public Object[][] lockDana() {
+    public Object[][] lockUser() {
         return new Object[][]{
                 {UserRepository.getAdmin(), UserRepository.getUserDana()}
         };
     }
 
     @DataProvider
-    public Object[][] lockAdmin() {
+    public Object[][] Admin() {
         return new Object[][]{
-                {UserRepository.getAdmin(), UserRepository.getAdminVasya()}
+                {UserRepository.getAdmin()}
         };
     }
 
     @DataProvider
-    public Object[][] lockUser() {
+    public Object[][] lockAdminVasya() {
+        return new Object[][]{
+                {UserRepository.getAdminVasya()}
+        };
+    }
+
+    @DataProvider
+    public Object[][] lockWrongUser() {
         return new Object[][]{
                 {UserRepository.getAdmin(), UserRepository.getUserWithWrongPassword()}
         };
     }
 
-    @Test(dataProvider = "lockDana", priority = 1)
+    @Test(dataProvider = "lockUser", priority = 1)
     public void lockUserFromAdmin(User admin, User simpleUser) {
         LockService adminService = new LoginService()
                 .successfulAdminLogin(admin)
@@ -41,7 +63,7 @@ public class LockTest {
         Assert.assertTrue(adminService.isUserLocked(simpleUser));
     }
 
-    @Test(dataProvider = "lockUser", priority = 2)
+    @Test(dataProvider = "lockWrongUser", priority = 2)
     public void lockUserByUnsuccessfulLogin(User admin, User UserWithWrongPassword) {
         LockService adminService = new LoginService()
                 .successfulAdminLogin(admin)
@@ -54,17 +76,7 @@ public class LockTest {
         Assert.assertTrue(adminService.isUserLocked(UserWithWrongPassword));
     }
 
-    @Test(dataProvider = "lockAdmin", priority = 3)
-    public void lockAdminFromAdmin(User admin, User someAdmin) {
-        LockService adminService = new LoginService()
-                .successfulAdminLogin(admin)
-                .gotoLockService()
-                .lockUser(someAdmin);
-
-        Assert.assertTrue(adminService.isUserLocked(someAdmin));
-    }
-
-    @Test(dataProvider = "lockDana", priority = 4)
+    @Test(dataProvider = "lockUser", priority = 3)
     public void unlockUserFromAdmin(User admin, User someUser) {
         LockService adminService = new LoginService()
                 .successfulAdminLogin(admin)
@@ -74,5 +86,23 @@ public class LockTest {
         Assert.assertFalse(adminService.isUserLocked(someUser));
     }
 
+    @Test(dataProvider = "lockAdminVasya", priority = 4)
+    public void lockAdminFromAdmin(User adminVasya) {
+        LockService adminService = new LoginService()
+                .successfulAdminLogin(adminVasya)
+                .gotoLockService()
+                .lockUser(adminVasya);
 
+        Assert.assertTrue(adminService.isUserLocked(adminVasya));
+    }
+
+    @Test(dataProvider = "Admin", priority = 9)
+    public void unlockAll(User admin) {
+        LockService adminService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoLockService()
+                .unlockAllUsers();
+
+        Assert.assertEquals(adminService.getAllLockedUsers(), "");
+    }
 }
