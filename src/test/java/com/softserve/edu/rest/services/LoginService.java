@@ -44,6 +44,10 @@ public class LoginService {
         return this;
     }
 
+    public SimpleEntity unsuccessfulUserLoginAsEntity(User basicUser) {
+        return login(basicUser);
+    }
+
 
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
         for (User adminUser : adminUsers) {
