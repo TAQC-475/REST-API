@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginAdministrationTest {
-    @DataProvider
+    @DataProvider(parallel = true)
     public Object[][] userExist() {
         return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser()}};
     }

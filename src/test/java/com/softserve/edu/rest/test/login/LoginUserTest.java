@@ -48,6 +48,15 @@ public class LoginUserTest extends RestTestRunner {
         Assert.assertFalse(users.contains(existingUser));
     }
 
+    @Test(dataProvider = "existingUserDataProvider", dataProviderClass = UsersTestData.class)
+    public void logoutExistingUserTestAsEntity(User admin, User existingUser){
+        SimpleEntity simpleEntity = new LoginService()
+                .successfulUserLogin(existingUser)
+                .goToLoginService()
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
+        Assert.assertTrue(Boolean.valueOf(simpleEntity.getContent()));
+    }
+
     @Test(dataProvider = "nonExistingUserDataProvider", dataProviderClass = UsersTestData.class)
     public void createAndLoginUserTest(User admin, User newUser){
         UserService userService = new LoginService()
