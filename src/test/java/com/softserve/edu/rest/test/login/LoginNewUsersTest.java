@@ -1,29 +1,20 @@
 package com.softserve.edu.rest.test.login;
 
+import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
-import com.softserve.edu.rest.services.*;
+import com.softserve.edu.rest.services.AdministrationService;
+import com.softserve.edu.rest.services.LogginedUsersService;
+import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.test.RestTestRunner;
+import com.softserve.edu.rest.tools.CustomException;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class LoginUsersTest extends RestTestRunner {
-
-
-
-    @Test(dataProvider = "existingUsersDataProvider", dataProviderClass = UsersTestData.class)
-    public void loginExistingUsersTest(User admin, List<User> existingUsers){
-        LogginedUsersService logginedUsersService = new LoginService()
-                .successfulUsersLogin(existingUsers)
-                .gotoLoginService()
-                .successfulAdminLogin(admin)
-                .gotoLogginedUsersService();
-
-        Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(existingUsers));
-    }
+public class LoginNewUsersTest{
 
     @Test(dataProvider = "nonExistingUsersDataProvider", dataProviderClass = UsersTestData.class)
     public void createAndLoginUsersTest(User admin, List<User> nonExistingUsers){
@@ -50,4 +41,16 @@ public class LoginUsersTest extends RestTestRunner {
         Assert.assertTrue(logginedUsersService.getLoggedAdmins().containsAll(nonExistingAdmins));
     }
 
+    @AfterMethod()
+    public void removeCreated(ITestResult result) throws CustomException {
+        Object[] inputArgs = result.getParameters();
+        User admin = (User) inputArgs[0];
+        List<User> newUsers = (List<User>) inputArgs[1];
+        new LoginService().successfulUsersLogout((ApplicationState.get().getLogginedUsers()))
+                .gotoLoginService().successfulAdminLogin(admin)
+                .gotoManageUserService()
+                .removeUsers(newUsers)
+                .goToLoginService()
+                .successfulLogout(ApplicationState.get().getLastLoggined());
+    }
 }

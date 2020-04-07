@@ -6,6 +6,7 @@ import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.AdministrationService;
+import com.softserve.edu.rest.services.LogginedUsersService;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.services.UserService;
 import com.softserve.edu.rest.test.RestTestRunner;
@@ -15,7 +16,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class LoginUserTest extends RestTestRunner {
+public class LoginExistingUserTest extends RestTestRunner {
     private static final short tokenLength = 32;
 
     @Test(dataProvider = "existingUserDataProvider", dataProviderClass = UsersTestData.class)
@@ -57,27 +58,17 @@ public class LoginUserTest extends RestTestRunner {
         Assert.assertTrue(Boolean.valueOf(simpleEntity.getContent()));
     }
 
-    @Test(dataProvider = "nonExistingUserDataProvider", dataProviderClass = UsersTestData.class)
-    public void createAndLoginUserTest(User admin, User newUser){
-        UserService userService = new LoginService()
-                .successfulAdminLogin(admin)
-                .gotoManageUserService()
-                .createUser(newUser)
-                .gotoLoginService()
-                .successfulUserLogin(newUser);
-        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
-    }
 
-    @Test(dataProvider = "nonExistingAdminDataProvider", dataProviderClass = UsersTestData.class)
-    public void createAndLoginAdminTest(User admin, User newAdmin){
-        AdministrationService adminService = new LoginService()
+
+    @Test(dataProvider = "existingUsersDataProvider", dataProviderClass = UsersTestData.class)
+    public void loginExistingUsersTest(User admin, List<User> existingUsers){
+        LogginedUsersService logginedUsersService = new LoginService()
+                .successfulUsersLogin(existingUsers)
+                .gotoLoginService()
                 .successfulAdminLogin(admin)
-                .gotoManageUserService()
-                .removeUser(UserRepository.getValidUser());
-                /*.createUser(newAdmin)
-                .goToLoginService()
-                .successfulAdminLogin(newAdmin);*/
-        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
+                .gotoLogginedUsersService();
+
+        Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(existingUsers));
     }
 
 }

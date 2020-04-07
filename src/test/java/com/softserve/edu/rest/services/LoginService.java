@@ -83,6 +83,14 @@ public class LoginService {
         return logout(loginedUser);
 
     }
+    public GuestService successfulUsersLogout(List<LoginedUser> loginedUsers){
+        for(int i = 0; i < loginedUsers.size(); ++i){
+            LoginedUser loginedUser = loginedUsers.get(i);
+            ApplicationState.get().removeLoggined(loginedUser);
+            logout(loginedUser);
+        }
+        return new GuestService();
+    }
 
 //    public SimpleEntity unsuccessfulUserLogin(User user){
 //        return login(user);
