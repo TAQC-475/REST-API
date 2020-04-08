@@ -1,18 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 
-<suite name="SuiteOpenCart">
+<suite name="RestApi">
 	<parameter name="url" value="http://localhost:8080" />
-
-
 	<test name="TestLogin" verbose="9" >
 
 		<classes>
- 			<class name="com.softserve.edu.rest.test.user.UpdateUserPasswordTest">
+<!-- 			<class name="com.softserve.edu.rest.test.user.UpdateUserPasswordTest">-->
+<!--			<methods>-->
+<!--				<include name="updateUserPassword"/>-->
+<!--			</methods>-->
+<!--		</class>-->
+			<class name="com.softserve.edu.rest.test.user.CreateNewUserTest">
 				<methods>
-					<include name="updateUserPassword"/>
+					<include name="createUser"/>
 				</methods>
-		</class>
+			</class>
 		</classes>
 	</test>
 

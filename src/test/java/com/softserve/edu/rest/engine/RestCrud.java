@@ -131,9 +131,7 @@ public abstract class RestCrud {
         String responseText = null;
         try {
             responseText = response.body().string();
-            System.out.println("This is Response TEXT!!!" + responseText);
             responseText = "{" + "\"code\":\"" + response.code() + "\"," + (responseText!=null && responseText.length()>0? responseText.substring(1):"\"content\":\"null\"}");
-            System.out.println("This is Response TEXT 2!!!" + responseText);
         } catch (IOException e) {
             // TODO Develop Custom Exception + Log
             // e.printStackTrace();

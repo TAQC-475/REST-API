@@ -45,6 +45,14 @@ public class EntityUtils {
         return RandomStringUtils.randomAlphanumeric(count);
     }
 
+    /**
+     * @param count
+     * @return String random letters
+     */
+    public static String randomAlphabetic(int count){
+        return RandomStringUtils.randomAlphabetic(count);
+    }
+
     //Check if lock request is success
     public void checkLockEntity(SimpleEntity simpleEntity, String message) {
         if ((simpleEntity.getContent() == null) || (simpleEntity.getContent().isEmpty())

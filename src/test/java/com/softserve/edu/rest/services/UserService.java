@@ -53,9 +53,4 @@ public class UserService extends GuestService{
         EntityUtils.get().checkEntity(result);
         return this;
     }
-
-
 }
-
-
-
