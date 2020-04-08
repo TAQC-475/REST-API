@@ -67,7 +67,7 @@ public class LoginExistingUserTest extends LoginTestRunner{
                 .successfulAdminLogin(admin)
                 .gotoLogginedUsersService();
 
-        Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(existingUsers));
+        Assert.assertTrue(logginedUsersService.getLoggedUsers().containsAll(existingUsers) );
     }
 
 }
