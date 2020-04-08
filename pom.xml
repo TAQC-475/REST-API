@@ -276,14 +276,23 @@
 						-javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
 					</argLine>
 				</configuration>
-				<!-- <dependencies> -->
-				<!-- <dependency> -->
-				<!-- <groupId>org.aspectj</groupId> -->
-				<!-- <artifactId>aspectjweaver</artifactId> -->
-				<!-- <version>${aspectj.version}</version> -->
-				<!-- <scope>test</scope> -->
-				<!-- </dependency> -->
-				<!-- </dependencies> -->
+				 <dependencies>
+				 <dependency>
+				 <groupId>org.aspectj</groupId>
+				 <artifactId>aspectjweaver</artifactId>
+				 <version>${aspectj.version}</version>
+				 <scope>compile</scope>
+				 </dependency>
+				 </dependencies>
+			</plugin>
+
+			<plugin>
+				<groupId>io.qameta.allure</groupId>
+				<artifactId>allure-maven</artifactId>
+				<version>2.8</version>
+				<configuration>
+					<reportVersion>2.3.1</reportVersion>
+				</configuration>
 			</plugin>
 
 		</plugins>

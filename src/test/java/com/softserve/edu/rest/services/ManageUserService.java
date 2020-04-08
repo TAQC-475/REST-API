@@ -7,6 +7,8 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
+import io.qameta.allure.Step;
+
 import java.util.List;
 
 public class ManageUserService {
@@ -19,20 +21,24 @@ public class ManageUserService {
         userResource = new UserResource();
     }
 
+    @Step("Create user")
     public AdministrationService createUser(User user) {
         createUserExample(user);
         return new AdministrationService(loginedUser);
     }
 
+    @Step("removeUser")
     public AdministrationService removeUser(User user) {
         removeUserExample(user);
         return new AdministrationService(loginedUser);
     }
+    @Step("removeUserAndCheckIt")
     public boolean removeUserAndCheckIt(User user){
         removeUserExample(user);
         return true;
     }
 
+    @Step("removeUsers")
     public AdministrationService removeUsers(List<User> users) {
         for (User current : users) {
             removeUser(current);
@@ -40,6 +46,7 @@ public class ManageUserService {
         return new AdministrationService(loginedUser);
     }
 
+    @Step("createUsers")
     public AdministrationService createUsers(List<User> users) {
         for (User current : users) {
             createUserExample(current);

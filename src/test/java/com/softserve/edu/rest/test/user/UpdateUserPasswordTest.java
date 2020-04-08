@@ -5,9 +5,11 @@ import com.softserve.edu.rest.data.dataproviders.UserPasswordData;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.tools.EntityUtils;
+import io.qameta.allure.Epic;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+@Epic("Change password tests")
 public class UpdateUserPasswordTest extends UserTestRunner {
     SoftAssert softAssert = new SoftAssert();
 
@@ -23,7 +25,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionUnSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
     }
@@ -41,7 +43,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionUnSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
     }
@@ -58,7 +60,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionUnSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
     }
@@ -108,7 +110,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionUnSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
     }
