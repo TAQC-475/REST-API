@@ -12,6 +12,7 @@ public class CooldownService{
 
     protected CooldownTimeResource cooldownResource;
     private LoginedUser loginedUser;
+    private SimpleEntity response;
 
     public CooldownService() {
         cooldownResource = new CooldownTimeResource();
@@ -22,23 +23,27 @@ public class CooldownService{
         this.loginedUser = loginedUser;
     }
 
+    public SimpleEntity getResponse() { return response; }
+
+    public void setResponse(SimpleEntity response) { this.response = response; }
+
     public Lifetime getCooldownTime() {
-        SimpleEntity result = cooldownResource
+        SimpleEntity simpleEntity = cooldownResource
                 .httpGetAsEntity(null, null);
-        EntityUtils.get().checkEntity(result);
-        return new Lifetime(result.getContent());
+        EntityUtils.get().checkEntity(simpleEntity);
+        return new Lifetime(simpleEntity.getContent());
     }
 
-    public Lifetime changeCooldown(Lifetime lifetime) {
+    public CooldownService changeCooldown(Lifetime lifetime) {
+        System.out.println("user - "+loginedUser.getUser());
         RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedUser.getToken())  //  ?
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
                 .addParameter(EParameters.TIME, lifetime.getTimeAsText());
-        SimpleEntity result = cooldownResource
+        SimpleEntity simpleEntity = cooldownResource
                 .httpPutAsEntity(null, null, bodyParameters);
-        EntityUtils.get().checkEntity(result);
-        if (result.getContent().equals("true")) return new Lifetime(lifetime.getTime());
-        return new Lifetime(result.getContent());
+        setResponse(simpleEntity);
+        EntityUtils.get().checkCooldownEntity(simpleEntity);
+        return this;
     }
-
 
 }

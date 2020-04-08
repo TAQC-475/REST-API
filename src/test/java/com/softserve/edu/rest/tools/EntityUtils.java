@@ -1,7 +1,6 @@
 package com.softserve.edu.rest.tools;
 
 import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.services.GuestService;
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class EntityUtils {
@@ -23,6 +22,15 @@ public class EntityUtils {
         if (result.getContent() == null
                 || result.getContent() == ""
                 || result.getContent() == "false"
+                || result.getContent() == "null") {
+            throw new RuntimeException("Content is not found or Token time out");
+        }
+        return result;
+    }
+
+    public SimpleEntity checkCooldownEntity(SimpleEntity result) {
+        if (result.getContent() == null
+                || result.getContent() == ""
                 || result.getContent() == "null") {
             throw new RuntimeException("Content is not found or Token time out");
         }

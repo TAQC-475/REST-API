@@ -6,9 +6,10 @@ import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.AdministrationService;
 import com.softserve.edu.rest.services.CooldownService;
+import com.softserve.edu.rest.services.GuestService;
 import com.softserve.edu.rest.services.LoginService;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -16,6 +17,11 @@ public class ChangeCooldownTimeTest {
 
     private CooldownService cooldownService;
     private AdministrationService adminService;
+
+    @BeforeSuite
+    public void createExtraUsers() {
+        new GuestService().resetServiceToInitialState();
+    }
 
     @DataProvider
     public Object[][] defaultCoolTime() {
@@ -36,7 +42,7 @@ public class ChangeCooldownTimeTest {
         cooldownService = new CooldownService();
         Assert.assertEquals(cooldownService
                 .getCooldownTime()
-                .getTimeAsText(), defaultTime.getTimeAsText());
+                .getTime(), defaultTime.getTime());
     }
 
     @Test(dataProvider = "changeCooldownTimePositive", priority = 2)
@@ -44,18 +50,11 @@ public class ChangeCooldownTimeTest {
         Lifetime checkNewCooldownTime = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoCooldownService()
-                .changeCooldown(newLifeTime);
+                .changeCooldown(newLifeTime)
+                .getCooldownTime();
 
-        Assert.assertEquals(checkNewCooldownTime.getTimeAsText(),
-                newLifeTime.getTimeAsText());
-    }
-
-    @AfterClass
-    public void setCooldownTimeForDefault() {
-         new LoginService()
-                .successfulAdminLogin(UserRepository.getAdmin())
-                .gotoCooldownService()
-                .changeCooldown(LifetimeRepository.getDefaultCooldownTime());
+        Assert.assertEquals(checkNewCooldownTime.getTime(),
+                newLifeTime.getTime());
     }
 
 }
