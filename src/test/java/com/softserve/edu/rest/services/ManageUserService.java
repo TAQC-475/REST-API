@@ -42,7 +42,7 @@ public class ManageUserService {
 
     public AdministrationService createUsers(List<User> users) {
         for (User current : users) {
-            createUser(current);
+            createUserExample(current);
         }
         return new AdministrationService(loginedUser);
     }

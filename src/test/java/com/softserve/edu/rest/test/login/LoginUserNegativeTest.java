@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class LoginUserNegativeTest extends RestTestRunner {
+public class LoginUserNegativeTest extends LoginTestRunner{
 
     @Test(dataProviderClass = UsersTestData.class, dataProvider = "nonExistingUserDataProvider")
     public void loginUserNegativeTestAsEntity(User admin, User notExisingUser){

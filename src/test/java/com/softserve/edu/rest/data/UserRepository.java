@@ -82,8 +82,8 @@ public final class UserRepository {
 
     public static List<User> getNonExistingAdmins() {
         List<User> admins = new ArrayList<>();
-        admins.add(new User("kabanAdmin", "qwerty", true));
-        admins.add(new User("puhlyashAdmin", "qwerty", true));
+        //admins.add(new User("kabanAdmin", "qwerty", true));
+        //admins.add(new User("puhlyashAdmin", "qwerty", true));
         admins.add(new User("srakaAdmin", "qwerty", true));
         admins.add(new User("malyshkaAdmin", "qwerty", true));
         admins.add(new User("katakombicAdmin", "qwerty", true));

@@ -19,23 +19,14 @@ public class GuestService {
         return new LoginService();
     }
 
-    public UserService gotoUserService(){
-        UserService userService = null;
-        try {
-            userService = new UserService(ApplicationState.get().getLogginedUser());
-        }catch (CustomException exception){
-            exception.printStackTrace();
-        }
+    public UserService gotoUserService(String name){
+        UserService userService = new UserService(ApplicationState.get().getLogginedUser(name));
         return userService;
     }
 
-    public AdministrationService gotoAdministrationService(){
-        AdministrationService administrationService = null;
-        try {
-            administrationService = new AdministrationService(ApplicationState.get().getLogginedAdmin());
-        }catch (CustomException exception){
-            exception.printStackTrace();
-        }
+    public AdministrationService gotoAdministrationService(String name){
+        AdministrationService administrationService = new AdministrationService(ApplicationState.get()
+                .getLogginedAdmin(name));
         return administrationService;
     }
 
@@ -43,6 +34,7 @@ public class GuestService {
     public GuestService resetServiceToInitialState() {
         SimpleEntity simpleEntity = applicationResource.httpGetAsEntity(null, null);
         EntityUtils.get().checkEntity(simpleEntity);
+        ApplicationState.get().getLogginedUsers().clear();
         return this;
     }
 }

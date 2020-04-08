@@ -16,11 +16,10 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class LoginExistingUserTest extends RestTestRunner {
-    private static final short tokenLength = 32;
+public class LoginExistingUserTest extends LoginTestRunner{
 
     @Test(dataProvider = "existingUserDataProvider", dataProviderClass = UsersTestData.class)
-    public void loginExistingUserTest(User user){
+    public void loginExistingUserTest(User adminUser, User user){
         UserService userService = new LoginService()
                 .successfulUserLogin(user);
         Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());

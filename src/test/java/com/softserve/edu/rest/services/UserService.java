@@ -32,15 +32,6 @@ public class UserService extends GuestService{
         return new LoginService();
     }
 
-    public AdministrationService gotoAdministrationService(){
-        AdministrationService administrationService = null;
-        try {
-             administrationService = new AdministrationService(ApplicationState.get().getLogginedAdmin());
-        }catch (CustomException exception){
-            exception.printStackTrace();
-        }
-        return administrationService;
-    }
 
     public UserService createUser(User user){
         RestParameters bodyParameters = new RestParameters()

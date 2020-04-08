@@ -67,4 +67,20 @@ public class ApplicationState {
         }
         throw new CustomException("Cannot go to the UserService because no users are loggined");
     }
+
+    public LoginedUser getLogginedAdmin(String name){
+        for(LoginedUser loginedUser: logginedClients){
+            if(loginedUser.getUser().isAdmin() && loginedUser.getUser().getName().equalsIgnoreCase(name))
+                return loginedUser;
+        }
+        return null;
+    }
+
+    public LoginedUser getLogginedUser(String name){
+        for(LoginedUser loginedUser: logginedClients){
+            if(!loginedUser.getUser().isAdmin() && loginedUser.getUser().equalName(name))
+                return loginedUser;
+        }
+        return null;
+    }
 }

@@ -12,8 +12,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class LoginNewUserTest extends RestTestRunner {
-    private static final int tokenLength = 32;
+public class LoginNewUserTest extends LoginTestRunner {
 
 
     @Test(dataProvider = "nonExistingUserDataProvider", dataProviderClass = UsersTestData.class)
@@ -37,15 +36,6 @@ public class LoginNewUserTest extends RestTestRunner {
                 .goToLoginService()
                 .successfulAdminLogin(newAdmin);
         Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
-    }
-
-    @AfterMethod()
-    public void removeCreated(ITestResult result){
-        Object[] inputArgs = result.getParameters();
-        User admin = (User) inputArgs[0];
-        User newUser = (User) inputArgs[1];
-        new LoginService().successfulAdminLogin(admin)
-                .gotoManageUserService().removeUser(newUser);
     }
 
 }
