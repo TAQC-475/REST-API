@@ -10,6 +10,11 @@ public class SimpleEntity {
 		this.code = code;
 	}
 
+	public SimpleEntity(String content) {
+		this.content = content;
+		this.code = "";
+	}
+
 	public String getContent() {
 		return content;
 	}
@@ -25,4 +30,6 @@ public class SimpleEntity {
 				", code='" + code + '\'' +
 				'}';
 	}
+
+
 }

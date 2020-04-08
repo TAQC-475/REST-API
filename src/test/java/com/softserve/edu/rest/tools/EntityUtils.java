@@ -39,7 +39,7 @@ public class EntityUtils {
 
     /**
      * @param count
-     * @return random letters and digits
+     * @return String random letters and digits
      */
     public static String randomAlphaNumeric(int count) {
         return RandomStringUtils.randomAlphanumeric(count);

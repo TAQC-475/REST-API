@@ -1,12 +1,10 @@
 package com.softserve.edu.rest.test.user;
 
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.data.dataproviders.UserPasswordData;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.tools.EntityUtils;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -30,18 +28,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertAll();
     }
 
-    @DataProvider
-    public Object[][] updateUserPasswordToBeforeTheLimitData() {
-        String newPassword = EntityUtils.randomAlphaNumeric(2);
-//        newPassword = newPassword.concat("%^");
-        return new Object[][]{{
-                UserRepository.getValidUser(),
-                UserRepository.getValidUser(),
-                newPassword,
-                UserRepository.getUserWithNewPassword(newPassword)}};
-    }
-
-    @Test(dataProvider = "updateUserPasswordToBeforeTheLimitData",
+    @Test(dataProvider = "updateUserPasswordToBeforeTheLimitData", dataProviderClass = UserPasswordData.class,
             description = "Check if User can change his password to 2 symbols")
     public void updatePasswordToBeforeTheMinimumLimitSymbols(User user, User oldPassword, String newPassword,
                                                              User sameUser) {

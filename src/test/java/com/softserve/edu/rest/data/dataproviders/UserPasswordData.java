@@ -16,16 +16,15 @@ public class UserPasswordData {
                 UserRepository.getUserWithNewPassword(newPassword)}};
     }
 
-//    @DataProvider
-//    public Object[][] updateUserPasswordToBeforeTheLimitData() {
-//        String newPassword = EntityUtils.randomAlphaNumeric(2);
-////        newPassword = newPassword.concat("%^");
-//        return new Object[][]{{
-//                UserRepository.getValidUser(),
-//                UserRepository.getValidUser(),
-//                newPassword,
-//                UserRepository.getUserWithNewPassword(newPassword)}};
-//    }
+    @DataProvider
+    public Object[][] updateUserPasswordToBeforeTheLimitData() {
+        String newPassword = EntityUtils.randomAlphaNumeric(2);
+        return new Object[][]{{
+                UserRepository.getValidUser(),
+                UserRepository.getValidUser(),
+                newPassword,
+                UserRepository.getUserWithNewPassword(newPassword)}};
+    }
 
     @DataProvider
     public Object[][] updateUserPasswordToToLowerLimitData() {
