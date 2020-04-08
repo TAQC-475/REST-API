@@ -5,16 +5,22 @@ import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
+import com.softserve.edu.rest.resources.LockAdminsResource;
 import com.softserve.edu.rest.resources.LockUserResource;
+import com.softserve.edu.rest.resources.LockUsersResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 
 public class LockService {
 
     protected LockUserResource lockUserResource;
+    protected LockUsersResource lockUsersResource;
+    protected LockAdminsResource lockAdminsResource;
     protected LoginedUser loginedUser;
 
     public LockService(LoginedUser loginedUser) {
         lockUserResource = new LockUserResource();
+        lockUsersResource = new LockUsersResource();
+        lockAdminsResource = new LockAdminsResource();
         this.loginedUser = loginedUser;
     }
 
@@ -32,10 +38,10 @@ public class LockService {
     public String getAllLockedUsers() {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken());
-        SimpleEntity simpleEntity = lockUserResource
+        SimpleEntity simpleEntity = lockUsersResource
                 .httpGetAsEntity(null, bodyParameters);
 
-        System.out.println("locked users - \n"+simpleEntity.getContent());  //  !!!
+        System.out.println("locked users - "+simpleEntity.getContent());  //  !!!
         return simpleEntity.getContent();
     }
 
@@ -53,7 +59,7 @@ public class LockService {
     public LockService unlockAllUsers() {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken());
-        SimpleEntity simpleEntity = lockUserResource
+        SimpleEntity simpleEntity = lockUsersResource
                 .httpPutAsEntity(null, null, bodyParameters);
         return this;
     }

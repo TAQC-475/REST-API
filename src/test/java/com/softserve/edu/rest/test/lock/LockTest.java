@@ -22,7 +22,6 @@ public class LockTest {
                 .createUser(UserRepository.getUserDana())
                 .gotoManageUserService()
                 .createUser(UserRepository.getAdminVasya());
-        System.out.println("before suite");
     }
 
     @DataProvider
