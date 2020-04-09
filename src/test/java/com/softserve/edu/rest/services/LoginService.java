@@ -42,6 +42,7 @@ public class LoginService {
 
     @Step("Successful Admin Login")
     public AdministrationService successfulAdminLogin(User adminUser) {
+        LOGGER.debug("Successful login by admin = "+adminUser.getName());
         ApplicationState.get().addUser((new LogginedUser(adminUser, login(adminUser).getContent())));
         return new AdministrationService(ApplicationState.get().getLastLoggined());
     }
@@ -55,8 +56,7 @@ public class LoginService {
     @Step("Unsuccessful User Login")
     public LoginService unsuccessfulUserLogin(User basicUser) {
         login(basicUser);
-        LOGGER.debug("unsuccessful login by user = "+basicUser.getName());
-        LOGGER.debug("Unsuccessful login by user {}", basicUser.getName());
+        LOGGER.warn("Unsuccessful login by user {}", basicUser.getName());
         return this;
     }
 
