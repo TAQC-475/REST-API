@@ -3,21 +3,22 @@ package com.softserve.edu.rest.test.items;
 import com.softserve.edu.rest.data.Item;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.dataproviders.DataForIndexTest;
+import com.softserve.edu.rest.data.dataproviders.DataForItemsTest;
 import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
 import io.qameta.allure.Epic;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import org.slf4j.Logger;
+import java.util.List;
 
 @Epic("Test indexes")
 public class IndexTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
 
-    @Test(dataProvider = "dataForCreatingItemWithValidIndexValue", dataProviderClass = DataForIndexTest.class,
-    description = "verifyCreatingItemWIthValidIndex")
+    @Test(dataProvider = "dataForCreatingItemWithValidIndexValue", dataProviderClass = DataForIndexTest.class)
     public void verifyCreatingItemWIthValidIndex(User user, Item itemWithValidIndex) {
         LOGGER.info("adding item with valid index: " + itemWithValidIndex.getItemIndex());
         ItemsService itemsService = new LoginService()
@@ -26,12 +27,11 @@ public class IndexTest {
                 .createItem(itemWithValidIndex, true)
                 .goToItemsService();
 
-        Assert.assertTrue(itemsService.getAllItemsList().contains(itemWithValidIndex));
+        Assert.assertTrue(itemsService.getAllItemsList().contains(itemWithValidIndex), "Item: " + itemWithValidIndex.getItemText() + " was not added");
         LOGGER.info("item with valid index [" + itemWithValidIndex.getItemIndex() + "] added");
     }
 
-    @Test(dataProvider = "dataForCreatingItemWithInvalidIndexValue", dataProviderClass = DataForIndexTest.class,
-    description = "verifyItemCantBeCreatedWithInvalidIndex")
+    @Test(dataProvider = "dataForCreatingItemWithInvalidIndexValue", dataProviderClass = DataForIndexTest.class)
     public void verifyItemCantBeCreatedWithInvalidIndex(User user, Item itemWithInvalidIndex) {
         LOGGER.info("adding item with invalid index: " + itemWithInvalidIndex.getItemIndex());
         String statusCode = new LoginService()
@@ -41,5 +41,18 @@ public class IndexTest {
 
         Assert.assertEquals(statusCode, "400", itemWithInvalidIndex.toString() + " with invalid index was added");
         LOGGER.info("item with invalid index [" + itemWithInvalidIndex.getItemIndex() + "] added");
+    }
+
+    @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes", dataProviderClass = DataForItemsTest.class)
+    public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes) {
+        List<String> itemsIndexes = new LoginService()
+                .successfulUserLogin(user)
+                .goToItemService()
+                .createItem(firstItem, true)
+                .createItem(secondItem, true)
+                .goToItemsIndexesService()
+                .getAllItemsIndexes();
+
+        Assert.assertEquals(itemsIndexes, testItemsIndexes, "Actual and expected items indexes are not equal");
     }
 }

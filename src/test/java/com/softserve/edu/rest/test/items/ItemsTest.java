@@ -20,7 +20,7 @@ public class ItemsTest {
                 .createItem(secondItem, true)
                 .goToItemsService();
 
-        Assert.assertEquals(itemsService.getAllItemsList(), testItemsList);
+        Assert.assertEquals(itemsService.getAllItemsList(), testItemsList, "Actual and expected user items lists are not equal");
     }
 
     @Test(dataProvider = "dataForAdminGettingUserItemsTest", dataProviderClass = DataForItemsTest.class)
@@ -35,7 +35,7 @@ public class ItemsTest {
                 .goToItemsService()
                 .getAllUserItemsAsAdmin(userToCheck);
 
-        Assert.assertEquals(checkedUserItems, itemsGotByAdmin);
+        Assert.assertEquals(checkedUserItems, itemsGotByAdmin, "Items got by user and user items got by admin are different");
     }
 
     @Test(dataProvider = "dataForVerifyingUserCantGetAdminItems", dataProviderClass = DataForItemsTest.class)
@@ -52,19 +52,6 @@ public class ItemsTest {
                 .goToItemsService()
                 .getAllUserItemsAsAdmin(userToCheck);
 
-        Assert.assertTrue(adminItems.contains(firstItem.getItemText()) && contentUserGetsTryingToGetAdminItems.equals(""));
-    }
-
-    @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes", dataProviderClass = DataForItemsTest.class)
-    public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes) {
-        List<String> itemsIndexes = new LoginService()
-                .successfulUserLogin(user)
-                .goToItemService()
-                .createItem(firstItem, true)
-                .createItem(secondItem, true)
-                .goToItemsIndexesService()
-                .getAllItemsIndexes();
-
-        Assert.assertEquals(itemsIndexes, testItemsIndexes);
+        Assert.assertTrue(adminItems.contains(firstItem.getItemText()) && contentUserGetsTryingToGetAdminItems.equals(""), "User can get admin items");
     }
 }
