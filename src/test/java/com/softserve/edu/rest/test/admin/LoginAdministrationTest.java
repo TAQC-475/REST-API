@@ -1,4 +1,4 @@
-package com.softserve.edu.rest.test;
+package com.softserve.edu.rest.test.admin;
 
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
@@ -9,7 +9,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginAdministrationTest {
-    @DataProvider
+    @DataProvider(parallel = true)
     public Object[][] userExist() {
         return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser()}};
     }

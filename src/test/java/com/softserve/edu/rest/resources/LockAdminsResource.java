@@ -4,11 +4,10 @@ import com.softserve.edu.rest.dto.RestUrlRepository;
 import com.softserve.edu.rest.engine.RestQueries;
 import com.softserve.edu.rest.entity.SimpleEntity;
 
-public class LockedUsersResource extends RestQueries<SimpleEntity, SimpleEntity, SimpleEntity, SimpleEntity, SimpleEntity> {
+public class LockAdminsResource extends RestQueries<SimpleEntity, SimpleEntity, SimpleEntity, SimpleEntity, SimpleEntity> {
 
-    public LockedUsersResource() {
-        super(RestUrlRepository.getUsers(),
-                SimpleEntity.class, SimpleEntity.class,
+    public LockAdminsResource() {
+        super(RestUrlRepository.getLockedAdmins(), SimpleEntity.class, SimpleEntity.class,
                 SimpleEntity.class, SimpleEntity.class, SimpleEntity.class);
     }
 }

@@ -7,6 +7,7 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.*;
 import com.softserve.edu.rest.tools.EntityUtils;
+import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 import java.util.List;

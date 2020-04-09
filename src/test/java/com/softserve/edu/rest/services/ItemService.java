@@ -69,6 +69,19 @@ public class ItemService {
         return this;
     }
 
+    public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
+        if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
+            throw new RuntimeException("Item with such index already exists");
+        }
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.ITEM, item.getItemText());
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.INDEX, item.getItemIndex());
+        SimpleEntity statusCode = itemResource.httpPostAsEntity(pathParameters, null, bodyParameters);
+        return statusCode.getCode();
+    }
+
     public Item getItem(Item item){
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedUser.getToken());
@@ -86,4 +99,6 @@ public class ItemService {
     public ItemsService goToItemsService(){
         return new ItemsService(loginedUser);
     }
+
+    public ItemsIndexesService goToItemsIndexesService(){ return new ItemsIndexesService(loginedUser);}
 }

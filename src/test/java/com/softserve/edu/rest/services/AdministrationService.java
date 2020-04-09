@@ -17,14 +17,24 @@ public class AdministrationService extends UserService{
         this.loginedUser = loginedUser;
     }
 
-  public UsersService gotoUsersService(){
-    return new UsersService(loginedUser);
-  }
-  public ItemService goToItemService(){return  new ItemService(loginedUser);}
+    public UsersService gotoUsersService() {
+        return new UsersService(loginedUser);
+    }
 
-  public ItemsService goToItemsService() {return  new ItemsService(loginedUser); }
+    public ItemService goToItemService() {
+        return new ItemService(loginedUser);
+    }
 
-  public CooldownService gotoCooldownService() {return new CooldownService(loginedUser); }
+    public ItemsService goToItemsService() {
+        return new ItemsService(loginedUser);
+    }
+
+    public LoginService goToLoginService() {
+        return new LoginService();
+    }
+
+    public CooldownService gotoCooldownService() { return new CooldownService(loginedUser); }
+    public LockService gotoLockService(){ return new LockService(loginedUser);}
 
     public LogginedUsersService gotoLogginedUsersService(){
         return new LogginedUsersService(loginedUser);

@@ -46,7 +46,7 @@ public final class RestUrlRepository {
                 .addPatchUrl("");
     }
 
-    public static RestUrl getUser(){
+    public static RestUrl getUser() {
         return new RestUrl()
                 .addBaseUrl(server)
                 .addGetUrl("/user")
@@ -55,7 +55,6 @@ public final class RestUrlRepository {
                 .addDeleteUrl("/user")
                 .addPatchUrl("");
     }
-
 
 
     public static RestUrl getApplication() {
@@ -68,7 +67,7 @@ public final class RestUrlRepository {
                 .addPatchUrl("");
     }
 
-    public static RestUrl getAliveTokens(){
+    public static RestUrl getAliveTokens() {
         return new RestUrl()
                 .addBaseUrl(server)
                 .addGetUrl("/login/tockens") //Jesus doesn't want me for a sunbeam
@@ -154,4 +153,32 @@ public final class RestUrlRepository {
                 .addDeleteUrl("")
                 .addPatchUrl("");
     }
+
+    public static RestUrl getLockedUser() {
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("")
+                .addPostUrl("/locked/user/{name}")
+                .addPutUrl("/locked/user/{name}")
+                .addDeleteUrl("");
+    }
+
+    public static RestUrl getLockedUsers() {
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("/locked/users")
+                .addPostUrl("")
+                .addPutUrl("/locked/reset")
+                .addDeleteUrl("");
+    }
+
+    public static RestUrl getLockedAdmins() {
+        return new RestUrl()
+                .addBaseUrl(server)
+                .addGetUrl("/locked/admins")
+                .addPostUrl("")
+                .addPutUrl("/locked/reset")
+                .addDeleteUrl("");
+    }
 }
+

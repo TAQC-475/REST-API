@@ -1,6 +1,7 @@
 package com.softserve.edu.rest.data;
 
 import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.tools.CustomException;
 
 import java.util.LinkedList;
 
@@ -49,5 +50,37 @@ public class ApplicationState {
 
     public boolean isLoggined(LoginedUser loginedUser){
         return logginedClients.contains(loginedUser);
+    }
+
+    public LoginedUser getLogginedAdmin() throws CustomException{
+        for(LoginedUser loginedUser: logginedClients){
+            if(loginedUser.getUser().isAdmin())
+                return loginedUser;
+        }
+        throw new CustomException("Cannot go to the AdministrationService because no administrators are loggined");
+    }
+
+    public LoginedUser getLogginedUser() throws CustomException{
+        for(LoginedUser loginedUser : logginedClients){
+            if(!loginedUser.getUser().isAdmin())
+                return loginedUser;
+        }
+        throw new CustomException("Cannot go to the UserService because no users are loggined");
+    }
+
+    public LoginedUser getLogginedAdmin(String name){
+        for(LoginedUser loginedUser: logginedClients){
+            if(loginedUser.getUser().isAdmin() && loginedUser.getUser().getName().equalsIgnoreCase(name))
+                return loginedUser;
+        }
+        return null;
+    }
+
+    public LoginedUser getLogginedUser(String name){
+        for(LoginedUser loginedUser: logginedClients){
+            if(!loginedUser.getUser().isAdmin() && loginedUser.getUser().equalName(name))
+                return loginedUser;
+        }
+        return null;
     }
 }
