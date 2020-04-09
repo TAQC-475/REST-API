@@ -5,12 +5,9 @@
 	<test name="TestLogin" verbose="9" >
 
 		<classes>
- 			<class name="com.softserve.edu.rest.test.user.UpdateUserPasswordTest"/>
-<!--			<class name="com.softserve.edu.rest.test.user.CreateNewUserTest">-->
-<!--				<methods>-->
-<!--					<include name="createUser"/>-->
-<!--				</methods>-->
-<!--			</class>-->
+<!-- 			<class name="com.softserve.edu.rest.test.user.UpdateUserPasswordTest"/>-->
+			<class name="com.softserve.edu.rest.test.user.CreateNewUserTest"/>
+
 		</classes>
 	</test>
 

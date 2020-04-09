@@ -7,13 +7,17 @@ import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.LoginResource;
+import com.softserve.edu.rest.test.user.CreateNewUserTest;
 import com.softserve.edu.rest.tools.EntityUtils;
 import io.qameta.allure.Step;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class LoginService {
     private LoginResource loginResource;
+    private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
     public static final String INVALID_USER = "ERROR, user not found";
 
     public LoginService() {
@@ -50,6 +54,7 @@ public class LoginService {
 
     @Step("Unsuccessful User Login")
     public SimpleEntity unsuccessfulUserLoginAsEntity(User basicUser) {
+        logger.warn("unsuccessful User Login: " + basicUser.toString());
         return login(basicUser);
     }
 
@@ -63,6 +68,7 @@ public class LoginService {
 
     @Step("Successful Users Login")
     public UserService successfulUsersLogin(List<User> adminUsers) {
+        logger.debug("successful Users Login" + adminUsers.toString());
         for (User adminUser : adminUsers) {
             ApplicationState.get().addUser(new LoginedUser(adminUser, login(adminUser).getContent()));
         }

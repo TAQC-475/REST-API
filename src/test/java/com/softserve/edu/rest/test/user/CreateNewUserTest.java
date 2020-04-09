@@ -11,12 +11,16 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 @Epic("Create new user tests")
-public class CreateNewUserTest {
-    public static final Logger logger = LoggerFactory.getLogger(CreateNewUserTest.class);
+public class CreateNewUserTest extends UserTestRunner{
+//    private static final Logger LOG = LoggerFactory.getLogger(AllureJbehave.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(CreateNewUserTest.class);
 
     @Test(dataProvider = "createUserData", dataProviderClass = CreateUserData.class,
             description = "Check if admin could create user with all valid fields")
     public void createUser(User adminUser, User newUser, User expectedUser) {
+        logger.info("Creating valid user with parameters: adminUser = " + adminUser.toString()
+                + " newUser" + newUser.toString());
         UsersService actualUser = new LoginService()
                 .successfulAdminLogin(adminUser)
                 .gotoManageUserService()
@@ -24,6 +28,7 @@ public class CreateNewUserTest {
                 .gotoUsersService();
 
         Assert.assertTrue(actualUser.isUserPresent(expectedUser));
+        logger.info("Finished creating user");
     }
 
     @Test(dataProvider = "userWithEmptyNameData", dataProviderClass = CreateUserData.class,

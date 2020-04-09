@@ -13,6 +13,7 @@ import org.testng.asserts.SoftAssert;
 public class UpdateUserPasswordTest extends UserTestRunner {
     SoftAssert softAssert = new SoftAssert();
 
+
     @Test(dataProvider = "updateUserPasswordToEmptyData", dataProviderClass = UserPasswordData.class,
             description = "Check if User can change his password to an empty")
     public void updateUserPasswordToEmpty(User user, User oldPassword, String newPassword, User sameUser) {
