@@ -5,12 +5,12 @@ import com.softserve.edu.rest.tools.EntityUtils;
 import org.testng.annotations.DataProvider;
 
 public class UserPasswordData {
-    public static final int EMPTY_FIELD = 0;
-    public static final int LOWEST_INVALID_SYMBOLS_COUNT = 2;
-    public static final int LOWEST_VALID_SYMBOLS_COUNT = 5;
-    public static final int VALID_SYMBOLS_COUNT = 15;
-    public static final int HIGHEST_VALID_SYMBOLS_COUNT = 25;
-    public static final int HIGHEST_INVALID_SYMBOLS_COUNT = 36;
+    private static final int EMPTY_FIELD = 0;
+    private static final int LOWEST_INVALID_SYMBOLS_COUNT = 2;
+    private static final int LOWEST_VALID_SYMBOLS_COUNT = 5;
+    private static final int VALID_SYMBOLS_COUNT = 15;
+    private static final int HIGHEST_VALID_SYMBOLS_COUNT = 25;
+    private static final int HIGHEST_INVALID_SYMBOLS_COUNT = 36;
 
     @DataProvider
     public Object[][] updateUserPasswordToEmptyData() {
