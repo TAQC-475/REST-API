@@ -1,0 +1,363 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "com.softserve.edu.rest.test.login",
+    "children" : [ {
+      "name" : "LoginNewUserTest",
+      "children" : [ {
+        "name" : "createAndLoginAdminTest",
+        "uid" : "36181f9f5def16be",
+        "parentUid" : "a624eba72464a23d4e782484198e1f5b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428058684,
+          "stop" : 1586428060172,
+          "duration" : 1488
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "createAndLoginUserTest",
+        "uid" : "868e0941505726fa",
+        "parentUid" : "a624eba72464a23d4e782484198e1f5b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428060604,
+          "stop" : 1586428060655,
+          "duration" : 51
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "createAndLoginAdminTest",
+        "uid" : "a106cca9fd5b09bc",
+        "parentUid" : "a624eba72464a23d4e782484198e1f5b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457163135,
+          "stop" : 1586457164650,
+          "duration" : 1515
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, password=qwerty, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "createAndLoginUserTest",
+        "uid" : "595a42e55be7306f",
+        "parentUid" : "a624eba72464a23d4e782484198e1f5b",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165038,
+          "stop" : 1586457165104,
+          "duration" : 66
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, password=qwerty, isAdmin=false, items=[]]" ]
+      } ],
+      "uid" : "a624eba72464a23d4e782484198e1f5b"
+    }, {
+      "name" : "LoginExistingUserTest",
+      "children" : [ {
+        "name" : "loginExistingAdminTest",
+        "uid" : "d0a837a9e858ba6f",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061164,
+          "stop" : 1586428061175,
+          "duration" : 11
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      }, {
+        "name" : "loginExistingUserTest",
+        "uid" : "32d78fa9729d0475",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061184,
+          "stop" : 1586428061198,
+          "duration" : 14
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=otlumtc, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginExistingUsersTest",
+        "uid" : "389a7c0e63bfe8c9",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061218,
+          "stop" : 1586428061272,
+          "duration" : 54
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=kilinatc, isAdmin=false, items=[]], User [name=akimatc, isAdmin=false, items=[]], User [name=OKonokhtc, isAdmin=false, items=[]], User [name=slototc, isAdmin=false, items=[]], User [name=khalaktc, isAdmin=false, items=[]]]" ]
+      }, {
+        "name" : "logoutExistingUserTest",
+        "uid" : "5a81650d6ab0e4c7",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061284,
+          "stop" : 1586428061332,
+          "duration" : 48
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=otlumtc, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "logoutExistingUserTestAsEntity",
+        "uid" : "c9e14e10628c1eb4",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061342,
+          "stop" : 1586428061355,
+          "duration" : 13
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=otlumtc, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginExistingAdminTest",
+        "uid" : "3611c5647ecbd03e",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165499,
+          "stop" : 1586457165528,
+          "duration" : 29
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]" ]
+      }, {
+        "name" : "loginExistingUserTest",
+        "uid" : "fc66ee1a9ddb6b35",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165574,
+          "stop" : 1586457165596,
+          "duration" : 22
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=otlumtc, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginExistingUsersTest",
+        "uid" : "1d9320591b97945d",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165667,
+          "stop" : 1586457165769,
+          "duration" : 102
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "[User [name=kilinatc, password=qwerty, isAdmin=false, items=[]], User [name=akimatc, password=qwerty, isAdmin=false, items=[]], User [name=OKonokhtc, password=qwerty, isAdmin=false, items=[]], User [name=slototc, password=qwerty, isAdmin=false, items=[]], User [name=khalaktc, password=qwerty, isAdmin=false, items=[]]]" ]
+      }, {
+        "name" : "logoutExistingUserTest",
+        "uid" : "49a774fcb8c17918",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165796,
+          "stop" : 1586457165870,
+          "duration" : 74
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=otlumtc, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "logoutExistingUserTestAsEntity",
+        "uid" : "6afe6e28c490a728",
+        "parentUid" : "eed60d1eaa5fa1cfb02c2a8f8c157062",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165897,
+          "stop" : 1586457165929,
+          "duration" : 32
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=otlumtc, password=qwerty, isAdmin=false, items=[]]" ]
+      } ],
+      "uid" : "eed60d1eaa5fa1cfb02c2a8f8c157062"
+    }, {
+      "name" : "LoginUserNegativeTest",
+      "children" : [ {
+        "name" : "loginAdminNegativeTest",
+        "uid" : "d5612247000e543e",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061371,
+          "stop" : 1586428061456,
+          "duration" : 85
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "loginUserNegativeTest",
+        "uid" : "ef89bce23f1c018c",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061489,
+          "stop" : 1586428061511,
+          "duration" : 22
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginUserNegativeTestAsEntity",
+        "uid" : "a16fc94facd36c9",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061524,
+          "stop" : 1586428061540,
+          "duration" : 16
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "966b4e9e1b774f9d",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586454960865,
+          "stop" : 1586454961413,
+          "duration" : 548
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      }, {
+        "name" : "loginAdminNegativeTest",
+        "uid" : "5840609e64bcdaa4",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166008,
+          "stop" : 1586457166034,
+          "duration" : 26
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, password=qwerty, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "loginUserNegativeTest",
+        "uid" : "8ca6fd0aad55059c",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166074,
+          "stop" : 1586457166109,
+          "duration" : 35
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginUserNegativeTestAsEntity",
+        "uid" : "968cc9e5523801e8",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166135,
+          "stop" : 1586457166143,
+          "duration" : 8
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "37a3736041ec261f",
+        "parentUid" : "d25389cf1943dd3c0211afcbef304105",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166158,
+          "stop" : 1586457166172,
+          "duration" : 14
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "d25389cf1943dd3c0211afcbef304105"
+    }, {
+      "name" : "LoginNewUsersTest",
+      "children" : [ {
+        "name" : "createAndLoginAdminsTest",
+        "uid" : "b8152c896cabd544",
+        "parentUid" : "27a1d797d4bf37859bc4d0c3000e9028",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586449221567,
+          "stop" : 1586449222702,
+          "duration" : 1135
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=srakaAdmin, isAdmin=true, items=[]], User [name=malyshkaAdmin, isAdmin=true, items=[]], User [name=katakombicAdmin, isAdmin=true, items=[]]]" ]
+      }, {
+        "name" : "createAndLoginUsersTest",
+        "uid" : "5d62d6f755587730",
+        "parentUid" : "27a1d797d4bf37859bc4d0c3000e9028",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586449222910,
+          "stop" : 1586449223063,
+          "duration" : 153
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=kaban, isAdmin=false, items=[]], User [name=puhlyash, isAdmin=false, items=[]], User [name=sraka, isAdmin=false, items=[]], User [name=malyshka, isAdmin=false, items=[]], User [name=katakombic, isAdmin=false, items=[]]]" ]
+      }, {
+        "name" : "createAndLoginAdminsTest",
+        "uid" : "2200b730321ddd62",
+        "parentUid" : "27a1d797d4bf37859bc4d0c3000e9028",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165119,
+          "stop" : 1586457165250,
+          "duration" : 131
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "[User [name=srakaAdmin, password=qwerty, isAdmin=true, items=[]], User [name=malyshkaAdmin, password=qwerty, isAdmin=true, items=[]], User [name=katakombicAdmin, password=qwerty, isAdmin=true, items=[]]]" ]
+      }, {
+        "name" : "createAndLoginUsersTest",
+        "uid" : "c80364a28567e6be",
+        "parentUid" : "27a1d797d4bf37859bc4d0c3000e9028",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165276,
+          "stop" : 1586457165423,
+          "duration" : 147
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "[User [name=kaban, password=qwerty, isAdmin=false, items=[]], User [name=puhlyash, password=qwerty, isAdmin=false, items=[]], User [name=sraka, password=qwerty, isAdmin=false, items=[]], User [name=malyshka, password=qwerty, isAdmin=false, items=[]], User [name=katakombic, password=qwerty, isAdmin=false, items=[]]]" ]
+      } ],
+      "uid" : "27a1d797d4bf37859bc4d0c3000e9028"
+    } ],
+    "uid" : "com.softserve.edu.rest.test.login"
+  } ]
+}

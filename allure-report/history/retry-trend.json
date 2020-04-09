@@ -1,0 +1,25 @@
+[ {
+  "buildOrder" : 9,
+  "reportUrl" : "http://localhost:9090/job/dashRestTest/9/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "run" : 26,
+    "retry" : 12
+  }
+}, {
+  "buildOrder" : 8,
+  "reportUrl" : "http://localhost:9090/job/dashRestTest/8/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "run" : 12,
+    "retry" : 0
+  }
+}, {
+  "buildOrder" : 7,
+  "reportUrl" : "http://localhost:9090/job/dashRestTest/7/allure",
+  "reportName" : "AllureReport",
+  "data" : {
+    "run" : 37,
+    "retry" : 265
+  }
+} ]

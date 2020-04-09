@@ -1,0 +1,79 @@
+{
+  "uid" : "cb4524d12aacf265",
+  "name" : "logoutWithInvalidTokenTest",
+  "fullName" : "com.softserve.edu.rest.test.login.LoginUserNegativeTest.logoutWithInvalidTokenTest",
+  "historyId" : "a6e003e8aa0610b06a6d79e82d864846",
+  "time" : {
+    "start" : 1586452229046,
+    "stop" : 1586452229549,
+    "duration" : 503
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ ],
+  "afterStages" : [ {
+    "name" : "removeCreated",
+    "time" : {
+      "start" : 1586452229677,
+      "stop" : 1586452229688,
+      "duration" : 11
+    },
+    "description" : "",
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "package",
+    "value" : "com.softserve.edu.rest.test.login.LoginUserNegativeTest"
+  }, {
+    "name" : "testClass",
+    "value" : "com.softserve.edu.rest.test.login.LoginUserNegativeTest"
+  }, {
+    "name" : "testMethod",
+    "value" : "logoutWithInvalidTokenTest"
+  }, {
+    "name" : "parentSuite",
+    "value" : "Default Suite"
+  }, {
+    "name" : "suite",
+    "value" : "lv459"
+  }, {
+    "name" : "subSuite",
+    "value" : "com.softserve.edu.rest.test.login.LoginUserNegativeTest"
+  }, {
+    "name" : "host",
+    "value" : "borys-Aspire-E5-575G"
+  }, {
+    "name" : "thread",
+    "value" : "8904@borys-Aspire-E5-575G.main(1)"
+  }, {
+    "name" : "framework",
+    "value" : "testng"
+  }, {
+    "name" : "language",
+    "value" : "java"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ {
+    "name" : "arg0",
+    "value" : "User [name=admin, isAdmin=true, items=[My data]]"
+  } ],
+  "links" : [ ],
+  "hidden" : true,
+  "retry" : true,
+  "extra" : {
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "cb4524d12aacf265.json",
+  "parameterValues" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+}

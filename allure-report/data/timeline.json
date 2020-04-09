@@ -1,0 +1,559 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "borys-Aspire-E5-575G",
+    "children" : [ {
+      "name" : "13305@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "966b4e9e1b774f9d",
+        "parentUid" : "ef6fa0ce685665c707800ed91a6a3ff2",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586454960865,
+          "stop" : 1586454961413,
+          "duration" : 548
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "ef6fa0ce685665c707800ed91a6a3ff2"
+    }, {
+      "name" : "16936@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "loginExistingAdminTest",
+        "uid" : "d0a837a9e858ba6f",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061164,
+          "stop" : 1586428061175,
+          "duration" : 11
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      }, {
+        "name" : "loginExistingUserTest",
+        "uid" : "32d78fa9729d0475",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061184,
+          "stop" : 1586428061198,
+          "duration" : 14
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=otlumtc, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginAdminNegativeTest",
+        "uid" : "d5612247000e543e",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061371,
+          "stop" : 1586428061456,
+          "duration" : 85
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "loginUserNegativeTest",
+        "uid" : "ef89bce23f1c018c",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061489,
+          "stop" : 1586428061511,
+          "duration" : 22
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "logoutExistingUserTestAsEntity",
+        "uid" : "c9e14e10628c1eb4",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061342,
+          "stop" : 1586428061355,
+          "duration" : 13
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=otlumtc, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "createAndLoginAdminTest",
+        "uid" : "36181f9f5def16be",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428058684,
+          "stop" : 1586428060172,
+          "duration" : 1488
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "loginUserNegativeTestAsEntity",
+        "uid" : "a16fc94facd36c9",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061524,
+          "stop" : 1586428061540,
+          "duration" : 16
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "createAndLoginUserTest",
+        "uid" : "868e0941505726fa",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428060604,
+          "stop" : 1586428060655,
+          "duration" : 51
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginExistingUsersTest",
+        "uid" : "389a7c0e63bfe8c9",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061218,
+          "stop" : 1586428061272,
+          "duration" : 54
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=kilinatc, isAdmin=false, items=[]], User [name=akimatc, isAdmin=false, items=[]], User [name=OKonokhtc, isAdmin=false, items=[]], User [name=slototc, isAdmin=false, items=[]], User [name=khalaktc, isAdmin=false, items=[]]]" ]
+      }, {
+        "name" : "logoutExistingUserTest",
+        "uid" : "5a81650d6ab0e4c7",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061284,
+          "stop" : 1586428061332,
+          "duration" : 48
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "User [name=otlumtc, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "createAndLoginAdminsTest",
+        "uid" : "d08e2ff4d51ed1d2",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428060702,
+          "stop" : 1586428061035,
+          "duration" : 333
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=srakaAdmin, isAdmin=true, items=[]], User [name=malyshkaAdmin, isAdmin=true, items=[]], User [name=katakombicAdmin, isAdmin=true, items=[]]]" ]
+      }, {
+        "name" : "createAndLoginUsersTest",
+        "uid" : "12b7fbf045275ef3",
+        "parentUid" : "24bc6ef11d3396c18f92d36b318eddd1",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586428061069,
+          "stop" : 1586428061142,
+          "duration" : 73
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=kaban, isAdmin=false, items=[]], User [name=puhlyash, isAdmin=false, items=[]], User [name=sraka, isAdmin=false, items=[]], User [name=malyshka, isAdmin=false, items=[]], User [name=katakombic, isAdmin=false, items=[]]]" ]
+      } ],
+      "uid" : "24bc6ef11d3396c18f92d36b318eddd1"
+    }, {
+      "name" : "14616@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "loginExistingUsersTest",
+        "uid" : "1d9320591b97945d",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165667,
+          "stop" : 1586457165769,
+          "duration" : 102
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "[User [name=kilinatc, password=qwerty, isAdmin=false, items=[]], User [name=akimatc, password=qwerty, isAdmin=false, items=[]], User [name=OKonokhtc, password=qwerty, isAdmin=false, items=[]], User [name=slototc, password=qwerty, isAdmin=false, items=[]], User [name=khalaktc, password=qwerty, isAdmin=false, items=[]]]" ]
+      }, {
+        "name" : "loginUserNegativeTestAsEntity",
+        "uid" : "968cc9e5523801e8",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166135,
+          "stop" : 1586457166143,
+          "duration" : 8
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginAdminNegativeTest",
+        "uid" : "5840609e64bcdaa4",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166008,
+          "stop" : 1586457166034,
+          "duration" : 26
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, password=qwerty, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "createAndLoginUserTest",
+        "uid" : "595a42e55be7306f",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165038,
+          "stop" : 1586457165104,
+          "duration" : 66
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginExistingAdminTest",
+        "uid" : "3611c5647ecbd03e",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165499,
+          "stop" : 1586457165528,
+          "duration" : 29
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]" ]
+      }, {
+        "name" : "loginExistingUserTest",
+        "uid" : "fc66ee1a9ddb6b35",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165574,
+          "stop" : 1586457165596,
+          "duration" : 22
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=otlumtc, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "loginUserNegativeTest",
+        "uid" : "8ca6fd0aad55059c",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166074,
+          "stop" : 1586457166109,
+          "duration" : 35
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistinguser, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "createAndLoginUsersTest",
+        "uid" : "c80364a28567e6be",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165276,
+          "stop" : 1586457165423,
+          "duration" : 147
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "[User [name=kaban, password=qwerty, isAdmin=false, items=[]], User [name=puhlyash, password=qwerty, isAdmin=false, items=[]], User [name=sraka, password=qwerty, isAdmin=false, items=[]], User [name=malyshka, password=qwerty, isAdmin=false, items=[]], User [name=katakombic, password=qwerty, isAdmin=false, items=[]]]" ]
+      }, {
+        "name" : "createAndLoginAdminTest",
+        "uid" : "a106cca9fd5b09bc",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457163135,
+          "stop" : 1586457164650,
+          "duration" : 1515
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=nonexistingadmin, password=qwerty, isAdmin=true, items=[]]" ]
+      }, {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "37a3736041ec261f",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457166158,
+          "stop" : 1586457166172,
+          "duration" : 14
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]" ]
+      }, {
+        "name" : "createAndLoginAdminsTest",
+        "uid" : "2200b730321ddd62",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165119,
+          "stop" : 1586457165250,
+          "duration" : 131
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "[User [name=srakaAdmin, password=qwerty, isAdmin=true, items=[]], User [name=malyshkaAdmin, password=qwerty, isAdmin=true, items=[]], User [name=katakombicAdmin, password=qwerty, isAdmin=true, items=[]]]" ]
+      }, {
+        "name" : "logoutExistingUserTest",
+        "uid" : "49a774fcb8c17918",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165796,
+          "stop" : 1586457165870,
+          "duration" : 74
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=otlumtc, password=qwerty, isAdmin=false, items=[]]" ]
+      }, {
+        "name" : "logoutExistingUserTestAsEntity",
+        "uid" : "6afe6e28c490a728",
+        "parentUid" : "79f69c3be701d2453921784c0b650fb0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586457165897,
+          "stop" : 1586457165929,
+          "duration" : 32
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, password=qwerty, isAdmin=true, items=[My data]]", "User [name=otlumtc, password=qwerty, isAdmin=false, items=[]]" ]
+      } ],
+      "uid" : "79f69c3be701d2453921784c0b650fb0"
+    }, {
+      "name" : "13184@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "f81fef97e7fcfb7c",
+        "parentUid" : "edf709470ed96fc18c6d5665f1c0e4bb",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586454896937,
+          "stop" : 1586454897473,
+          "duration" : 536
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "edf709470ed96fc18c6d5665f1c0e4bb"
+    }, {
+      "name" : "7408@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "createAndLoginUsersTest",
+        "uid" : "5d62d6f755587730",
+        "parentUid" : "12367832d04f40eb070aa46cafd01fad",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586449222910,
+          "stop" : 1586449223063,
+          "duration" : 153
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=kaban, isAdmin=false, items=[]], User [name=puhlyash, isAdmin=false, items=[]], User [name=sraka, isAdmin=false, items=[]], User [name=malyshka, isAdmin=false, items=[]], User [name=katakombic, isAdmin=false, items=[]]]" ]
+      }, {
+        "name" : "createAndLoginAdminsTest",
+        "uid" : "b8152c896cabd544",
+        "parentUid" : "12367832d04f40eb070aa46cafd01fad",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586449221567,
+          "stop" : 1586449222702,
+          "duration" : 1135
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]", "[User [name=srakaAdmin, isAdmin=true, items=[]], User [name=malyshkaAdmin, isAdmin=true, items=[]], User [name=katakombicAdmin, isAdmin=true, items=[]]]" ]
+      } ],
+      "uid" : "12367832d04f40eb070aa46cafd01fad"
+    }, {
+      "name" : "9784@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "70e340f3149bda2",
+        "parentUid" : "abdfd3b93a758af9eeb5747ca3aa350d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586454105952,
+          "stop" : 1586454106504,
+          "duration" : 552
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "abdfd3b93a758af9eeb5747ca3aa350d"
+    }, {
+      "name" : "8414@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "6b610c0f46e5c2f5",
+        "parentUid" : "d47e722c1f6e702983d19afe3d84f911",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586451153531,
+          "stop" : 1586451154052,
+          "duration" : 521
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "d47e722c1f6e702983d19afe3d84f911"
+    }, {
+      "name" : "8313@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "abaa78ad0ce42179",
+        "parentUid" : "061defcf453f46eef788bc71bc1029f3",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586451076531,
+          "stop" : 1586451077025,
+          "duration" : 494
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "061defcf453f46eef788bc71bc1029f3"
+    }, {
+      "name" : "7881@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "9ff7204cc39c99f4",
+        "parentUid" : "6a9756db33de6a38d6812a4898e5908d",
+        "status" : "broken",
+        "time" : {
+          "start" : 1586450425785,
+          "stop" : 1586450426370,
+          "duration" : 585
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "6a9756db33de6a38d6812a4898e5908d"
+    }, {
+      "name" : "12505@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "37a5b0325c675f88",
+        "parentUid" : "3e3631ae5ed93b5dab27f2eb4de1d60f",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586454406805,
+          "stop" : 1586454407283,
+          "duration" : 478
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "3e3631ae5ed93b5dab27f2eb4de1d60f"
+    }, {
+      "name" : "8904@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "cb4524d12aacf265",
+        "parentUid" : "154657850bff8eeed1507d7986a0244d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586452229046,
+          "stop" : 1586452229549,
+          "duration" : 503
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "154657850bff8eeed1507d7986a0244d"
+    }, {
+      "name" : "7959@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "31a9d9c5edc7b151",
+        "parentUid" : "96b7e7c45a82ffdeb5cabefdeb422c89",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586450500258,
+          "stop" : 1586450500776,
+          "duration" : 518
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "96b7e7c45a82ffdeb5cabefdeb422c89"
+    }, {
+      "name" : "9025@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "c7ec1d9491179648",
+        "parentUid" : "0f640ab3ba9466186c2a56c7adf9a9de",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586452414414,
+          "stop" : 1586452414772,
+          "duration" : 358
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "0f640ab3ba9466186c2a56c7adf9a9de"
+    }, {
+      "name" : "13020@borys-Aspire-E5-575G.main(1)",
+      "children" : [ {
+        "name" : "logoutWithInvalidTokenTest",
+        "uid" : "eb16f22ca98511a8",
+        "parentUid" : "4ea7e4ae3ab3f6d2ecb4c50404e282f7",
+        "status" : "passed",
+        "time" : {
+          "start" : 1586454707251,
+          "stop" : 1586454707779,
+          "duration" : 528
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "User [name=admin, isAdmin=true, items=[My data]]" ]
+      } ],
+      "uid" : "4ea7e4ae3ab3f6d2ecb4c50404e282f7"
+    } ],
+    "uid" : "eec56f9c3d126b45caa73007cde3d69b"
+  } ]
+}
