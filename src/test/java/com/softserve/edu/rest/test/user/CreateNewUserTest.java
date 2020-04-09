@@ -8,9 +8,11 @@ import io.qameta.allure.Epic;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
+import org.testng.log4testng.Logger;
 
 @Epic("Create new user tests")
 public class CreateNewUserTest extends UserTestRunner {
+    private static Logger LOGGER = Logger.getLogger(CreateNewUserTest.class);
 
     @Parameters({"Admin login", "Create user", "Check is user present"})
     @Test(dataProvider = "createUserData", dataProviderClass = CreateUserData.class,
