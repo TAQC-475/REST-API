@@ -19,10 +19,10 @@ public class RemoveAdminsTest {
 
     @Test(dataProvider = "getAdmins")
     public void removeFirstAdmin(User firstAdmin, User secondAdmin) {
-        boolean actual = new LoginService()
+        AdministrationService actual = new LoginService()
             .successfulAdminLogin(firstAdmin)
             .gotoManageUserService()
-            .removeUser(secondAdmin)
+            .removeUser(secondAdmin);
     }
 
     @Test(dataProvider = "getAdmins")
