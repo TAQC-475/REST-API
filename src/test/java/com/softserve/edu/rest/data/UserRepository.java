@@ -51,7 +51,7 @@ public final class UserRepository {
     }
 
     public static User getCorrectNewUser(int nameCount, int passwordCount) {
-        return new User(EntityUtils.randomAlphabetic(nameCount), EntityUtils.randomAlphaNumeric(passwordCount), false);
+        return new User(EntityUtils.randomAlphaNumeric(nameCount), EntityUtils.randomAlphaNumeric(passwordCount), false);
     }
 
     public static User notExistingUser() {

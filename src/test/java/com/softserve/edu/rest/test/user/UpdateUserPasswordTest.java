@@ -6,6 +6,7 @@ import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.tools.EntityUtils;
 import io.qameta.allure.Epic;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -13,10 +14,12 @@ import org.testng.asserts.SoftAssert;
 public class UpdateUserPasswordTest extends UserTestRunner {
     SoftAssert softAssert = new SoftAssert();
 
-
+    @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordToEmptyData", dataProviderClass = UserPasswordData.class,
             description = "Check if User can change his password to an empty")
     public void updateUserPasswordToEmpty(User user, User oldPassword, String newPassword, User sameUser) {
+        LOGGER.info("Changing user password to an empty with parameters: old password = " + oldPassword.getPassword()
+                + "; new password = " + newPassword);
 
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
@@ -29,13 +32,17 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
+        LOGGER.info("Finished changing password");
     }
 
+    @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordToBeforeTheLimitData", dataProviderClass = UserPasswordData.class,
-            description = "Check if User can change his password to 2 symbols")
+            description = "Check if User can change his password to minimum invalid symbols")
     public void updatePasswordToBeforeTheMinimumLimitSymbols(User user, User oldPassword, String newPassword,
                                                              User sameUser) {
 
+        LOGGER.info("Changing user password to invalid minimum with parameters: old password = " + oldPassword.getPassword()
+                + "; new password = " + newPassword);
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -47,12 +54,16 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
+        LOGGER.info("Finished changing password");
     }
 
+    @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordToToLowerLimitData", dataProviderClass = UserPasswordData.class,
             description = "Check if User can change his password to valid minimum symbols")
     public void updatePasswordToLowerLimitSymbols(User user, User oldPassword, String newPassword, User sameUser) {
 
+        LOGGER.info("Changing user password to valid minimum with parameters: old password = " + oldPassword.getPassword()
+                + "; new password = " + newPassword);
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -64,12 +75,16 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
+        LOGGER.info("Finished changing password");
     }
 
+    @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordData", dataProviderClass = UserPasswordData.class,
             description = "Check if user can change his password to valid password")
     public void updateUserPassword(User user, User oldPassword, String newPassword, User sameUser) {
 
+        LOGGER.info("Changing user password to valid with parameters: old password = " + oldPassword.getPassword()
+                + "; new password = " + newPassword);
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -81,12 +96,16 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
+        LOGGER.info("Finished changing password");
     }
 
+    @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordToUpperLimitData", dataProviderClass = UserPasswordData.class,
             description = "Check if User can change his password to 25 symbols")
     public void updateUserPasswordToMaximumLimitSymbols(User user, User oldPassword, String newPassword,
                                                         User sameUser) {
+        LOGGER.info("Changing user password to valid maximum with parameters: old password = " + oldPassword.getPassword()
+                + "; new password = " + newPassword);
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -98,11 +117,15 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
+        LOGGER.info("Finished changing password");
     }
 
+    @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordToBeyondTheLimitData", dataProviderClass = UserPasswordData.class)
     public void updateUserPasswordToBeyondTheLimitSymbols(User user, User oldPassword, String newPassword,
                                                           User sameUser) {
+        LOGGER.info("Changing user password to invalid maximum with parameters: old password = " + oldPassword.getPassword()
+                + "; new password = " + newPassword);
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -114,5 +137,6 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
+        LOGGER.info("Finished changing password");
     }
 }
