@@ -21,7 +21,6 @@ public class EntityUtils {
     public SimpleEntity checkEntity(SimpleEntity result) {
         if (result.getContent() == null
                 || result.getContent() == ""
-                || result.getContent() == "false"
                 || result.getContent() == "null") {
             throw new RuntimeException("Content is not found or Token time out");
         }

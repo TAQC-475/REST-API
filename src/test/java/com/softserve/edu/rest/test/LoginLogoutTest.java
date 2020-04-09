@@ -55,6 +55,7 @@ public class LoginLogoutTest extends RestTestRunner {
         //Steps
         UserServiceDoNotUse userService = new GuestServiceDoNotUse()
         		.successfulUserLogin(user);
+        logger.error("fjfj{}", user);
         //
         //Check
         //Assert.assertTrue(userService.isUserLogged(user));

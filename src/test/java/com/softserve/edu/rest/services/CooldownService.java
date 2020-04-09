@@ -2,7 +2,7 @@ package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.Lifetime;
 import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.CooldownTimeResource;
@@ -16,16 +16,16 @@ public class CooldownService{
     public static final Logger logger = LoggerFactory.getLogger(CooldownService.class);
 
     protected CooldownTimeResource cooldownResource;
-    private LoginedUser loginedUser;
+    private LogginedUser logginedUser;
     private SimpleEntity response;
 
     public CooldownService() {
         cooldownResource = new CooldownTimeResource();
     }
 
-    public CooldownService(LoginedUser loginedUser) {
+    public CooldownService(LogginedUser logginedUser) {
         cooldownResource = new CooldownTimeResource();
-        this.loginedUser = loginedUser;
+        this.logginedUser = logginedUser;
     }
 
     public SimpleEntity getResponse() { return response; }
@@ -44,7 +44,7 @@ public class CooldownService{
     public CooldownService changeCooldown(Lifetime lifetime) {
         logger.debug("Change cooldown time START, new lifetime for setting = " + lifetime.getTime());
         RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedUser.getToken())
+                .addParameter(EParameters.TOKEN, logginedUser.getToken())
                 .addParameter(EParameters.TIME, lifetime.getTimeAsText());
         SimpleEntity simpleEntity = cooldownResource
                 .httpPutAsEntity(null, null, bodyParameters);

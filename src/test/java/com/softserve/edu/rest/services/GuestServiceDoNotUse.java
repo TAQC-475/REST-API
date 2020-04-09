@@ -1,14 +1,13 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.resources.CooldownTimeResource;
 import com.softserve.edu.rest.resources.LoginResource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.softserve.edu.rest.data.Lifetime;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.ApplicationResource;
@@ -104,7 +103,7 @@ public class GuestServiceDoNotUse {
 		//logger.trace("successfulUserLogin TRACE, simpleEntity = " + simpleEntity);
 		checkEntity(simpleEntity, "ERROR, user not found", "Error Login");
 		//logger.debug("successfulUserLogin DONE, user = " + user);
-		return new UserServiceDoNotUse(new LoginedUser(user, simpleEntity.getContent()));
+		return new UserServiceDoNotUse(new LogginedUser(user, simpleEntity.getContent()));
 	}
 
 	@Step("Successful_Admin_Login")
@@ -114,7 +113,7 @@ public class GuestServiceDoNotUse {
 				.addParameter(EParameters.PASSWORD, adminUser.getPassword());
 		SimpleEntity adminContent = loginResource.httpPostAsEntity(null, null, bodyParameters);
 		checkEntity(adminContent, "ERROR, user not found", "Error Login");
-		return new AdminServiceDoNotUse(new LoginedUser(adminUser, adminContent.getContent()));
+		return new AdminServiceDoNotUse(new LogginedUser(adminUser, adminContent.getContent()));
 	}
 
 //	public AdminServiceDoNotUse ChangeCurrentPassword(User adminUser) {
