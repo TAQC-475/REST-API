@@ -24,8 +24,8 @@ public class CreateNewUserTest {
                 newUser}};
     }
 
-    @Description("Check if admin {adminUser}, could create user with all valid fields")
-    @Test(dataProvider = "createUserData")
+    @Test(dataProvider = "createUserData",
+            description = "Check if admin {adminUser}, could create user with all valid fields")
     public void createUser(User adminUser, User newUser, User expectedUser) {
         UsersService actualUser = new LoginService()
                 .successfulAdminLogin(adminUser)
@@ -36,5 +36,68 @@ public class CreateNewUserTest {
         Assert.assertTrue(actualUser.isUserPresent(expectedUser));
     }
 
+
+
+    @DataProvider
+    public Object[][] userWithEmptyNameData() {
+        User newUser = UserRepository.getCorrectNewUser(0,5);
+        return new Object[][]{{UserRepository.getAdmin(),
+                newUser,
+                newUser}};
+    }
+
+    @Test(dataProvider = "userWithEmptyNameData",
+            description = "Check if admin could create user with empty name field")
+    public void createUserWithEmptyName(User adminUser, User newUser, User expectedUser) {
+        UsersService actualUser = new LoginService()
+                .successfulAdminLogin(adminUser)
+                .gotoManageUserService()
+                .createUser(newUser)
+                .gotoUsersService();
+
+        Assert.assertTrue(actualUser.isUserPresent(expectedUser));
+    }
+
+
+    @DataProvider
+    public Object[][] userWithEmptyPasswordData() {
+        User newUser = UserRepository.getCorrectNewUser(6,0);
+        return new Object[][]{{UserRepository.getAdmin(),
+                newUser,
+                newUser}};
+    }
+
+    @Test(dataProvider = "userWithEmptyPasswordData",
+            description = "Check if admin could create user with empty password field")
+    public void createUserWithEmptyPassword(User adminUser, User newUser, User expectedUser) {
+        UsersService actualUser = new LoginService()
+                .successfulAdminLogin(adminUser)
+                .gotoManageUserService()
+                .createUser(newUser)
+                .gotoUsersService();
+
+        Assert.assertTrue(actualUser.isUserPresent(expectedUser));
+    }
+
+
+    @DataProvider
+    public Object[][] userWithEmptyNameAndPasswordData() {
+        User newUser = UserRepository.getCorrectNewUser(0,0);
+        return new Object[][]{{UserRepository.getAdmin(),
+                newUser,
+                newUser}};
+    }
+
+    @Test(dataProvider = "userWithEmptyNameAndPasswordData",
+            description = "Check if admin could create user with all empty fields")
+    public void createUserWithEmptyNameAndPassword(User adminUser, User newUser, User expectedUser) {
+        UsersService actualUser = new LoginService()
+                .successfulAdminLogin(adminUser)
+                .gotoManageUserService()
+                .createUser(newUser)
+                .gotoUsersService();
+
+        Assert.assertTrue(actualUser.isUserPresent(expectedUser));
+    }
 
 }
