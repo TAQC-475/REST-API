@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
+import java.util.Random;
 
 public class LoginService {
 
@@ -33,6 +34,10 @@ public class LoginService {
         EntityUtils.get().checkEntity(tokenContent);
         logger.debug("Login method returns token {}", tokenContent);
         return tokenContent;
+    }
+
+    private String changeToken(String token){
+        return token.replace(token.charAt(0), '_');
     }
 
     @Step("Successful Admin Login")
@@ -102,7 +107,7 @@ public class LoginService {
 
     @Step("Unsuccessful logout as entity")
     public SimpleEntity unsuccessfulLogoutAsEntity(LogginedUser logginedUser){
-        return logout(logginedUser);
+        return logout(new LogginedUser(logginedUser.getUser(), changeToken(logginedUser.getToken())));
     }
 
     public SimpleEntity changePasswordAndLogOut(User user, User oldPassword, String newPassword) {
