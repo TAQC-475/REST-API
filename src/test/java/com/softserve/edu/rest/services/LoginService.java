@@ -16,6 +16,9 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 public class LoginService {
+
+    public static final Logger logger = LoggerFactory.getLogger(LockService.class);
+
     private LoginResource loginResource;
     private static final Logger logger = LoggerFactory.getLogger(LoginService.class);
     public static final String INVALID_USER = "ERROR, user not found";
@@ -49,6 +52,7 @@ public class LoginService {
     @Step("Unsuccessful User Login")
     public LoginService unsuccessfulUserLogin(User basicUser) {
         login(basicUser);
+        logger.debug("unsuccessful login by user = "+basicUser.getName());
         return this;
     }
 
