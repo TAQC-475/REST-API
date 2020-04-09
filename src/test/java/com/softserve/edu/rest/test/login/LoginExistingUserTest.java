@@ -2,8 +2,6 @@ package com.softserve.edu.rest.test.login;
 
 import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
-import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.AdministrationService;
 import com.softserve.edu.rest.services.LogginedUsersService;
@@ -11,7 +9,6 @@ import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.services.UserService;
 import com.softserve.edu.rest.test.RestTestRunner;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;

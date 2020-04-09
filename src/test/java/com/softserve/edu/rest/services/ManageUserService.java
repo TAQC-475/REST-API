@@ -2,7 +2,7 @@ package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
@@ -13,24 +13,24 @@ import java.util.List;
 
 public class ManageUserService {
 
-    private LoginedUser loginedUser;
+    private LogginedUser logginedUser;
     private UserResource userResource;
 
-    public ManageUserService(LoginedUser loginedUser) {
-        this.loginedUser = loginedUser;
+    public ManageUserService(LogginedUser logginedUser) {
+        this.logginedUser = logginedUser;
         userResource = new UserResource();
     }
 
     @Step("Create user")
     public AdministrationService createUser(User user) {
         createUserExample(user);
-        return new AdministrationService(loginedUser);
+        return new AdministrationService(logginedUser);
     }
 
     @Step("removeUser")
     public AdministrationService removeUser(User user) {
         removeUserExample(user);
-        return new AdministrationService(loginedUser);
+        return new AdministrationService(logginedUser);
     }
     @Step("removeUserAndCheckIt")
     public boolean removeUserAndCheckIt(User user){
@@ -43,7 +43,7 @@ public class ManageUserService {
         for (User current : users) {
             removeUser(current);
         }
-        return new AdministrationService(loginedUser);
+        return new AdministrationService(logginedUser);
     }
 
     @Step("createUsers")
@@ -51,12 +51,12 @@ public class ManageUserService {
         for (User current : users) {
             createUserExample(current);
         }
-        return new AdministrationService(loginedUser);
+        return new AdministrationService(logginedUser);
     }
 
     private void removeUserExample(User user) {
         RestParameters bodyParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, loginedUser.getToken())
+            .addParameter(EParameters.TOKEN, logginedUser.getToken())
             .addParameter(EParameters.NAME, user.getName());
         SimpleEntity simpleEntity = userResource
             .httpDeleteAsEntity(null, bodyParameters, bodyParameters);
@@ -66,7 +66,7 @@ public class ManageUserService {
 
     private void createUserExample(User user) {
         RestParameters bodyParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, loginedUser.getToken())
+            .addParameter(EParameters.TOKEN, logginedUser.getToken())
             .addParameter(EParameters.NAME, user.getName())
             .addParameter(EParameters.PASSWORD, user.getPassword())
             .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
@@ -75,6 +75,6 @@ public class ManageUserService {
     }
 
     public AdministrationService gotoAdminService() {
-        return new AdministrationService(loginedUser);
+        return new AdministrationService(logginedUser);
     }
 }

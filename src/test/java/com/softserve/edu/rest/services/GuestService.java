@@ -1,10 +1,8 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.ApplicationState;
-import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.ApplicationResource;
-import com.softserve.edu.rest.tools.CustomException;
 import com.softserve.edu.rest.tools.EntityUtils;
 import io.qameta.allure.Step;
 

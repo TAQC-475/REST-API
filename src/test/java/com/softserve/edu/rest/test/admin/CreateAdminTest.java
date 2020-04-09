@@ -2,10 +2,7 @@ package com.softserve.edu.rest.test.admin;
 
 import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.UserRepository;
-import com.softserve.edu.rest.dto.LoginedUser;
 import com.softserve.edu.rest.services.LoginService;
-import java.util.ArrayList;
-import java.util.List;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

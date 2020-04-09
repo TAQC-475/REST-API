@@ -1,50 +1,45 @@
 package com.softserve.edu.rest.services;
 
-import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
-import com.softserve.edu.rest.dto.RestParameters;
-import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.tools.EntityUtils;
+import com.softserve.edu.rest.dto.LogginedUser;
 
 public class AdministrationService extends UserService{
-    private LoginedUser loginedUser;
+    private LogginedUser logginedUser;
 //  private UsersService usersService;
 
 
-    public AdministrationService(LoginedUser loginedUser) {
-        super(loginedUser);
-        this.loginedUser = loginedUser;
+    public AdministrationService(LogginedUser logginedUser) {
+        super(logginedUser);
+        this.logginedUser = logginedUser;
     }
 
     public UsersService gotoUsersService() {
-        return new UsersService(loginedUser);
+        return new UsersService(logginedUser);
     }
 
     public ItemService goToItemService() {
-        return new ItemService(loginedUser);
+        return new ItemService(logginedUser);
     }
 
     public ItemsService goToItemsService() {
-        return new ItemsService(loginedUser);
+        return new ItemsService(logginedUser);
     }
 
     public LoginService goToLoginService() {
         return new LoginService();
     }
 
-    public CooldownService gotoCooldownService() { return new CooldownService(loginedUser); }
-    public LockService gotoLockService(){ return new LockService(loginedUser);}
+    public CooldownService gotoCooldownService() { return new CooldownService(logginedUser); }
+    public LockService gotoLockService(){ return new LockService(logginedUser);}
 
     public LogginedUsersService gotoLogginedUsersService(){
-        return new LogginedUsersService(loginedUser);
+        return new LogginedUsersService(logginedUser);
     }
 
-    public LoginedUser getLoginedUser() {
-        return loginedUser;
+    public LogginedUser getLogginedUser() {
+        return logginedUser;
     }
     public ManageUserService gotoManageUserService(){
-        return new ManageUserService(loginedUser);
+        return new ManageUserService(logginedUser);
     }
 
 //    public AdministrationService createUser(){

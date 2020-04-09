@@ -1,20 +1,18 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.Lifetime;
-import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.AliveTokensResource;
-import io.qameta.allure.Step;
 
 public class TokensService extends AdministrationService{
-    private LoginedUser loginedAdmin;
+    private LogginedUser loginedAdmin;
     private AliveTokensResource aliveTokensResource;
 
 
-    public TokensService(LoginedUser loginedAdmin){
+    public TokensService(LogginedUser loginedAdmin){
         super(loginedAdmin);
         this.loginedAdmin = loginedAdmin;
         this.aliveTokensResource = new AliveTokensResource();

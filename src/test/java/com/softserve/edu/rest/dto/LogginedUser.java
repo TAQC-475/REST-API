@@ -2,13 +2,13 @@ package com.softserve.edu.rest.dto;
 
 import com.softserve.edu.rest.data.User;
 
-public class LoginedUser {
+public class LogginedUser {
 
 	private User user;
 	private String token;
 	private long loginTime;
 	
-	public LoginedUser(User user, String token) {
+	public LogginedUser(User user, String token) {
 		this.user = user;
 		this.token = token;
 		loginTime = System.currentTimeMillis();

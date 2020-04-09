@@ -1,17 +1,13 @@
 package com.softserve.edu.rest.services;
 
-import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
-import com.softserve.edu.rest.dto.RestParameters;
-import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.tools.RegexUtils;
+import com.softserve.edu.rest.dto.LogginedUser;
 
 public class AdminServiceDoNotUse extends UserServiceDoNotUse {
 	private UsersService usersService;
 	private TokensService tokensService;
 
-	public AdminServiceDoNotUse(LoginedUser loginedUser) {
-		super(loginedUser);
+	public AdminServiceDoNotUse(LogginedUser logginedUser) {
+		super(logginedUser);
 		//checkLoginedAdmins();
 	}
 //	/*
