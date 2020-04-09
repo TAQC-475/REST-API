@@ -8,6 +8,7 @@ import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.ItemsIndexesResource;
 import com.softserve.edu.rest.resources.ItemResource;
 import com.softserve.edu.rest.tools.EntityUtils;
+import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class ItemService {
      return createItem(item, true);
     }
 
+    @Step("Adding Item")
     public ItemService createItem(Item item, boolean toOverride){
         if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
             throw new RuntimeException("Item with such index already exists");
@@ -68,6 +70,7 @@ public class ItemService {
         return this;
     }
 
+    @Step("Get status code of add item request")
     public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
         if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
             throw new RuntimeException("Item with such index already exists");
@@ -95,6 +98,7 @@ public class ItemService {
         return new UserService(logginedUser);
     }
 
+    @Step("Go to Items service")
     public ItemsService goToItemsService(){
         return new ItemsService(logginedUser);
     }
