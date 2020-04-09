@@ -54,6 +54,8 @@ public class ManageUserService {
         return new AdministrationService(logginedUser);
     }
 
+
+
     private void removeUserExample(User user) {
         RestParameters bodyParameters = new RestParameters()
             .addParameter(EParameters.TOKEN, logginedUser.getToken())

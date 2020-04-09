@@ -127,6 +127,14 @@ public class LoginService {
                 .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
     }
 
+    public AdministrationService loginAndCreateUser(User admin, User newUser){
+        return new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoManageUserService()
+                .createUser(newUser)
+                ;
+    }
+
     public GuestService successfulUsersLogout(List<LogginedUser> logginedUsers) {
         for (int i = 0; i < logginedUsers.size(); ++i) {
             LogginedUser logginedUser = logginedUsers.get(i);

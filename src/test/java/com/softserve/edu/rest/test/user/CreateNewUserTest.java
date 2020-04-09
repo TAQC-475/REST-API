@@ -20,9 +20,7 @@ public class CreateNewUserTest extends UserTestRunner {
                 + " newUser" + newUser.toString());
 
         UsersService actualUser = new LoginService()
-                .successfulAdminLogin(adminUser)
-                .gotoManageUserService()
-                .createUser(newUser)
+                .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
         Assert.assertTrue(actualUser.isUserPresent(expectedUser));
@@ -35,10 +33,9 @@ public class CreateNewUserTest extends UserTestRunner {
     public void createUserWithEmptyName(User adminUser, User newUser, User expectedUser) {
         LOGGER.info("Creating invalid user with parameters: adminUser = " + adminUser.toString()
                 + " newUser" + newUser.toString());
+
         UsersService actualUser = new LoginService()
-                .successfulAdminLogin(adminUser)
-                .gotoManageUserService()
-                .createUser(newUser)
+                .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
         Assert.assertTrue(actualUser.isUserPresent(expectedUser));
@@ -53,9 +50,7 @@ public class CreateNewUserTest extends UserTestRunner {
                 + " newUser" + newUser.toString());
 
         UsersService actualUser = new LoginService()
-                .successfulAdminLogin(adminUser)
-                .gotoManageUserService()
-                .createUser(newUser)
+                .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
         Assert.assertTrue(actualUser.isUserPresent(expectedUser));
@@ -68,10 +63,9 @@ public class CreateNewUserTest extends UserTestRunner {
     public void createUserWithEmptyNameAndPassword(User adminUser, User newUser, User expectedUser) {
         LOGGER.info("Creating invalid user with parameters: adminUser = " + adminUser.toString()
                 + " newUser" + newUser.toString());
+
         UsersService actualUser = new LoginService()
-                .successfulAdminLogin(adminUser)
-                .gotoManageUserService()
-                .createUser(newUser)
+                .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
         Assert.assertTrue(actualUser.isUserPresent(expectedUser));
