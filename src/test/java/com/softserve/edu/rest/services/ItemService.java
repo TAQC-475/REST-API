@@ -9,6 +9,8 @@ import com.softserve.edu.rest.resources.ItemsIndexesResource;
 import com.softserve.edu.rest.resources.ItemResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 import io.qameta.allure.Step;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +18,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ItemService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemService.class);
+
     private LogginedUser logginedUser;
     private ItemResource itemResource;
     private ItemsIndexesResource itemsIndexesResource;
@@ -52,11 +56,12 @@ public class ItemService {
     }
 
     public ItemService overrideItem(Item item){
-     return createItem(item, true);
+     return addItem(item, true);
     }
 
     @Step("Adding Item")
-    public ItemService createItem(Item item, boolean toOverride){
+    public ItemService addItem(Item item, boolean toOverride){
+        LOGGER.debug("addItem method gets: " + item.toString());
         if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
             throw new RuntimeException("Item with such index already exists");
         }
@@ -67,6 +72,7 @@ public class ItemService {
                 .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity status = itemResource.httpPostAsEntity(pathParameters, null, bodyParameters);
         EntityUtils.get().checkEntity(status);
+        LOGGER.debug("addItem method returns status: " + status);
         return this;
     }
 

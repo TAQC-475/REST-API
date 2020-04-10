@@ -49,6 +49,7 @@ public class LoginService {
 
     @Step("Successful User Login")
     public UserService successfulUserLogin(User basicUser) {
+        LOGGER.debug("Successful login by user: " + basicUser.getName());
         ApplicationState.get().addUser(new LogginedUser(basicUser, login(basicUser).getContent()));
         return new UserService(ApplicationState.get().getLastLoggined());
     }

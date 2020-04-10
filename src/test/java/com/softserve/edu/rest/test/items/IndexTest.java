@@ -26,7 +26,7 @@ public class IndexTest {
         ItemsService itemsService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(itemWithValidIndex, true)
+                .addItem(itemWithValidIndex, true)
                 .goToItemsService();
 
         Assert.assertTrue(itemsService.getAllItemsList().contains(itemWithValidIndex), "Item: " + itemWithValidIndex.getItemText() + " was not added");
@@ -52,8 +52,8 @@ public class IndexTest {
         List<String> itemsIndexes = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(firstItem, true)
-                .createItem(secondItem, true)
+                .addItem(firstItem, true)
+                .addItem(secondItem, true)
                 .goToItemsIndexesService()
                 .getAllItemsIndexes();
 

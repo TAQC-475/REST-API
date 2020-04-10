@@ -22,7 +22,7 @@ public class ItemTest {
         ItemService itemService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(insertItem, false);
+                .addItem(insertItem, false);
         Assert.assertTrue(itemService.getItem(checkItem).equals(insertItem));
     }
 }

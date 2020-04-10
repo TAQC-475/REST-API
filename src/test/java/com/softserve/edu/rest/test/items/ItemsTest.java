@@ -23,8 +23,8 @@ public class ItemsTest {
         ItemsService itemsService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(firstItem, true)
-                .createItem(secondItem, true)
+                .addItem(firstItem, true)
+                .addItem(secondItem, true)
                 .goToItemsService();
 
         Assert.assertEquals(itemsService.getAllItemsList(), testItemsList, "Actual and expected user items lists are not equal");
@@ -57,7 +57,7 @@ public class ItemsTest {
         String adminItems = new LoginService()
                 .successfulAdminLogin(adminUser)
                 .goToItemService()
-                .createItem(firstItem, true)
+                .addItem(firstItem, true)
                 .goToItemsService()
                 .getAllItems();
 
