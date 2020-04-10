@@ -63,6 +63,7 @@ public class ItemService {
     public ItemService addItem(Item item, boolean toOverride){
         LOGGER.debug("addItem method gets: " + item.toString());
         if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
+            LOGGER.warn("RuntimeException");
             throw new RuntimeException("Item with such index already exists");
         }
         RestParameters bodyParameters = new RestParameters()

@@ -20,6 +20,7 @@ public abstract class RestTestRunner {
 	protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	private final Long ONE_SECOND_DELAY = 1000L;
 
+	@Step
 	@BeforeClass
 	public void beforeClass(ITestContext context) {
 		for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {

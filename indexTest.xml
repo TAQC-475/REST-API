@@ -13,6 +13,7 @@
 					<include name="verifyItemCantBeCreatedWithInvalidIndex" />
 				</methods>
 			</class>
+			<class name="com.softserve.edu.rest.test.items.ItemsTest"></class>
 		</classes>
 	</test>
 
