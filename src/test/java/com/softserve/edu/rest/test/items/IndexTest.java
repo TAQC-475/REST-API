@@ -21,7 +21,7 @@ public class IndexTest {
 
     @Parameters({"Existing user", "Item with valid index"})
     @Test(dataProvider = "dataForCreatingItemWithValidIndexValue", dataProviderClass = DataForIndexTest.class)
-    public void verifyCreatingItemWIthValidIndex(User user, Item itemWithValidIndex) {
+    public void verifyCreatingItemWithValidIndex(User user, Item itemWithValidIndex) {
         LOGGER.info("adding item with valid index: " + itemWithValidIndex.getItemIndex());
         ItemsService itemsService = new LoginService()
                 .successfulUserLogin(user)
