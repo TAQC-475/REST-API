@@ -31,14 +31,14 @@ public class LockService {
 
     @Step("Locking user with token")
     public LockService lockUser(User userToLock) {
-        logger.debug("Locking user START, user name = " + userToLock.getName());
+        logger.debug("Locking user named = " + userToLock.getName());
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.NAME, userToLock.getName());
         SimpleEntity simpleEntity = lockUserResource
                 .httpPostAsEntity(pathParameters, null, bodyParameters);
-        logger.debug("Locking user DONE, response = " + simpleEntity.getContent());
+        logger.debug("Lock user response = " + simpleEntity.getContent());
         EntityUtils.get().checkLockEntity(simpleEntity, "User was not locked");
         return this;
     }
@@ -56,7 +56,7 @@ public class LockService {
 
     @Step("Unlock user")
     public LockService unlockUser(User user) {
-        logger.debug("Unlocking user START, user name = " + user.getName());
+        logger.debug("unlocking user named = " + user.getName());
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
@@ -64,7 +64,7 @@ public class LockService {
         SimpleEntity simpleEntity = lockUserResource
                 .httpPutAsEntity(pathParameters, null, bodyParameters);
         EntityUtils.get().checkLockEntity(simpleEntity, "User was not unlocked");
-        logger.debug("Unlocking user DONE, response = " + simpleEntity.getContent());
+        logger.debug("unlock user response = " + simpleEntity.getContent());
         return this;
     }
 
@@ -87,17 +87,19 @@ public class LockService {
         return simpleEntity.getContent();
     }
 
-    @Step("Check if user is logged")
-    public boolean isUserLocked(User userToLock) {
-        if (getAllLockedUsers().contains(userToLock.getName())) {
+    @Step("Check if user is locked")
+    public boolean isUserLocked(User user) {
+        logger.debug("Checking if locked user = "+user.getName());
+        if (getAllLockedUsers().contains(user.getName())) {
             return true;
         } else {
             return false;
         }
     }
 
-    @Step("Check if admin is logged")
+    @Step("Check if admin is locked")
     public boolean isAdminLocked(User user) {
+        logger.debug("Checking if locked admin = "+user.getName());
         if (getAllLockedAdmins().contains(user.getName())) {
             return true;
         } else {

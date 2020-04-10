@@ -8,10 +8,14 @@ import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 import io.qameta.allure.Step;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class ManageUserService {
+
+    public static final Logger logger = LoggerFactory.getLogger(ManageUserService.class);
 
     private LogginedUser logginedUser;
     private UserResource userResource;
@@ -23,6 +27,7 @@ public class ManageUserService {
 
     @Step("Create user")
     public AdministrationService createUser(User user) {
+        logger.debug("Create user "+user);
         createUserExample(user);
         return new AdministrationService(logginedUser);
     }

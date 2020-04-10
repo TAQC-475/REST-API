@@ -10,6 +10,7 @@ import io.qameta.allure.Epic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
@@ -18,19 +19,21 @@ import java.util.List;
 public class IndexTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
 
+    @Parameters({"Existing user", "Item with valid index"})
     @Test(dataProvider = "dataForCreatingItemWithValidIndexValue", dataProviderClass = DataForIndexTest.class)
-    public void verifyCreatingItemWIthValidIndex(User user, Item itemWithValidIndex) {
+    public void verifyCreatingItemWithValidIndex(User user, Item itemWithValidIndex) {
         LOGGER.info("adding item with valid index: " + itemWithValidIndex.getItemIndex());
         ItemsService itemsService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(itemWithValidIndex, true)
+                .addItem(itemWithValidIndex, true)
                 .goToItemsService();
 
         Assert.assertTrue(itemsService.getAllItemsList().contains(itemWithValidIndex), "Item: " + itemWithValidIndex.getItemText() + " was not added");
         LOGGER.info("item with valid index [" + itemWithValidIndex.getItemIndex() + "] added");
     }
 
+    @Parameters({"Existing user", "Item with invalid index"})
     @Test(dataProvider = "dataForCreatingItemWithInvalidIndexValue", dataProviderClass = DataForIndexTest.class)
     public void verifyItemCantBeCreatedWithInvalidIndex(User user, Item itemWithInvalidIndex) {
         LOGGER.info("adding item with invalid index: " + itemWithInvalidIndex.getItemIndex());
@@ -43,13 +46,14 @@ public class IndexTest {
         LOGGER.info("item with invalid index [" + itemWithInvalidIndex.getItemIndex() + "] added");
     }
 
+    @Parameters({"Existing user", "First item to add", "Second item to add", "Indexes list of added items"})
     @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes", dataProviderClass = DataForItemsTest.class)
     public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes) {
         List<String> itemsIndexes = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(firstItem, true)
-                .createItem(secondItem, true)
+                .addItem(firstItem, true)
+                .addItem(secondItem, true)
                 .goToItemsIndexesService()
                 .getAllItemsIndexes();
 
