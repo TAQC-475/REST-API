@@ -27,21 +27,21 @@ public class ManageUserService {
 
     @Step("Create user")
     public AdministrationService createUser(User user) {
-        LOGGER.debug("Create user " + user);
+        LOGGER.debug("Create: " + user);
         createUserExample(user);
         return new AdministrationService(logginedUser);
     }
 
     @Step("Remove User")
     public AdministrationService removeUser(User user) {
-        LOGGER.debug("Remove {} user.", user.getName());
+        LOGGER.debug("Remove: {}", user.getName());
         removeUserExample(user);
         return new AdministrationService(logginedUser);
     }
 
     @Step("Remove User And Check It")
     public boolean removeUserAndCheckIt(User user) {
-        LOGGER.debug("Remove {} user.", user.getName());
+        LOGGER.debug("Remove: {}", user.getName());
         removeUserExample(user);
         return true;
     }

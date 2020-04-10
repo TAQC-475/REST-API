@@ -99,7 +99,6 @@ public abstract class RestCrud {
     private Request.Builder prepareRequestBuilder(String requestUrl, RestParameters pathVariables,
                                                   RestParameters urlParameters) {
         if ((requestUrl == null) || (requestUrl.isEmpty())) {
-            // TODO Develop Custom Exception
             LOGGER.error("prepareRequestBuilder() Error, requestUrl = " + requestUrl);
             throw new RuntimeException("prepareRequestBuilder() Error");
 
@@ -114,7 +113,6 @@ public abstract class RestCrud {
         try {
             result = client.newCall(request).execute();
         } catch (IOException e) {
-            // TODO Develop Custom Exception
             LOGGER.error("Execute request Error " + request.toString());
             throw new RuntimeException("Request Error " + e.toString());
         }
@@ -127,9 +125,7 @@ public abstract class RestCrud {
             responseText = response.body().string();
             responseText = "{" + "\"code\":\"" + response.code() + "\"," + (responseText != null && responseText.length() > 0 ? responseText.substring(1) : "\"content\":\"null\"}");
         } catch (IOException e) {
-            // TODO Develop Custom Exception + Log
-            // e.printStackTrace();
-            //log.error("Error to get text from ResponseBody.");
+            LOGGER.error("Error to get text from ResponseBody. " + e.toString());
             throw new RuntimeException("Error to get text from ResponseBody." + e.toString());
         }
         return responseText;
