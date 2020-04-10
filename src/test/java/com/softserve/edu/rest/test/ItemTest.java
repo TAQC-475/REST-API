@@ -14,11 +14,13 @@ import org.testng.annotations.Test;
 public class ItemTest {
     @DataProvider
     public Object[][] dataForItemTest(){
-            return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
+            return new Object[][]{{UserRepository.getValidUser(),
+                    ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
     }
     @DataProvider
     public Object[][] dataForUpdateItemTest(){
-        return new Object[][]{{UserRepository.getAkimatcUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
+        return new Object[][]{{UserRepository.getAkimatcUser(),
+                ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
     }
 
     @Test(dataProvider = "dataForItemTest")
