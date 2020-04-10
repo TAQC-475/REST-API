@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="Suite1" verbose="1" >
+  <test name="AdministrationTests" >
+    <classes>
+      <class name="com.softserve.edu.rest.test.admin.CreateAdminTest" />
+      <class name="com.softserve.edu.rest.test.admin.RemoveAdminsTest" />
+      <class name="com.softserve.edu.rest.test.admin.RemoveAdminTest" />
+      <class name="com.softserve.edu.rest.test.admin." />
+    </classes>
+  </test>
+
+</suite>
