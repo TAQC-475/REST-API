@@ -28,20 +28,20 @@ import io.qameta.allure.Story;
 @Feature("Login_Application_Test FEATURE")
 public class LoginLogoutTest extends RestTestRunner {
 	public static final Logger logger = LoggerFactory.getLogger(LoginLogoutTest.class); // org.slf4j.LoggerFactory
-	//public final Logger logger = LoggerFactory.getLogger(this.getClass());
+	//public final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	
 	//@Test
 	public void checkVariables() {
-		//logger.info("checkVariables() START");
+		//LOGGER.info("checkVariables() START");
 		System.out.println("JENKINS_LV426_PASSWORD = "
 				+ System.getenv().get("JENKINS_LV426_PASSWORD"));
 		System.out.println("password.variable = " + System.getProperty("password.variable"));
-		//logger.info("checkVariables() DONE");
+		//LOGGER.info("checkVariables() DONE");
 	}
 
 	@DataProvider
     public Object[][] correctUser() {
-		//logger.info("@DataProvider correctUser() DONE");
+		//LOGGER.info("@DataProvider correctUser() DONE");
         return new Object[][]{
                 { UserRepository.getAdmin() },
         };
@@ -49,7 +49,7 @@ public class LoginLogoutTest extends RestTestRunner {
 	
 	//@Test(dataProvider = "correctUser")
 	public void verifyLogin(User user) {
-		//logger.info("loginPositiveTest START, user = " + user);
+		//LOGGER.info("loginPositiveTest START, user = " + user);
         //log.debug("loginPositiveTest started!");
 		//
         //Steps
@@ -70,12 +70,12 @@ public class LoginLogoutTest extends RestTestRunner {
         guestService = adminService.logout();
         //
         //log.debug("loginPositiveTest finished!");
-        //logger.info("loginPositiveTest DONE, user = " + user);
+        //LOGGER.info("loginPositiveTest DONE, user = " + user);
     }
 
 	@DataProvider
     public Object[][] correctAdminTime() {
-		//logger.info("@DataProvider correctUser() DONE");
+		//LOGGER.info("@DataProvider correctUser() DONE");
         return new Object[][]{
                 { UserRepository.getAdmin(), LifetimeRepository.getExtend() },
         };
@@ -90,7 +90,7 @@ public class LoginLogoutTest extends RestTestRunner {
 	@Test(dataProvider = "correctAdminTime")
 	public void verifyLifeTimeToken(User admin, Lifetime lifetime) {
 		AllureUtils.isSaveJson = true;
-		//logger.info("loginPositiveTest START, user = " + user);
+		//LOGGER.info("loginPositiveTest START, user = " + user);
         //log.debug("loginPositiveTest started!");
 		//
         // Steps
@@ -114,7 +114,7 @@ public class LoginLogoutTest extends RestTestRunner {
         guestService = adminService.logout();
         //
         //log.debug("loginPositiveTest finished!");
-        //logger.info("loginPositiveTest DONE, user = " + user);
+        //LOGGER.info("loginPositiveTest DONE, user = " + user);
     }
 
 	//@Test(dataProvider = "correctAdminTime",//)

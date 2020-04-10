@@ -25,7 +25,7 @@ public class LoginService {
     }
 
     private SimpleEntity login(User user) {
-        LOGGER.debug("Login method receive {}", user);
+        LOGGER.debug("Login method receive {}", user.toString());
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.NAME, user.getName())
                 .addParameter(EParameters.PASSWORD, user.getPassword());
@@ -41,14 +41,14 @@ public class LoginService {
 
     @Step("Successful Admin Login")
     public AdministrationService successfulAdminLogin(User adminUser) {
-        LOGGER.debug("Successful Admin Login receive {}", adminUser);
+        LOGGER.debug("Successful Admin Login receive {}", adminUser.toString());
         ApplicationState.get().addUser((new LogginedUser(adminUser, login(adminUser).getContent())));
         return new AdministrationService(ApplicationState.get().getLastLoggined());
     }
 
     @Step("Successful User Login")
     public UserService successfulUserLogin(User basicUser) {
-        LOGGER.debug("Successful Admin Login receive {}", basicUser);
+        LOGGER.debug("Successful Admin Login receive {}", basicUser.toString());
         ApplicationState.get().addUser(new LogginedUser(basicUser, login(basicUser).getContent()));
         return new UserService(ApplicationState.get().getLastLoggined());
     }
@@ -68,6 +68,7 @@ public class LoginService {
 
     @Step("Successful Admins Login")
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
+        LOGGER.debug("Successful Users list Login receive: {}", adminUsers);
         for (User adminUser : adminUsers) {
             ApplicationState.get().addUser(new LogginedUser(adminUser, login(adminUser).getContent()));
         }
@@ -95,6 +96,7 @@ public class LoginService {
 
     @Step("Successful logout")
     public GuestService successfulLogout(LogginedUser logginedUser) {
+        LOGGER.debug("Successful User Logout {}", logginedUser.toString());
         ApplicationState.get().removeLoggined(logginedUser);
         logout(logginedUser);
         return new GuestService();
@@ -102,12 +104,14 @@ public class LoginService {
 
     @Step("Successful logout")
     public SimpleEntity successfulLogoutAsEntity(LogginedUser logginedUser) {
+        LOGGER.debug("Successful User Logout {}", logginedUser.toString());
         ApplicationState.get().removeLoggined(logginedUser);
         return logout(logginedUser);
     }
 
     @Step("Unsuccessful logout as entity")
     public SimpleEntity unsuccessfulLogoutAsEntity(LogginedUser logginedUser) {
+        LOGGER.debug("Unsuccessful User Logout {}", logginedUser.toString());
         return logout(new LogginedUser(logginedUser.getUser(), changeToken(logginedUser.getToken())));
     }
 
@@ -133,14 +137,13 @@ public class LoginService {
                 ;
     }
 
-    public GuestService successfulUsersLogout(List<LogginedUser> logginedUsers) {
-        for (int i = 0; i < logginedUsers.size(); ++i) {
-            LogginedUser logginedUser = logginedUsers.get(i);
+    public GuestService successfulUsersLogout(List<LogginedUser> loggedUsers) {
+        LOGGER.debug("Successful Users list Logout: {}", loggedUsers);
+        for (int i = 0; i < loggedUsers.size(); ++i) {
+            LogginedUser logginedUser = loggedUsers.get(i);
             ApplicationState.get().removeLoggined(logginedUser);
             logout(logginedUser);
         }
         return new GuestService();
     }
-
-
 }
