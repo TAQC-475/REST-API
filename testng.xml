@@ -6,7 +6,6 @@
       <class name="com.softserve.edu.rest.test.admin.CreateAdminTest" />
       <class name="com.softserve.edu.rest.test.admin.RemoveAdminsTest" />
       <class name="com.softserve.edu.rest.test.admin.RemoveAdminTest" />
-      <class name="com.softserve.edu.rest.test.admin." />
     </classes>
   </test>
 
