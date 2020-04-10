@@ -53,6 +53,7 @@ hs_err_pid*
 /reports/
 /.idea/
 *.iml
+*.xml
 *.ucls
 
 # Multi Modules Project

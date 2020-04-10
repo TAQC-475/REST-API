@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Random;
 
 public class LoginService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginService.class);
@@ -36,18 +35,20 @@ public class LoginService {
         return tokenContent;
     }
 
-    private String changeToken(String token){
+    private String changeToken(String token) {
         return token.replace(token.charAt(0), '_');
     }
 
     @Step("Successful Admin Login")
     public AdministrationService successfulAdminLogin(User adminUser) {
+        LOGGER.debug("Successful Admin Login receive {}", adminUser);
         ApplicationState.get().addUser((new LogginedUser(adminUser, login(adminUser).getContent())));
         return new AdministrationService(ApplicationState.get().getLastLoggined());
     }
 
     @Step("Successful User Login")
     public UserService successfulUserLogin(User basicUser) {
+        LOGGER.debug("Successful Admin Login receive {}", basicUser);
         ApplicationState.get().addUser(new LogginedUser(basicUser, login(basicUser).getContent()));
         return new UserService(ApplicationState.get().getLastLoggined());
     }
@@ -55,7 +56,7 @@ public class LoginService {
     @Step("Unsuccessful User Login")
     public LoginService unsuccessfulUserLogin(User basicUser) {
         login(basicUser);
-        LOGGER.debug("unsuccessful login by user = "+basicUser.getName());
+        LOGGER.debug("unsuccessful login by user = " + basicUser.getName());
         LOGGER.debug("Unsuccessful login by user {}", basicUser.getName());
         return this;
     }
@@ -109,7 +110,7 @@ public class LoginService {
     }
 
     @Step("Unsuccessful logout as entity")
-    public SimpleEntity unsuccessfulLogoutAsEntity(LogginedUser logginedUser){
+    public SimpleEntity unsuccessfulLogoutAsEntity(LogginedUser logginedUser) {
         return logout(new LogginedUser(logginedUser.getUser(), changeToken(logginedUser.getToken())));
     }
 
@@ -127,7 +128,7 @@ public class LoginService {
                 .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
     }
 
-    public AdministrationService loginAndCreateUser(User admin, User newUser){
+    public AdministrationService loginAndCreateUser(User admin, User newUser) {
         return new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()

@@ -1,12 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-
-<suite name="Change password-RestApi">
-	<parameter name="url" value="http://localhost:8080" />
-	<test name="Change password" verbose="9" >
-
-		<classes>
- 			<class name="com.softserve.edu.rest.test.user.UpdateUserPasswordTest"/>
-		</classes>
-	</test>
-
+<suite name="All Test Suite">
+    <test verbose="3"
+          name="Create New User Tests">
+        <classes>
+            <class name="com.softserve.edu.rest.test.user.CreateNewUserTest"/>
+        </classes>
+    </test>
 </suite>

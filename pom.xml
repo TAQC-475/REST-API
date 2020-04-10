@@ -270,7 +270,7 @@
 					<suiteXmlFiles>
 						<!-- <suiteXmlFile>testng.xml</suiteXmlFile> -->
 						<!-- <suiteXmlFile>testng2.xml</suiteXmlFile> -->
-						<!-- <suiteXmlFile>testng.xml</suiteXmlFile> -->
+						 <suiteXmlFile>testng.xml</suiteXmlFile>
 						<suiteXmlFile>${application.testng.name}</suiteXmlFile>
 					</suiteXmlFiles>
 					<reportsDirectory>${testng.reports.directory}</reportsDirectory>

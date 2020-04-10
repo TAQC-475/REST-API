@@ -33,7 +33,7 @@ public class UserPasswordData {
     }
 
     @DataProvider
-    public Object[][] updateUserPasswordToToLowerLimitData() {
+    public Object[][] updateUserPasswordToMinimumValidData() {
         String newPassword = EntityUtils.randomAlphaNumeric(LOWEST_VALID_SYMBOLS_COUNT);
         return new Object[][]{{
                 UserRepository.getValidUser(),
@@ -63,7 +63,7 @@ public class UserPasswordData {
     }
 
     @DataProvider
-    public Object[][] updateUserPasswordToBeyondTheLimitData() {
+    public Object[][] updateUserPasswordToMaximumInvalidData() {
         String newPassword = EntityUtils.randomAlphaNumeric(HIGHEST_INVALID_SYMBOLS_COUNT);
         return new Object[][]{{
                 UserRepository.getValidUser(),
