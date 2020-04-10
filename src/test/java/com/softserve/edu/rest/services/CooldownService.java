@@ -34,22 +34,24 @@ public class CooldownService{
 
     @Step("Getting cooldown time")
     public Lifetime getCooldownTime() {
+        logger.debug("Getting cooldown time");
         SimpleEntity simpleEntity = cooldownResource
                 .httpGetAsEntity(null, null);
         EntityUtils.get().checkEntity(simpleEntity);
+        logger.debug("got respond = {}",simpleEntity.getContent());
         return new Lifetime(simpleEntity.getContent());
     }
 
     @Step("Changing cooldown time")
     public CooldownService changeCooldown(Lifetime lifetime) {
-        logger.debug("Change cooldown time START, new lifetime for setting = " + lifetime.getTime());
+        logger.debug("Changing cooldown time, setting lifetime = " + lifetime.getTime());
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken())
                 .addParameter(EParameters.TIME, lifetime.getTimeAsText());
         SimpleEntity simpleEntity = cooldownResource
                 .httpPutAsEntity(null, null, bodyParameters);
         setResponse(simpleEntity);
-        logger.debug("Change cooldown time is DONE, response = "+simpleEntity.getContent());
+        logger.debug("Change cooldown time response = "+simpleEntity.getContent());
         EntityUtils.get().checkCooldownEntity(simpleEntity);
         return this;
     }
