@@ -12,9 +12,15 @@ public class RemoveAdminTest {
         boolean actual = new LoginService()
             .successfulAdminLogin(UserRepository.getAdmin())
             .gotoManageUserService()
-            .removeUserAndCheckIt(UserRepository.getAdmin());
+            .createUser(UserRepository.getAdminVasya())
+            .gotoManageUserService()
+            .removeUser(UserRepository.getAdmin())
+            .goToLoginService()
+            .successfulAdminLogin(UserRepository.getAdminVasya())
+            .gotoUsersService()
+            .isUserPresent(UserRepository.getAdmin());
 
-        Assert.assertTrue(actual);
+        Assert.assertFalse(actual);
     }
 
 }

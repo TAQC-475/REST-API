@@ -21,7 +21,6 @@ public class EntityUtils {
     public SimpleEntity checkEntity(SimpleEntity result) {
         if (result.getContent() == null
                 || result.getContent() == ""
-                || result.getContent() == "false"
                 || result.getContent() == "null") {
             throw new RuntimeException("Content is not found or Token time out");
         }
@@ -51,14 +50,6 @@ public class EntityUtils {
      */
     public static String randomAlphaNumeric(int count) {
         return RandomStringUtils.randomAlphanumeric(count);
-    }
-
-    /**
-     * @param count
-     * @return String random letters
-     */
-    public static String randomAlphabetic(int count){
-        return RandomStringUtils.randomAlphabetic(count);
     }
 
     //Check if lock request is success

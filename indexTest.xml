@@ -1,0 +1,19 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="RestApi_IndexTest">
+	<parameter name="url" value="http://localhost:8080" />
+	
+	<test name="IndexTest" verbose="9">
+
+		<classes>
+			<class
+				name="com.softserve.edu.rest.test.items.IndexTest">
+				<methods>
+					<include name="verifyCreatingItemWIthValidIndex" />
+					<include name="verifyItemCantBeCreatedWithInvalidIndex" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+
+</suite>

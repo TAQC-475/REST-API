@@ -1,39 +1,17 @@
 package com.softserve.edu.rest.test.items;
 
 import com.softserve.edu.rest.data.Item;
-import com.softserve.edu.rest.data.ItemRepository;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
+import com.softserve.edu.rest.data.dataproviders.DataForItemsTest;
 import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class ItemsTest {
-    @DataProvider
-    public Object[][] dataForGettingAllItemsTest() {
-        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getTestItemsList()}};
-    }
-
-    @DataProvider
-    public Object[][] dataForAdminGettingUserItemsTest() {
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser()}};
-    }
-
-    @DataProvider
-    public Object[][] dataForVerifyingUserCantGetAdminItems() {
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI7()}};
-    }
-
-    @DataProvider
-    public Object[][] dataForVerifyingUserCanGetAllItemsIndexes() {
-        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getTestItemsIndexes()}};
-    }
-
-    @Test(dataProvider = "dataForGettingAllItemsTest")
+    @Test(dataProvider = "dataForGettingAllItemsTest", dataProviderClass = DataForItemsTest.class)
     public void verifyUserCanGetAllItems(User user, Item firstItem, Item secondItem, List<Item> testItemsList) {
         ItemsService itemsService = new LoginService()
                 .successfulUserLogin(user)
@@ -42,10 +20,10 @@ public class ItemsTest {
                 .createItem(secondItem, true)
                 .goToItemsService();
 
-        Assert.assertEquals(itemsService.getAllItemsList(), testItemsList);
+        Assert.assertEquals(itemsService.getAllItemsList(), testItemsList, "Actual and expected user items lists are not equal");
     }
 
-    @Test(dataProvider = "dataForAdminGettingUserItemsTest")
+    @Test(dataProvider = "dataForAdminGettingUserItemsTest", dataProviderClass = DataForItemsTest.class)
     public void verifyAdminCanGetUserItems(User adminUser, User userToCheck) {
         String checkedUserItems = new LoginService()
                 .successfulUserLogin(userToCheck)
@@ -57,10 +35,10 @@ public class ItemsTest {
                 .goToItemsService()
                 .getAllUserItemsAsAdmin(userToCheck);
 
-        Assert.assertEquals(checkedUserItems, itemsGotByAdmin);
+        Assert.assertEquals(checkedUserItems, itemsGotByAdmin, "Items got by user and user items got by admin are different");
     }
 
-    @Test(dataProvider = "dataForVerifyingUserCantGetAdminItems")
+    @Test(dataProvider = "dataForVerifyingUserCantGetAdminItems", dataProviderClass = DataForItemsTest.class)
     public void verifyUserCantGetAdminItems(User adminUser, User userToCheck, Item firstItem) {
         String adminItems = new LoginService()
                 .successfulAdminLogin(adminUser)
@@ -74,19 +52,6 @@ public class ItemsTest {
                 .goToItemsService()
                 .getAllUserItemsAsAdmin(userToCheck);
 
-        Assert.assertTrue(adminItems.contains(firstItem.getItemText()) && contentUserGetsTryingToGetAdminItems.equals(""));
-    }
-
-    @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes")
-    public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes){
-        List<String> itemsIndexes = new LoginService()
-                .successfulUserLogin(user)
-                .goToItemService()
-                .createItem(firstItem, true)
-                .createItem(secondItem, true)
-                .goToItemsIndexesService()
-                .getAllItemsIndexes();
-
-        Assert.assertEquals(itemsIndexes, testItemsIndexes);
+        Assert.assertTrue(adminItems.contains(firstItem.getItemText()) && contentUserGetsTryingToGetAdminItems.equals(""), "User can get admin items");
     }
 }

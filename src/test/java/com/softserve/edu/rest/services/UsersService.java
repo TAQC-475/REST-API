@@ -2,12 +2,11 @@ package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.*;
 import com.softserve.edu.rest.tools.EntityUtils;
-import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,17 +15,17 @@ import java.util.regex.Pattern;
 
 public class UsersService {
     private UsersResource usersResource;
-    protected LoginedUser loginedUser;
+    protected LogginedUser logginedUser;
 
-    public UsersService(LoginedUser loginedUser) {
+    public UsersService(LogginedUser logginedUser) {
         this.usersResource = new UsersResource();
-        this.loginedUser = loginedUser;
+        this.logginedUser = logginedUser;
     }
 
 
     public List<User> getAllUsers(){
         RestParameters urlParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, loginedUser.getToken());
+            .addParameter(EParameters.TOKEN, logginedUser.getToken());
         SimpleEntity usersResult = usersResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(usersResult);
         return parseUsers(usersResult.getContent());
@@ -54,7 +53,7 @@ public class UsersService {
     }
 
     public AdministrationService gotoAdministrationService(){
-        return new AdministrationService(loginedUser);
+        return new AdministrationService(logginedUser);
     }
 
     /*...*/

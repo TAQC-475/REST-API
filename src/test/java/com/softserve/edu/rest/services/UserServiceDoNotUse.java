@@ -1,7 +1,7 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 
@@ -9,18 +9,18 @@ import io.qameta.allure.Step;
 
 public class UserServiceDoNotUse extends GuestServiceDoNotUse {
 
-	protected LoginedUser loginedUser;
+	protected LogginedUser logginedUser;
 
-	public UserServiceDoNotUse(LoginedUser loginedUser) {
+	public UserServiceDoNotUse(LogginedUser logginedUser) {
 		// super();
-		this.loginedUser = loginedUser;
+		this.logginedUser = logginedUser;
 	}
 
 	@Step("Logout")
 	public GuestServiceDoNotUse logout() {
 		RestParameters bodyParameters = new RestParameters()
-				.addParameter(EParameters.NAME, loginedUser.getUser().getName())
-				.addParameter(EParameters.TOKEN, loginedUser.getToken());
+				.addParameter(EParameters.NAME, logginedUser.getUser().getName())
+				.addParameter(EParameters.TOKEN, logginedUser.getToken());
 		SimpleEntity simpleEntity = loginResource
 				.httpDeleteAsEntity(null, null, bodyParameters);
 		checkEntity(simpleEntity, "false", "Error Logout");

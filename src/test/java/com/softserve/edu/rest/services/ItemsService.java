@@ -4,7 +4,7 @@ package com.softserve.edu.rest.services;
 import com.softserve.edu.rest.data.Item;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
-import com.softserve.edu.rest.dto.LoginedUser;
+import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.ItemsResource;
@@ -17,19 +17,19 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ItemsService {
-    private LoginedUser loginedUser;
+    private LogginedUser logginedUser;
     private ItemsResource itemsResource;
     private UserItemsResource userItemsResource;
 
-    public ItemsService(LoginedUser loginedUser) {
-        this.loginedUser = loginedUser;
+    public ItemsService(LogginedUser logginedUser) {
+        this.logginedUser = logginedUser;
         itemsResource = new ItemsResource();
         userItemsResource = new UserItemsResource();
     }
 
     public String getAllItems() {
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
         SimpleEntity result = itemsResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(result);
         return result.getContent();
@@ -37,14 +37,14 @@ public class ItemsService {
 
     public String getAllItemsStatusCode() {
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
         SimpleEntity statusCode = itemsResource.httpGetAsEntity(null, urlParameters);
         return statusCode.getCode();
     }
 
     public String getAllUserItemsAsAdmin(User user) {
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.NAME, user.getName());
         SimpleEntity result = userItemsResource.httpGetAsEntity(pathParameters, urlParameters);
@@ -54,7 +54,7 @@ public class ItemsService {
 
     public String getAllUserItemsAsAdminStatusCode(User user) {
         RestParameters urlParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedUser.getToken());
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.NAME, user.getName());
         SimpleEntity statusCode = userItemsResource.httpGetAsEntity(pathParameters, urlParameters);

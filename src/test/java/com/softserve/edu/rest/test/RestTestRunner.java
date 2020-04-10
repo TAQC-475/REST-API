@@ -3,6 +3,9 @@ package com.softserve.edu.rest.test;
 import java.io.IOException;
 import java.util.Map;
 
+import com.softserve.edu.rest.test.user.CreateNewUserTest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
@@ -14,6 +17,7 @@ import com.softserve.edu.rest.services.GuestServiceDoNotUse;
 import io.qameta.allure.Step;
 
 public abstract class RestTestRunner {
+	protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 	private final Long ONE_SECOND_DELAY = 1000L;
 
 	@BeforeClass
@@ -34,10 +38,10 @@ public abstract class RestTestRunner {
 
 	// @After
 	@AfterMethod
-	public void afterMethod(ITestResult result) throws IOException {
-		// TODO Logout
+	public void afterMethod(ITestResult result){
 		loadApplication().resetServiceToInitialState();
 		if (!result.isSuccess()) {
+			LOGGER.warn("Test fail: " + result.getName());
 			System.out.println("***Test " + result.getName() + " ERROR");
 		}
 	}
