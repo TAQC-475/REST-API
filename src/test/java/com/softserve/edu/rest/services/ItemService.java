@@ -61,7 +61,7 @@ public class ItemService {
 
     @Step("Adding Item")
     public ItemService addItem(Item item, boolean toOverride){
-        LOGGER.debug("addItem method gets: " + item.toString());
+        LOGGER.debug("addItem method gets item = {} " , item.toString());
         if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
             LOGGER.warn("RuntimeException");
             throw new RuntimeException("Item with such index already exists");
@@ -73,13 +73,14 @@ public class ItemService {
                 .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity status = itemResource.httpPostAsEntity(pathParameters, null, bodyParameters);
         EntityUtils.get().checkEntity(status);
-        LOGGER.debug("addItem method returns status: " + status);
+        LOGGER.debug("addItem method returns status = {} " , status);
         return this;
     }
 
     @Step("Get status code of add item request")
     public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
-        if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
+        LOGGER.debug("Getting request code after adding item = {}", item);
+        if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
             throw new RuntimeException("Item with such index already exists");
         }
         RestParameters bodyParameters = new RestParameters()
@@ -88,6 +89,7 @@ public class ItemService {
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity statusCode = itemResource.httpPostAsEntity(pathParameters, null, bodyParameters);
+        LOGGER.debug("Adding item = {} status code = {}", item,  statusCode.getCode());
         return statusCode.getCode();
     }
 
@@ -105,7 +107,6 @@ public class ItemService {
         return new UserService(logginedUser);
     }
 
-    @Step("Go to Items service")
     public ItemsService goToItemsService(){
         return new ItemsService(logginedUser);
     }

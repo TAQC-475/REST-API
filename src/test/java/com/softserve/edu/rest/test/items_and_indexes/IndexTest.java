@@ -1,4 +1,4 @@
-package com.softserve.edu.rest.test.items;
+package com.softserve.edu.rest.test.items_and_indexes;
 
 import com.softserve.edu.rest.data.Item;
 import com.softserve.edu.rest.data.User;
@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 
 @Epic("Test indexes")
-public class IndexTest {
+public class IndexTest extends ItemsAndIndexesTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
 
     @Parameters({"Existing user", "Item with valid index"})
@@ -43,12 +43,13 @@ public class IndexTest {
                 .getCreateItemRequestStatusCode(itemWithInvalidIndex, true);
 
         Assert.assertEquals(statusCode, "400", itemWithInvalidIndex.toString() + " with invalid index was added");
-        LOGGER.info("item with invalid index [" + itemWithInvalidIndex.getItemIndex() + "] added");
+        LOGGER.info("Adding item with invalid index = {} status code = {}", itemWithInvalidIndex.getItemIndex(), statusCode);
     }
 
     @Parameters({"Existing user", "First item to add", "Second item to add", "Indexes list of added items"})
     @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes", dataProviderClass = DataForItemsTest.class)
     public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes) {
+        LOGGER.info("Adding items with indexes = {} {} and verifying user can get those indexes", firstItem.getItemIndex(), secondItem.getItemIndex());
         List<String> itemsIndexes = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
@@ -58,5 +59,6 @@ public class IndexTest {
                 .getAllItemsIndexes();
 
         Assert.assertEquals(itemsIndexes, testItemsIndexes, "Actual and expected items indexes are not equal");
+        LOGGER.info("Indexes got by user = {}", itemsIndexes);
     }
 }

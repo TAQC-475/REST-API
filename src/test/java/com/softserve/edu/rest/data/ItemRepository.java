@@ -22,9 +22,9 @@ public class ItemRepository {
         return new Item("3", "Intel Core i9");
     }
 
-    public static Item getItemWithMinIndex(){ return new Item("0", "ItemWithMinValue");}
+    public static Item getItemWithMinIndex(){ return new Item("0", "ItemWithMinIndex");}
 
-    public static Item getItemWithMaxIndex(){ return new Item(String.valueOf(Integer.MAX_VALUE), "ItemWithMinValue");}
+    public static Item getItemWithMaxIndex(){ return new Item(String.valueOf(Integer.MAX_VALUE), "ItemWithMaxIndex");}
 
     public static Item getItemWithIndexBetweenMinAndMax(){ return new Item("432564", "ItemWithValueBetweenMinAndMax");}
 
