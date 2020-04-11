@@ -59,10 +59,16 @@ public class ItemService {
      return addItem(item, true);
     }
 
+    /**
+     * Preparing and sending POST request as logged in user to add item
+     * @param item item to add
+     * @param toOverride to override item, if item with same index already exists?
+     * @return ItemService after adding an item
+     */
     @Step("Adding Item")
     public ItemService addItem(Item item, boolean toOverride){
-        LOGGER.debug("addItem method gets item = {} " , item.toString());
-        if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
+        LOGGER.debug("addItem method gets item = {} " , item);
+        if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
             LOGGER.warn("RuntimeException");
             throw new RuntimeException("Item with such index already exists");
         }
