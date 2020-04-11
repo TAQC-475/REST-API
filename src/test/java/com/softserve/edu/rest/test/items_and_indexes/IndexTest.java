@@ -19,9 +19,14 @@ import java.util.List;
 public class IndexTest extends ItemsAndIndexesTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
 
+    /**
+     * verifies that user can add item with valid index
+     * @param user user
+     * @param itemWithValidIndex item with valid index
+     */
     @Parameters({"Existing user", "Item with valid index"})
     @Test(dataProvider = "dataForCreatingItemWithValidIndexValue", dataProviderClass = DataForIndexTest.class)
-    public void verifyCreatingItemWithValidIndex(User user, Item itemWithValidIndex) {
+    public void verifyAddingItemWithValidIndex(User user, Item itemWithValidIndex) {
         LOGGER.info("adding item with valid index: " + itemWithValidIndex.getItemIndex());
         ItemsService itemsService = new LoginService()
                 .successfulUserLogin(user)
@@ -33,9 +38,14 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
         LOGGER.info("item with valid index [" + itemWithValidIndex.getItemIndex() + "] added");
     }
 
+    /**
+     * verifies that user can't add item with invalid index
+     * @param user user
+     * @param itemWithInvalidIndex item with invalid index
+     */
     @Parameters({"Existing user", "Item with invalid index"})
     @Test(dataProvider = "dataForCreatingItemWithInvalidIndexValue", dataProviderClass = DataForIndexTest.class)
-    public void verifyItemCantBeCreatedWithInvalidIndex(User user, Item itemWithInvalidIndex) {
+    public void verifyItemWithInvalidIndexCantBeAdded(User user, Item itemWithInvalidIndex) {
         LOGGER.info("adding item with invalid index: " + itemWithInvalidIndex.getItemIndex());
         String statusCode = new LoginService()
                 .successfulUserLogin(user)
@@ -46,6 +56,13 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
         LOGGER.info("Adding item with invalid index = {} status code = {}", itemWithInvalidIndex.getItemIndex(), statusCode);
     }
 
+    /**
+     * verifies that user can get indexes of all his items
+     * @param user user
+     * @param firstItem item to add
+     * @param secondItem item to add
+     * @param testItemsIndexes indexes of added items
+     */
     @Parameters({"Existing user", "First item to add", "Second item to add", "Indexes list of added items"})
     @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes", dataProviderClass = DataForItemsTest.class)
     public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes) {
