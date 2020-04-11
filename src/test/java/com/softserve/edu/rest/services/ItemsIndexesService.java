@@ -24,6 +24,10 @@ public class ItemsIndexesService {
         itemsIndexesResource = new ItemsIndexesResource();
     }
 
+    /**
+     * Prepares and sends GET request to get logged in user all item indexes
+     * @return indexes of all user items
+     */
     @Step("Get all user items indexes")
     public List<String> getAllItemsIndexes(){
         LOGGER.debug("User = {} getting all items indexes", logginedUser.getUser().getName());
