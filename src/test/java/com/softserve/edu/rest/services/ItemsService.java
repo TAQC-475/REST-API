@@ -31,6 +31,10 @@ public class ItemsService {
         userItemsResource = new UserItemsResource();
     }
 
+    /**
+     * Prepares and sends GET request to get all logged in user items
+     * @return all logged in user items
+     */
     @Step("Get all items")
     public String getAllItems() {
         LOGGER.debug("User = {} trying to get all his items", logginedUser.getUser().getName());
@@ -42,6 +46,10 @@ public class ItemsService {
         return result.getContent();
     }
 
+    /**
+     * Prepares and sends GET request to get all logged in user items status code
+     * @return status code of get all user items request
+     */
     public String getAllItemsStatusCode() {
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
@@ -49,6 +57,11 @@ public class ItemsService {
         return statusCode.getCode();
     }
 
+    /**
+     * Prepares and sends GET request to get all items of some user as admin
+     * @param user user whose items request gets
+     * @return all items of some user as admin
+     */
     @Step("Get all user items as admin")
     public String getAllUserItemsAsAdmin(User user) {
         LOGGER.debug("Admin = {} trying to get items of user = {}", logginedUser.getUser().getName(), user.getName());
@@ -62,6 +75,11 @@ public class ItemsService {
         return result.getContent();
     }
 
+    /**
+     * Prepares and sends GET request to get all items of user as admin status code
+     * @param user user whose items request gets
+     * @return status code of get all items of user as admin request
+     */
     public String getAllUserItemsAsAdminStatusCode(User user) {
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
@@ -71,6 +89,11 @@ public class ItemsService {
         return statusCode.getCode();
     }
 
+    /**
+     * Parse string value of user items into list of items
+     * @param items String value of user items
+     * @return list of user items
+     */
     @Step("Get list of items")
     public List<Item> getItemsList(String items) {
         LOGGER.debug("Converting string = {} to list of items", items);
@@ -98,6 +121,10 @@ public class ItemsService {
         return itemsList;
     }
 
+    /**
+     * gets list of all user items
+     * @return list of all user items
+     */
     public List<Item> getAllItemsList() {
         return getItemsList(getAllItems());
     }
