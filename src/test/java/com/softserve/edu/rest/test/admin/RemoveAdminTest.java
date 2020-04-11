@@ -15,6 +15,7 @@ public class RemoveAdminTest {
 
     @Test(dataProvider = "removeAdminTestData", dataProviderClass = AdminData.class)
     public void removeAdminTest(User admin, User adminVasya) {
+        LOGGER.info("Login as {} , create and remove {}", admin, adminVasya, adminVasya);
         boolean actual = new LoginService()
             .successfulAdminLogin(admin)
             .gotoManageUserService()
@@ -27,6 +28,7 @@ public class RemoveAdminTest {
             .isUserPresent(admin);
 
         Assert.assertFalse(actual);
+        LOGGER.info("check if remove {} missing", admin);
     }
 
 }

@@ -14,17 +14,19 @@ public class RemoveUserTest {
     private static final Logger LOGGER = LoggerFactory.getLogger(RemoveUserTest.class);
 
     @Test(dataProvider = "removeUserTestData", dataProviderClass = AdminData.class)
-    public void removeUserTest(User admin, User nonExistedUser){
+    public void removeUserTest(User admin, User noExistedUser) {
+        LOGGER.info("Login as {} create and remove {}", admin, noExistedUser);
         boolean actual = new LoginService()
             .successfulAdminLogin(admin)
             .gotoManageUserService()
-            .createUser(nonExistedUser)
+            .createUser(noExistedUser)
             .gotoManageUserService()
-            .removeUser(nonExistedUser)
+            .removeUser(noExistedUser)
             .gotoUsersService()
-            .isUserPresent(nonExistedUser);
+            .isUserPresent(noExistedUser);
 
         Assert.assertFalse(actual);
+        LOGGER.info("check if remove {} missing", noExistedUser);
     }
 
 }

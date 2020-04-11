@@ -29,6 +29,7 @@ public class RemoveAdminsTest {
 
     @Test(dataProvider = "removeAdminsTestData", dataProviderClass = AdminData.class)
     public void removeFirstAdmin(User firstAdmin, User secondAdmin, User adminDana) {
+        LOGGER.info("Logged as {} and remove {}",firstAdmin,secondAdmin);
         boolean actual = new LoginService()
             .successfulAdminLogin(firstAdmin)
             .gotoManageUserService()
@@ -39,10 +40,12 @@ public class RemoveAdminsTest {
             .isUserPresent(secondAdmin);
 
         Assert.assertFalse(actual);
+        LOGGER.info("check if remove {} missing",secondAdmin);
     }
 
     @Test(dataProvider = "removeAdminsTestData", dataProviderClass = AdminData.class)
     public void removeSecondAdmin(User firstAdmin, User secondAdmin, User adminDana){
+        LOGGER.info("Logged as {} and remove {}",secondAdmin,firstAdmin);
         boolean actual = new LoginService()
             .successfulAdminLogin(secondAdmin)
             .gotoManageUserService()
@@ -53,5 +56,6 @@ public class RemoveAdminsTest {
             .isUserPresent(firstAdmin);
 
         Assert.assertFalse(actual);
+        LOGGER.info("check if remove {} missing", firstAdmin);
     }
 }

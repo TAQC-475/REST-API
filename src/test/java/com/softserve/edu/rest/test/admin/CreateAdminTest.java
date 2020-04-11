@@ -15,6 +15,7 @@ public class CreateAdminTest {
 
     @Test(dataProvider = "createAdminTestData", dataProviderClass = AdminData.class)
     public void adminTest(User admin, User adminVasya, User userVasya, User nonExistUser) {
+        LOGGER.info("Login as Admin {} , and create new Admin {}", admin, adminVasya);
         boolean actual = new LoginService()
             .successfulAdminLogin(admin)
             .gotoManageUserService()
@@ -33,6 +34,7 @@ public class CreateAdminTest {
             .isUserPresent(nonExistUser);
 
         Assert.assertTrue(actual);
+        LOGGER.info("{} user create by fake Admin", nonExistUser);
 
     }
 
