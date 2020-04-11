@@ -7,6 +7,7 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.UserResource;
 import com.softserve.edu.rest.tools.EntityUtils;
+import io.qameta.allure.Step;
 
 public class UserService extends GuestService{
     private UserResource userResource;
@@ -40,6 +41,7 @@ public class UserService extends GuestService{
         return this;
     }
 
+    @Step("Change password")
     protected UserService changePassword(User oldPassword, String newPassword){
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken())
