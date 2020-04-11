@@ -10,7 +10,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class LoginNewUserTest extends LoginTestRunner {
-    private static final Logger logger = LoggerFactory.getLogger(LoginNewUserTest.class);
+    private static Logger logger = LoggerFactory.getLogger(LoginNewUserTest.class);
 
     @Test(dataProvider = "nonExistingUserDataProvider", dataProviderClass = UsersTestData.class,
     description = "This test verifies that newly created user by admin alter successful " +
