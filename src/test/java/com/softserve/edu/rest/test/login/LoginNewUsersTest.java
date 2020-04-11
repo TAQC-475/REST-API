@@ -2,15 +2,21 @@ package com.softserve.edu.rest.test.login;
 
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.services.LoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
 
 public class LoginNewUsersTest extends LoginTestRunner{
+    private static Logger logger = LoggerFactory.getLogger(LoginNewUserTest.class);
 
-    @Test(dataProvider = "nonExistingUsersDataProvider", dataProviderClass = UsersTestData.class)
+    @Test(dataProvider = "nonExistingUsersDataProvider", dataProviderClass = UsersTestData.class,
+    description = "This test verifies that newly created users can login and then they" +
+            " will be displayed in the loggined users list")
     public void createAndLoginUsersTest(User admin, List<User> nonExistingUsers){
+        logger.info("Creating and login users with credentials {}", nonExistingUsers);
         List<User> users = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
@@ -22,8 +28,11 @@ public class LoginNewUsersTest extends LoginTestRunner{
         Assert.assertTrue(users.containsAll(nonExistingUsers));
     }
 
-    @Test(dataProvider = "nonExistingAdminsDataProvider", dataProviderClass = UsersTestData.class)
+    @Test(dataProvider = "nonExistingAdminsDataProvider", dataProviderClass = UsersTestData.class,
+            description = "This test verifies that newly created admins can login and then they" +
+                    " will be displayed in the loggined admins list")
     public void createAndLoginAdminsTest(User admin, List<User> nonExistingAdmins){
+        logger.info("Creating and login users with credentials {}", nonExistingAdmins);
         List<User> admins = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
