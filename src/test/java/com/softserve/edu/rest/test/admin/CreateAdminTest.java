@@ -2,10 +2,8 @@ package com.softserve.edu.rest.test.admin;
 
 import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.data.dataproviders.AdminData;
 import com.softserve.edu.rest.services.LoginService;
-import com.softserve.edu.rest.test.items.ItemsTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -37,7 +35,6 @@ public class CreateAdminTest {
         Assert.assertTrue(actual);
 
     }
-
 
 
 }
