@@ -3,13 +3,17 @@ package com.softserve.edu.rest.test.admin;
 import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
+import com.softserve.edu.rest.data.dataproviders.AdminData;
 import com.softserve.edu.rest.services.LoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class RemoveAdminsTest {
+    private static final Logger LOGGER = LoggerFactory.getLogger(RemoveAdminTest.class);
 
     @BeforeClass
     public void createNewAdmin(){
@@ -21,12 +25,9 @@ public class RemoveAdminsTest {
             .successfulLogout(ApplicationState.get().getLastLoggined());
     }
 
-    @DataProvider(parallel = true)
-    public Object[][] getAdmins() {
-        return new Object[][]{{UserRepository.getAdmin(),UserRepository.getAdminVasya(),UserRepository.getAdminDana()}};
-    }
 
-    @Test(dataProvider = "getAdmins")
+
+    @Test(dataProvider = "removeAdminsTestData", dataProviderClass = AdminData.class)
     public void removeFirstAdmin(User firstAdmin, User secondAdmin, User adminDana) {
         boolean actual = new LoginService()
             .successfulAdminLogin(firstAdmin)
@@ -40,7 +41,7 @@ public class RemoveAdminsTest {
         Assert.assertFalse(actual);
     }
 
-    @Test(dataProvider = "getAdmins")
+    @Test(dataProvider = "removeAdminsTestData", dataProviderClass = AdminData.class)
     public void removeSecondAdmin(User firstAdmin, User secondAdmin, User adminDana){
         boolean actual = new LoginService()
             .successfulAdminLogin(secondAdmin)
