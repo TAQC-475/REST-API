@@ -7,13 +7,13 @@
 
 		<classes>
 			<class
-				name="com.softserve.edu.rest.test.items.IndexTest">
+				name="com.softserve.edu.rest.test.items_and_indexes.IndexTest">
 				<methods>
 					<include name="verifyCreatingItemWIthValidIndex" />
 					<include name="verifyItemCantBeCreatedWithInvalidIndex" />
 				</methods>
 			</class>
-			<class name="com.softserve.edu.rest.test.items.ItemsTest"></class>
+			<class name="com.softserve.edu.rest.test.items_and_indexes.ItemsTest"></class>
 		</classes>
 	</test>
 
