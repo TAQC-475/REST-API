@@ -16,6 +16,13 @@ import java.util.List;
 public class ItemsTest extends ItemsAndIndexesTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemsTest.class);
 
+    /**
+     * logs in as user, adds two items and verifies that user can get this items
+     * @param user user
+     * @param firstItem item to add
+     * @param secondItem item to add
+     * @param testItemsList list of added items
+     */
     @Parameters({"Existing user", "First item to add", "Second item to add", "List of added items"})
     @Test(dataProvider = "dataForGettingAllItemsTest", dataProviderClass = DataForItemsTest.class)
     public void verifyUserCanGetAllItems(User user, Item firstItem, Item secondItem, List<Item> testItemsList) {
@@ -31,14 +38,23 @@ public class ItemsTest extends ItemsAndIndexesTestRunner {
         LOGGER.info("Items = {} were added", itemsService.getAllItemsList());
     }
 
+    /**
+     * logs in as user from param, adds item and gets his items,
+     * then logs in as admin and gets all items of user from param,
+     * verifies item got by user and by admin are equal
+     * @param adminUser admin
+     * @param userToCheck user
+     * @param firstItem item to add
+     */
     @Parameters({"Admin user", "User to check"})
-    @Test(dataProvider = "dataForVerifyingUserCantGetAdminItems", dataProviderClass = DataForItemsTest.class)
-    public void verifyAdminCanGetUserItems(User adminUser, User userToCheck, Item firstItem) {
+    @Test(dataProvider = "dataForAdminGettingUserItemsTest", dataProviderClass = DataForItemsTest.class)
+    public void verifyAdminCanGetUserItems(User adminUser, User userToCheck, Item firstItem, Item secondItem) {
         LOGGER.info("Logging in and getting all user items as admin [" + adminUser.getName() + "] and as user [" +userToCheck.getName() + "] , asserting that result is equal");
         String checkedUserItems = new LoginService()
                 .successfulUserLogin(userToCheck)
                 .goToItemService()
                 .addItem(firstItem, true)
+                .addItem(secondItem, true)
                 .goToItemsService()
                 .getAllItems();
 
@@ -51,14 +67,23 @@ public class ItemsTest extends ItemsAndIndexesTestRunner {
         LOGGER.info("Items got by user = {} items got by admin = {}", checkedUserItems, itemsGotByAdmin);
     }
 
+    /**
+     * logs as admin, ads item and get his items
+     * then logs as user and tries to get admin items
+     * then verifies that user can't get admin items
+     * @param adminUser admin
+     * @param userToCheck user
+     * @param firstItem item to add
+     */
     @Parameters({"Admin user", "User", "Item added by admin"})
     @Test(dataProvider = "dataForVerifyingUserCantGetAdminItems", dataProviderClass = DataForItemsTest.class)
-    public void verifyUserCantGetAdminItems(User adminUser, User userToCheck, Item firstItem) {
+    public void verifyUserCantGetAdminItems(User adminUser, User userToCheck, Item firstItem, Item secondItem) {
         LOGGER.info("Logging in as admin = {} adding item {} then logging in as user {} and trying to get admin items", adminUser.getName(), firstItem.toString(), userToCheck.getName());
         String adminItems = new LoginService()
                 .successfulAdminLogin(adminUser)
                 .goToItemService()
                 .addItem(firstItem, true)
+                .addItem(secondItem, true)
                 .goToItemsService()
                 .getAllItems();
 

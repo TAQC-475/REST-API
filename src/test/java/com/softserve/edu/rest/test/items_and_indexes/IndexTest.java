@@ -20,6 +20,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
 
     /**
+     * logs in as user and tries to add item with valid index
      * verifies that user can add item with valid index
      * @param user user
      * @param itemWithValidIndex item with valid index
@@ -39,6 +40,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
     }
 
     /**
+     * logs in as user and tries to add item with invalid index
      * verifies that user can't add item with invalid index
      * @param user user
      * @param itemWithInvalidIndex item with invalid index
@@ -57,6 +59,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
     }
 
     /**
+     * logs in as user and gets all his items indexes
      * verifies that user can get indexes of all his items
      * @param user user
      * @param firstItem item to add
@@ -64,7 +67,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
      * @param testItemsIndexes indexes of added items
      */
     @Parameters({"Existing user", "First item to add", "Second item to add", "Indexes list of added items"})
-    @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes", dataProviderClass = DataForItemsTest.class)
+    @Test(dataProvider = "dataForVerifyingUserCanGetAllItemsIndexes", dataProviderClass = DataForIndexTest.class)
     public void verifyUserCanGetAllItemsIndexes(User user, Item firstItem, Item secondItem, List<String> testItemsIndexes) {
         LOGGER.info("Adding items with indexes = {} {} and verifying user can get those indexes", firstItem.getItemIndex(), secondItem.getItemIndex());
         List<String> itemsIndexes = new LoginService()

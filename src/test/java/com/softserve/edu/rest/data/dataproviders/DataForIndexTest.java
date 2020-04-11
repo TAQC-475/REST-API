@@ -19,4 +19,9 @@ public class DataForIndexTest {
                 {UserRepository.getValidUser(), ItemRepository.getItemWithIndexHigherThanMax()},
                 {UserRepository.getValidUser(), ItemRepository.getItemWithSpecialCharacterIndex()}};
     }
+
+    @DataProvider
+    public Object[][] dataForVerifyingUserCanGetAllItemsIndexes() {
+        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getTestItemsIndexes()}};
+    }
 }
