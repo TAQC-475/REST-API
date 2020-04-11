@@ -40,6 +40,11 @@ public class ItemService {
         return result;
     }
 
+    /**
+     * get indexes of all items of logged in user and checks if index from params is available
+     * @param index index to check for availability
+     * @return true if index is available, false if item with such index already exists
+     */
     private boolean isIndexFree(int index){
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
@@ -83,6 +88,12 @@ public class ItemService {
         return this;
     }
 
+    /**
+     * Preparing and sending POST request as logged in user to add item and get response status code
+     * @param item item to add
+     * @param toOverride to override item, if item with same index already exists?
+     * @return status code of adding item request
+     */
     @Step("Get status code of add item request")
     public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
         LOGGER.debug("Getting request code after adding item = {}", item);
