@@ -4,19 +4,19 @@ import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.*;
-import com.softserve.edu.rest.test.RestTestRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 public class LoginNewUserTest extends LoginTestRunner {
+    private static final Logger logger = LoggerFactory.getLogger(LoginNewUserTest.class);
 
-
-    @Test(dataProvider = "nonExistingUserDataProvider", dataProviderClass = UsersTestData.class)
+    @Test(dataProvider = "nonExistingUserDataProvider", dataProviderClass = UsersTestData.class,
+    description = "This test verifies that newly created user by admin alter successful " +
+            "login will be displayed in the loggined users list")
     public void createAndLoginUserTest(User admin, User newUser){
+        logger.info("Creation and authorization of user with credential {}", newUser);
         UserService userService = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
@@ -28,10 +28,10 @@ public class LoginNewUserTest extends LoginTestRunner {
 
     @Test(dataProvider = "nonExistingAdminDataProvider", dataProviderClass = UsersTestData.class)
     public void createAndLoginAdminTest(User admin, User newAdmin){
+        logger.info("Creation and authorization of admin with credentials {}", newAdmin);
         AdministrationService adminService = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
-                .removeUser(UserRepository.getValidUser())
                 .createUser(newAdmin)
                 .goToLoginService()
                 .successfulAdminLogin(newAdmin);
