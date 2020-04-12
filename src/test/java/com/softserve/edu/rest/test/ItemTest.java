@@ -111,7 +111,7 @@ public class ItemTest {
         Verify If User Can Get Item Frome Another User
         */
     @Test(dataProvider = "dataForTwoUsersTest")
-    public void verifyIfUserCanGetItemFromeAnotherUser(User user1, User user2, Item itemUserOne, Item checkItem){
+    public void verifyIfUserCanSeeItemFromeAnotherUser(User user1, User user2, Item itemUserOne, Item checkItem){
         ItemService userOne = new LoginService()
                 .successfulUserLogin(user1)
                 .goToItemService()
