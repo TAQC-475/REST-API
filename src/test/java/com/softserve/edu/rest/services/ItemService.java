@@ -64,6 +64,7 @@ public class ItemService {
         return isFree;
     }
 
+    @Step("Overriding item")
     public ItemService overrideItem(Item item) {
         return addItem(item, true);
     }
@@ -113,7 +114,7 @@ public class ItemService {
         LOGGER.debug("Adding item = {} status code = {}", item,  statusCode.getCode());
         return statusCode.getCode();
     }
-
+    @Step("Getting item")
     public Item getItem(Item item) {
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
@@ -124,6 +125,7 @@ public class ItemService {
         return new Item(item.getItemIndex(), result.getContent());
     }
 
+    @Step("Getting user item by another user")
     public Item getUserItemByAnotherUser(User user, Item item) {
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
@@ -136,7 +138,7 @@ public class ItemService {
         return new Item(item.getItemIndex(), result.getContent());
     }
 
-
+    @Step("Delete item")
     public ItemService deleteItem(Item item) {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());

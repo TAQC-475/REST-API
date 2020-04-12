@@ -1,61 +1,23 @@
-package com.softserve.edu.rest.test;
+package com.softserve.edu.rest.test.item;
 
 
 import com.softserve.edu.rest.data.Item;
 import com.softserve.edu.rest.data.ItemRepository;
+import com.softserve.edu.rest.data.dataproviders.ItemData;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.ItemService;
 import com.softserve.edu.rest.services.LoginService;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import java.sql.SQLOutput;
 
 public class ItemTest {
-    @DataProvider
-    public Object[][] dataForAddItemTest(){
-            return new Object[][]{{UserRepository.getValidUser(),
-                    ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
-    }
-    @DataProvider
-    public Object[][] dataForUpdateItemTest(){
-        return new Object[][]{{UserRepository.getAkimatcUser(),
-                ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
-    }
-    @DataProvider
-    public Object[][] dataForDeleteItemTest() {
-        return new Object[][]{{UserRepository.getAkimatcUser(),
-                ItemRepository.getCoreI9()}};
-    }
-    @DataProvider
-    public Object[][] dataForAddItemByAdminTest(){
-        return new Object[][]{{UserRepository.getAdmin(),
-                ItemRepository.getCoreI5(), ItemRepository.getCoreI5()}};
-    }
-    @DataProvider
-    public Object[][] dataForTwoUsersTest(){
-        return new Object[][]{{UserRepository.getUserDana(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI5(), ItemRepository.getCoreI5()}};
-    }
-    @DataProvider
-    public Object[][] dataForAdminAndUserTest(){
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
-    }
-    @DataProvider
-    public Object[][] dataForAdminAndNewUserTest(){
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
-    }
-
     /*
     Test 1
     Verify if User Can Create Item
-
     */
-    @Test(dataProvider = "dataForAddItemTest")
+    @Test(dataProvider = "dataForAddItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanCreateItem(User user, Item insertItem, Item checkItem){
         ItemService itemService = new LoginService()
                 .successfulUserLogin(user)
@@ -68,7 +30,7 @@ public class ItemTest {
     Test 2
     Verify if User Can Update Item
     */
-    @Test(dataProvider = "dataForUpdateItemTest")
+    @Test(dataProvider = "dataForUpdateItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanUpdateItem(User user, Item firstItem, Item updateItem, Item checkItem){
         ItemService itemService = new LoginService()
                 .successfulUserLogin(user)
@@ -82,7 +44,7 @@ public class ItemTest {
     Test 3
     Verify if User Can Delete Item
     */
-    @Test(dataProvider = "dataForDeleteItemTest")
+    @Test(dataProvider = "dataForDeleteItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanDeleteItem(User user, Item insertItem){
         ItemService itemService = new LoginService()
                 .successfulUserLogin(user)
@@ -98,7 +60,7 @@ public class ItemTest {
         Verify If Admin Can Add Item
     */
 
-    @Test(dataProvider = "dataForAddItemByAdminTest")
+    @Test(dataProvider = "dataForAddItemByAdminTest", dataProviderClass=ItemData.class)
     public void verifyIfAdminCanAddItem(User admin, Item insertItem, Item checkItem){
         ItemService adminsItem = new LoginService()
                 .successfulAdminLogin(admin)
@@ -110,7 +72,7 @@ public class ItemTest {
         Test 5
         Verify If User Can Get Item Frome Another User
         */
-    @Test(dataProvider = "dataForTwoUsersTest")
+    @Test(dataProvider = "dataForTwoUsersTest", dataProviderClass=ItemData.class)
     public void verifyIfUserCanSeeItemFromeAnotherUser(User user1, User user2, Item itemUserOne, Item checkItem){
         ItemService userOne = new LoginService()
                 .successfulUserLogin(user1)
@@ -127,7 +89,7 @@ public class ItemTest {
         Test 6
         Verify If Admin Can Get Item Frome Another User
     */
-    @Test(dataProvider = "dataForAdminAndUserTest")
+    @Test(dataProvider = "dataForAdminAndUserTest", dataProviderClass=ItemData.class)
     public void verifyIfAdminCanSeeUsersItem(User admin, User user, Item insertItem, Item checkItem){
         ItemService userItemService = new LoginService()
                 .successfulUserLogin(user)
