@@ -1,23 +1,20 @@
 package com.softserve.edu.rest.test.cooldown;
 
 import com.softserve.edu.rest.data.Lifetime;
-import com.softserve.edu.rest.data.LifetimeRepository;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
+import com.softserve.edu.rest.data.dataproviders.CooldownData;
 import com.softserve.edu.rest.services.*;
+import io.qameta.allure.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 public class ChangeCooldownTimeTest {
 
     public static final Logger logger = LoggerFactory.getLogger(ChangeCooldownTimeTest.class);
-
-    private CooldownService cooldownService;
-    private AdministrationService adminService;
 
     @BeforeSuite
     public void createExtraUsers() {
@@ -25,31 +22,21 @@ public class ChangeCooldownTimeTest {
         new GuestService().resetServiceToInitialState();
     }
 
-    @DataProvider
-    public Object[][] defaultCoolTime() {
-        return new Object[][]{
-                {LifetimeRepository.getDefaultCooldownTime()}
-        };
-    }
-
-    @DataProvider
-    public Object[][] changeCooldownTimePositive() {
-        return new Object[][]{
-                {UserRepository.getAdmin(), LifetimeRepository.getNewCooldownTime()},
-        };
-    }
-
-    @Test(dataProvider = "defaultCoolTime", priority = 1)
+    @Description("Verify that GET cooldown time request returns default time")
+    @Parameters({"Get current lifetime"})
+    @Test(priority = 1, dataProvider = "defaultCoolTime", dataProviderClass = CooldownData.class)
     public void checkCooldownTime(Lifetime defaultTime) {
         logger.info("START TEST Check cooldown time = {} ", defaultTime.getTimeAsText());
-        cooldownService = new CooldownService();
+        CooldownService cooldownService = new CooldownService();
         Assert.assertEquals(cooldownService
                 .getCooldownTime()
                 .getTime(), defaultTime.getTime());
         logger.info("END OF THE TEST");
     }
 
-    @Test(dataProvider = "changeCooldownTimePositive", priority = 2)
+    @Description("Verify that cooldown time can be changed on other positive time")
+    @Parameters({"Admin login", "Set new lifetime"})
+    @Test(priority = 2, dataProvider = "changeCooldownTimePositive", dataProviderClass = CooldownData.class)
     public void cooldownTimeChangeTest(User admin, Lifetime newLifeTime) {
         logger.info("START TEST Change cooldown positive time = {}, as admin = {} ", newLifeTime.getTimeAsText(), admin.getName());
         Lifetime checkNewCooldownTime = new LoginService()

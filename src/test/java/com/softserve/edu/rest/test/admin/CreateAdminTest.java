@@ -1,36 +1,42 @@
 package com.softserve.edu.rest.test.admin;
 
 import com.softserve.edu.rest.data.ApplicationState;
-import com.softserve.edu.rest.data.UserRepository;
+import com.softserve.edu.rest.data.User;
+import com.softserve.edu.rest.data.dataproviders.AdminData;
 import com.softserve.edu.rest.services.LoginService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class CreateAdminTest {
 
-    @Test
-    public void adminTest() {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CreateAdminTest.class);
+
+    @Test(dataProvider = "createAdminTestData", dataProviderClass = AdminData.class)
+    public void adminTest(User admin, User adminVasya, User userVasya, User nonExistUser) {
+        LOGGER.info("Login as Admin {} , and create new Admin {}", admin, adminVasya);
         boolean actual = new LoginService()
-            .successfulAdminLogin(UserRepository.getAdmin())
+            .successfulAdminLogin(admin)
             .gotoManageUserService()
-            .createUser(UserRepository.getAdminVasya())
+            .createUser(adminVasya)
             .gotoManageUserService()
-            .removeUser(UserRepository.getAdminVasya())
+            .removeUser(adminVasya)
             .gotoManageUserService()
-            .createUser(UserRepository.getUserVasya())
+            .createUser(userVasya)
             .goToLoginService()
             .successfulLogout(ApplicationState.get().getLastLoggined())
             .gotoLoginService()
-            .successfulAdminLogin(UserRepository.getUserVasya())
+            .successfulAdminLogin(userVasya)
             .gotoManageUserService()
-            .createUser(UserRepository.getNonExistingUser())
+            .createUser(nonExistUser)
             .gotoUsersService()
-            .isUserPresent(UserRepository.getNonExistingUser());
+            .isUserPresent(nonExistUser);
 
         Assert.assertTrue(actual);
+        LOGGER.info("{} user create by fake Admin", nonExistUser);
 
     }
-
 
 
 }

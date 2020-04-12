@@ -29,7 +29,7 @@ import io.qameta.allure.Story;
 public class LoginLogoutTest extends RestTestRunner {
 	public static final Logger logger = LoggerFactory.getLogger(LoginLogoutTest.class); // org.slf4j.LoggerFactory
 	//public final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-	
+
 	//@Test
 	public void checkVariables() {
 		//LOGGER.info("checkVariables() START");
@@ -46,7 +46,7 @@ public class LoginLogoutTest extends RestTestRunner {
                 { UserRepository.getAdmin() },
         };
     }
-	
+
 	//@Test(dataProvider = "correctUser")
 	public void verifyLogin(User user) {
 		//LOGGER.info("loginPositiveTest START, user = " + user);
