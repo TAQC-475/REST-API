@@ -95,14 +95,14 @@ public class GuestServiceDoNotUse {
 //
 
 	public UserServiceDoNotUse successfulUserLogin(User user) {
-		//logger.debug("successfulUserLogin START, user = " + user);
+		//LOGGER.debug("successfulUserLogin START, user = " + user);
 		RestParameters bodyParameters = new RestParameters()
 				.addParameter(EParameters.NAME, user.getName())
 				.addParameter(EParameters.PASSWORD, user.getPassword());
 		SimpleEntity simpleEntity = loginResource.httpPostAsEntity(null, null, bodyParameters);
-		//logger.trace("successfulUserLogin TRACE, simpleEntity = " + simpleEntity);
+		//LOGGER.trace("successfulUserLogin TRACE, simpleEntity = " + simpleEntity);
 		checkEntity(simpleEntity, "ERROR, user not found", "Error Login");
-		//logger.debug("successfulUserLogin DONE, user = " + user);
+		//LOGGER.debug("successfulUserLogin DONE, user = " + user);
 		return new UserServiceDoNotUse(new LogginedUser(user, simpleEntity.getContent()));
 	}
 

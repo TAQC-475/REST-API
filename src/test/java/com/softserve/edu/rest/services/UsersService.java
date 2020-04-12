@@ -7,6 +7,7 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.*;
 import com.softserve.edu.rest.tools.EntityUtils;
+import io.qameta.allure.Step;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class UsersService {
         this.logginedUser = logginedUser;
     }
 
-
+    @Step("Get list of users")
     public List<User> getAllUsers(){
         RestParameters urlParameters = new RestParameters()
             .addParameter(EParameters.TOKEN, logginedUser.getToken());

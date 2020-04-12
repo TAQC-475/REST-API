@@ -24,6 +24,14 @@ public class LogginedUser {
 
 	public long getLoginTime() {
 		return loginTime;
-	}	
+	}
 
+	@Override
+	public String toString() {
+		return "LogginedUser{" +
+				"user=" + user +
+				", token='" + token + '\'' +
+				", loginTime=" + loginTime +
+				'}';
+	}
 }

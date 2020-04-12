@@ -218,9 +218,9 @@
 							<goal>install-drivers</goal>
 						</goals>
 						<!-- Uncomment for download automatically -->
-						<phase>test-compile</phase>
+<!--						<phase>test-compile</phase>-->
 						<!-- <phase>process-test-classes</phase> -->
-						<!-- <phase>test</phase> -->
+						 <phase>test</phase>
 					</execution>
 				</executions>
 				<configuration>
@@ -270,7 +270,7 @@
 					<suiteXmlFiles>
 						<!-- <suiteXmlFile>testng.xml</suiteXmlFile> -->
 						<!-- <suiteXmlFile>testng2.xml</suiteXmlFile> -->
-						<!-- <suiteXmlFile>testng.xml</suiteXmlFile> -->
+						 <suiteXmlFile>testng.xml</suiteXmlFile>
 						<suiteXmlFile>${application.testng.name}</suiteXmlFile>
 					</suiteXmlFiles>
 					<reportsDirectory>${testng.reports.directory}</reportsDirectory>

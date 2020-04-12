@@ -11,9 +11,11 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.sql.SQLOutput;
+
 public class ItemTest {
     @DataProvider
-    public Object[][] dataForItemTest(){
+    public Object[][] dataForAddItemTest(){
             return new Object[][]{{UserRepository.getValidUser(),
                     ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
     }
@@ -22,26 +24,87 @@ public class ItemTest {
         return new Object[][]{{UserRepository.getAkimatcUser(),
                 ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
     }
+    @DataProvider
+    public Object[][] dataForDeleteItemTest() {
+        return new Object[][]{{UserRepository.getAkimatcUser(),
+                ItemRepository.getCoreI9()}};
+    }
+    @DataProvider
+    public Object[][] dataForAddItemByAdminTest(){
+        return new Object[][]{{UserRepository.getAdmin(),
+                ItemRepository.getCoreI5(), ItemRepository.getCoreI5()}};
+    }
+    @DataProvider
+    public Object[][] dataForTwoUsersTest(){
+        return new Object[][]{{UserRepository.getUserDana(), UserRepository.getValidUser(),
+                ItemRepository.getCoreI5(), ItemRepository.getCoreI5()}};
+    }
+    @DataProvider
+    public Object[][] dataForAdminAndUserTest(){
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(),
+                ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
+    }
+    @DataProvider
+    public Object[][] dataForAdminAndNewUserTest(){
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(),
+                ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
+    }
 
-    @Test(dataProvider = "dataForItemTest")
+    /*
+    Test 1
+    Verify if User Can Create Item
+
+    */
+    @Test(dataProvider = "dataForAddItemTest")
     public void verifyUserCanCreateItem(User user, Item insertItem, Item checkItem){
         ItemService itemService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(insertItem, false);
+                .addItem(insertItem, false);
         Assert.assertTrue(itemService.getItem(checkItem).equals(insertItem));
     }
 
+    /*
+    Test 2
+    Verify if User Can Update Item
+    */
     @Test(dataProvider = "dataForUpdateItemTest")
     public void verifyUserCanUpdateItem(User user, Item firstItem, Item updateItem, Item checkItem){
         ItemService itemService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .createItem(firstItem, false)
-                .overrideItem(updateItem, true);
+                .addItem(firstItem, false)
+                .overrideItem(updateItem);
         Assert.assertTrue(itemService.getItem(checkItem).equals(updateItem));
     }
 
+    /*
+    Test 3
+    Verify if User Can Delete Item
+    */
+    @Test(dataProvider = "dataForDeleteItemTest")
+    public void verifyUserCanDeleteItem(User user, Item insertItem){
+        ItemService itemService = new LoginService()
+                .successfulUserLogin(user)
+                .goToItemService()
+                .addItem(insertItem, false)
+                .deleteItem(insertItem);
+               // .getItem(insertItem);
+       Assert.assertEquals(itemService, null);
+    }
 
+    /*
+        Test 4
+        Verify If Admin Can Add Item
+    */
+
+    @Test(dataProvider = "dataForAddItemByAdminTest")
+    public void verifyIfAdminCanAddItem(User admin, Item insertItem, Item checkItem){
+        ItemService adminsItem = new LoginService()
+                .successfulAdminLogin(admin)
+                .goToItemService()
+                .addItem(insertItem, false);
+        Assert.assertTrue(adminsItem.getItem(checkItem).equals(insertItem));
+    }
 
 }

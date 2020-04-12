@@ -1,2 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd"><suite name="All Test Suite"><test verbose="2" preserve-order="true" name="C:/SoftServe/University/Materials/DEMO4/REST-API/src/test/java/com/softserve/edu/rest/test/lock/LockTest.java"><classes><class name="com.softserve.edu.rest.test.lock.LockTest"><methods><include name="lockUserFromAdmin"/><include name="lockUserByUnsuccessfulLogin"/><include name="unlockUserFromAdmin"/><include name="lockAdminFromAdmin"/><include name="unlockAll"/></methods></class></classes></test></suite>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RestAPI_LockTests">
+    <parameter name="url" value="http://localhost:8080"/>
+
+    <test name="LockTest" verbose="9" >
+        <classes>
+            <class name="com.softserve.edu.rest.test.lock.LockTest">
+                <methods>
+                    <include name="lockUserFromAdmin"/>
+                    <include name="lockUserByUnsuccessfulLogin"/>
+                    <include name="unlockUserFromAdmin"/>
+                    <include name="lockAdminFromAdmin"/>
+                    <include name="unlockAll"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

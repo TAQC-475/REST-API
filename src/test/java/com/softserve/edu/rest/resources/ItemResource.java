@@ -5,7 +5,6 @@ import com.softserve.edu.rest.engine.RestQueries;
 import com.softserve.edu.rest.entity.SimpleEntity;
 
 public class ItemResource extends RestQueries<SimpleEntity, SimpleEntity, SimpleEntity, SimpleEntity, SimpleEntity> {
-
     public ItemResource() {
     	super(RestUrlRepository.getItem(),
 			  SimpleEntity.class,

@@ -19,11 +19,16 @@ public class EntityUtils {
     }
 
     public SimpleEntity checkEntity(SimpleEntity result) {
-        if (result.getContent() == null
-                || result.getContent() == ""
-                || result.getContent() == "null") {
-            throw new RuntimeException("Content is not found or Token time out");
-        }
+//        if (
+//                result.getContent() == null
+//                || result.getContent() == ""
+//                || result.getContent() == "null") {
+//            throw new RuntimeException("Content is not found or Token time out");
+//        }
+        return result;
+    }
+
+    public SimpleEntity deleteEntity(SimpleEntity result) {
         return result;
     }
 

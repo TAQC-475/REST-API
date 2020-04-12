@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.List;
-import java.util.Random;
 
 public class LoginService {
     private static final Logger LOGGER = LoggerFactory.getLogger(LoginService.class);
@@ -26,29 +25,30 @@ public class LoginService {
     }
 
     private SimpleEntity login(User user) {
-        LOGGER.debug("Login method receive {}", user);
+        LOGGER.debug("Login method receive: Username = {}, password = {}", user.getName(), user.getPassword());
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.NAME, user.getName())
                 .addParameter(EParameters.PASSWORD, user.getPassword());
         SimpleEntity tokenContent = loginResource.httpPostAsEntity(null, null, bodyParameters);
         EntityUtils.get().checkEntity(tokenContent);
-        LOGGER.debug("Login method returns token {}", tokenContent);
+        LOGGER.debug("Login method returns token {} and status code {}", tokenContent.getContent(), tokenContent.getCode());
         return tokenContent;
     }
 
-    private String changeToken(String token){
+    private String changeToken(String token) {
         return token.replace(token.charAt(0), '_');
     }
 
     @Step("Successful Admin Login")
     public AdministrationService successfulAdminLogin(User adminUser) {
-        LOGGER.debug("Successful login by admin = "+adminUser.getName());
+        LOGGER.debug("Successful Admin login: Username = {}, password = {}", adminUser.getName(), adminUser.getPassword());
         ApplicationState.get().addUser((new LogginedUser(adminUser, login(adminUser).getContent())));
         return new AdministrationService(ApplicationState.get().getLastLoggined());
     }
 
     @Step("Successful User Login")
     public UserService successfulUserLogin(User basicUser) {
+        LOGGER.debug("Successful login: Username = {}, password = {}", basicUser.getName(), basicUser.getPassword());
         ApplicationState.get().addUser(new LogginedUser(basicUser, login(basicUser).getContent()));
         return new UserService(ApplicationState.get().getLastLoggined());
     }
@@ -56,19 +56,19 @@ public class LoginService {
     @Step("Unsuccessful User Login")
     public LoginService unsuccessfulUserLogin(User basicUser) {
         login(basicUser);
-        LOGGER.warn("Unsuccessful login by user {}", basicUser.getName());
+        LOGGER.warn("Unsuccessful login by: {}", basicUser.getName());
         return this;
     }
 
     @Step("Unsuccessful User Login")
     public SimpleEntity unsuccessfulUserLoginAsEntity(User basicUser) {
-        LOGGER.warn("unsuccessful User Login: " + basicUser.toString());
-        LOGGER.warn("Unsuccessful User Login {}", basicUser.toString());
+        LOGGER.warn("Unsuccessful login {}", basicUser.getName());
         return login(basicUser);
     }
 
     @Step("Successful Admins Login")
     public AdministrationService successfulAdminsLogin(List<User> adminUsers) {
+        LOGGER.debug("Successful Admins list Login: {}", adminUsers);
         for (User adminUser : adminUsers) {
             ApplicationState.get().addUser(new LogginedUser(adminUser, login(adminUser).getContent()));
         }
@@ -77,8 +77,7 @@ public class LoginService {
 
     @Step("Successful Users Login")
     public UserService successfulUsersLogin(List<User> adminUsers) {
-        LOGGER.debug("successful Users Login" + adminUsers.toString());
-        LOGGER.debug("Successful Users Login {}", adminUsers.toString());
+        LOGGER.debug("Successful Users list Login: {}", adminUsers.toString());
         for (User adminUser : adminUsers) {
             ApplicationState.get().addUser(new LogginedUser(adminUser, login(adminUser).getContent()));
         }
@@ -86,7 +85,7 @@ public class LoginService {
     }
 
     private SimpleEntity logout(LogginedUser logginedUser) {
-        LOGGER.debug("Logout for loggined user {}", logginedUser);
+        LOGGER.debug("Logout for:  UserName = {}, with token = {}", logginedUser.getUser().getName(), logginedUser.getToken());
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.NAME, logginedUser.getUser().getName())
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
@@ -97,6 +96,7 @@ public class LoginService {
 
     @Step("Successful logout")
     public GuestService successfulLogout(LogginedUser logginedUser) {
+        LOGGER.debug("Successful logout: UserName = {}, with token = {}", logginedUser.getUser().getName(), logginedUser.getToken());
         ApplicationState.get().removeLoggined(logginedUser);
         logout(logginedUser);
         return new GuestService();
@@ -104,12 +104,14 @@ public class LoginService {
 
     @Step("Successful logout")
     public SimpleEntity successfulLogoutAsEntity(LogginedUser logginedUser) {
+        LOGGER.debug("Successful logout: UserName = {}, with token = {}", logginedUser.getUser().getName(), logginedUser.getToken());
         ApplicationState.get().removeLoggined(logginedUser);
         return logout(logginedUser);
     }
 
     @Step("Unsuccessful logout as entity")
-    public SimpleEntity unsuccessfulLogoutAsEntity(LogginedUser logginedUser){
+    public SimpleEntity unsuccessfulLogoutAsEntity(LogginedUser logginedUser) {
+        LOGGER.debug("Unsuccessful logout: UserName = {}, with token = {}", logginedUser.getUser().getName(), logginedUser.getToken());
         return logout(new LogginedUser(logginedUser.getUser(), changeToken(logginedUser.getToken())));
     }
 
@@ -127,7 +129,7 @@ public class LoginService {
                 .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
     }
 
-    public AdministrationService loginAndCreateUser(User admin, User newUser){
+    public AdministrationService loginAndCreateUser(User admin, User newUser) {
         return new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoManageUserService()
@@ -135,14 +137,13 @@ public class LoginService {
                 ;
     }
 
-    public GuestService successfulUsersLogout(List<LogginedUser> logginedUsers) {
-        for (int i = 0; i < logginedUsers.size(); ++i) {
-            LogginedUser logginedUser = logginedUsers.get(i);
+    public GuestService successfulUsersLogout(List<LogginedUser> loggedUsers) {
+        LOGGER.debug("Successful Users list Logout: {}", loggedUsers);
+        for (int i = 0; i < loggedUsers.size(); ++i) {
+            LogginedUser logginedUser = loggedUsers.get(i);
             ApplicationState.get().removeLoggined(logginedUser);
             logout(logginedUser);
         }
         return new GuestService();
     }
-
-
 }
