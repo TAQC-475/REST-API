@@ -105,6 +105,19 @@ public class ItemService {
         return new Item(item.getItemIndex(), result.getContent());
     }
 
+    public Item getUserItemByAnotherUser(User user, Item item) {
+        RestParameters urlParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.NAME, user.getName())
+                .addParameter(EParameters.INDEX, item.getItemIndex());
+
+        SimpleEntity result = userItemResource.httpGetAsEntity(pathParameters, urlParameters);
+        EntityUtils.get().checkEntity(result);
+        return new Item(item.getItemIndex(), result.getContent());
+    }
+
+
     public ItemService deleteItem(Item item) {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
