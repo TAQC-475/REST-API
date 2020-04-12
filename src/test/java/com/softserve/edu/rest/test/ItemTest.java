@@ -106,5 +106,38 @@ public class ItemTest {
                 .addItem(insertItem, false);
         Assert.assertTrue(adminsItem.getItem(checkItem).equals(insertItem));
     }
+        /*
+        Test 5
+        Verify If User Can Get Item Frome Another User
+        */
+    @Test(dataProvider = "dataForTwoUsersTest")
+    public void verifyIfUserCanGetItemFromeAnotherUser(User user1, User user2, Item itemUserOne, Item checkItem){
+        ItemService userOne = new LoginService()
+                .successfulUserLogin(user1)
+                .goToItemService()
+                .addItem(itemUserOne, false);
+        Item  userTwo = new LoginService()
+                .successfulUserLogin(user2)
+                .goToItemService()
+                .getUserItemByAnotherUser(user1, itemUserOne);;
+        Assert.assertNotEquals(userTwo, (checkItem));
+    }
+
+    /*
+        Test 6
+        Verify If Admin Can Get Item Frome Another User
+    */
+    @Test(dataProvider = "dataForAdminAndUserTest")
+    public void verifyIfAdminCanSeeUsersItem(User admin, User user, Item insertItem, Item checkItem){
+        ItemService userItemService = new LoginService()
+                .successfulUserLogin(user)
+                .goToItemService()
+                .addItem(insertItem, false);
+        Item adminItemService = new LoginService()
+                .successfulAdminLogin(admin)
+                .goToItemService()
+                .getUserItemByAnotherUser(user, insertItem);
+        Assert.assertEquals(adminItemService, checkItem);
+    }
 
 }
