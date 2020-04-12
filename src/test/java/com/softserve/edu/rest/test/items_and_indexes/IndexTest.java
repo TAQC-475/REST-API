@@ -3,7 +3,6 @@ package com.softserve.edu.rest.test.items_and_indexes;
 import com.softserve.edu.rest.data.Item;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.dataproviders.DataForIndexTest;
-import com.softserve.edu.rest.data.dataproviders.DataForItemsTest;
 import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
 import io.qameta.allure.Epic;
@@ -59,7 +58,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
     }
 
     /**
-     * logs in as user and gets all his items indexes
+     * logs in as user, adds two items and gets all his items indexes
      * verifies that user can get indexes of all his items
      * @param user user
      * @param firstItem item to add
