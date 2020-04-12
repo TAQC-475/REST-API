@@ -1,9 +1,8 @@
 package com.softserve.edu.rest.test.cooldown;
 
 import com.softserve.edu.rest.data.Lifetime;
-import com.softserve.edu.rest.data.LifetimeRepository;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
+import com.softserve.edu.rest.data.dataproviders.CooldownData;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.CooldownService;
 import com.softserve.edu.rest.services.GuestService;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class ChangeCooldownTimeNegativeTest {
@@ -28,22 +26,7 @@ public class ChangeCooldownTimeNegativeTest {
         new GuestService().resetServiceToInitialState();
     }
 
-    @DataProvider
-    public Object[][] simpleUser() {
-        return new Object[][]{
-                {UserRepository.getValidUser(), LifetimeRepository.getNewCooldownTime()}
-        };
-    }
-
-    @DataProvider
-    public Object[][] negativeTime() {
-        return new Object[][]{
-                {UserRepository.getAdmin(), LifetimeRepository.getNegativeLifeTime(),
-                        LifetimeRepository.getDefaultCooldownTime()}
-        };
-    }
-
-    @Test(priority = 1, dataProvider = "simpleUser")
+    @Test(priority = 1, dataProvider = "simpleUser", dataProviderClass = CooldownData.class)
     public void changeCooldownTimeAsUser(User simpleUser, Lifetime newLifeTime) {
         logger.info("START TEST Change cooldown time to = {}, user = {}", newLifeTime.getTime(), simpleUser.getName());
         SimpleEntity response = new LoginService()
@@ -56,7 +39,7 @@ public class ChangeCooldownTimeNegativeTest {
         logger.info("END OF THE TEST");
     }
 
-    @Test(priority = 2, dataProvider = "negativeTime")
+    @Test(priority = 2, dataProvider = "negativeTime", dataProviderClass = CooldownData.class)
     public void cooldownTimeWithNegativeNumberTest(User admin, Lifetime newLifeTime, Lifetime defaultTime) {
         logger.info("START TEST Change cooldown time with negative number = {}, as admin = {}", newLifeTime.getTime(), admin.getName());
         Lifetime checkNewCooldownTime = new LoginService()
