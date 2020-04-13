@@ -12,8 +12,14 @@ public class ItemData {
     }
     @DataProvider
     public Object[][] dataForUpdateItemTest(){
-        return new Object[][]{{UserRepository.getAkimatcUser(),
-                ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
+        return new Object[][]{
+                {UserRepository.getAdmin(),
+                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()},
+                {UserRepository.getUserVasya(),
+                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()},
+                {UserRepository.getAdminDana(),
+                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}
+        };
     }
     @DataProvider
     public Object[][] dataForDeleteItemTest() {
@@ -23,7 +29,7 @@ public class ItemData {
     @DataProvider
     public Object[][] dataForAddItemByAdminTest(){
         return new Object[][]{{UserRepository.getAdmin(),
-                ItemRepository.getCoreI5(), ItemRepository.getCoreI5()}};
+                ItemRepository.getCoreI9(), ItemRepository.getCoreI9()}};
     }
     @DataProvider
     public Object[][] dataForTwoUsersTest(){

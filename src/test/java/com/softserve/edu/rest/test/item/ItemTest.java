@@ -8,22 +8,24 @@ import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.ItemService;
 import com.softserve.edu.rest.services.LoginService;
+import com.softserve.edu.rest.test.login.LoginTestRunner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class ItemTest {
+public class ItemTest extends ItemTestRunner {
     /*
     Test 1
     Verify if User Can Create Item
     */
     @Test(dataProvider = "dataForAddItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanCreateItem(User user, Item insertItem, Item checkItem){
-        ItemService itemService = new LoginService()
+        String result = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .addItem(insertItem, false);
-        Assert.assertTrue(itemService.getItem(checkItem).equals(insertItem));
+                .addItem(insertItem, false)
+                .getItem(insertItem);
+        Assert.assertEquals(result, checkItem.getItemText());
     }
 
     /*
@@ -32,12 +34,13 @@ public class ItemTest {
     */
     @Test(dataProvider = "dataForUpdateItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanUpdateItem(User user, Item firstItem, Item updateItem, Item checkItem){
-        ItemService itemService = new LoginService()
+        String itemService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
                 .addItem(firstItem, false)
-                .overrideItem(updateItem);
-        Assert.assertTrue(itemService.getItem(checkItem).equals(updateItem));
+                .putOverwriteItem(firstItem, updateItem)
+                .getItem(firstItem);
+        Assert.assertEquals(itemService, checkItem.getItemText());
     }
 
     /*
@@ -46,13 +49,13 @@ public class ItemTest {
     */
     @Test(dataProvider = "dataForDeleteItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanDeleteItem(User user, Item insertItem){
-        ItemService itemService = new LoginService()
+        String result = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
                 .addItem(insertItem, false)
-                .deleteItem(insertItem);
-               // .getItem(insertItem);
-       Assert.assertEquals(itemService, null);
+                .deleteItem(insertItem)
+                .getItem(insertItem);
+       Assert.assertEquals(result, null);
     }
 
     /*
@@ -62,11 +65,12 @@ public class ItemTest {
 
     @Test(dataProvider = "dataForAddItemByAdminTest", dataProviderClass=ItemData.class)
     public void verifyIfAdminCanAddItem(User admin, Item insertItem, Item checkItem){
-        ItemService adminsItem = new LoginService()
+        String result = new LoginService()
                 .successfulAdminLogin(admin)
                 .goToItemService()
-                .addItem(insertItem, false);
-        Assert.assertTrue(adminsItem.getItem(checkItem).equals(insertItem));
+                .addItem(insertItem, false)
+                .getItem(insertItem);
+        Assert.assertEquals(result, checkItem.getItemText());
     }
         /*
         Test 5
@@ -78,11 +82,11 @@ public class ItemTest {
                 .successfulUserLogin(user1)
                 .goToItemService()
                 .addItem(itemUserOne, false);
-        Item  userTwo = new LoginService()
+        String  result = new LoginService()
                 .successfulUserLogin(user2)
                 .goToItemService()
-                .getUserItemByAnotherUser(user1, itemUserOne);;
-        Assert.assertNotEquals(userTwo, (checkItem));
+                .getUserItemByAnotherUser(user1, itemUserOne);
+        Assert.assertNotEquals(result, checkItem.getItemIndex());
     }
 
     /*
@@ -95,11 +99,11 @@ public class ItemTest {
                 .successfulUserLogin(user)
                 .goToItemService()
                 .addItem(insertItem, false);
-        Item adminItemService = new LoginService()
+        String result = new LoginService()
                 .successfulAdminLogin(admin)
                 .goToItemService()
                 .getUserItemByAnotherUser(user, insertItem);
-        Assert.assertEquals(adminItemService, checkItem);
+        Assert.assertEquals(result, checkItem.getItemText());
     }
 
 }
