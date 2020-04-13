@@ -92,7 +92,7 @@ public class ItemService {
      * @param toOverride to override item, if item with same index already exists?
      * @return ItemService after adding an item
      */
-    @Step("Adding Item")
+    @Step("Item Service: item added {item}")
     public ItemService addItem(Item item, boolean toOverride){
         LOGGER.debug("addItem method gets item = {} " , item);
         if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
