@@ -29,6 +29,11 @@ public class LockService {
         this.logginedUser = logginedUser;
     }
 
+    /**
+     * Preparing and sending PUT request as logged in admin to lock user or admin
+     * @param userToLock item to lock
+     * @return LockService after getting response
+     */
     @Step("Locking user with token")
     public LockService lockUser(User userToLock) {
         logger.debug("Locking user named = " + userToLock.getName());
@@ -43,6 +48,10 @@ public class LockService {
         return this;
     }
 
+    /**
+     * Preparing and sending GET request as logged in admin to get list of all locked users
+     * @return string of all locked users after getting response
+     */
     @Step("Get all locked users")
     public String getAllLockedUsers() {
         RestParameters bodyParameters = new RestParameters()
@@ -54,6 +63,11 @@ public class LockService {
         return simpleEntity.getContent();
     }
 
+    /**
+     * Preparing and sending PUT request as logged in admin to unlock user
+     * @param user item to unlock
+     * @return LockService after getting response
+     */
     @Step("Unlock user")
     public LockService unlockUser(User user) {
         logger.debug("unlocking user named = " + user.getName());
@@ -68,6 +82,10 @@ public class LockService {
         return this;
     }
 
+    /**
+     * Preparing and sending PUT request as logged in admin to unlock all users and admins
+     * @return LockService after getting response
+     */
     @Step("Unlock all users")
     public LockService unlockAllUsers() {
         RestParameters bodyParameters = new RestParameters()
@@ -78,6 +96,10 @@ public class LockService {
         return this;
     }
 
+    /**
+     * Preparing and sending GET request as logged in admin to get list of all locked admins
+     * @return string of all locked admins after getting response
+     */
     @Step("Get all locked admins")
     public String getAllLockedAdmins() {
         RestParameters urlParameters = new RestParameters()
@@ -87,6 +109,11 @@ public class LockService {
         return simpleEntity.getContent();
     }
 
+    /**
+     * Checking if out user is in list of locked users
+     * @param user is user locked
+     * @return boolean
+     */
     @Step("Check if user is locked")
     public boolean isUserLocked(User user) {
         logger.debug("Checking if locked user = "+user.getName());
@@ -97,10 +124,15 @@ public class LockService {
         }
     }
 
+    /**
+     * Checking if out admin is in list of locked admins
+     * @param admin is admin locked
+     * @return boolean
+     */
     @Step("Check if admin is locked")
-    public boolean isAdminLocked(User user) {
-        logger.debug("Checking if locked admin = "+user.getName());
-        if (getAllLockedAdmins().contains(user.getName())) {
+    public boolean isAdminLocked(User admin) {
+        logger.debug("Checking if locked admin = "+admin.getName());
+        if (getAllLockedAdmins().contains(admin.getName())) {
             return true;
         } else {
             return false;

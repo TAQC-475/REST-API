@@ -32,6 +32,10 @@ public class CooldownService{
 
     public void setResponse(SimpleEntity response) { this.response = response; }
 
+    /**
+     * Sending GET request as guest to get cooldown time
+     * @return Lifetime after getting response
+     */
     @Step("Getting cooldown time")
     public Lifetime getCooldownTime() {
         logger.debug("Getting cooldown time");
@@ -42,6 +46,11 @@ public class CooldownService{
         return new Lifetime(simpleEntity.getContent());
     }
 
+    /**
+     * Preparing and sending PUT request as logged in admin to change cooldown lifetime
+     * @param lifetime item to change
+     * @return CooldownService after getting response
+     */
     @Step("Changing cooldown time")
     public CooldownService changeCooldown(Lifetime lifetime) {
         logger.debug("Changing cooldown time, setting lifetime = " + lifetime.getTime());
