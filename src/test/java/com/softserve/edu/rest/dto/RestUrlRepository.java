@@ -70,10 +70,10 @@ public final class RestUrlRepository {
     public static RestUrl getAliveTokens() {
         return new RestUrl()
                 .addBaseUrl(server)
-                .addGetUrl("/login/tockens") //Jesus doesn't want me for a sunbeam
-                .addPostUrl("")
-                .addPutUrl("")
-                .addDeleteUrl("")
+                .addGetUrl("/tokenlifetime") //Jesus doesn't want me for a sunbeam
+                .addPostUrl("/tokenlifetime")
+                .addPutUrl("/tokenlifetime")
+                .addDeleteUrl("/tokenlifetime")
                 .addPatchUrl("");
     }
 
