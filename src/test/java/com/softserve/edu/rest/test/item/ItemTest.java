@@ -77,7 +77,7 @@ public class ItemTest extends ItemTestRunner {
         Verify If User Can Get Item Frome Another User
         */
     @Test(dataProvider = "dataForTwoUsersTest", dataProviderClass=ItemData.class)
-    public void verifyIfUserCanSeeItemFromeAnotherUser(User user1, User user2, Item itemUserOne, Item checkItem){
+    public void verifyIfUserCanNotSeeItemFromeAnotherUser(User user1, User user2, Item itemUserOne, Item checkItem){
         ItemService userOne = new LoginService()
                 .successfulUserLogin(user1)
                 .goToItemService()
