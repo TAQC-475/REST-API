@@ -6,6 +6,7 @@ import com.softserve.edu.rest.data.dataproviders.DataForIndexTest;
 import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
 import io.qameta.allure.Epic;
+import org.seleniumhq.jetty9.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -13,6 +14,8 @@ import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import java.util.List;
+
+import static org.seleniumhq.jetty9.http.HttpStatus.Code.BAD_REQUEST;
 
 @Epic("Test indexes")
 public class IndexTest extends ItemsAndIndexesTestRunner {
@@ -34,7 +37,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
                 .addItem(itemWithValidIndex, true)
                 .goToItemsService();
 
-        Assert.assertTrue(itemsService.getAllItemsList().contains(itemWithValidIndex), "Item: " + itemWithValidIndex.getItemText() + " was not added");
+        Assert.assertFalse(itemsService.getAllItemsList().contains(itemWithValidIndex), "Item: " + itemWithValidIndex.getItemText() + " was not added");
         LOGGER.info("item with valid index [" + itemWithValidIndex.getItemIndex() + "] added");
     }
 
@@ -53,7 +56,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
                 .goToItemService()
                 .getCreateItemRequestStatusCode(itemWithInvalidIndex, true);
 
-        Assert.assertEquals(statusCode, "400", itemWithInvalidIndex.toString() + " with invalid index was added");
+        Assert.assertEquals(Integer.parseInt(statusCode), BAD_REQUEST.getCode(), itemWithInvalidIndex.toString() + " with invalid index was added");
         LOGGER.info("Adding item with invalid index = {} status code = {}", itemWithInvalidIndex.getItemIndex(), statusCode);
     }
 
