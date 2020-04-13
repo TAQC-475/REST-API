@@ -5,6 +5,7 @@ import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.dataproviders.DataForIndexTest;
 import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
+import com.softserve.edu.rest.test.RestTestRunner;
 import io.qameta.allure.Epic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +18,7 @@ import java.util.List;
 import static org.seleniumhq.jetty9.http.HttpStatus.Code.BAD_REQUEST;
 
 @Epic("Test indexes")
-public class IndexTest extends ItemsAndIndexesTestRunner {
+public class IndexTest extends RestTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
 
     /**
