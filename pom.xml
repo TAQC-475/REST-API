@@ -219,7 +219,7 @@
 						</goals>
 						<!-- Uncomment for download automatically -->
 <!--						<phase>test-compile</phase>-->
-						<!-- <phase>process-test-classes</phase> -->
+<!--						 <phase>process-test-classes</phase>-->
 						 <phase>test</phase>
 					</execution>
 				</executions>

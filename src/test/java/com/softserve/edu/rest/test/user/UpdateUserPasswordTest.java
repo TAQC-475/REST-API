@@ -13,7 +13,7 @@ import org.testng.asserts.SoftAssert;
 
 @Epic("Change password tests")
 public class UpdateUserPasswordTest extends UserTestRunner {
-    SoftAssert softAssert = new SoftAssert();
+
 
     @Description("Check if User can change his password to an empty")
     @Parameters({"User login", "User with old password", "New password", "Login with new password"})
@@ -33,7 +33,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
-        LOGGER.info("Finished changing password");
+        LOGGER.info("Finished changing password \n");
     }
 
     @Description("Check if User can change his password to minimum invalid symbols")
@@ -55,7 +55,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
-        LOGGER.info("Finished changing password");
+        LOGGER.info("Finished changing password \n");
     }
 
     @Description("Check if User can change his password to minimum valid symbols")
@@ -76,7 +76,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
-        LOGGER.info("Finished changing password");
+        LOGGER.info("Finished changing password \n");
     }
 
     @Description("Check if user can change his password to valid password")
@@ -97,7 +97,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
-        LOGGER.info("Finished changing password");
+        LOGGER.info("Finished changing password \n");
     }
 
     @Description("Check if User can change his password to maximum valid symbols")
@@ -118,7 +118,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
-        LOGGER.info("Finished changing password");
+        LOGGER.info("Finished changing password \n");
     }
 
     @Description("Check if User can change his password to maximum invalid symbols")
@@ -139,6 +139,6 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
 
         softAssert.assertAll();
-        LOGGER.info("Finished changing password");
+        LOGGER.info("Finished changing password \n");
     }
 }
