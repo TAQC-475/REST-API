@@ -50,8 +50,8 @@ public class EntityUtils {
     }
 
     /**
-     * @param count
-     * @return String random letters and digits
+     * @param count symbols quantity
+     * @return String of random letters and digits
      */
     public static String randomAlphaNumeric(int count) {
         return RandomString.make(count);

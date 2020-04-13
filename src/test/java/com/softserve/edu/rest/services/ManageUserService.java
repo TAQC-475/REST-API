@@ -25,6 +25,11 @@ public class ManageUserService {
         userResource = new UserResource();
     }
 
+    /**
+     * Create new user
+     * @param user user to add
+     * @return new Administration Service
+     */
     @Step("Create user")
     public AdministrationService createUser(User user) {
         LOGGER.debug("Create: " + user);
@@ -64,7 +69,10 @@ public class ManageUserService {
         return new AdministrationService(logginedUser);
     }
 
-
+    /**
+     * Prepare and send DELETE request to delete user
+     * @param user user to add
+     */
     private void removeUserExample(User user) {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken())
@@ -74,7 +82,10 @@ public class ManageUserService {
         EntityUtils.get().checkEntity(simpleEntity);
     }
 
-
+    /**
+     * Prepare and send POST request to create new user
+     * @param user user to add
+     */
     private void createUserExample(User user) {
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken())
