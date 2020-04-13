@@ -36,7 +36,7 @@ public class IndexTest extends ItemsAndIndexesTestRunner {
                 .addItem(itemWithValidIndex, true)
                 .goToItemsService();
 
-        Assert.assertFalse(itemsService.getAllItemsList().contains(itemWithValidIndex), "Item: " + itemWithValidIndex.getItemText() + " was not added");
+        Assert.assertTrue(itemsService.getAllItemsList().contains(itemWithValidIndex), "Item: " + itemWithValidIndex.getItemText() + " was not added");
         LOGGER.info("item with valid index [" + itemWithValidIndex.getItemIndex() + "] added");
     }
 
