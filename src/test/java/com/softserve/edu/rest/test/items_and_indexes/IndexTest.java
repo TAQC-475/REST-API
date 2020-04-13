@@ -6,7 +6,6 @@ import com.softserve.edu.rest.data.dataproviders.DataForIndexTest;
 import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
 import io.qameta.allure.Epic;
-import org.seleniumhq.jetty9.http.HttpStatus;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
