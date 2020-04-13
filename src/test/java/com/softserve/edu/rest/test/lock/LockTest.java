@@ -31,6 +31,13 @@ public class LockTest {
         logger.info("END OF BEFORE CLASS method");
     }
 
+    /**
+     * logs in as admin and tries to lock user
+     * verifies that user is locked
+     *
+     * @param admin      for login and check user status
+     * @param simpleUser user for locking by admin
+     */
     @Description("Verify that logged-in admin can  lock user")
     @Parameters({"Admin login", "User for locking"})
     @Test(priority = 1, dataProvider = "lockUser", dataProviderClass = LockData.class)
@@ -45,23 +52,36 @@ public class LockTest {
         logger.info("END OF THE TEST");
     }
 
+    /**
+     * do three tries of login as a user with wrong password
+     * after login as an admin and verifies that user is locked
+     *
+     * @param userWithWrongPassword user for locking by unsuccessful login
+     * @param admin                 for login and check user status
+     */
     @Description("Verify that user will be locked after three unsuccessful tries of login")
     @Parameters({"Admin login", "User with wrong password"})
     @Test(priority = 2, dataProvider = "lockWrongUser", dataProviderClass = LockData.class)
     public void lockUserByUnsuccessfulLogin(User admin, User userWithWrongPassword) {
         logger.info("START TEST Lock user by tree unsuccessful login tries = {}, as admin = {} ", userWithWrongPassword.getName(), admin.getName());
         LockService adminService = new LoginService()
+                .unsuccessfulUserLogin(userWithWrongPassword)
+                .unsuccessfulUserLogin(userWithWrongPassword)
+                .unsuccessfulUserLogin(userWithWrongPassword)
                 .successfulAdminLogin(admin)
                 .gotoLockService();
-        LoginService loginService = new LoginService()
-                .unsuccessfulUserLogin(userWithWrongPassword)
-                .unsuccessfulUserLogin(userWithWrongPassword)
-                .unsuccessfulUserLogin(userWithWrongPassword);
 
         Assert.assertTrue(adminService.isUserLocked(userWithWrongPassword));
         logger.info("END OF THE TEST");
     }
 
+    /**
+     * logs in as admin and tries to unlock user
+     * verifies that user is unlocked
+     *
+     * @param admin    for login and unlocking user after check user status
+     * @param someUser user for unlocking by admin
+     */
     @Description("Verify that logged-in admin can unlock user")
     @Parameters({"Admin login", "User for unlocking"})
     @Test(priority = 3, dataProvider = "lockUser", dataProviderClass = LockData.class)
@@ -76,6 +96,12 @@ public class LockTest {
         logger.info("END OF THE TEST");
     }
 
+    /**
+     * logs in as admin and tries to lock himself
+     * verifies that admin is locked
+     *
+     * @param adminVasya for login and locking himself
+     */
     @Description("Verify that logged-in admin can lock himself")
     @Parameters({"Admin for locking himself"})
     @Test(priority = 4, dataProvider = "lockAdminVasya", dataProviderClass = LockData.class)
@@ -90,6 +116,12 @@ public class LockTest {
         logger.info("END OF THE TEST");
     }
 
+    /**
+     * login as admin and try to unlock all users and admins
+     * verifies that locked admins and users are unlocked
+     *
+     * @param admin for login and unlocking all users and admins
+     */
     @Description("Verify that unlock all users and admins work")
     @Parameters({"Admin login"})
     @Test(priority = 9, dataProvider = "Admin", dataProviderClass = LockData.class)

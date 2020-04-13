@@ -22,6 +22,11 @@ public class ChangeCooldownTimeTest {
         new GuestService().resetServiceToInitialState();
     }
 
+    /**
+     * do GET cooldown time request after verify responded time
+     *
+     * @param defaultTime time
+     */
     @Description("Verify that GET cooldown time request returns default time")
     @Parameters({"Get current lifetime"})
     @Test(priority = 1, dataProvider = "defaultCoolTime", dataProviderClass = CooldownData.class)
@@ -34,6 +39,12 @@ public class ChangeCooldownTimeTest {
         logger.info("END OF THE TEST");
     }
 
+    /**
+     * set cooldown time PUT request and after verify responded time
+     *
+     * @param admin       for login
+     * @param newLifeTime time for setting
+     */
     @Description("Verify that cooldown time can be changed on other positive time")
     @Parameters({"Admin login", "Set new lifetime"})
     @Test(priority = 2, dataProvider = "changeCooldownTimePositive", dataProviderClass = CooldownData.class)
