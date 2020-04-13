@@ -2,6 +2,7 @@ package com.softserve.edu.rest.tools;
 
 import com.softserve.edu.rest.entity.SimpleEntity;
 import net.bytebuddy.utility.RandomString;
+import org.apache.commons.lang3.RandomStringUtils;
 
 public class EntityUtils {
     public static final String SUCCESS_MARKER = "true";
@@ -41,12 +42,12 @@ public class EntityUtils {
         return result;
     }
 
-    public static boolean isUserActionSuccessful(SimpleEntity logoutEntity) {
-        return logoutEntity.getContent().equalsIgnoreCase(SUCCESS_MARKER);
+    public static boolean isUserActionSuccessful(SimpleEntity entity) {
+        return entity.getContent().equalsIgnoreCase(SUCCESS_MARKER);
     }
 
-    public static boolean isUserActionUnSuccessful(SimpleEntity logoutEntity) {
-        return logoutEntity.getContent().equalsIgnoreCase(UNSUCCESSFUL_MARKER);
+    public static boolean isUserActionUnSuccessful(SimpleEntity entity) {
+        return entity.getContent().equalsIgnoreCase(UNSUCCESSFUL_MARKER);
     }
 
     /**
@@ -54,7 +55,7 @@ public class EntityUtils {
      * @return String of random letters and digits
      */
     public static String randomAlphaNumeric(int count) {
-        return RandomString.make(count);
+        return RandomStringUtils.randomAlphanumeric(count);
     }
 
     //Check if lock request is success

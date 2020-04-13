@@ -4,7 +4,6 @@ import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.services.AdministrationService;
-import com.softserve.edu.rest.services.LogginedUsersService;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.services.UserService;
 import org.slf4j.Logger;
@@ -24,7 +23,7 @@ public class LoginExistingUserTest extends LoginTestRunner{
         logger.info("Login with existing user credentials {}", user);
         UserService userService = new LoginService()
                 .successfulUserLogin(user);
-        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLogged().getToken().length());
     }
 
     @Test(dataProvider = "existingAdminDataProvider", dataProviderClass = UsersTestData.class,
@@ -33,7 +32,7 @@ public class LoginExistingUserTest extends LoginTestRunner{
         logger.info("Login with existing admin credentials {}", admin);
         AdministrationService adminService = new LoginService()
                 .successfulAdminLogin(admin);
-        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLogged().getToken().length());
     }
 
 
@@ -46,7 +45,7 @@ public class LoginExistingUserTest extends LoginTestRunner{
         List<User> users = new LoginService()
                 .successfulUserLogin(existingUser)
                 .gotoLoginService()
-                .successfulLogout(ApplicationState.get().getLastLoggined())
+                .successfulLogout(ApplicationState.get().getLastLogged())
                 .gotoLoginService()
                 .successfulAdminLogin(admin)
                 .gotoLogginedUsersService()
@@ -65,7 +64,7 @@ public class LoginExistingUserTest extends LoginTestRunner{
         SimpleEntity simpleEntity = new LoginService()
                 .successfulUserLogin(existingUser)
                 .goToLoginService()
-                .successfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
+                .successfulLogoutAsEntity(ApplicationState.get().getLastLogged());
         Assert.assertTrue(Boolean.valueOf(simpleEntity.getContent()));
 
         logger.trace("Logout result {}", simpleEntity.getContent());

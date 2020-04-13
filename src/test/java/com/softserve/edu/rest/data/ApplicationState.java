@@ -6,11 +6,11 @@ import com.softserve.edu.rest.tools.CustomException;
 import java.util.LinkedList;
 
 public class ApplicationState {
-    private static LinkedList<LogginedUser> logginedClients;
+    private static LinkedList<LogginedUser> loggedClients;
     private static ApplicationState instance;
 
     private ApplicationState(){
-        logginedClients = new LinkedList<>();
+        loggedClients = new LinkedList<>();
     }
 
     public static ApplicationState get(){
@@ -21,39 +21,39 @@ public class ApplicationState {
     }
 
     public void addUser(LogginedUser client){
-        logginedClients.add(client);
+        loggedClients.add(client);
     }
 
-    public LogginedUser getLastLoggined(){
-        return logginedClients.getLast();
+    public LogginedUser getLastLogged(){
+        return loggedClients.getLast();
     }
 
     public LogginedUser getAtIndex(int index){
-        return logginedClients.get(index);
+        return loggedClients.get(index);
     }
 
     public void removeLastLoggined(){
-        logginedClients.removeLast();
+        loggedClients.removeLast();
     }
 
     public void removeAtIndex(int index){
-        logginedClients.remove(index);
+        loggedClients.remove(index);
     }
 
-    public LinkedList<LogginedUser> getLogginedUsers() {
-        return logginedClients;
+    public LinkedList<LogginedUser> getLoggedUsers() {
+        return loggedClients;
     }
 
-    public void removeLoggined(LogginedUser logginedUser){
-        logginedClients.remove(logginedUser);
+    public void removeLogged(LogginedUser logginedUser){
+        loggedClients.remove(logginedUser);
     }
 
     public boolean isLoggined(LogginedUser logginedUser){
-        return logginedClients.contains(logginedUser);
+        return loggedClients.contains(logginedUser);
     }
 
     public LogginedUser getLogginedAdmin() throws CustomException{
-        for(LogginedUser logginedUser : logginedClients){
+        for(LogginedUser logginedUser : loggedClients){
             if(logginedUser.getUser().isAdmin())
                 return logginedUser;
         }
@@ -61,7 +61,7 @@ public class ApplicationState {
     }
 
     public LogginedUser getLogginedUser() throws CustomException{
-        for(LogginedUser logginedUser : logginedClients){
+        for(LogginedUser logginedUser : loggedClients){
             if(!logginedUser.getUser().isAdmin())
                 return logginedUser;
         }
@@ -69,7 +69,7 @@ public class ApplicationState {
     }
 
     public LogginedUser getLogginedAdmin(String name){
-        for(LogginedUser logginedUser : logginedClients){
+        for(LogginedUser logginedUser : loggedClients){
             if(logginedUser.getUser().isAdmin() && logginedUser.getUser().getName().equalsIgnoreCase(name))
                 return logginedUser;
         }
@@ -77,7 +77,7 @@ public class ApplicationState {
     }
 
     public LogginedUser getLogginedUser(String name){
-        for(LogginedUser logginedUser : logginedClients){
+        for(LogginedUser logginedUser : loggedClients){
             if(!logginedUser.getUser().isAdmin() && logginedUser.getUser().equalName(name))
                 return logginedUser;
         }

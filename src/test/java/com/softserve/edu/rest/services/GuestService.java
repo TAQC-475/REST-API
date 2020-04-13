@@ -9,30 +9,34 @@ import io.qameta.allure.Step;
 public class GuestService {
     private ApplicationResource applicationResource;
 
-    public GuestService(){
+    public GuestService() {
         applicationResource = new ApplicationResource();
     }
 
-    public LoginService gotoLoginService(){
+    public LoginService gotoLoginService() {
         return new LoginService();
     }
 
-    public UserService gotoUserService(String name){
+    public UserService gotoUserService(String name) {
         UserService userService = new UserService(ApplicationState.get().getLogginedUser(name));
         return userService;
     }
 
-    public AdministrationService gotoAdministrationService(String name){
+    public AdministrationService gotoAdministrationService(String name) {
         AdministrationService administrationService = new AdministrationService(ApplicationState.get()
                 .getLogginedAdmin(name));
         return administrationService;
     }
 
+    /**
+     * Reset application to default state
+     * @return Guest Service
+     */
     @Step("Reset_Service_To_Initial_State")
     public GuestService resetServiceToInitialState() {
         SimpleEntity simpleEntity = applicationResource.httpGetAsEntity(null, null);
         EntityUtils.get().checkEntity(simpleEntity);
-        ApplicationState.get().getLogginedUsers().clear();
+        ApplicationState.get().getLoggedUsers().clear();
         return this;
     }
 }
