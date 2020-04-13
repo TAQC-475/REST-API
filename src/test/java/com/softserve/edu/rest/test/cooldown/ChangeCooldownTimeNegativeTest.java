@@ -28,6 +28,12 @@ public class ChangeCooldownTimeNegativeTest {
         new GuestService().resetServiceToInitialState();
     }
 
+    /**
+     * try set cooldown time with a PUT request logged in as a user without admin rights
+     *
+     * @param simpleUser  for login
+     * @param newLifeTime time for setting
+     */
     @Description("Verify that not admin user can't change cooldown time")
     @Parameters({"User login", "New life time"})
     @Test(priority = 1, dataProvider = "simpleUser", dataProviderClass = CooldownData.class)
@@ -43,6 +49,14 @@ public class ChangeCooldownTimeNegativeTest {
         logger.info("END OF THE TEST");
     }
 
+    /**
+     * try set cooldown time with a PUT request with negative lifetime
+     * verify that negative time won't be changed
+     *
+     * @param admin       for login
+     * @param newLifeTime negative time for setting
+     * @param defaultTime time for comparing
+     */
     @Description("Verify that cooldown time can't be set as negative time")
     @Parameters({"Admin login", "New negative lifetime to put", "Default time to compare"})
     @Test(priority = 2, dataProvider = "negativeTime", dataProviderClass = CooldownData.class)
