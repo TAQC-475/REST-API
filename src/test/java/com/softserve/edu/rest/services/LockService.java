@@ -9,6 +9,7 @@ import com.softserve.edu.rest.resources.LockAdminsResource;
 import com.softserve.edu.rest.resources.LockUserResource;
 import com.softserve.edu.rest.resources.LockUsersResource;
 import com.softserve.edu.rest.tools.EntityUtils;
+import com.softserve.edu.rest.tools.RegexUtils;
 import io.qameta.allure.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +60,7 @@ public class LockService {
         SimpleEntity simpleEntity = lockUsersResource
                 .httpGetAsEntity(null, bodyParameters);
 
-        logger.debug("Locked users = "+simpleEntity.getContent());
+        logger.debug("Locked users = "+ RegexUtils.extractNewLinesFromLockedUsers(simpleEntity.getContent()));
         return simpleEntity.getContent();
     }
 
