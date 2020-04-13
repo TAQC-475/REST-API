@@ -12,16 +12,11 @@ public class DataForItemsTest {
 
     @DataProvider
     public Object[][] dataForAdminGettingUserItemsTest() {
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser()}};
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}};
     }
 
     @DataProvider
     public Object[][] dataForVerifyingUserCantGetAdminItems() {
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI7()}};
-    }
-
-    @DataProvider
-    public Object[][] dataForVerifyingUserCanGetAllItemsIndexes() {
-        return new Object[][]{{UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getTestItemsIndexes()}};
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}};
     }
 }

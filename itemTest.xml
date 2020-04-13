@@ -1,0 +1,13 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="ItemTest-RestApi">
+	<parameter name="url" value="http://localhost:8080" />
+	
+	<test name="ItemTest" verbose="3">
+
+		<classes>
+			<class name="com.softserve.edu.rest.test.item.ItemTest"/>
+		</classes>
+	</test>
+
+</suite>

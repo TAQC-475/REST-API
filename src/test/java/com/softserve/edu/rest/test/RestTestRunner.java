@@ -1,69 +1,52 @@
 package com.softserve.edu.rest.test;
 
-import java.io.IOException;
-import java.util.Map;
-
-import com.softserve.edu.rest.test.user.CreateNewUserTest;
+import com.softserve.edu.rest.services.GuestService;
+import io.qameta.allure.Step;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeMethod;
 
-import com.softserve.edu.rest.services.GuestServiceDoNotUse;
-
-import io.qameta.allure.Step;
+import java.util.Map;
 
 public abstract class RestTestRunner {
-	protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
-	private final Long ONE_SECOND_DELAY = 1000L;
+    protected final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
+    private final Long ONE_SECOND_DELAY = 1000L;
 
-	@Step
-	@BeforeClass
-	public void beforeClass(ITestContext context) {
-		for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
-			System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
-		}
-	}
+    @Step
+    @BeforeClass
+    public void beforeClass(ITestContext context) {
+        for (Map.Entry<String, String> entry : context.getCurrentXmlTest().getAllParameters().entrySet()) {
+            System.out.println("Key: " + entry.getKey() + "  Value: " + entry.getValue());
+        }
+    }
 
-//	@AfterClass(alwaysRun = true)
-//	public void afterClass() {
-//	}
+    @AfterMethod
+    public void afterMethod(ITestResult result) {
+        loadApplication().resetServiceToInitialState();
+        if (!result.isSuccess()) {
+            LOGGER.warn("Test fail: " + result.getName());
+            System.out.println("***Test " + result.getName() + " ERROR");
+        }
+    }
 
-	// @Before
-	@BeforeMethod
-	public void beforeMethod() {
-	}
+    @Step("Load_Application")
+    public GuestService loadApplication() {
+        return new GuestService();
+    }
 
-	// @After
-	@AfterMethod
-	public void afterMethod(ITestResult result){
-		loadApplication().resetServiceToInitialState();
-		if (!result.isSuccess()) {
-			LOGGER.warn("Test fail: " + result.getName());
-			System.out.println("***Test " + result.getName() + " ERROR");
-		}
-	}
+    public void presentationSleep() {
+        presentationSleep(1);
+    }
 
-	@Step("Load_Application")
-	public GuestServiceDoNotUse loadApplication() {
-		// TODO Check Server Availability
-		return new GuestServiceDoNotUse();
-	}
-
-	public void presentationSleep() {
-		presentationSleep(1);
-	}
-
-	public void presentationSleep(Integer seconds) {
-		try {
-			Thread.sleep(seconds * ONE_SECOND_DELAY); // For Presentation ONLY
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
+    public void presentationSleep(Integer seconds) {
+        try {
+            Thread.sleep(seconds * ONE_SECOND_DELAY); // For Presentation ONLY
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 
 }

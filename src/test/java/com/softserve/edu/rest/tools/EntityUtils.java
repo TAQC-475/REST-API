@@ -1,7 +1,7 @@
 package com.softserve.edu.rest.tools;
 
 import com.softserve.edu.rest.entity.SimpleEntity;
-import org.apache.commons.lang3.RandomStringUtils;
+import net.bytebuddy.utility.RandomString;
 
 public class EntityUtils {
     public static final String SUCCESS_MARKER = "true";
@@ -19,11 +19,16 @@ public class EntityUtils {
     }
 
     public SimpleEntity checkEntity(SimpleEntity result) {
-        if (result.getContent() == null
-                || result.getContent() == ""
-                || result.getContent() == "null") {
-            throw new RuntimeException("Content is not found or Token time out");
-        }
+//        if (
+//                result.getContent() == null
+//                || result.getContent() == ""
+//                || result.getContent() == "null") {
+//            throw new RuntimeException("Content is not found or Token time out");
+//        }
+        return result;
+    }
+
+    public SimpleEntity deleteEntity(SimpleEntity result) {
         return result;
     }
 
@@ -49,7 +54,7 @@ public class EntityUtils {
      * @return String random letters and digits
      */
     public static String randomAlphaNumeric(int count) {
-        return RandomStringUtils.randomAlphanumeric(count);
+        return RandomString.make(count);
     }
 
     //Check if lock request is success

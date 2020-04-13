@@ -41,6 +41,9 @@ public final class UserRepository {
     public static User getValidUser() {
         return new User("otlumtc", "qwerty", false);
     }
+    public static User getAkimatcUser() {
+        return new User("akimatc", "qwerty", false);
+    }
 
     public static User getUserWithWrongPassword() {
         return new User("otlumtc", "wrong", false);

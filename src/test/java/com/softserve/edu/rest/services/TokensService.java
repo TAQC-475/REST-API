@@ -48,7 +48,7 @@ public class TokensService extends AdministrationService{
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedAdmin.getToken())
                 .addParameter(EParameters.TIME, lifetime.getTimeAsText());
-        SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, null, bodyParameters);
+        SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, bodyParameters, null );
         //checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
         return this;
     }
@@ -62,11 +62,11 @@ public class TokensService extends AdministrationService{
         return this;
     }
 //    public boolean isUserLogged(User user) {
-//
-//        if (getAllLoggedUsers().contains(user.getName())) {
-//            return true;
-//        } else {
-//            return false;
-//        }
-//    }
+////
+////        if (getAllLoggedUsers().contains(user.getName())) {
+////            return true;
+////        } else {
+////            return false;
+////        }
+////    }
 }

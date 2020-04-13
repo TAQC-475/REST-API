@@ -1,12 +1,14 @@
 package com.softserve.edu.rest.services;
 
 import com.softserve.edu.rest.data.Item;
+import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.ItemsIndexesResource;
 import com.softserve.edu.rest.resources.ItemResource;
+import com.softserve.edu.rest.resources.UserItemResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 import io.qameta.allure.Step;
 import org.slf4j.Logger;
@@ -23,23 +25,30 @@ public class ItemService {
     private LogginedUser logginedUser;
     private ItemResource itemResource;
     private ItemsIndexesResource itemsIndexesResource;
+    private UserItemResource userItemResource;
 
     public ItemService(LogginedUser logginedUser) {
         this.logginedUser = logginedUser;
         itemResource = new ItemResource();
         itemsIndexesResource = new ItemsIndexesResource();
+        userItemResource = new UserItemResource();
     }
 
-    private List<Integer> parseIndexes(String indexes){
+    private List<Integer> parseIndexes(String indexes) {
         List<Integer> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("\\d+");
         Matcher matcher = pattern.matcher(indexes);
-        while (matcher.find()){
-            result.add(Integer.valueOf(indexes.substring(matcher.start(),matcher.end())));
+        while (matcher.find()) {
+            result.add(Integer.valueOf(indexes.substring(matcher.start(), matcher.end())));
         }
         return result;
     }
 
+    /**
+     * get indexes of all items of logged in user and checks if index from params is available
+     * @param index index to check for availability
+     * @return true if index is available, false if item with such index already exists
+     */
     private boolean isIndexFree(int index){
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
@@ -55,14 +64,38 @@ public class ItemService {
         return isFree;
     }
 
-    public ItemService overrideItem(Item item){
-     return addItem(item, true);
+    @Step("Overriding item")
+    public ItemService overrideItem(Item item) {
+        return addItem(item, true);
     }
 
-    @Step("Adding Item")
+    @Step("Overwrite user's item (PUT)")
+    public ItemService putOverwriteItem(Item initialItem, Item overwtriteItem) {
+
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, logginedUser.getToken())
+                .addParameter(EParameters.ITEM, overwtriteItem.getItemText());
+
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.INDEX, initialItem.getItemIndex());
+
+        SimpleEntity result = itemResource
+                .httpPutAsEntity(pathParameters, bodyParameters, null);
+        EntityUtils.get().checkEntity(result);
+        LOGGER.debug("putOvewriteItem method returns result = {} " , result);
+        return this;
+    }
+
+    /**
+     * Preparing and sending POST request as logged in user to add item
+     * @param item item to add
+     * @param toOverride to override item, if item with same index already exists?
+     * @return ItemService after adding an item
+     */
+    @Step("Item Service: item added {item}")
     public ItemService addItem(Item item, boolean toOverride){
-        LOGGER.debug("addItem method gets: " + item.toString());
-        if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
+        LOGGER.debug("addItem method gets item = {} " , item);
+        if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
             LOGGER.warn("RuntimeException");
             throw new RuntimeException("Item with such index already exists");
         }
@@ -73,13 +106,20 @@ public class ItemService {
                 .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity status = itemResource.httpPostAsEntity(pathParameters, null, bodyParameters);
         EntityUtils.get().checkEntity(status);
-        LOGGER.debug("addItem method returns status: " + status);
+        LOGGER.debug("addItem method returns status = {} " , status);
         return this;
     }
 
+    /**
+     * Preparing and sending POST request as logged in user to add item and get response status code
+     * @param item item to add
+     * @param toOverride to override item, if item with same index already exists?
+     * @return status code of adding item request
+     */
     @Step("Get status code of add item request")
     public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
-        if(!toOverride && !isIndexFree(Integer.valueOf(item.getItemIndex()))){
+        LOGGER.debug("Getting request code after adding item = {}", item);
+        if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
             throw new RuntimeException("Item with such index already exists");
         }
         RestParameters bodyParameters = new RestParameters()
@@ -88,24 +128,51 @@ public class ItemService {
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity statusCode = itemResource.httpPostAsEntity(pathParameters, null, bodyParameters);
+        LOGGER.debug("Adding item = {} status code = {}", item,  statusCode.getCode());
         return statusCode.getCode();
     }
-
-    public Item getItem(Item item){
+    @Step("Getting item")
+    public String getItem(Item item) {
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity result = itemResource.httpGetAsEntity(pathParameters, urlParameters);
         EntityUtils.get().checkEntity(result);
-        return new Item(item.getItemIndex(), result.getContent());
+        return result.getContent();
     }
 
-    public UserService goToUserService(){
+    @Step("Getting user item by another user")
+    public String getUserItemByAnotherUser(User user, Item item) {
+        RestParameters urlParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.NAME, user.getName())
+                .addParameter(EParameters.INDEX, item.getItemIndex());
+
+        SimpleEntity result = userItemResource.httpGetAsEntity(pathParameters, urlParameters);
+        EntityUtils.get().checkEntity(result);
+        return result.getContent();
+    }
+
+    @Step("Delete item")
+    public ItemService deleteItem(Item item) {
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
+
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.INDEX, item.getItemIndex())
+                .addParameter(EParameters.ITEM, item.getItemText());
+
+        SimpleEntity result = itemResource.httpDeleteAsEntity(pathParameters, bodyParameters, null);
+        return this;
+    }
+
+
+    public UserService goToUserService() {
         return new UserService(logginedUser);
     }
 
-    @Step("Go to Items service")
     public ItemsService goToItemsService(){
         return new ItemsService(logginedUser);
     }
