@@ -23,8 +23,6 @@ public class ItemTest extends ItemTestRunner {
     Test 1
     Verify if User Can Create Item
     */
-    @Parameters({"User", "Item"})
-    @Test(dataProvider = "dataForAddItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanCreateItem(User user, Item insertItem, Item checkItem){
         String result = new LoginService()
                 .successfulUserLogin(user)
