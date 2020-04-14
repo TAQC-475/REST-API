@@ -29,7 +29,7 @@ public class ItemData {
     @DataProvider
     public Object[][] dataForAddItemByAdminTest(){
         return new Object[][]{{UserRepository.getAdmin(),
-                ItemRepository.getCoreI9(), ItemRepository.getCoreI9()}};
+                ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
     }
     @DataProvider
     public Object[][] dataForTwoUsersTest(){
