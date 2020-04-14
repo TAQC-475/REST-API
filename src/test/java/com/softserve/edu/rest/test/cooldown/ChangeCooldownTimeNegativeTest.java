@@ -50,7 +50,8 @@ public class ChangeCooldownTimeNegativeTest {
     }
 
     /**
-     * try set cooldown time with a PUT request with negative lifetime
+     * try set cooldown time with a PUT request with lower then minimum
+     * and bigger then maximum lifetime values
      * verify that negative time won't be changed
      *
      * @param admin       for login
@@ -59,7 +60,7 @@ public class ChangeCooldownTimeNegativeTest {
     @Description("Verify that cooldown time can't be set as negative time")
     @Parameters({"Admin login", "New negative lifetime to put", "Default time to compare"})
     @Test(priority = 2, dataProvider = "negativeTime", dataProviderClass = CooldownData.class)
-    public void cooldownTimeWithNegativeNumberTest(User admin, Lifetime newLifeTime) {
+    public void cooldownTimeWithNegativeNumberTest(User admin, Lifetime newLifeTime, Lifetime defaultTime) {
         logger.info("START TEST Change cooldown time with negative number = {}, as admin = {}", newLifeTime.getTime(), admin.getName());
         Lifetime checkNewCooldownTime = new LoginService()
                 .successfulAdminLogin(admin)
@@ -67,8 +68,8 @@ public class ChangeCooldownTimeNegativeTest {
                 .changeCooldown(newLifeTime)
                 .getCooldownTime();
 
-        Assert.assertNotEquals(checkNewCooldownTime.getTime(),
-                newLifeTime.getTime());
+        Assert.assertEquals(checkNewCooldownTime.getTime(),
+                defaultTime.getTime());
         logger.info("END OF THE TEST");
     }
 

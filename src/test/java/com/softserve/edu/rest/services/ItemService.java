@@ -91,7 +91,7 @@ public class ItemService {
      * @param toOverride to override item, if item with same index already exists?
      * @return ItemService after adding an item
      */
-    @Step("Item Service: item added {item}")
+    @Step("Item service: item added {item}")
     public ItemService addItem(Item item, boolean toOverride){
         LOGGER.debug("addItem method gets item = {} " , item);
         if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
@@ -115,7 +115,7 @@ public class ItemService {
      * @param toOverride to override item, if item with same index already exists?
      * @return status code of adding item request
      */
-    @Step("Get status code of add item request")
+    @Step("Item service: Got status code of add item request {item}")
     public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
         LOGGER.debug("Getting request code after adding item = {}", item);
         if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
@@ -130,7 +130,7 @@ public class ItemService {
         LOGGER.debug("Adding item = {} status code = {}", item,  statusCode.getCode());
         return statusCode.getCode();
     }
-    @Step("Getting item")
+    @Step("Item service: Got item {item}")
     public String getItem(Item item) {
         LOGGER.debug("User trying to get his item = {} " , item);
         RestParameters urlParameters = new RestParameters()
