@@ -12,7 +12,7 @@ import io.qameta.allure.Description;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
@@ -22,7 +22,7 @@ public class ChangeCooldownTimeNegativeTest {
 
     private CooldownService cooldownService;
 
-    @BeforeSuite
+    @BeforeMethod
     public void createExtraUsers() {
         logger.info("BEFORE CLASS reset service to initial state");
         new GuestService().resetServiceToInitialState();
@@ -55,12 +55,11 @@ public class ChangeCooldownTimeNegativeTest {
      *
      * @param admin       for login
      * @param newLifeTime negative time for setting
-     * @param defaultTime time for comparing
      */
     @Description("Verify that cooldown time can't be set as negative time")
     @Parameters({"Admin login", "New negative lifetime to put", "Default time to compare"})
     @Test(priority = 2, dataProvider = "negativeTime", dataProviderClass = CooldownData.class)
-    public void cooldownTimeWithNegativeNumberTest(User admin, Lifetime newLifeTime, Lifetime defaultTime) {
+    public void cooldownTimeWithNegativeNumberTest(User admin, Lifetime newLifeTime) {
         logger.info("START TEST Change cooldown time with negative number = {}, as admin = {}", newLifeTime.getTime(), admin.getName());
         Lifetime checkNewCooldownTime = new LoginService()
                 .successfulAdminLogin(admin)
@@ -69,7 +68,7 @@ public class ChangeCooldownTimeNegativeTest {
                 .getCooldownTime();
 
         Assert.assertNotEquals(checkNewCooldownTime.getTime(),
-                defaultTime.getTime());
+                newLifeTime.getTime());
         logger.info("END OF THE TEST");
     }
 

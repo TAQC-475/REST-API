@@ -21,9 +21,22 @@ public final class LifetimeRepository {
 
 	public static Lifetime getNewCooldownTime() { return new Lifetime("360000"); }
 
-	public static Lifetime getNegativeLifeTime() { return new Lifetime("-100000"); }
+	public static Lifetime getCooldownNegative() { return new Lifetime("-1"); }
 
 	public static Lifetime getShort() {		return new Lifetime("5000"); }
 
 	public static Lifetime getZeroLifetime() {		return new Lifetime("0"); }
+
+	public static Lifetime getCooldownMax() {
+		return new Lifetime("43200000");
+	}
+
+	public static Lifetime getCooldownMoreThanMax() {
+		return new Lifetime("43200001");
+	}
+
+	public static Lifetime getCooldownMin() {
+		return new Lifetime("1");
+	}
+
 }
