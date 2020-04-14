@@ -17,7 +17,7 @@ import java.util.List;
 
 import static org.seleniumhq.jetty9.http.HttpStatus.Code.BAD_REQUEST;
 
-@Epic("Test indexes")
+@Epic("Test of items indexes resource")
 public class IndexTest extends RestTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
 
