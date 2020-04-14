@@ -2,7 +2,6 @@ package com.softserve.edu.rest.test.login;
 
 import com.softserve.edu.rest.data.ApplicationState;
 import com.softserve.edu.rest.data.User;
-import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +22,7 @@ public class LoginNewUserTest extends LoginTestRunner {
                 .createUser(newUser)
                 .gotoLoginService()
                 .successfulUserLogin(newUser);
-        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLogged().getToken().length());
     }
 
     @Test(dataProvider = "nonExistingAdminDataProvider", dataProviderClass = UsersTestData.class)
@@ -35,7 +34,7 @@ public class LoginNewUserTest extends LoginTestRunner {
                 .createUser(newAdmin)
                 .goToLoginService()
                 .successfulAdminLogin(newAdmin);
-        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLoggined().getToken().length());
+        Assert.assertEquals(tokenLength, ApplicationState.get().getLastLogged().getToken().length());
     }
 
 }

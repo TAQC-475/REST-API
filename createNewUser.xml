@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+
+<suite name="Creating new user REST-API">
+    <parameter name="url" value="http://localhost:8080"/>
+    <test name="Create New User Tests" verbose="3">
+        <classes>
+            <class name="com.softserve.edu.rest.test.user.CreateNewUserTest"/>
+        </classes>
+    </test>
+</suite>

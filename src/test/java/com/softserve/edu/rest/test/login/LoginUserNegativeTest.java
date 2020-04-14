@@ -9,7 +9,6 @@ import com.softserve.edu.rest.services.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class LoginUserNegativeTest extends LoginTestRunner{
@@ -57,7 +56,7 @@ public class LoginUserNegativeTest extends LoginTestRunner{
         SimpleEntity errorMessage = new LoginService()
                 .successfulAdminLogin(admin)
                 .goToLoginService()
-                .unsuccessfulLogoutAsEntity(ApplicationState.get().getLastLoggined());
+                .unsuccessfulLogoutAsEntity(ApplicationState.get().getLastLogged());
         Assert.assertFalse(Boolean.valueOf(errorMessage.getContent()));
     }
 }

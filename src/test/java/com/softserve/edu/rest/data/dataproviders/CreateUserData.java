@@ -23,7 +23,7 @@ public class CreateUserData {
         User newUser = UserRepository.getCorrectNewUser(EMPTY_FIELD, VALID_PASSWORD_SYMBOLS_COUNT);
         return new Object[][]{{UserRepository.getAdmin(),
                 newUser,
-                newUser}};
+                true}};
     }
 
     @DataProvider
@@ -39,6 +39,6 @@ public class CreateUserData {
         User newUser = UserRepository.getCorrectNewUser(EMPTY_FIELD, EMPTY_FIELD);
         return new Object[][]{{UserRepository.getAdmin(),
                 newUser,
-                newUser}};
+                true}};
     }
 }

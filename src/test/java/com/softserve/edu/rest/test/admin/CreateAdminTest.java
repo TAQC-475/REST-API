@@ -25,7 +25,7 @@ public class CreateAdminTest {
             .gotoManageUserService()
             .createUser(userVasya)
             .goToLoginService()
-            .successfulLogout(ApplicationState.get().getLastLoggined())
+            .successfulLogout(ApplicationState.get().getLastLogged())
             .gotoLoginService()
             .successfulAdminLogin(userVasya)
             .gotoManageUserService()

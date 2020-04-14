@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class RemoveAdminsTest {
@@ -22,7 +21,7 @@ public class RemoveAdminsTest {
             .gotoManageUserService()
             .createUser(UserRepository.getAdminDana())
             .goToLoginService()
-            .successfulLogout(ApplicationState.get().getLastLoggined());
+            .successfulLogout(ApplicationState.get().getLastLogged());
     }
 
 
