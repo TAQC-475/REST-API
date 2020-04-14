@@ -56,20 +56,16 @@ public class TokenLifetimeTest extends RestTestRunner {
     public void verifyTokenLifetime(User admin, Lifetime tokenShort){
 
         AdministrationService administrationService=new LoginService().successfulAdminLogin(admin);
+        UsersService usersService = new UsersService(administrationService.getLogginedUser());
+        TokensService tokensService = new TokensService(administrationService.getLogginedUser());
 
-        TokensService tokensService=new TokensService(administrationService.getLogginedUser());
         tokensService
-                .changeCurrentLifetime(tokenShort);
-               // .waitTokenLifeTime(tokenShort);
-        List<User> user = administrationService.gotoUsersService().getAllUsers();
-        //LogginedUser user1 = administrationService.gotoUserService()getLogginedUser();
-        //ItemService user2 = administrationService.goToItemService();
-////////тут
-        //LogginedUser user= tokensService.getLogginedUser();
+                .changeCurrentLifetime(tokenShort)
+                .waitTokenLifeTime(tokenShort);
 
-       // Assert.assertFalse();
-//        Assert.assertEquals(tokensService.getCurrentLifetime(), tokenShort);
+        List<User> admins = usersService.getAdmins();
 
+        Assert.assertTrue(admins.isEmpty());
     }
 
     @Test(dataProvider = "correctAdminNegative", priority = 3)
