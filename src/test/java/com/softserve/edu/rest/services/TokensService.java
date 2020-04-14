@@ -69,4 +69,15 @@ public class TokensService extends AdministrationService{
 ////            return false;
 ////        }
 ////    }
+
+//    public boolean isUserPresent(User user){
+//    boolean result = false;
+//    for (User current: getAllUsers()){
+//        if (current.equalName(user)){
+//            result = true;
+//            break;
+//        }
+//    }
+//    return result;
+//}
 }

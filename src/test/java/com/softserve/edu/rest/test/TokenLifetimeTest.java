@@ -9,6 +9,8 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class TokenLifetimeTest extends RestTestRunner {
 
     @DataProvider
@@ -25,14 +27,28 @@ public class TokenLifetimeTest extends RestTestRunner {
         };
     }
 
+    @DataProvider
+    public Object[][] correctAdminNegative() {
+        return new Object[][]{
+                { UserRepository.getAdmin(), LifetimeRepository.getNegativeLifeTime()}
+        };
+    }
+
+    @DataProvider
+    public Object[][] correctAdminZero() {
+        return new Object[][]{
+                { UserRepository.getAdmin(), LifetimeRepository.getZeroLifetime()}
+        };
+    }
+
     @Test(dataProvider = "correctAdminExtend", priority = 1)
-    public void verifyTokenChange(User admin, Lifetime extend){
+    public void verifyTokenChange(User admin, Lifetime tokenExtend){
         AdministrationService administrationService =new LoginService().successfulAdminLogin(admin);
         TokensService tokensService = new TokensService(administrationService.getLogginedUser());
 
-        tokensService.changeCurrentLifetime(extend);
+        tokensService.changeCurrentLifetime(tokenExtend);
 
-        Assert.assertEquals(tokensService.getCurrentLifetime(), extend);
+        Assert.assertEquals(tokensService.getCurrentLifetime(), tokenExtend);
 
     }
 
@@ -40,10 +56,43 @@ public class TokenLifetimeTest extends RestTestRunner {
     public void verifyTokenLifetime(User admin, Lifetime tokenShort){
 
         AdministrationService administrationService=new LoginService().successfulAdminLogin(admin);
+
         TokensService tokensService=new TokensService(administrationService.getLogginedUser());
-        tokensService.changeCurrentLifetime(tokenShort).waitTokenLifeTime(tokenShort);
+        tokensService
+                .changeCurrentLifetime(tokenShort);
+               // .waitTokenLifeTime(tokenShort);
+        List<User> user = administrationService.gotoUsersService().getAllUsers();
+        //LogginedUser user1 = administrationService.gotoUserService()getLogginedUser();
+        //ItemService user2 = administrationService.goToItemService();
+////////тут
+        //LogginedUser user= tokensService.getLogginedUser();
 
-        //Assert.assertFalse(administrationService.isUserLogged(admin));
+       // Assert.assertFalse();
+//        Assert.assertEquals(tokensService.getCurrentLifetime(), tokenShort);
 
+    }
+
+    @Test(dataProvider = "correctAdminNegative", priority = 3)
+    public void verifyNegativeTokenLifetime(User admin, Lifetime negativeLifeTime){
+
+        AdministrationService administrationService=new LoginService().successfulAdminLogin(admin);
+        TokensService tokensService=new TokensService(administrationService.getLogginedUser());
+
+        tokensService.changeCurrentLifetime(negativeLifeTime);
+
+////////тут
+        //Assert.assertEquals(tokensService.getCurrentLifetime(), tokenShort);
+    }
+
+    @Test(dataProvider = "correctAdminZero", priority = 4)
+    public void verifyZeroTokenLifetime(User admin, Lifetime zeroLifeTime){
+
+        AdministrationService administrationService=new LoginService().successfulAdminLogin(admin);
+        TokensService tokensService=new TokensService(administrationService.getLogginedUser());
+
+        tokensService.changeCurrentLifetime(zeroLifeTime);
+
+////////тут
+        //Assert.assertEquals(tokensService.getCurrentLifetime(), tokenShort);
     }
 }
