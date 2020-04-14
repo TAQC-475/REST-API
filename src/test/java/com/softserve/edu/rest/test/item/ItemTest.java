@@ -8,16 +8,22 @@ import com.softserve.edu.rest.data.User;
 import com.softserve.edu.rest.data.UserRepository;
 import com.softserve.edu.rest.services.ItemService;
 import com.softserve.edu.rest.services.LoginService;
+import com.softserve.edu.rest.test.items_and_indexes.IndexTest;
 import com.softserve.edu.rest.test.login.LoginTestRunner;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.testng.Assert;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 
 public class ItemTest extends ItemTestRunner {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ItemTest.class);
     /*
     Test 1
     Verify if User Can Create Item
     */
+    @Parameters({"User", "Item"})
     @Test(dataProvider = "dataForAddItemTest", dataProviderClass=ItemData.class)
     public void verifyUserCanCreateItem(User user, Item insertItem, Item checkItem){
         String result = new LoginService()

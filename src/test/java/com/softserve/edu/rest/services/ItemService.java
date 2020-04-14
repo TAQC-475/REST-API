@@ -63,15 +63,14 @@ public class ItemService {
         }
         return isFree;
     }
-
-    @Step("Overriding item")
+    
     public ItemService overrideItem(Item item) {
         return addItem(item, true);
     }
 
     @Step("Overwrite user's item (PUT)")
     public ItemService putOverwriteItem(Item initialItem, Item overwtriteItem) {
-
+        LOGGER.debug("User trying to owerwrite(PUT method) his initial item = {} to new item ={}" , initialItem, overwtriteItem);
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken())
                 .addParameter(EParameters.ITEM, overwtriteItem.getItemText());
@@ -133,17 +132,20 @@ public class ItemService {
     }
     @Step("Getting item")
     public String getItem(Item item) {
+        LOGGER.debug("User trying to get his item = {} " , item);
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
                 .addParameter(EParameters.INDEX, item.getItemIndex());
         SimpleEntity result = itemResource.httpGetAsEntity(pathParameters, urlParameters);
         EntityUtils.get().checkEntity(result);
+        LOGGER.debug("getItem method returns result = {} " , result.getContent());
         return result.getContent();
     }
 
     @Step("Getting user item by another user")
     public String getUserItemByAnotherUser(User user, Item item) {
+        LOGGER.debug("User ={} trying to get another user item = {}" , user, item);
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
         RestParameters pathParameters = new RestParameters()
@@ -152,11 +154,13 @@ public class ItemService {
 
         SimpleEntity result = userItemResource.httpGetAsEntity(pathParameters, urlParameters);
         EntityUtils.get().checkEntity(result);
+        LOGGER.debug("getUserItemByAnotherUser method returns result = {} " , result.getContent());
         return result.getContent();
     }
 
     @Step("Delete item")
     public ItemService deleteItem(Item item) {
+        LOGGER.debug("User trying to delete his item = {}", item);
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
 
@@ -165,6 +169,7 @@ public class ItemService {
                 .addParameter(EParameters.ITEM, item.getItemText());
 
         SimpleEntity result = itemResource.httpDeleteAsEntity(pathParameters, bodyParameters, null);
+        LOGGER.debug("deleteItem method returns result = {} ", result.getContent());
         return this;
     }
 
