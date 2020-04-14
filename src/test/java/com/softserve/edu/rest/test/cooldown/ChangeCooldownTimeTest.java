@@ -40,7 +40,8 @@ public class ChangeCooldownTimeTest {
     }
 
     /**
-     * set cooldown time PUT request and after verify responded time
+     * set cooldown time with positive boundary values
+     * do PUT request and after verify responded time
      *
      * @param admin       for login
      * @param newLifeTime time for setting

@@ -53,6 +53,27 @@ public class LockTest {
     }
 
     /**
+     * logs in as admin and tries to unlock user
+     * verifies that user is unlocked
+     *
+     * @param admin    for login and unlocking user after check user status
+     * @param someUser user for unlocking by admin
+     */
+    @Description("Verify that logged-in admin can unlock user")
+    @Parameters({"Admin login", "User for unlocking"})
+    @Test(priority = 3, dataProvider = "lockUser", dataProviderClass = LockData.class)
+    public void unlockUserFromAdmin(User admin, User someUser) {
+        logger.info("START TEST Unlock user = {}, as admin = {} ", someUser.getName(), admin.getName());
+        LockService adminService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoLockService()
+                .unlockUser(someUser);
+
+        Assert.assertFalse(adminService.isUserLocked(someUser));
+        logger.info("END OF THE TEST");
+    }
+
+    /**
      * do three tries of login as a user with wrong password
      * after login as an admin and verifies that user is locked
      *
@@ -76,27 +97,6 @@ public class LockTest {
     }
 
     /**
-     * logs in as admin and tries to unlock user
-     * verifies that user is unlocked
-     *
-     * @param admin    for login and unlocking user after check user status
-     * @param someUser user for unlocking by admin
-     */
-    @Description("Verify that logged-in admin can unlock user")
-    @Parameters({"Admin login", "User for unlocking"})
-    @Test(priority = 3, dataProvider = "lockUser", dataProviderClass = LockData.class)
-    public void unlockUserFromAdmin(User admin, User someUser) {
-        logger.info("START TEST Unlock user = {}, as admin = {} ", someUser.getName(), admin.getName());
-        LockService adminService = new LoginService()
-                .successfulAdminLogin(admin)
-                .gotoLockService()
-                .unlockUser(someUser);
-
-        Assert.assertFalse(adminService.isUserLocked(someUser));
-        logger.info("END OF THE TEST");
-    }
-
-    /**
      * logs in as admin and tries to lock himself
      * verifies that admin is locked
      *
@@ -112,7 +112,7 @@ public class LockTest {
                 .gotoLockService()
                 .lockUser(adminVasya);
 
-        Assert.assertTrue(adminService.isUserLocked(adminVasya));
+        Assert.assertTrue(adminService.isAdminLocked(adminVasya));
         logger.info("END OF THE TEST");
     }
 

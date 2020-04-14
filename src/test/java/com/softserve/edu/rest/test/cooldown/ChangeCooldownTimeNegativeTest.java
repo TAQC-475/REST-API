@@ -50,7 +50,8 @@ public class ChangeCooldownTimeNegativeTest {
     }
 
     /**
-     * try set cooldown time with a PUT request with negative lifetime
+     * try set cooldown time with a PUT request with lower then minimum
+     * and bigger then maximum lifetime values
      * verify that negative time won't be changed
      *
      * @param admin       for login
