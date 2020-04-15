@@ -70,6 +70,4 @@ public class AdministrationService extends UserService {
         LOGGER.debug("Go to Manage User Service");
         return new ManageUserService(logginedUser);
     }
-
-
 }
