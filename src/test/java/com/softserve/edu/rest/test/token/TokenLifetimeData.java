@@ -46,9 +46,10 @@ public class TokenLifetimeData {
     public Object[][] correctAdminUpdate() {
         logger.info("@DataProvider correctAdminUpdate() DONE");
         return new Object[][]{
-                {UserRepository.getAdmin(), LifetimeRepository.getShort(),LifetimeRepository.getExtend()}
+                {UserRepository.getAdmin(), LifetimeRepository.getShort(), LifetimeRepository.getExtend()}
         };
     }
+
     @DataProvider
     public Object[][] correctAdminMax() {
         logger.info("@DataProvider correctAdminUpdate() DONE");
