@@ -84,6 +84,12 @@ public class LoginService {
         return this;
     }
 
+    /**
+     * Unsuccessful User Login as entity
+     *
+     * @param basicUser user for login to system
+     * @return Login Service
+     */
     @Step("Unsuccessful User Login")
     public SimpleEntity unsuccessfulUserLoginAsEntity(User basicUser) {
         LOGGER.warn("Unsuccessful login {}", basicUser.getName());
@@ -180,13 +186,14 @@ public class LoginService {
      * @return new Login Service
      */
     public SimpleEntity successfulLoginAndLogout(User baseUser) {
-        return new LoginService().successfulUserLogin(baseUser)
+        return new LoginService()
+                .successfulUserLogin(baseUser)
                 .goToLoginService()
                 .successfulLogoutAsEntity(ApplicationState.get().getLastLogged());
     }
 
     /**
-     * User login and logout
+     * User login and create user
      *
      * @param admin login as administrator
      * @param newUser data for creating new user

@@ -41,9 +41,9 @@ public class UpdateUserPasswordTest extends UserTestRunner {
     @Test(dataProvider = "updateUserPasswordToBeforeTheLimitData", dataProviderClass = UserPasswordData.class)
     public void updatePasswordToInvalidMinimumSymbols(User user, User oldPassword, String newPassword,
                                                       User sameUser) {
-
         LOGGER.info("Changing user password to invalid minimum with parameters: old password = " + oldPassword.getPassword()
                 + "; new password = " + newPassword);
+
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -62,9 +62,9 @@ public class UpdateUserPasswordTest extends UserTestRunner {
     @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordToMinimumValidData", dataProviderClass = UserPasswordData.class)
     public void updatePasswordToValidMinimumSymbols(User user, User oldPassword, String newPassword, User sameUser) {
-
         LOGGER.info("Changing user password to valid minimum with parameters: old password = " + oldPassword.getPassword()
                 + "; new password = " + newPassword);
+
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -83,9 +83,9 @@ public class UpdateUserPasswordTest extends UserTestRunner {
     @Parameters({"User login", "User with old password", "New password", "Login with new password"})
     @Test(dataProvider = "updateUserPasswordData", dataProviderClass = UserPasswordData.class)
     public void updateUserPassword(User user, User oldPassword, String newPassword, User sameUser) {
-
         LOGGER.info("Changing user password to valid with parameters: old password = " + oldPassword.getPassword()
                 + "; new password = " + newPassword);
+
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -107,6 +107,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
                                                         User sameUser) {
         LOGGER.info("Changing user password to valid maximum with parameters: old password = " + oldPassword.getPassword()
                 + "; new password = " + newPassword);
+
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
@@ -128,6 +129,7 @@ public class UpdateUserPasswordTest extends UserTestRunner {
                                                           User sameUser) {
         LOGGER.info("Changing user password to invalid maximum with parameters: old password = " + oldPassword.getPassword()
                 + "; new password = " + newPassword);
+
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
