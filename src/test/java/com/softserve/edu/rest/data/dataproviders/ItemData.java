@@ -8,17 +8,17 @@ public class ItemData {
     @DataProvider
     public Object[][] dataForAddItemTest(){
         return new Object[][]{{UserRepository.getValidUser(),
-                ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
+                ItemRepository.getDefaultItem()}};
     }
     @DataProvider
     public Object[][] dataForUpdateItemTest(){
         return new Object[][]{
                 {UserRepository.getAdmin(),
-                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()},
+                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7()},
                 {UserRepository.getUserVasya(),
-                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()},
+                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7()},
                 {UserRepository.getAdminDana(),
-                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}
+                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}
         };
     }
     @DataProvider
@@ -29,17 +29,17 @@ public class ItemData {
     @DataProvider
     public Object[][] dataForAddItemByAdminTest(){
         return new Object[][]{{UserRepository.getAdmin(),
-                ItemRepository.getDefaultItem(), ItemRepository.getDefaultItem()}};
+                ItemRepository.getDefaultItem()}};
     }
     @DataProvider
     public Object[][] dataForTwoUsersTest(){
         return new Object[][]{{UserRepository.getUserDana(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI5(), ItemRepository.getCoreI5()}};
+                ItemRepository.getCoreI5()}};
     }
     @DataProvider
     public Object[][] dataForAdminAndUserTest(){
         return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
+                ItemRepository.getCoreI7()}};
     }
     @DataProvider
     public Object[][] dataForAdminAndNewUserTest(){
