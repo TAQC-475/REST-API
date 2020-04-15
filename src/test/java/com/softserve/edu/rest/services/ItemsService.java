@@ -35,7 +35,7 @@ public class ItemsService {
      * Prepares and sends GET request to get all logged in user items
      * @return all logged in user items
      */
-    @Step("Get all items")
+    @Step("Items service: got all items")
     public String getAllItems() {
         LOGGER.debug("User = {} trying to get all his items", logginedUser.getUser().getName());
         RestParameters urlParameters = new RestParameters()
@@ -62,7 +62,7 @@ public class ItemsService {
      * @param user user whose items request gets
      * @return all items of some user as admin
      */
-    @Step("Get all user items as admin")
+    @Step("Items service: got all user {user} items as admin")
     public String getAllUserItemsAsAdmin(User user) {
         LOGGER.debug("Admin = {} trying to get items of user = {}", logginedUser.getUser().getName(), user.getName());
         RestParameters urlParameters = new RestParameters()
@@ -94,7 +94,7 @@ public class ItemsService {
      * @param items String value of user items
      * @return list of user items
      */
-    @Step("Get list of items")
+    @Step("Items service: got list of items {items}")
     public List<Item> getItemsList(String items) {
         LOGGER.debug("Converting string = {} to list of items", items);
         List<Item> itemsList = new ArrayList<>();
@@ -125,6 +125,7 @@ public class ItemsService {
      * gets list of all user items
      * @return list of all user items
      */
+    @Step("Items service: got list of all items")
     public List<Item> getAllItemsList() {
         return getItemsList(getAllItems());
     }

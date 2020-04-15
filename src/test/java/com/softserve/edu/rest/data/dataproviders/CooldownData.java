@@ -16,8 +16,8 @@ public class CooldownData {
     @DataProvider
     public Object[][] negativeTime() {
         return new Object[][]{
-                {UserRepository.getAdmin(), LifetimeRepository.getCooldownNegative()},
-                {UserRepository.getAdmin(), LifetimeRepository.getCooldownMoreThanMax()}
+                {UserRepository.getAdmin(), LifetimeRepository.getCooldownNegative(), LifetimeRepository.getDefaultCooldownTime()},
+                {UserRepository.getAdmin(), LifetimeRepository.getCooldownMoreThanMax(), LifetimeRepository.getDefaultCooldownTime()}
         }
 
                 ;

@@ -13,9 +13,7 @@ public final class LifetimeRepository {
 		return new Lifetime("300000");
 	}
 
-	public static Lifetime getExtend() {
-		return new Lifetime("900000");
-	}
+	public static Lifetime getExtend() { return new Lifetime("900000"); }
 
 	public static Lifetime getDefaultCooldownTime() { return new Lifetime("180000"); }
 
@@ -24,6 +22,8 @@ public final class LifetimeRepository {
 	public static Lifetime getCooldownNegative() { return new Lifetime("-1"); }
 
 	public static Lifetime getShort() {		return new Lifetime("5000"); }
+
+	public static Lifetime getNegativeLifeTime() {		return new Lifetime("-5"); }
 
 	public static Lifetime getZeroLifetime() {		return new Lifetime("0"); }
 

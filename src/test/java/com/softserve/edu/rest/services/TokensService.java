@@ -7,16 +7,17 @@ import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.AliveTokensResource;
 
-public class TokensService extends AdministrationService{
+public class TokensService extends AdministrationService {
     private LogginedUser loginedAdmin;
     private AliveTokensResource aliveTokensResource;
 
 
-    public TokensService(LogginedUser loginedAdmin){
+    public TokensService(LogginedUser loginedAdmin) {
         super(loginedAdmin);
         this.loginedAdmin = loginedAdmin;
         this.aliveTokensResource = new AliveTokensResource();
     }
+
     protected void checkEntity(SimpleEntity simpleEntity,
                                String wrongMessage, String errorMessage) {
         if ((simpleEntity.getContent() == null)
@@ -27,20 +28,23 @@ public class TokensService extends AdministrationService{
             throw new RuntimeException(errorMessage);
         }
     }
+
     public Lifetime getCurrentLifetime() {
         SimpleEntity simpleEntity = aliveTokensResource.httpGetAsEntity(null, null);
         return new Lifetime(simpleEntity.getContent());
     }
+
     public void updateLifetime() {
         aliveTokensResource.httpPostAsEntity(null, null, null);
     }
 
     public TokensService updateCurrentLifetime() {
-        // checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, "111111111111111")
                 .addParameter(EParameters.TIME, new Lifetime("111111").getTimeAsText());
         SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, null, bodyParameters);
+        checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
+
         return this;
     }
 
@@ -48,8 +52,8 @@ public class TokensService extends AdministrationService{
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedAdmin.getToken())
                 .addParameter(EParameters.TIME, lifetime.getTimeAsText());
-        SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, bodyParameters, null );
-        //checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
+        SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, bodyParameters, null);
+        checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
         return this;
     }
 
@@ -61,12 +65,4 @@ public class TokensService extends AdministrationService{
         }
         return this;
     }
-//    public boolean isUserLogged(User user) {
-////
-////        if (getAllLoggedUsers().contains(user.getName())) {
-////            return true;
-////        } else {
-////            return false;
-////        }
-////    }
 }

@@ -16,10 +16,12 @@ import java.util.regex.Pattern;
 
 public class UsersService {
     private UsersResource usersResource;
+    private AdminsResource adminsResource;
     protected LogginedUser logginedUser;
 
     public UsersService(LogginedUser logginedUser) {
         this.usersResource = new UsersResource();
+        this.adminsResource = new AdminsResource();
         this.logginedUser = logginedUser;
     }
 
@@ -55,6 +57,15 @@ public class UsersService {
 
     public AdministrationService gotoAdministrationService(){
         return new AdministrationService(logginedUser);
+    }
+
+    @Step("Get list of admins")
+    public List<User> getAdmins(){
+        RestParameters urlParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
+        SimpleEntity usersResult = adminsResource.httpGetAsEntity(null, urlParameters);
+        EntityUtils.get().checkEntity(usersResult);
+        return parseUsers(usersResult.getContent());
     }
 
     /*...*/

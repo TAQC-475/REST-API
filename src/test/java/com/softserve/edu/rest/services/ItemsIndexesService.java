@@ -25,10 +25,10 @@ public class ItemsIndexesService {
     }
 
     /**
-     * Prepares and sends GET request to get logged in user all item indexes
+     * Prepares and sends GET request to get users all items indexes
      * @return indexes of all user items
      */
-    @Step("Get all user items indexes")
+    @Step("Items indexes service: got all user items indexes")
     public List<String> getAllItemsIndexes(){
         LOGGER.debug("User = {} getting all items indexes", logginedUser.getUser().getName());
         RestParameters urlParameters = new RestParameters()

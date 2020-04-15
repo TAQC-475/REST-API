@@ -6,6 +6,7 @@ import com.softserve.edu.rest.data.dataproviders.DataForItemsTest;
 import com.softserve.edu.rest.services.ItemsService;
 import com.softserve.edu.rest.services.LoginService;
 import com.softserve.edu.rest.test.RestTestRunner;
+import io.qameta.allure.Epic;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -14,6 +15,7 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
+@Epic("Test of items resource")
 public class ItemsTest extends RestTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemsTest.class);
 
