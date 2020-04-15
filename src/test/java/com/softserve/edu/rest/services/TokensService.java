@@ -6,8 +6,12 @@ import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
 import com.softserve.edu.rest.resources.AliveTokensResource;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TokensService extends AdministrationService {
+    public static final Logger logger = LoggerFactory.getLogger(TokensService.class);
+
     private LogginedUser loginedAdmin;
     private AliveTokensResource aliveTokensResource;
 
@@ -34,27 +38,19 @@ public class TokensService extends AdministrationService {
         return new Lifetime(simpleEntity.getContent());
     }
 
-    public void updateLifetime() {
-        aliveTokensResource.httpPostAsEntity(null, null, null);
-    }
-
-    public TokensService updateCurrentLifetime() {
+    public TokensService changeCurrentLifetime(String lifetime) {
+        logger.debug("changeCurrentLifetime START");
         RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, "111111111111111")
-                .addParameter(EParameters.TIME, new Lifetime("111111").getTimeAsText());
-        SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, null, bodyParameters);
+                .addParameter(EParameters.TOKEN, loginedAdmin.getToken())
+                .addParameter(EParameters.TIME, lifetime);
+        SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, bodyParameters, null);
         checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
-
+        logger.debug("changeCurrentLifetime DONE");
         return this;
     }
 
     public TokensService changeCurrentLifetime(Lifetime lifetime) {
-        RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, loginedAdmin.getToken())
-                .addParameter(EParameters.TIME, lifetime.getTimeAsText());
-        SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, bodyParameters, null);
-        checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
-        return this;
+        return this.changeCurrentLifetime(lifetime.getTimeAsText());
     }
 
     public TokensService waitTokenLifeTime(Lifetime lifetime) {
