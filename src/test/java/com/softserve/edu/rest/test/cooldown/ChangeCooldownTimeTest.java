@@ -17,7 +17,7 @@ public class ChangeCooldownTimeTest {
     public static final Logger logger = LoggerFactory.getLogger(ChangeCooldownTimeTest.class);
 
     @BeforeMethod
-    public void createExtraUsers() {
+    public void resetAPI() {
         logger.info("BEFORE CLASS reset service to initial state");
         new GuestService().resetServiceToInitialState();
     }
