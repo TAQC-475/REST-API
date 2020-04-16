@@ -16,7 +16,7 @@ public class LoginUserNegativeTest extends LoginTestRunner{
 
     @Test(dataProviderClass = UsersTestData.class, dataProvider = "nonExistingUserDataProvider",
     description = "This test verifies that error message appear when user try to login with invalid credentials")
-    public void loginUserNegativeTestAsEntity(User admin, User notExisingUser){
+    public void loginInvalidUserAsEntityTest(User admin, User notExisingUser){
         logger.info("Unsuccessful user login with credentials {}", notExisingUser);
         SimpleEntity simpleEntity = new GuestService()
                 .gotoLoginService()
@@ -27,7 +27,7 @@ public class LoginUserNegativeTest extends LoginTestRunner{
 
     @Test(dataProviderClass = UsersTestData.class, dataProvider = "nonExistingUserDataProvider",
             description = "This test verifies that after unsuccessful login attempt user doesn't appear in the loggened users list")
-    public void loginUserNegativeTest(User admin, User notExisingUser){
+    public void loginInvalidUserTest(User admin, User notExisingUser){
         logger.info("Unsuccessful user login with credentials {}", notExisingUser);
         LogginedUsersService logginedUsersService = new GuestService()
                 .gotoLoginService()
@@ -39,7 +39,7 @@ public class LoginUserNegativeTest extends LoginTestRunner{
 
     @Test(dataProviderClass = UsersTestData.class, dataProvider = "nonExistingAdminDataProvider",
             description = "This test verifies that after unsuccessful login attempt admin doesn't appear in the loggened admins list")
-    public void loginAdminNegativeTest(User admin, User notExisingAdmin){
+    public void loginInvalidAdminTest(User admin, User notExisingAdmin){
         logger.info("Unsuccessful admin login with credentials {}", notExisingAdmin);
         LogginedUsersService logginedUsersService = new GuestService()
                 .gotoLoginService()
