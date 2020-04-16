@@ -58,7 +58,7 @@ public class ItemsService {
     }
 
     /**
-     * Prepares and sends GET request to get all items of some user as admin
+     * Prepares and sends GET request to get all items of user as admin
      * @param user user whose items request gets
      * @return all items of user
      */
