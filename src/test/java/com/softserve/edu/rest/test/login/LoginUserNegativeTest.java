@@ -34,7 +34,7 @@ public class LoginUserNegativeTest extends LoginTestRunner{
                 .unsuccessfulUserLogin(notExisingUser)
                 .successfulAdminLogin(admin)
                 .gotoLogginedUsersService();
-        Assert.assertFalse(logginedUsersService.getLoggedUsers().contains(notExisingUser));
+        Assert.assertFalse(logginedUsersService.getLogginedUsers().contains(notExisingUser));
     }
 
     @Test(dataProviderClass = UsersTestData.class, dataProvider = "nonExistingAdminDataProvider",
@@ -46,7 +46,7 @@ public class LoginUserNegativeTest extends LoginTestRunner{
                 .unsuccessfulUserLogin(notExisingAdmin)
                 .successfulAdminLogin(admin)
                 .gotoLogginedUsersService();
-        Assert.assertFalse(logginedUsersService.getLoggedUsers().contains(notExisingAdmin));
+        Assert.assertFalse(logginedUsersService.getLogginedUsers().contains(notExisingAdmin));
     }
 
     @Test(dataProviderClass = UsersTestData.class, dataProvider = "existingAdminDataProvider",

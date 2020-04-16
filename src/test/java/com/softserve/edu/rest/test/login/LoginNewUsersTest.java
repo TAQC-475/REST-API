@@ -24,7 +24,7 @@ public class LoginNewUsersTest extends LoginTestRunner{
                 .gotoLoginService()
                 .successfulUsersLogin(nonExistingUsers)
                 .gotoAdministrationService(admin.getName())
-                .gotoLogginedUsersService().getLoggedUsers();
+                .gotoLogginedUsersService().getLogginedUsers();
         Assert.assertTrue(users.containsAll(nonExistingUsers));
     }
 
@@ -39,7 +39,7 @@ public class LoginNewUsersTest extends LoginTestRunner{
                 .createUsers(nonExistingAdmins)
                 .gotoLoginService()
                 .successfulAdminsLogin(nonExistingAdmins)
-                .gotoLogginedUsersService().getLoggedAdmins();
+                .gotoLogginedUsersService().getLogginedAdmins();
         Assert.assertTrue(admins.containsAll(nonExistingAdmins));
     }
 
