@@ -45,12 +45,16 @@ public final class LifetimeRepository {
         return new Lifetime("0");
     }
 
+    public static Lifetime getCooldownLessThanMax() {
+        return new Lifetime("1399999");
+    }
+
     public static Lifetime getCooldownMax() {
-        return new Lifetime("43200000");
+        return new Lifetime("1400000");
     }
 
     public static Lifetime getCooldownMoreThanMax() {
-        return new Lifetime("43200001");
+        return new Lifetime("1400001");
     }
 
     public static Lifetime getCooldownMin() {
