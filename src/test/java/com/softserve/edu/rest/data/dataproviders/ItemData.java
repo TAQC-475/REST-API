@@ -6,44 +6,39 @@ import org.testng.annotations.DataProvider;
 
 public class ItemData {
     @DataProvider
-    public Object[][] dataForAddItemTest(){
-        return new Object[][]{{UserRepository.getValidUser(),
-                ItemRepository.getDefaultItem()}};
-    }
-    @DataProvider
-    public Object[][] dataForUpdateItemTest(){
+    public Object[][] dataForAddItemTest() {
         return new Object[][]{
-                {UserRepository.getAdmin(),
-                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7()},
-                {UserRepository.getUserVasya(),
-                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7()},
-                {UserRepository.getAdminDana(),
-                        ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}
-        };
+                {UserRepository.getValidUser(), ItemRepository.getDefaultItem()},
+                {UserRepository.getAdmin(), ItemRepository.getDefaultItem()}};
     }
+
+    @DataProvider
+    public Object[][] dataForUpdateItemTest() {
+        return new Object[][]{
+                {UserRepository.getAdmin(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7()},
+                {UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}};
+    }
+
     @DataProvider
     public Object[][] dataForDeleteItemTest() {
-        return new Object[][]{{UserRepository.getAkimatcUser(),
-                ItemRepository.getCoreI9()}};
+        return new Object[][]{
+                {UserRepository.getAdmin(), ItemRepository.getCoreI7()},
+                {UserRepository.getAkimatcUser(), ItemRepository.getCoreI7()}};
     }
+
+
     @DataProvider
-    public Object[][] dataForAddItemByAdminTest(){
-        return new Object[][]{{UserRepository.getAdmin(),
-                ItemRepository.getDefaultItem()}};
+    public Object[][] dataForTwoUsersTest() {
+        return new Object[][]{
+                {UserRepository.getUserDana(), UserRepository.getValidUser(), ItemRepository.getCoreI9()},
+                {UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI9()}
+        };
     }
+
     @DataProvider
-    public Object[][] dataForTwoUsersTest(){
-        return new Object[][]{{UserRepository.getUserDana(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI5()}};
+    public Object[][] dataForAdminAndUserTest() {
+        return new Object[][]{
+                {UserRepository.getValidUser(), UserRepository.getAdmin(), ItemRepository.getCoreI9()}};
     }
-    @DataProvider
-    public Object[][] dataForAdminAndUserTest(){
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI7()}};
-    }
-    @DataProvider
-    public Object[][] dataForAdminAndNewUserTest(){
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(),
-                ItemRepository.getCoreI7(), ItemRepository.getCoreI7()}};
-    }
+
 }
