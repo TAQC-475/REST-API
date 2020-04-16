@@ -18,8 +18,8 @@ import java.util.List;
 import static org.seleniumhq.jetty9.http.HttpStatus.Code.BAD_REQUEST;
 
 @Epic("Test of items indexes resource")
-public class IndexTest extends RestTestRunner {
-    private static final Logger LOGGER = LoggerFactory.getLogger(IndexTest.class);
+public class IndexesTest extends RestTestRunner {
+    private static final Logger LOGGER = LoggerFactory.getLogger(IndexesTest.class);
 
     /**
      * logs in as user and tries to add item with valid index
@@ -54,7 +54,7 @@ public class IndexTest extends RestTestRunner {
         String statusCode = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .getCreateItemRequestStatusCode(itemWithInvalidIndex, true);
+                .getAddItemRequestStatusCode(itemWithInvalidIndex, true);
 
         Assert.assertEquals(Integer.parseInt(statusCode), BAD_REQUEST.getCode(), itemWithInvalidIndex.toString() + " with invalid index was added");
         LOGGER.info("Adding item with invalid index = {} status code = {}", itemWithInvalidIndex.getItemIndex(), statusCode);

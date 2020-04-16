@@ -61,7 +61,7 @@ public class LockService {
         SimpleEntity simpleEntity = lockUsersResource
                 .httpGetAsEntity(null, bodyParameters);
 
-        logger.debug("Locked users = "+ RegexUtils.extractNewLinesFromLockedUsers(simpleEntity.getContent()));
+        logger.debug("Locked users = "+ RegexUtils.extractLineOfLockedUsers(simpleEntity.getContent()));
         return simpleEntity.getContent();
     }
     /**
@@ -75,7 +75,7 @@ public class LockService {
         SimpleEntity simpleEntity = lockAdminsResource
                 .httpGetAsEntity(null, urlParameters);
 
-        logger.debug("Locked admins = "+ RegexUtils.extractNewLinesFromLockedUsers(simpleEntity.getContent()));
+        logger.debug("Locked admins = "+ RegexUtils.extractLineOfLockedUsers(simpleEntity.getContent()));
         return simpleEntity.getContent();
     }
     /**

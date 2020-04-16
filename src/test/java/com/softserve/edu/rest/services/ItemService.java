@@ -68,9 +68,9 @@ public class ItemService {
         return addItem(item, true);
     }
 
-    @Step("Overwrite user's item (PUT)")
-    public ItemService putOverwriteItem(Item initialItem, Item overwtriteItem) {
-        LOGGER.debug("User trying to owerwrite(PUT method) his initial item = {} to new item ={}" , initialItem, overwtriteItem);
+    @Step("Overwrite user's item")
+    public ItemService overwriteItem(Item initialItem, Item overwtriteItem) {
+        LOGGER.debug("User trying to overwrite his initial item = {} to new item ={}" , initialItem, overwtriteItem);
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken())
                 .addParameter(EParameters.ITEM, overwtriteItem.getItemText());
@@ -81,7 +81,7 @@ public class ItemService {
         SimpleEntity result = itemResource
                 .httpPutAsEntity(pathParameters, bodyParameters, null);
         EntityUtils.get().checkEntity(result);
-        LOGGER.debug("putOvewriteItem method returns result = {} " , result);
+        LOGGER.debug("OvewriteItem method returns result = {} " , result);
         return this;
     }
 
@@ -116,7 +116,7 @@ public class ItemService {
      * @return status code of adding item request
      */
     @Step("Item service: Got status code of add item request {item}")
-    public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
+    public String getAddItemRequestStatusCode(Item item, boolean toOverride){
         LOGGER.debug("Getting request code after adding item = {}", item);
         if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
             throw new RuntimeException("Item with such index already exists");
@@ -143,8 +143,8 @@ public class ItemService {
         return result.getContent();
     }
 
-    @Step("Getting user item by another user")
-    public String getUserItemByAnotherUser(User user, Item item) {
+    @Step("Getting another user item")
+    public String getAnotherUserItem(User user, Item item) {
         LOGGER.debug("User ={} trying to get another user item = {}" , user, item);
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());

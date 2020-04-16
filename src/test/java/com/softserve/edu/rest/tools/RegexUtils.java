@@ -11,7 +11,7 @@ public final class RegexUtils {
     private final static String PATTERN_UNSIGNED_DOUBLE = "\\d+(,\\d+)*\\.\\d{2}";
     public final static String DELETE_SERVER = "http://[^/]+/";
     private final static String EXTRACT_NUMBER_MESSAGE = "NumberFormatException for pattern =  %s text =  %s";
-    private final static String PATTERN_USERS_WITHOUT_NEW_LINES = "\\n+";
+    private final static String PATTERN_ALL_USERS_IN_ONE_LINE = "\\n+";
 
     private RegexUtils() {
     }
@@ -79,7 +79,7 @@ public final class RegexUtils {
     	return text.replaceAll(DOUBLE_UI_SEPARATOR, new String());
     }
 
-    public static String extractNewLinesFromLockedUsers(String text){
-        return text.replaceAll(PATTERN_USERS_WITHOUT_NEW_LINES,", ");
+    public static String extractLineOfLockedUsers(String text){
+        return text.replaceAll(PATTERN_ALL_USERS_IN_ONE_LINE,", ");
     }
 }

@@ -19,7 +19,7 @@ public class ItemTest extends ItemTestRunner {
 
     /*
     Test 1
-    Verify if User Can Create Item
+    Verify if User and Admin Can Create Item
     */
     @Parameters({"User", "Item"})
     @Test(dataProvider = "dataForAddItemTest", dataProviderClass = ItemData.class)
@@ -36,7 +36,7 @@ public class ItemTest extends ItemTestRunner {
 
     /*
     Test 2
-    Verify if User Can Update Item
+    Verify if User and Admin Can Update Item
     */
     @Parameters({"User", "Create new item", "Update new item"})
     @Test(dataProvider = "dataForUpdateItemTest", dataProviderClass = ItemData.class)
@@ -46,7 +46,7 @@ public class ItemTest extends ItemTestRunner {
                 .successfulUserLogin(user)
                 .goToItemService()
                 .addItem(firstItem, false)
-                .putOverwriteItem(firstItem, updateItem)
+                .overwriteItem(firstItem, updateItem)
                 .getItem(firstItem);
         Assert.assertEquals(itemService, updateItem.getItemText());
         LOGGER.info("Item = {} was created, then it was updated to = {}, by User = {}", firstItem, updateItem, user);
@@ -54,7 +54,7 @@ public class ItemTest extends ItemTestRunner {
 
     /*
     Test 3
-    Verify if User Can Delete Item
+    Verify if User and Admin Can Delete Item
     */
     @Parameters({"User", "Item"})
     @Test(dataProvider = "dataForDeleteItemTest", dataProviderClass = ItemData.class)
@@ -71,25 +71,8 @@ public class ItemTest extends ItemTestRunner {
     }
 
     /*
-        Test 4
-        Verify If Admin Can Add Item
-    */
-    @Parameters({"User", "Item"})
-    @Test(dataProvider = "dataForAddItemByAdminTest", dataProviderClass = ItemData.class)
-    public void verifyIfAdminCanAddItem(User admin, Item item) {
-        LOGGER.info("Admin = {} create new item = {}", admin, item);
-        String result = new LoginService()
-                .successfulAdminLogin(admin)
-                .goToItemService()
-                .addItem(item, false)
-                .getItem(item);
-        Assert.assertEquals(result, item.getItemText());
-        LOGGER.info("Item = {}, was added by Admin = {}", item, admin);
-    }
-
-    /*
-    Test 5
-    Verify If User Can Get Item Frome Another User
+    Test 4
+    Verify If User Can Get Item Frome Another User and Admin
     */
     @Parameters({"User one", "User two", "Item of first user"})
     @Test(dataProvider = "dataForTwoUsersTest", dataProviderClass = ItemData.class)
@@ -102,18 +85,18 @@ public class ItemTest extends ItemTestRunner {
         String result = new LoginService()
                 .successfulUserLogin(user2)
                 .goToItemService()
-                .getUserItemByAnotherUser(user1, itemUserOne);
+                .getAnotherUserItem(user1, itemUserOne);
         Assert.assertNotEquals(result, itemUserOne.getItemText());
         LOGGER.info("User = {} didn't get item = {}, from User = {}", user2, itemUserOne, user1);
     }
 
     /*
-        Test 6
+        Test 5
         Verify If Admin Can Get Item Frome Another User
     */
-    @Parameters({"Admin", "User", "User item"})
+    @Parameters({"User", "Admin", "User item"})
     @Test(dataProvider = "dataForAdminAndUserTest", dataProviderClass = ItemData.class)
-    public void verifyIfAdminCanSeeUsersItem(User admin, User user, Item userItem) {
+    public void verifyIfAdminCanSeeUsersItem(User user, User admin, Item userItem) {
         LOGGER.info("User = {} create new item = {}, Admin = {} trying to get item ={} from User ={}", user, userItem, admin, userItem, user);
         ItemService userItemService = new LoginService()
                 .successfulUserLogin(user)
@@ -122,7 +105,7 @@ public class ItemTest extends ItemTestRunner {
         String result = new LoginService()
                 .successfulAdminLogin(admin)
                 .goToItemService()
-                .getUserItemByAnotherUser(user, userItem);
+                .getAnotherUserItem(user, userItem);
         Assert.assertEquals(result, userItem.getItemText());
         LOGGER.info("Admin = {} got item = {}, from User = {}", admin, userItem, user);
     }

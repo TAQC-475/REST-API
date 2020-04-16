@@ -25,7 +25,7 @@ public class ItemsIndexesService {
     }
 
     /**
-     * Prepares and sends GET request to get users all items indexes
+     * Prepares and sends GET request to get all user items indexes
      * @return indexes of all user items
      */
     @Step("Items indexes service: got all user items indexes")

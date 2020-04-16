@@ -6,7 +6,7 @@
 	<test name="IndexTest" verbose="9">
 
 		<classes>
-			<class name="com.softserve.edu.rest.test.items_and_indexes.IndexTest"/>
+			<class name="com.softserve.edu.rest.test.items_and_indexes.IndexesTest"/>
 			<class name="com.softserve.edu.rest.test.items_and_indexes.ItemsTest"/>
 		</classes>
 	</test>
