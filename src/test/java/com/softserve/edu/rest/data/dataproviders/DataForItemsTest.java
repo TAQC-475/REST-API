@@ -17,6 +17,6 @@ public class DataForItemsTest {
 
     @DataProvider
     public Object[][] dataForVerifyingUserCantGetAdminItems() {
-        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI5(), ItemRepository.getCoreI7()}};
+        return new Object[][]{{UserRepository.getAdmin(), UserRepository.getValidUser(), ItemRepository.getCoreI5()}};
     }
 }
