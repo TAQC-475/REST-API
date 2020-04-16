@@ -56,7 +56,7 @@ public class TokensService extends AdministrationService {
                 .addParameter(EParameters.TIME, lifetime);
         SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, bodyParameters, null);
         checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
-        logger.debug("Token lifetime was change from {} to {}", loginedAdmin.getToken(), lifetime);
+        logger.debug("Token lifetime was change from {} to {}", getCurrentLifetime()., lifetime);
         return this;
     }
 
