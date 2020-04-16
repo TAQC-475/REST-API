@@ -81,39 +81,58 @@ public class LockTest {
      * logs in as admin and tries to unlock user
      * verifies that user is unlocked
      *
-     * @param admin    for login and unlocking user after check user status
-     * @param someUser user for unlocking by admin
+     * @param admin      for login and unlocking user after check user status
+     * @param simpleUser user for unlocking by admin
      */
     @Description("Verify that logged-in admin can unlock user")
     @Parameters({"Admin login", "User for unlocking"})
     @Test(priority = 3, dataProvider = "lockUser", dataProviderClass = LockData.class)
-    public void unlockUserFromAdmin(User admin, User someUser) {
-        logger.info("START TEST Unlock user = {}, as admin = {} ", someUser.getName(), admin.getName());
+    public void unlockUserFromAdmin(User admin, User simpleUser) {
+        logger.info("START TEST Unlock user = {}, as admin = {} ", simpleUser.getName(), admin.getName());
         LockService adminService = new LoginService()
                 .successfulAdminLogin(admin)
                 .gotoLockService()
-                .unlockUser(someUser);
+                .unlockUser(simpleUser);
 
-        Assert.assertFalse(adminService.isUserLocked(someUser));
+        Assert.assertFalse(adminService.isUserLocked(simpleUser));
         logger.info("END OF THE TEST");
     }
 
     /**
-     * logs in as admin and tries to lock second admin and himself
-     * verifies that admins are locked
+     * logs in as admin and tries to lock second admin
+     * verifies that admin is locked
      *
-     * @param adminVasya  for login and locking himself and second admin
+     * @param admin       for login and locking admin
      * @param adminPetryk for locking
      */
-    @Description("Verify that logged-in admin can lock second admin and lock himself")
-    @Parameters({"firstAdmin for locking second admin and himself", "second admin for locking"})
-    @Test(priority = 4, dataProvider = "lockAdminVasya", dataProviderClass = LockData.class)
-    public void lockAdminFromAdmin(User adminVasya, User adminPetryk) {
+    @Description("Verify that logged-in admin can lock second admin")
+    @Parameters({"admin logins", "admin fof locking"})
+    @Test(priority = 4, dataProvider = "lockAdminPetryk", dataProviderClass = LockData.class)
+    public void lockAdminFromAdmin(User admin, User adminPetryk) {
+        logger.info("START TEST Lock admin = {} by admin = {}", adminPetryk.getName(), admin.getName());
+        LockService adminService = new LoginService()
+                .successfulAdminLogin(admin)
+                .gotoLockService()
+                .lockUser(adminPetryk);
+
+        Assert.assertTrue(adminService.isAdminLocked(adminPetryk));
+        logger.info("END OF THE TEST");
+    }
+
+    /**
+     * logs in as admin and tries to lock himself
+     * verifies that admin is locked
+     *
+     * @param adminVasya for login and locking himself
+     */
+    @Description("Verify that logged-in admin can lock himself")
+    @Parameters({"firstAdmin for locking himself"})
+    @Test(priority = 5, dataProvider = "lockAdminVasya", dataProviderClass = LockData.class)
+    public void lockAdminByHimself(User adminVasya) {
         logger.info("START TEST Lock admin = {} by himself ", adminVasya.getName());
         LockService adminService = new LoginService()
                 .successfulAdminLogin(adminVasya)
                 .gotoLockService()
-                .lockUser(adminPetryk)
                 .lockUser(adminVasya);
 
         Assert.assertTrue(adminService.isAdminLocked(adminVasya));
@@ -129,7 +148,7 @@ public class LockTest {
      */
     @Description("Verify that logged-in admin can unlock second admin")
     @Parameters({"firstAdmin for logging and unlocking second admin", "second admin for unlocking"})
-    @Test(priority = 5, dataProvider = "unlockAdminVasya", dataProviderClass = LockData.class)
+    @Test(priority = 6, dataProvider = "unlockAdminVasya", dataProviderClass = LockData.class)
     public void unlockAdminFromAdmin(User admin, User adminVasya) {
         logger.info("START TEST Unlock admin = {}, as admin = {} ", adminVasya.getName(), admin.getName());
         LockService adminService = new LoginService()
@@ -149,7 +168,7 @@ public class LockTest {
      */
     @Description("Verify that unlock all users and admins work")
     @Parameters({"Admin login"})
-    @Test(priority = 6, dataProvider = "Admin", dataProviderClass = LockData.class)
+    @Test(priority = 7, dataProvider = "Admin", dataProviderClass = LockData.class)
     public void unlockAll(User admin) {
         logger.info("START TEST Unlock all as admin = {} ", admin.getName());
         LockService adminService = new LoginService()

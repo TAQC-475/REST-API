@@ -56,7 +56,7 @@ public class LockService {
     }
 
     /**
-     * Preparing and sending GET request as logged in admin to get list of all locked users
+     * Preparing and sending GET request, logged in as admin to get list of all locked users
      * @return string of all locked users after getting response
      */
     @Step("Get all locked users")
@@ -116,8 +116,6 @@ public class LockService {
         logger.debug("Unlock all locked users is DONE");
         return this;
     }
-
-
 
     /**
      * Checking if out user is in list of locked users

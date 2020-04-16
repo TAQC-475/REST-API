@@ -22,7 +22,14 @@ public class LockData {
     @DataProvider
     public Object[][] lockAdminVasya() {
         return new Object[][]{
-                {UserRepository.getAdminVasya(), UserRepository.getAdminPetryk()}
+                {UserRepository.getAdminVasya()}
+        };
+    }
+
+    @DataProvider
+    public Object[][] lockAdminPetryk() {
+        return new Object[][]{
+                {UserRepository.getAdmin(), UserRepository.getAdminPetryk()}
         };
     }
 

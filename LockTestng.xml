@@ -11,6 +11,7 @@
                     <include name="lockUserByUnsuccessfulLogin"/>
                     <include name="unlockUserFromAdmin"/>
                     <include name="lockAdminFromAdmin"/>
+                    <include name="lockAdminByHimself"/>
                     <include name="unlockAdminFromAdmin"/>
                     <include name="unlockAll"/>
                 </methods>
