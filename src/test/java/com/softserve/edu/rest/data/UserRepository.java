@@ -22,6 +22,10 @@ public final class UserRepository {
         return new User("Vasya", "qwerty", true);
     }
 
+    public static User getAdminPetryk() {
+        return new User("Petryk", "qwerty", true);
+    }
+
     public static User getUserVasya() {
         return new User("Vasya", "qwerty", false);
     }
