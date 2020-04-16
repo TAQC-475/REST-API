@@ -4,13 +4,14 @@ import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.tools.CustomException;
 
 import java.util.LinkedList;
+import java.util.Stack;
 
 public class ApplicationState {
-    private static LinkedList<LogginedUser> loggedClients;
+    private static Stack<LogginedUser> loggedClients;
     private static ApplicationState instance;
 
     private ApplicationState(){
-        loggedClients = new LinkedList<>();
+        loggedClients = new Stack<>();
     }
 
     public static ApplicationState get(){
@@ -25,7 +26,7 @@ public class ApplicationState {
     }
 
     public LogginedUser getLastLogged(){
-        return loggedClients.getLast();
+        return loggedClients.peek();
     }
 
     public LogginedUser getAtIndex(int index){
@@ -33,14 +34,14 @@ public class ApplicationState {
     }
 
     public void removeLastLoggined(){
-        loggedClients.removeLast();
+        loggedClients.pop();
     }
 
     public void removeAtIndex(int index){
         loggedClients.remove(index);
     }
 
-    public LinkedList<LogginedUser> getLoggedUsers() {
+    public Stack<LogginedUser> getLoggedUsers() {
         return loggedClients;
     }
 
@@ -77,10 +78,11 @@ public class ApplicationState {
     }
 
     public LogginedUser getLogginedUser(String name){
-        for(LogginedUser logginedUser : loggedClients){
-            if(!logginedUser.getUser().isAdmin() && logginedUser.getUser().equalName(name))
+        for(LogginedUser logginedUser : loggedClients) {
+            if (!logginedUser.getUser().isAdmin() && logginedUser.getUser().equalName(name))
                 return logginedUser;
         }
         return null;
     }
+
 }
