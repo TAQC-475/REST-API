@@ -85,7 +85,7 @@ public class ItemTest extends ItemTestRunner {
         String result = new LoginService()
                 .successfulUserLogin(user2)
                 .goToItemService()
-                .getAnotherUserIterm(user1, itemUserOne);
+                .getAnotherUserItem(user1, itemUserOne);
         Assert.assertNotEquals(result, itemUserOne.getItemText());
         LOGGER.info("User = {} didn't get item = {}, from User = {}", user2, itemUserOne, user1);
     }
@@ -105,7 +105,7 @@ public class ItemTest extends ItemTestRunner {
         String result = new LoginService()
                 .successfulAdminLogin(admin)
                 .goToItemService()
-                .getAnotherUserIterm(user, userItem);
+                .getAnotherUserItem(user, userItem);
         Assert.assertEquals(result, userItem.getItemText());
         LOGGER.info("Admin = {} got item = {}, from User = {}", admin, userItem, user);
     }
