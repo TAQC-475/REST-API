@@ -50,7 +50,7 @@ public class TokensService extends AdministrationService {
      * @return
      */
     public TokensService changeCurrentLifetime(String lifetime) {
-        logger.debug("Changing token lifetime from {} to {}", loginedAdmin.getToken(), lifetime);
+        logger.debug("Changing token lifetime from {} to {}", getCurrentLifetime(), lifetime);
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedAdmin.getToken())
                 .addParameter(EParameters.TIME, lifetime);
@@ -61,11 +61,12 @@ public class TokensService extends AdministrationService {
     }
 
     public TokensService changeCurrentLifetime(Lifetime lifetime) {
+        logger.debug("Changing token lifetime from {} to {}", getCurrentLifetime(), lifetime);
         return this.changeCurrentLifetime(lifetime.getTimeAsText());
     }
 
     /**
-     * Waiting choosen time
+     * Waiting chosen time
      *
      * @param lifetime is time to wait
      * @return
