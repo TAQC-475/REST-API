@@ -10,7 +10,7 @@ public class TokenLifetimeData {
 
     public static final Logger logger = LoggerFactory.getLogger(TokenLifetimeData.class);
 
-    @DataProvider
+    @DataProvider(name = "extendTokenLifeTimeDataProvider")
     public Object[][] correctAdminExtend() {
         logger.info("@DataProvider correctAdminExtend() DONE");
         return new Object[][]{
@@ -18,7 +18,7 @@ public class TokenLifetimeData {
         };
     }
 
-    @DataProvider
+    @DataProvider(name = "shortTokenLifeTimeDataProvider")
     public Object[][] correctAdminShort() {
         logger.info("@DataProvider correctAdminShort() DONE");
         return new Object[][]{
@@ -26,7 +26,7 @@ public class TokenLifetimeData {
         };
     }
 
-    @DataProvider
+    @DataProvider(name = "negativeTokenLifeTimeDataProvider")
     public Object[][] correctAdminNegative() {
         logger.info("@DataProvider correctAdminNegative() DONE");
         return new Object[][]{
@@ -34,7 +34,7 @@ public class TokenLifetimeData {
         };
     }
 
-    @DataProvider
+    @DataProvider(name = "zeroTokenLifeTimeDataProvider")
     public Object[][] correctAdminZero() {
         logger.info("@DataProvider correctAdminZero() DONE");
         return new Object[][]{
@@ -42,17 +42,17 @@ public class TokenLifetimeData {
         };
     }
 
-    @DataProvider
-    public Object[][] correctAdminUpdate() {
-        logger.info("@DataProvider correctAdminUpdate() DONE");
+    @DataProvider(name = "tokenLifeTimeDataProvider")
+    public Object[][] correctAdminShortAndExtend() {
+        logger.info("@DataProvider correctAdminShortAndExtend() DONE");
         return new Object[][]{
                 {UserRepository.getAdmin(), LifetimeRepository.getShort(), LifetimeRepository.getExtend()}
         };
     }
 
-    @DataProvider
+    @DataProvider(name = "maximalTokenLifeTimeDataProvider")
     public Object[][] correctAdminMax() {
-        logger.info("@DataProvider correctAdminUpdate() DONE");
+        logger.info("@DataProvider correctAdminMax() DONE");
         return new Object[][]{
                 {UserRepository.getAdmin(), LifetimeRepository.getLifeTimeMoreThanMax()}
         };
