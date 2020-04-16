@@ -23,8 +23,8 @@ public class ChangeCooldownTimeNegativeTest {
     private CooldownService cooldownService;
 
     @BeforeMethod
-    public void resetAPI() {
-        logger.info("BEFORE CLASS reset service to initial state");
+    public void resetService() {
+        logger.info("BEFORE METHOD reset service to initial state");
         new GuestService().resetServiceToInitialState();
     }
 

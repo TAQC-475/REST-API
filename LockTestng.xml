@@ -11,7 +11,14 @@
                     <include name="lockUserByUnsuccessfulLogin"/>
                     <include name="unlockUserFromAdmin"/>
                     <include name="lockAdminFromAdmin"/>
+                    <include name="unlockAdminFromAdmin"/>
                     <include name="unlockAll"/>
+                </methods>
+            </class>
+            <class name="com.softserve.edu.rest.test.lock.LockNegativeTest">
+                <methods>
+                    <include name="lockUnexcitingUserFromAdmin"/>
+                    <include name="unlockUnexcitingUserFromAdmin"/>
                 </methods>
             </class>
         </classes>

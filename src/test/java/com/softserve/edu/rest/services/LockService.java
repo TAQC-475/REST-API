@@ -22,6 +22,7 @@ public class LockService {
     protected LockUsersResource lockUsersResource;
     protected LockAdminsResource lockAdminsResource;
     protected LogginedUser logginedUser;
+    private SimpleEntity response;
 
     public LockService(LogginedUser logginedUser) {
         lockUserResource = new LockUserResource();
@@ -29,6 +30,10 @@ public class LockService {
         lockAdminsResource = new LockAdminsResource();
         this.logginedUser = logginedUser;
     }
+
+    public SimpleEntity getResponse() { return response; }
+
+    public void setResponse(SimpleEntity response) { this.response = response; }
 
     /**
      * Preparing and sending PUT request as logged in admin to lock user or admin
@@ -44,9 +49,9 @@ public class LockService {
                 .addParameter(EParameters.NAME, userToLock.getName());
         SimpleEntity simpleEntity = lockUserResource
                 .httpPostAsEntity(pathParameters, null, bodyParameters);
-        logger.debug("Lock user response = " + simpleEntity.getContent());
+        setResponse(simpleEntity);
         EntityUtils.get().checkLockEntity(simpleEntity, "User was not locked");
-        logger.debug("******* Lock user response = " + simpleEntity.getContent());
+        logger.debug("Lock user response = " + simpleEntity.getContent());
         return this;
     }
 
@@ -92,6 +97,7 @@ public class LockService {
                 .addParameter(EParameters.NAME, user.getName());
         SimpleEntity simpleEntity = lockUserResource
                 .httpPutAsEntity(pathParameters, null, bodyParameters);
+        setResponse(simpleEntity);
         EntityUtils.get().checkLockEntity(simpleEntity, "User was not unlocked");
         logger.debug("unlock user response = " + simpleEntity.getContent());
         return this;
@@ -120,7 +126,7 @@ public class LockService {
      */
     @Step("Check if user is locked")
     public boolean isUserLocked(User user) {
-        logger.debug("Checking if locked user = "+user.getName());
+        logger.debug("Checking if user {} is locked...",user.getName());
         return getAllLockedUsers().contains(user.getName());
     }
 
