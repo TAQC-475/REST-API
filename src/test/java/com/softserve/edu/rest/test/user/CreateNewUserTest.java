@@ -30,14 +30,14 @@ public class CreateNewUserTest extends UserTestRunner {
     @Description("Check if admin could create user with empty name field")
     @Parameters({"Admin login", "Create user", "Check is user present"})
     @Test(dataProvider = "userWithEmptyNameData", dataProviderClass = CreateUserData.class)
-    public void createUserWithEmptyName(User adminUser, User newUser, boolean expectedUser) {
+    public void createUserWithEmptyName(User adminUser, User newUser, User expectedUser) {
         LOGGER.info("Creating invalid user with parameters: " + newUser.toString());
 
         UsersService actualUser = new LoginService()
                 .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
-        Assert.assertTrue(expectedUser);
+        Assert.assertFalse(actualUser.isUserPresent(expectedUser));
         LOGGER.info("Finished creating user \n");
     }
 
@@ -58,14 +58,14 @@ public class CreateNewUserTest extends UserTestRunner {
     @Description("Check if admin could create user with all empty fields")
     @Parameters({"Admin login", "Create user", "Check is user present"})
     @Test(dataProvider = "userWithEmptyNameAndPasswordData", dataProviderClass = CreateUserData.class)
-    public void createUserWithEmptyNameAndPassword(User adminUser, User newUser, boolean expectedUser) {
+    public void createUserWithEmptyNameAndPassword(User adminUser, User newUser, User expectedUser) {
         LOGGER.info("Creating invalid user with parameters: " + newUser.toString());
 
         UsersService actualUser = new LoginService()
                 .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
-        Assert.assertTrue(expectedUser);
+        Assert.assertFalse(actualUser.isUserPresent(expectedUser));
         LOGGER.info("Finished creating user \n");
     }
 }

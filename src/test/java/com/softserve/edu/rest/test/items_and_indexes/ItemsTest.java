@@ -80,13 +80,12 @@ public class ItemsTest extends RestTestRunner {
      */
     @Parameters({"Admin user", "User", "Item added by admin"})
     @Test(dataProvider = "dataForVerifyingUserCantGetAdminItems", dataProviderClass = DataForItemsTest.class)
-    public void verifyUserCantGetAdminItems(User adminUser, User userToCheck, Item firstItem, Item secondItem) {
+    public void verifyUserCantGetAdminItems(User adminUser, User userToCheck, Item firstItem) {
         LOGGER.info("Logging in as admin = {} adding item {} then logging in as user {} and trying to get admin items", adminUser.getName(), firstItem.toString(), userToCheck.getName());
         String adminItems = new LoginService()
                 .successfulAdminLogin(adminUser)
                 .goToItemService()
                 .addItem(firstItem, true)
-                .addItem(secondItem, true)
                 .goToItemsService()
                 .getAllItems();
 

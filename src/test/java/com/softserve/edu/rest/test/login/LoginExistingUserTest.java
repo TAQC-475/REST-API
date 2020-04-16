@@ -49,7 +49,7 @@ public class LoginExistingUserTest extends LoginTestRunner{
                 .gotoLoginService()
                 .successfulAdminLogin(admin)
                 .gotoLogginedUsersService()
-                .getLoggedUsers();
+                .getLogginedUsers();
         Assert.assertFalse(users.contains(existingUser));
 
         logger.info("All logged users in the system {}", users);
@@ -81,7 +81,7 @@ public class LoginExistingUserTest extends LoginTestRunner{
                 .gotoLoginService()
                 .successfulAdminLogin(admin)
                 .gotoLogginedUsersService()
-                .getLoggedUsers();
+                .getLogginedUsers();
 
         Assert.assertTrue(users.containsAll(existingUsers) );
         logger.trace("All loggined users {}", users);

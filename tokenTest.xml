@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RestAPI_TokenLifeTimeTests">
+    <parameter name="url" value="http://localhost:8080"/>
+
+    <test name="TokenLifeTimeTest" verbose="9" >
+        <classes>
+            <class name="com.softserve.edu.rest.test.token.TokenLifetimeTest">
+                <methods>
+                    <include name="verifyTokenChange"/>
+                    <include name="verifyTokenLifetime"/>
+                    <include name="verifyNegativeTokenLifetime"/>
+                    <include name="verifyZeroTokenLifetime"/>
+                    <include name="changingTokenLifetimeAfterExpirationThrows"/>
+                    <include name="changingToIncorrectTokenLifetime"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

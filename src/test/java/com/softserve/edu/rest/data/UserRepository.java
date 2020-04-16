@@ -53,10 +53,6 @@ public final class UserRepository {
         return new User("otlumtc", password, false);
     }
 
-    public static User getFedorUser() {
-        return new User("Fedor", "qwerty", false);
-    }
-
     public static User getCorrectNewUser(int nameCount, int passwordCount) {
         return new User(EntityUtils.randomAlphaNumeric(nameCount), EntityUtils.randomAlphaNumeric(passwordCount), false);
     }

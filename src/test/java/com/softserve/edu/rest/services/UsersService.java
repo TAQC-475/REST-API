@@ -5,7 +5,8 @@ import com.softserve.edu.rest.dto.EParameters;
 import com.softserve.edu.rest.dto.LogginedUser;
 import com.softserve.edu.rest.dto.RestParameters;
 import com.softserve.edu.rest.entity.SimpleEntity;
-import com.softserve.edu.rest.resources.*;
+import com.softserve.edu.rest.resources.AdminsResource;
+import com.softserve.edu.rest.resources.UsersResource;
 import com.softserve.edu.rest.tools.EntityUtils;
 import io.qameta.allure.Step;
 
@@ -26,28 +27,34 @@ public class UsersService {
     }
 
     @Step("Get list of users")
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         RestParameters urlParameters = new RestParameters()
-            .addParameter(EParameters.TOKEN, logginedUser.getToken());
+                .addParameter(EParameters.TOKEN, logginedUser.getToken());
         SimpleEntity usersResult = usersResource.httpGetAsEntity(null, urlParameters);
         EntityUtils.get().checkEntity(usersResult);
         return parseUsers(usersResult.getContent());
     }
 
-    protected List<User> parseUsers(String users){
+    protected List<User> parseUsers(String users) {
         List<User> result = new ArrayList<>();
         Pattern pattern = Pattern.compile("\t\\w+\n");
         Matcher matcher = pattern.matcher(users);
-        while (matcher.find()){
-            result.add(new User(users.substring(matcher.start() + 1,matcher.end() - 1)));
+        while (matcher.find()) {
+            result.add(new User(users.substring(matcher.start() + 1, matcher.end() - 1)));
         }
         return result;
     }
 
-    public boolean isUserPresent(User user){
+    /**
+     * Check if user present from getAllUsers List
+     *
+     * @param user search user
+     * @return true if user found, false if not
+     */
+    public boolean isUserPresent(User user) {
         boolean result = false;
-        for (User current: getAllUsers()){
-            if (current.equalName(user)){
+        for (User current : getAllUsers()) {
+            if (current.equalName(user)) {
                 result = true;
                 break;
             }
@@ -55,12 +62,12 @@ public class UsersService {
         return result;
     }
 
-    public AdministrationService gotoAdministrationService(){
+    public AdministrationService gotoAdministrationService() {
         return new AdministrationService(logginedUser);
     }
 
     @Step("Get list of admins")
-    public List<User> getAdmins(){
+    public List<User> getAdmins() {
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
         SimpleEntity usersResult = adminsResource.httpGetAsEntity(null, urlParameters);

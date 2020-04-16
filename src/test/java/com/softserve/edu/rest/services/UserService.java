@@ -30,17 +30,12 @@ public class UserService extends GuestService{
         return new LoginService();
     }
 
-    public UserService createUser(User user){
-        RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, logginedUser.getToken())
-                .addParameter(EParameters.NAME, user.getName())
-                .addParameter(EParameters.PASSWORD, user.getPassword())
-                .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
-        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
-        EntityUtils.get().checkEntity(simpleEntity);
-        return this;
-    }
-
+    /**
+     * Change password
+     * @param oldPassword actual user password
+     * @param newPassword new user password
+     * @return
+     */
     @Step("Change password")
     protected UserService changePassword(User oldPassword, String newPassword){
         RestParameters urlParameters = new RestParameters()

@@ -60,7 +60,7 @@ public class ItemsService {
     /**
      * Prepares and sends GET request to get all items of some user as admin
      * @param user user whose items request gets
-     * @return all items of some user as admin
+     * @return all items of user
      */
     @Step("Items service: got all user {user} items as admin")
     public String getAllUserItemsAsAdmin(User user) {

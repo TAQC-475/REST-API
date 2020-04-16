@@ -61,7 +61,7 @@ public class LockTest {
      */
     @Description("Verify that logged-in admin can unlock user")
     @Parameters({"Admin login", "User for unlocking"})
-    @Test(priority = 3, dataProvider = "lockUser", dataProviderClass = LockData.class)
+    @Test(priority = 2, dataProvider = "lockUser", dataProviderClass = LockData.class)
     public void unlockUserFromAdmin(User admin, User someUser) {
         logger.info("START TEST Unlock user = {}, as admin = {} ", someUser.getName(), admin.getName());
         LockService adminService = new LoginService()
@@ -82,7 +82,7 @@ public class LockTest {
      */
     @Description("Verify that user will be locked after three unsuccessful tries of login")
     @Parameters({"Admin login", "User with wrong password"})
-    @Test(priority = 2, dataProvider = "lockWrongUser", dataProviderClass = LockData.class)
+    @Test(priority = 3, dataProvider = "lockWrongUser", dataProviderClass = LockData.class)
     public void lockUserByUnsuccessfulLogin(User admin, User userWithWrongPassword) {
         logger.info("START TEST Lock user by tree unsuccessful login tries = {}, as admin = {} ", userWithWrongPassword.getName(), admin.getName());
         LockService adminService = new LoginService()
@@ -124,7 +124,7 @@ public class LockTest {
      */
     @Description("Verify that unlock all users and admins work")
     @Parameters({"Admin login"})
-    @Test(priority = 9, dataProvider = "Admin", dataProviderClass = LockData.class)
+    @Test(priority = 5, dataProvider = "Admin", dataProviderClass = LockData.class)
     public void unlockAll(User admin) {
         logger.info("START TEST Unlock all as admin = {} ", admin.getName());
         LockService adminService = new LoginService()
