@@ -96,7 +96,7 @@ public class ItemTest extends ItemTestRunner {
     */
     @Parameters({"User", "Admin", "User item"})
     @Test(dataProvider = "dataForAdminAndUserTest", dataProviderClass = ItemData.class)
-    public void verifyIfAdminCanSeeUsersItem(User user, User admin, Item userItem) {
+    public void verifyIfAdminCanSeeUserItem(User user, User admin, Item userItem) {
         LOGGER.info("User = {} create new item = {}, Admin = {} trying to get item ={} from User ={}", user, userItem, admin, userItem, user);
         ItemService userItemService = new LoginService()
                 .successfulUserLogin(user)
