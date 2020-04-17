@@ -68,23 +68,6 @@ public class ItemService {
         return addItem(item, true);
     }
 
-    @Step("Overwrite user's item")
-    public ItemService overwriteItem(Item initialItem, Item overwtriteItem) {
-        LOGGER.debug("User trying to overwrite his initial item = {} to new item ={}" , initialItem, overwtriteItem);
-        RestParameters bodyParameters = new RestParameters()
-                .addParameter(EParameters.TOKEN, logginedUser.getToken())
-                .addParameter(EParameters.ITEM, overwtriteItem.getItemText());
-
-        RestParameters pathParameters = new RestParameters()
-                .addParameter(EParameters.INDEX, initialItem.getItemIndex());
-
-        SimpleEntity result = itemResource
-                .httpPutAsEntity(pathParameters, bodyParameters, null);
-        EntityUtils.get().checkEntity(result);
-        LOGGER.debug("OvewriteItem method returns result = {} " , result);
-        return this;
-    }
-
     /**
      * Preparing and sending POST request as logged in user to add item
      * @param item item to add
@@ -110,6 +93,29 @@ public class ItemService {
     }
 
     /**
+     * Preparing and sending PUT request as logged in user to overwrite item
+     * @param initialItem item which was added before
+     * @param overwtriteItem new item to overwrite the initial item
+     * @return ItemService after overwriting an item
+     */
+    @Step("Overwrite user's item")
+    public ItemService overwriteItem(Item initialItem, Item overwtriteItem) {
+        LOGGER.debug("User trying to overwrite his initial item = {} to new item ={}" , initialItem, overwtriteItem);
+        RestParameters bodyParameters = new RestParameters()
+                .addParameter(EParameters.TOKEN, logginedUser.getToken())
+                .addParameter(EParameters.ITEM, overwtriteItem.getItemText());
+
+        RestParameters pathParameters = new RestParameters()
+                .addParameter(EParameters.INDEX, initialItem.getItemIndex());
+
+        SimpleEntity result = itemResource
+                .httpPutAsEntity(pathParameters, bodyParameters, null);
+        EntityUtils.get().checkEntity(result);
+        LOGGER.debug("OvewriteItem method returns result = {} " , result);
+        return this;
+    }
+
+    /**
      * Preparing and sending POST request as logged in user to add item and get response status code
      * @param item item to add
      * @param toOverride to override item, if item with same index already exists?
@@ -130,6 +136,12 @@ public class ItemService {
         LOGGER.debug("Adding item = {} status code = {}", item,  statusCode.getCode());
         return statusCode.getCode();
     }
+
+    /**
+     * Preparing and sending GET request as logged in user to get item
+     * @param item item to get
+     * @return result of getting item request
+     */
     @Step("Item service: Got item {item}")
     public String getItem(Item item) {
         LOGGER.debug("User trying to get his item = {} " , item);
@@ -143,6 +155,12 @@ public class ItemService {
         return result.getContent();
     }
 
+    /**
+     * Preparing and sending GET request as logged in user to get another user item
+     * @param user another user which belongs item
+     * @param item item to get
+     * @return result of getting item request
+     */
     @Step("Getting another user item")
     public String getAnotherUserItem(User user, Item item) {
         LOGGER.debug("User ={} trying to get another user item = {}" , user, item);
@@ -158,9 +176,18 @@ public class ItemService {
         return result.getContent();
     }
 
+    /**
+     * Preparing and sending DELETE request as logged in user to delete item
+     * @param item item to delete
+     * @return ItemService after deleting an item
+     */
     @Step("Delete item")
     public ItemService deleteItem(Item item) {
         LOGGER.debug("User trying to delete his item = {}", item);
+        if(isIndexFree(Integer.parseInt(item.getItemIndex()))){
+            LOGGER.warn("RuntimeException");
+            throw new RuntimeException("Item with such index doesn't exists");
+        }
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());
 

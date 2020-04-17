@@ -17,10 +17,11 @@ import org.testng.annotations.Test;
 public class ItemTest extends ItemTestRunner {
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemTest.class);
 
-    /*
-    Test 1
-    Verify if User and Admin Can Create Item
-    */
+    /**
+     * logs in as user/admin, adds an item and verifies that user can get his item
+     * @param user valid user/admin
+     * @param item item to add
+     */
     @Parameters({"User", "Item"})
     @Test(dataProvider = "dataForAddItemTest", dataProviderClass = ItemData.class)
     public void verifyUserCanCreateItem(User user, Item item) {
@@ -34,28 +35,31 @@ public class ItemTest extends ItemTestRunner {
         LOGGER.info("Item = {}, was added by User = {}", item, user);
     }
 
-    /*
-    Test 2
-    Verify if User and Admin Can Update Item
-    */
+    /**
+     * logs in as user/admin, adds an item and verifies that user can overwrite his item
+     * @param user valid user/admin
+     * @param initialItem the item that the user adds first
+     * @param updateItem the item which overwrites the initialItem
+     */
     @Parameters({"User", "Create new item", "Update new item"})
     @Test(dataProvider = "dataForUpdateItemTest", dataProviderClass = ItemData.class)
-    public void verifyUserCanUpdateItem(User user, Item firstItem, Item updateItem) {
-        LOGGER.info("User = {} crearte new item = {} , than update it = {}", user, firstItem, updateItem);
+    public void verifyUserCanUpdateItem(User user, Item initialItem, Item updateItem) {
+        LOGGER.info("User = {} crearte new item = {} , than update it = {}", user, initialItem, updateItem);
         String itemService = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .addItem(firstItem, false)
-                .overwriteItem(firstItem, updateItem)
-                .getItem(firstItem);
+                .addItem(initialItem, false)
+                .overwriteItem(initialItem, updateItem)
+                .getItem(initialItem);
         Assert.assertEquals(itemService, updateItem.getItemText());
-        LOGGER.info("Item = {} was created, then it was updated to = {}, by User = {}", firstItem, updateItem, user);
+        LOGGER.info("Item = {} was created, then it was updated to = {}, by User = {}", initialItem, updateItem, user);
     }
 
-    /*
-    Test 3
-    Verify if User and Admin Can Delete Item
-    */
+    /**
+     * logs in as user/admin, adds an item and verifies that user can delete that item
+     * @param user valid user/admin
+     * @param item item to add and after that delete it
+     */
     @Parameters({"User", "Item"})
     @Test(dataProvider = "dataForDeleteItemTest", dataProviderClass = ItemData.class)
     public void verifyUserCanDeleteItem(User user, Item item) {
@@ -70,30 +74,40 @@ public class ItemTest extends ItemTestRunner {
         LOGGER.info("User = {} deleted item = {}", user, item);
     }
 
-    /*
-    Test 4
-    Verify If User Can Get Item Frome Another User and Admin
-    */
+    /**
+     * logs in as user/admin, adds an item
+     * then logs as another user
+     * and try to get the item which was added by user/admin in the step before
+     * then verifies that user can't get that item
+     * @param userOne valid user/admin which adds item
+     * @param userTwo the user who tries to get not his item
+     * @param itemUserOne item to add
+     */
     @Parameters({"User one", "User two", "Item of first user"})
     @Test(dataProvider = "dataForTwoUsersTest", dataProviderClass = ItemData.class)
-    public void verifyIfUserCanNotSeeItemFromeAnotherUser(User user1, User user2, Item itemUserOne) {
-        LOGGER.info("User = {} create new item = {}, User = {} trying to get item ={} from User ={}", user1, itemUserOne, user2, itemUserOne, user1);
-        ItemService userOne = new LoginService()
-                .successfulUserLogin(user1)
+    public void verifyIfUserCanNotSeeItemFromeAnotherUser(User userOne, User userTwo, Item itemUserOne) {
+        LOGGER.info("User = {} create new item = {}, User = {} trying to get item ={} from User ={}", userOne, itemUserOne, userTwo, itemUserOne, userOne);
+        ItemService user = new LoginService()
+                .successfulUserLogin(userOne)
                 .goToItemService()
                 .addItem(itemUserOne, false);
         String result = new LoginService()
-                .successfulUserLogin(user2)
+                .successfulUserLogin(userTwo)
                 .goToItemService()
-                .getAnotherUserItem(user1, itemUserOne);
+                .getAnotherUserItem(userOne, itemUserOne);
         Assert.assertNotEquals(result, itemUserOne.getItemText());
-        LOGGER.info("User = {} didn't get item = {}, from User = {}", user2, itemUserOne, user1);
+        LOGGER.info("User = {} didn't get item = {}, from User = {}", userTwo, itemUserOne, userOne);
     }
 
-    /*
-        Test 5
-        Verify If Admin Can Get Item Frome Another User
-    */
+    /**
+     * logs in as user, adds an item
+     * then logs as admin
+     * and try to get the item which was added by user in the step before
+     * then verifies that admin can get user item
+     * @param user valid user which adds item
+     * @param admin admin who tries to get the user item
+     * @param userItem item to add
+     */
     @Parameters({"User", "Admin", "User item"})
     @Test(dataProvider = "dataForAdminAndUserTest", dataProviderClass = ItemData.class)
     public void verifyIfAdminCanSeeUserItem(User user, User admin, Item userItem) {
