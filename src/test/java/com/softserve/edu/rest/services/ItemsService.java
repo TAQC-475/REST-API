@@ -58,7 +58,7 @@ public class ItemsService {
     }
 
     /**
-     * Prepares and sends GET request to get all items of some user as admin
+     * Prepares and sends GET request to get all items of user as admin
      * @param user user whose items request gets
      * @return all items of user
      */
@@ -98,24 +98,10 @@ public class ItemsService {
     public List<Item> getItemsList(String items) {
         LOGGER.debug("Converting string = {} to list of items", items);
         List<Item> itemsList = new ArrayList<>();
-        List<String> indexes = new ArrayList<>();
-        List<String> productText = new ArrayList<>();
-
-        Pattern pattern = Pattern.compile("\\d+\\s");
-        Matcher matcher;
-        for (String item : items.split("\n")) {
-            matcher = pattern.matcher(item);
-            while (matcher.find()) {
-                indexes.add(item.substring(matcher.start(), matcher.end()).trim());
-            }
-        }
-        pattern = Pattern.compile("\t.+\n");
-        matcher = pattern.matcher(items);
-        while (matcher.find()) {
-            productText.add(items.substring(matcher.start() + 1, matcher.end() - 1));
-        }
-        for (int i = 0; i < indexes.size(); i++) {
-            itemsList.add(new Item(indexes.get(i), productText.get(i)));
+        Pattern pattern = Pattern.compile("(.+) \t(.+)\n");
+        Matcher matcher = pattern.matcher(items);
+        while (matcher.find()){
+            itemsList.add(new Item(matcher.group(1), matcher.group(2)));
         }
         LOGGER.debug("String was converted to list = {}", itemsList.toString());
         return itemsList;

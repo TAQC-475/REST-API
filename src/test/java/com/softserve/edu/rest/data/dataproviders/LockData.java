@@ -27,6 +27,27 @@ public class LockData {
     }
 
     @DataProvider
+    public Object[][] lockAdminPetryk() {
+        return new Object[][]{
+                {UserRepository.getAdmin(), UserRepository.getAdminPetryk()}
+        };
+    }
+
+    @DataProvider
+    public Object[][] unlockAdminVasya() {
+        return new Object[][]{
+                {UserRepository.getAdmin(), UserRepository.getAdminVasya()}
+        };
+    }
+
+    @DataProvider
+    public Object[][] lockUnexcitingUser() {
+        return new Object[][]{
+                {UserRepository.getAdmin(), UserRepository.getNonExistingUser()}
+        };
+    }
+
+    @DataProvider
     public Object[][] lockWrongUser() {
         return new Object[][]{
                 {UserRepository.getAdmin(), UserRepository.getUserWithWrongPassword()}

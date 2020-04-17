@@ -54,7 +54,7 @@ public class IndexesTest extends RestTestRunner {
         String statusCode = new LoginService()
                 .successfulUserLogin(user)
                 .goToItemService()
-                .getCreateItemRequestStatusCode(itemWithInvalidIndex, true);
+                .getAddItemRequestStatusCode(itemWithInvalidIndex, true);
 
         Assert.assertEquals(Integer.parseInt(statusCode), BAD_REQUEST.getCode(), itemWithInvalidIndex.toString() + " with invalid index was added");
         LOGGER.info("Adding item with invalid index = {} status code = {}", itemWithInvalidIndex.getItemIndex(), statusCode);

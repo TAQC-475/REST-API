@@ -116,7 +116,7 @@ public class ItemService {
      * @return status code of adding item request
      */
     @Step("Item service: Got status code of add item request {item}")
-    public String getCreateItemRequestStatusCode(Item item, boolean toOverride){
+    public String getAddItemRequestStatusCode(Item item, boolean toOverride){
         LOGGER.debug("Getting request code after adding item = {}", item);
         if(!toOverride && !isIndexFree(Integer.parseInt(item.getItemIndex()))){
             throw new RuntimeException("Item with such index already exists");
@@ -144,7 +144,7 @@ public class ItemService {
     }
 
     @Step("Getting another user item")
-    public String getAnotherUserIterm(User user, Item item) {
+    public String getAnotherUserItem(User user, Item item) {
         LOGGER.debug("User ={} trying to get another user item = {}" , user, item);
         RestParameters urlParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, logginedUser.getToken());

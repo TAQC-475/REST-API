@@ -36,6 +36,7 @@ public class CooldownData {
                 {UserRepository.getAdmin(), LifetimeRepository.getZeroLifetime()},
                 {UserRepository.getAdmin(), LifetimeRepository.getCooldownMin()},
                 {UserRepository.getAdmin(), LifetimeRepository.getNewCooldownTime()},
+                {UserRepository.getAdmin(), LifetimeRepository.getCooldownLessThanMax()},
                 {UserRepository.getAdmin(), LifetimeRepository.getCooldownMax()}};
 }
 

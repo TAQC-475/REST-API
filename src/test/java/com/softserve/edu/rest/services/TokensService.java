@@ -28,32 +28,51 @@ public class TokensService extends AdministrationService {
                 || (simpleEntity.getContent().isEmpty())
                 || (simpleEntity.getContent().toLowerCase()
                 .equals(wrongMessage.toLowerCase()))) {
-            // TODO Develop Custom Exception
             throw new RuntimeException(errorMessage);
         }
     }
 
+    /**
+     * Preparing and sending GET request as logged in admin to get current token lifetime
+     *
+     * @return token lifetime
+     */
     public Lifetime getCurrentLifetime() {
         SimpleEntity simpleEntity = aliveTokensResource.httpGetAsEntity(null, null);
+        logger.debug("Token lifetime = {}", simpleEntity.getContent());
         return new Lifetime(simpleEntity.getContent());
     }
 
+    /**
+     * Change token lifetime
+     *
+     * @param lifetime to change
+     * @return
+     */
     public TokensService changeCurrentLifetime(String lifetime) {
-        logger.debug("changeCurrentLifetime START");
+        logger.debug("Changing token lifetime from {} to {}", getCurrentLifetime(), lifetime);
         RestParameters bodyParameters = new RestParameters()
                 .addParameter(EParameters.TOKEN, loginedAdmin.getToken())
                 .addParameter(EParameters.TIME, lifetime);
         SimpleEntity simpleEntity = aliveTokensResource.httpPutAsEntity(null, bodyParameters, null);
         checkEntity(simpleEntity, "false", "Error Change Current Lifetime");
-        logger.debug("changeCurrentLifetime DONE");
+        logger.debug("Token lifetime was change from {} to {}", getCurrentLifetime(), lifetime);
         return this;
     }
 
     public TokensService changeCurrentLifetime(Lifetime lifetime) {
+        logger.debug("Changing token lifetime from {} to {}", getCurrentLifetime(), lifetime);
         return this.changeCurrentLifetime(lifetime.getTimeAsText());
     }
 
+    /**
+     * Waiting chosen time
+     *
+     * @param lifetime is time to wait
+     * @return
+     */
     public TokensService waitTokenLifeTime(Lifetime lifetime) {
+        logger.debug("Time to wait:{}", lifetime);
         try {
             Thread.sleep(lifetime.getTime());
         } catch (InterruptedException e) {

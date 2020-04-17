@@ -23,8 +23,8 @@ public class ChangeCooldownTimeNegativeTest {
     private CooldownService cooldownService;
 
     @BeforeMethod
-    public void createExtraUsers() {
-        logger.info("BEFORE CLASS reset service to initial state");
+    public void resetService() {
+        logger.info("BEFORE METHOD reset service to initial state");
         new GuestService().resetServiceToInitialState();
     }
 
@@ -45,7 +45,7 @@ public class ChangeCooldownTimeNegativeTest {
                 .changeCooldown(newLifeTime)
                 .getResponse();
 
-        Assert.assertTrue(EntityUtils.isUserActionUnSuccessful(response));
+        Assert.assertFalse(EntityUtils.isUserActionSuccessful(response));
         logger.info("END OF THE TEST");
     }
 
@@ -56,6 +56,7 @@ public class ChangeCooldownTimeNegativeTest {
      *
      * @param admin       for login
      * @param newLifeTime negative time for setting
+     * @param defaultTime time for asserting
      */
     @Description("Verify that cooldown time can't be set as negative time")
     @Parameters({"Admin login", "New negative lifetime to put", "Default time to compare"})
