@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 
-<suite name="RestApi_IndexTest">
+<suite name="RestApi_ItemsAndIndexesTest">
 	<parameter name="url" value="http://localhost:8080" />
 	
-	<test name="IndexTest" verbose="9">
+	<test name="ItemsAndIndexesTest" verbose="9">
 
 		<classes>
 			<class name="com.softserve.edu.rest.test.items_and_indexes.IndexesTest"/>

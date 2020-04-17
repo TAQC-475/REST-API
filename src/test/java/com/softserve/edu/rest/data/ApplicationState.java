@@ -22,7 +22,7 @@ public class ApplicationState {
     }
 
     public void addUser(LogginedUser client){
-        loggedClients.add(client);
+        loggedClients.push(client);
     }
 
     public LogginedUser getLastLogged(){
