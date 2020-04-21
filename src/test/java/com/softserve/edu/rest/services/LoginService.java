@@ -118,7 +118,7 @@ public class LoginService {
      * DELETE request for user logout
      *
      * @param loggedUser user for logout from the system
-     * @return if true content = "true" and status code = "200" else false
+     * @return if true content = "true" and status code = "200" else false and status code "200"
      */
     private SimpleEntity logout(LogginedUser loggedUser) {
         LOGGER.debug("Logout for:  UserName = {}, with token = {}", loggedUser.getUser().getName(), loggedUser.getToken());
@@ -193,7 +193,7 @@ public class LoginService {
     }
 
     /**
-     * User login and create user
+     * Login as administrator and create user
      *
      * @param admin login as administrator
      * @param newUser data for creating new user

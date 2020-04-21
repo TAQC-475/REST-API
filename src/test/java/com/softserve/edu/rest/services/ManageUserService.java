@@ -92,7 +92,8 @@ public class ManageUserService {
                 .addParameter(EParameters.NAME, user.getName())
                 .addParameter(EParameters.PASSWORD, user.getPassword())
                 .addParameter(EParameters.RIGHTS, String.valueOf(user.isAdmin()));
-        SimpleEntity simpleEntity = userResource.httpPostAsEntity(null, null, bodyParameters);
+        SimpleEntity simpleEntity = userResource
+                .httpPostAsEntity(null, null, bodyParameters);
         EntityUtils.get().checkEntity(simpleEntity);
     }
 

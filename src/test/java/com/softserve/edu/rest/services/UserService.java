@@ -31,10 +31,10 @@ public class UserService extends GuestService{
     }
 
     /**
-     * Change password
+     * Put method request for changing password
      * @param oldPassword actual user password
      * @param newPassword new user password
-     * @return
+     * @return UserService
      */
     @Step("Change password")
     protected UserService changePassword(User oldPassword, String newPassword){

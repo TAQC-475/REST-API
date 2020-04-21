@@ -9,11 +9,9 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
 @Epic("Change password tests")
 public class UpdateUserPasswordTest extends UserTestRunner {
-
 
     @Description("Check if User can change his password to an empty")
     @Parameters({"User login", "User with old password", "New password", "Login with new password"})
@@ -25,12 +23,14 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout),
+                String.format("Old password - %s did not changed to new password - %s.", oldPassword, newPassword));
 
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login),
+                String.format("User could not enter with new password like - %s", newPassword));
 
         softAssert.assertAll();
         LOGGER.info("Finished changing password \n");
@@ -47,12 +47,14 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout),
+                String.format("Old password - %s did not changed to new password - %s.", oldPassword, newPassword));
 
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login),
+                String.format("User could not enter with new password like - %s", newPassword));
 
         softAssert.assertAll();
         LOGGER.info("Finished changing password \n");
@@ -68,12 +70,14 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout),
+                String.format("Old password - %s did not changed to new password - %s.", oldPassword, newPassword));
 
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login),
+                String.format("User could not enter with new password like - %s", newPassword));
 
         softAssert.assertAll();
         LOGGER.info("Finished changing password \n");
@@ -89,12 +93,14 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout),
+                String.format("Old password - %s did not changed to new password - %s.", oldPassword, newPassword));
 
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login),
+                String.format("User could not enter with new password like - %s", newPassword));
 
         softAssert.assertAll();
         LOGGER.info("Finished changing password \n");
@@ -111,12 +117,14 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout),
+                String.format("Old password - %s did not changed to new password - %s.", oldPassword, newPassword));
 
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login),
+                String.format("User could not enter with new password like - %s", newPassword));
 
         softAssert.assertAll();
         LOGGER.info("Finished changing password \n");
@@ -133,12 +141,14 @@ public class UpdateUserPasswordTest extends UserTestRunner {
         SimpleEntity logout = new LoginService()
                 .changePasswordAndLogOut(user, oldPassword, newPassword);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(logout),
+                String.format("Old password - %s did not changed to new password - %s.", oldPassword, newPassword));
 
         SimpleEntity login = new LoginService()
                 .successfulLoginAndLogout(sameUser);
 
-        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login));
+        softAssert.assertTrue(EntityUtils.isUserActionSuccessful(login),
+                String.format("User could not enter with new password like - %s", newPassword));
 
         softAssert.assertAll();
         LOGGER.info("Finished changing password \n");

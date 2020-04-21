@@ -23,7 +23,8 @@ public class CreateNewUserTest extends UserTestRunner {
                 .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
-        Assert.assertTrue(actualUser.isUserPresent(expectedUser));
+        Assert.assertTrue(actualUser.isUserPresent(expectedUser),
+                String.format("User did not created"));
         LOGGER.info("Finished creating user \n");
     }
 
@@ -37,7 +38,8 @@ public class CreateNewUserTest extends UserTestRunner {
                 .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
-        Assert.assertFalse(actualUser.isUserPresent(expectedUser));
+        Assert.assertFalse(actualUser.isUserPresent(expectedUser),
+                String.format("User did not created"));
         LOGGER.info("Finished creating user \n");
     }
 
@@ -51,7 +53,8 @@ public class CreateNewUserTest extends UserTestRunner {
                 .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
-        Assert.assertTrue(actualUser.isUserPresent(expectedUser));
+        Assert.assertTrue(actualUser.isUserPresent(expectedUser),
+                String.format("User did not created"));
         LOGGER.info("Finished creating user \n");
     }
 
@@ -65,7 +68,8 @@ public class CreateNewUserTest extends UserTestRunner {
                 .loginAndCreateUser(adminUser, newUser)
                 .gotoUsersService();
 
-        Assert.assertFalse(actualUser.isUserPresent(expectedUser));
+        Assert.assertFalse(actualUser.isUserPresent(expectedUser),
+                String.format("User did not created"));
         LOGGER.info("Finished creating user \n");
     }
 }
